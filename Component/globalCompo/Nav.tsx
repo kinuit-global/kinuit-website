@@ -24,6 +24,7 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
   return (
     <>
       <motion.header
@@ -43,16 +44,23 @@ export default function Navbar() {
             className="flex items-center gap-3 group"
             whileHover={{ scale: 1.02 }}
           >
-            <Image src="/logo.svg" alt="logo img" width={200} height={200} className="object-contain"/>
+            <Image
+              src="/logoj.png"
+              alt="logo img"
+              width={200}
+              height={200}
+              className="object-contain w-[140px] sm:w-[160px] lg:w-[200px]"
+            />
           </motion.a>
+
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1 border border-white/5 rounded-2xl">
+          <nav className="hidden lg:flex items-center gap-1 border border-white/5 rounded-2xl">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
                 onClick={() => setActiveLink(link.label)}
-                className={`relative px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-2xl  group ${
+                className={`relative px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-2xl group ${
                   activeLink === link.label
                     ? "text-white"
                     : "text-white/50 hover:text-white/90"
@@ -71,7 +79,7 @@ export default function Navbar() {
           </nav>
 
           {/* CTA Button */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-4">
             <motion.a
               href="#contact"
               whileHover={{ scale: 1.04 }}
@@ -82,10 +90,10 @@ export default function Navbar() {
             </motion.a>
           </div>
 
-          {/* Mobile Hamburger */}
+          {/* Mobile/Tablet Hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden flex flex-col gap-1.5 p-2"
+            className="lg:hidden flex flex-col gap-1.5 p-2"
             aria-label="Toggle menu"
           >
             <motion.span
@@ -104,7 +112,7 @@ export default function Navbar() {
         </div>
       </motion.header>
 
-      {/* Mobile Menu */}
+      {/* Mobile/Tablet Menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -112,7 +120,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-[#050D1A]/98 backdrop-blur-2xl flex flex-col items-center justify-center md:hidden"
+            className="fixed inset-0 z-40 bg-[#050D1A]/98 backdrop-blur-2xl flex flex-col items-center justify-center lg:hidden px-6"
           >
             <nav className="flex flex-col items-center gap-6">
               {navLinks.map((link, i) => (

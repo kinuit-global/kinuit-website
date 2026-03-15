@@ -6,11 +6,11 @@ import Image from "next/image";
 
 export default function CTASection() {
   return (
-    <section className="relative py-15 px-6 bg-[#020617] flex justify-center">
+    <section className="relative py-16 px-4 sm:px-6 bg-[#020617] flex justify-center">
 
       {/* Glow background */}
-      <div className="absolute inset-0 flex justify-center">
-        <div className="w-[900px] h-[200px] bg-blue-600/30 blur-[120px]" />
+      <div className="absolute inset-0 flex justify-center pointer-events-none">
+        <div className="w-[500px] sm:w-[700px] md:w-[900px] h-[180px] sm:h-[200px] bg-blue-600/30 blur-[120px]" />
       </div>
 
       {/* Main Container */}
@@ -18,15 +18,16 @@ export default function CTASection() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="relative max-w-6xl w-full rounded-2xl 
-        bg-[#1447B8] p-8 md:p-10 flex flex-col md:flex-row 
-        items-center justify-between gap-8"
+        className="relative max-w-6xl w-full rounded-2xl
+        bg-[#1447B8] p-6 sm:p-8 md:p-10
+        flex flex-col md:flex-row
+        items-start md:items-center justify-between gap-8"
       >
 
         {/* LEFT SIDE */}
-        <div className="text-white max-w-md">
+        <div className="text-left md:text-left flex-1">
 
-          <h2 className="text-3xl md:text-4xl font-semibold leading-snug">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-snug">
             Are You Ready
             <br />
             To Start Your Project?
@@ -35,12 +36,20 @@ export default function CTASection() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="mt-6 px-6 py-3 rounded-full 
-            bg-white/10 border border-white/20 
-            text-sm flex items-center gap-2 hover:bg-white/20 transition"
+            className="mt-6 px-6 py-3 rounded-full
+            bg-white/10 border border-white/20
+            text-sm flex items-center gap-2
+            hover:bg-white/20 transition
+            md:mx-0"
           >
             Talk to the Team
-             <Image src="/fwd.png" alt="arrw-img" width={15} height={10} className="object-contain" />
+            <Image
+              src="/fwd.png"
+              alt="arrw-img"
+              width={15}
+              height={10}
+              className="object-contain"
+            />
           </motion.button>
 
         </div>
@@ -56,7 +65,7 @@ export default function CTASection() {
             News Letter
           </div>
 
-          <h3 className="text-2xl font-semibold mb-3">
+          <h3 className="text-xl sm:text-2xl font-semibold mb-3">
             Stay Updated
           </h3>
 
@@ -66,10 +75,9 @@ export default function CTASection() {
           </p>
 
           {/* Input */}
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-3">
 
             <div className="flex items-center gap-2 bg-[#111] px-4 py-3 rounded-lg flex-1">
-
               <Mail size={16} className="text-gray-400" />
 
               <input
@@ -77,10 +85,9 @@ export default function CTASection() {
                 placeholder="Your Email Address"
                 className="bg-transparent outline-none text-sm flex-1 text-white placeholder-gray-500"
               />
-
             </div>
 
-            <button className="bg-blue-600 px-5 py-1 rounded-lg text-sm font-medium hover:bg-blue-700 transition">
+            <button className="bg-blue-600 px-5 py-3 rounded-lg text-sm font-medium hover:bg-blue-700 transition whitespace-nowrap">
               CTA-Here
             </button>
 

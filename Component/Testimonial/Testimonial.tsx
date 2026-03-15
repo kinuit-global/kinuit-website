@@ -10,12 +10,11 @@ export default function Testimonials() {
   const [active, setActive] = useState<number>(1);
 
   return (
-    <section className="relative py-15 px-6 bg-[#050718] border-b border-t border-t-gray-900 border-b-gray-900">
-      {/* bg-gradient-to-b from-[#020617] to-[#020b1f] */}
+    <section className="relative py-16 px-4 sm:px-6 bg-[#050718] border-b border-t border-t-gray-900 border-b-gray-900">
 
       {/* Heading */}
-      <div className="text-center mb-16">
-        <h2 className="text-white text-3xl md:text-4xl font-bold">
+      <div className="text-center mb-12 md:mb-16">
+        <h2 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold">
           Our <span className="text-blue-500">Testimonials</span>
         </h2>
 
@@ -26,14 +25,13 @@ export default function Testimonials() {
       </div>
 
       {/* Cards */}
-      <div className="max-w-6xl mx-auto flex justify-center items-start gap-8">
+      <div className="max-w-6xl mx-auto flex flex-wrap justify-center items-start gap-6 md:gap-8">
 
         {testimonials.map((testimonial, index) => {
-
           const isActive = index === active;
 
           return (
-            <div key={testimonial.id} className="flex flex-col items-center">
+            <div key={testimonial.id} className="flex flex-col items-center w-full sm:w-auto">
 
               {/* Card */}
               <motion.div
@@ -44,21 +42,19 @@ export default function Testimonials() {
                   opacity: isActive ? 1 : 0.5
                 }}
                 transition={{ duration: 0.4 }}
-                className="relative w-[300px] rounded-xl border border-white/10
+                className="relative w-full sm:w-[300px] rounded-xl border border-white/10
                 backdrop-blur-xl p-6 bg-white/[0.04] cursor-pointer"
               >
 
                 {/* LinkedIn */}
                 <div className="flex">
-                   <div className="bg-white/10 rounded-md flex items-center justify-center p-3">
-                  <Linkedin size={20} className="text-white" />
+                  <div className="bg-white/10 rounded-md flex items-center justify-center p-3">
+                    <Linkedin size={20} className="text-white" />
+                  </div>
                 </div>
-
-                </div>
-               
 
                 {/* Message */}
-                <p className="text-white text-sm tracking-wideest py-5" >
+                <p className="text-white text-sm py-5">
                   {testimonial.message}
                 </p>
 
@@ -77,6 +73,7 @@ export default function Testimonials() {
                   height={40}
                   className="rounded-full object-cover"
                 />
+
                 <div>
                   <h4 className="text-white text-sm font-semibold">
                     {testimonial.name}
@@ -94,7 +91,7 @@ export default function Testimonials() {
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-center gap-3 mt-12">
+      <div className="flex justify-center gap-3 mt-10 md:mt-12">
 
         {testimonials.map((_, i) => (
           <button

@@ -2,16 +2,17 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 const quickLinks = ["Service", "Resources", "About us"];
 const services = ["Service", "Resources", "About us"];
 
 const socials = [
-  { label: "X", href: "#" },
-  { label: "Facebook", href: "#" },
-  { label: "Instagram", href: "#" },
-  { label: "LinkedIn", href: "#" },
-  { label: "TikTok", href: "#" },
+  { label: "X", href: "#", img: "/xtwi.png" },
+  { label: "Facebook", href: "#", img: "/git.png" },
+  { label: "Instagram", href: "#", img: "/insta.png" },
+  { label: "LinkedIn", href: "#", img: "/in.png" },
+  { label: "TikTok", href: "#", img: "/git.png" },
 ];
 
 export default function Footer() {
@@ -20,7 +21,11 @@ export default function Footer() {
   // Animation variants for the entire footer
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeInOut" } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeInOut" },
+    },
   };
 
   // Hover animation for links and icons
@@ -38,27 +43,47 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* LEFT CONTENT */}
           <div className="space-y-6">
-            <h2 className="text-white text-xl font-semibold" style={{fontFamily: "var(--font-lato)"}}>
+            <h2
+              className="text-white text-xl font-semibold"
+              style={{ fontFamily: "var(--font-lato)" }}
+            >
               Your Vision. Our Work. One Team.
             </h2>
 
-            <p className="text-white text-sm leading-relaxed max-w-sm" style={{fontFamily: "var(--font-lato)"}}>
-              We are the experts who design your brand, build your tech, and grow
-              your audience. From every corner of the world, we work as one to
-              make your next big move happen.
+            <p
+              className="text-white text-sm leading-relaxed max-w-sm"
+              style={{ fontFamily: "var(--font-lato)" }}
+            >
+              We are the experts who design your brand, build your tech, and
+              grow your audience. From every corner of the world, we work as one
+              to make your next big move happen.
             </p>
 
             {/* SOCIALS */}
-            <div className="flex gap-3 pt-2">
+            <div className="flex items-center gap-3 pt-3 flex-wrap">
               {socials.map((social) => (
                 <motion.a
                   key={social.label}
                   href={social.href}
                   whileHover={hoverEffect}
-                  className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition"
                   aria-label={social.label}
+                  className="
+                    flex items-center justify-center
+                    w-10 h-10 sm:w-11 sm:h-11
+                    rounded-full
+                    bg-white/5 border border-white/10
+                    text-white/70 hover:text-white
+                    hover:bg-white/10
+                    transition-all duration-300
+                    backdrop-blur-md"
                 >
-                  {social.label[0]}
+                  <Image
+                    src={social.img}
+                    alt={social.label}
+                    width={18}
+                    height={18}
+                    className="object-contain"
+                  />
                 </motion.a>
               ))}
             </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ApproachStep } from "@/types/Approach";
+import { ApproachSteps } from "@/lib/Approach";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
@@ -21,7 +21,7 @@ export default function OurApproach() {
       <div className=" flex justify-center  w-full flex-col">
    
         <div className="hidden lg:flex items-center justify-center gap-16 mb-12 w-full max-w-5xl mx-auto">
-          {ApproachStep.map((step, index) => (
+          {ApproachSteps.map((step, index) => (
             <div key={step.id} className="flex items-center gap-4">
               {/* Step Circle */}
               <motion.div
@@ -34,7 +34,7 @@ export default function OurApproach() {
               </motion.div>
 
               {/* Arrow */}
-              {index !== ApproachStep.length - 1 && (
+              {index !== ApproachSteps.length - 1 && (
                 <div className="flex items-center">
                   <div className="h-[2px] w-48 bg-white" />
 
@@ -46,7 +46,7 @@ export default function OurApproach() {
         </div>
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {ApproachStep.map((step, index) => (
+          {ApproachSteps.map((step, index) => (
             <motion.div
               key={step.id}
               initial={{ opacity: 0, y: 60 }}

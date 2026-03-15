@@ -1,7 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { services } from "@/types/service";
+import { servicesItem } from "@/lib/service";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
@@ -15,7 +15,6 @@ const sectionVariants = {
   },
 };
 
-// Card animation
 const cardVariants = {
   hidden: {
     opacity: 0,
@@ -38,7 +37,7 @@ export default function Services() {
     <motion.section
       id="services"
       ref={sectionRef}
-      className="relative py-15 lg:py-15 overflow-hidden"
+      className="relative py-14 sm:py-15 lg:py-15 overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
@@ -61,9 +60,11 @@ export default function Services() {
           opacity: 0.95,
         }}
       />
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-6 mb-12">
+
           <div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
               Our <span className="text-blue-500">Services</span>
@@ -77,35 +78,37 @@ export default function Services() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-           className="flex items-center gap-3 h-8 pr-4 rounded-full border border-[#2A2F45] bg-[#060A23]"
+            className="flex items-center gap-3 h-8 pr-4 rounded-full border border-[#2A2F45] bg-[#060A23] w-fit"
           >
-              {/* ICON CIRCLE */}
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#0059FF]">
-                <ArrowUpRight
-                  size={14}
-                  strokeWidth={2.5}
-                  className=" text-black"
-                />
-              </span>
+            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#0059FF]">
+              <ArrowUpRight
+                size={14}
+                strokeWidth={2.5}
+                className="text-black"
+              />
+            </span>
 
-              {/* TEXT */}
-              <span className="text-sm text-white font-medium">View All</span>
+            <span className="text-sm text-white font-medium">
+              View All
+            </span>
           </motion.button>
+
         </div>
 
         {/* Cards */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4 gap-6"
           variants={sectionVariants}
         >
-          {services.map((service) => (
+          {servicesItem.map((service) => (
             <motion.div
               key={service.num}
-              variants={cardVariants}
               whileHover={{ y: -6 }}
               className="bg-white/5 border border-white/10 rounded-xl p-6 flex flex-col hover:border-blue-500/40 transition"
             >
-              <span className="text-xs text-gray-500 mb-4">{service.num}</span>
+              <span className="text-xs text-gray-500 mb-4">
+                {service.num}
+              </span>
 
               <h3 className="text-2xl font-semibold text-white mb-6 md:w-[50%] w-full">
                 {service.title}
@@ -129,16 +132,17 @@ export default function Services() {
                 >
                   <Image
                     src="/Subtract.png"
-                    width={20}
-                    height={20}
+                    width={25}
+                    height={25}
                     alt="subtract image"
-                    className="w-full object-contain"
+                    className="object-contain"
                   />
                 </motion.button>
               </div>
             </motion.div>
           ))}
         </motion.div>
+
       </div>
     </motion.section>
   );
