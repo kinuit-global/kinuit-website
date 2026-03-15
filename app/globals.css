@@ -13,6 +13,7 @@
   --font-lato: var(--font-lato);
   --font-poppins: var(--font-poppins)
   --font-mono: var(--font-geist-mono);
+  --font-mont: var(--font-montserrat)
 }
 
 @media (prefers-color-scheme: dark) {

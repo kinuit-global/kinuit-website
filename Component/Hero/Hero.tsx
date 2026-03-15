@@ -61,7 +61,7 @@ export default function Hero() {
           transition={{ delay: 0.1 }}
           className="
           font-black uppercase leading-tight mb-6
-          text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+          text-2xl font-bold sm:text-4xl md:text-5xl lg:text-6xl
         "
         >
           WORK THAT MOVES

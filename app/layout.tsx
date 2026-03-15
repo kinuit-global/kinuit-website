@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Barlow, Barlow_Condensed, Inter, Sora, Lato, Poppins } from "next/font/google";
+import { Barlow, Barlow_Condensed, Inter, Sora, Lato, Poppins, Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/Component/globalCompo/Nav";
 import Footer from "@/Component/globalCompo/Footer";
@@ -27,6 +27,12 @@ const lato = Lato({
   variable: "--font-sora",
   display: "swap",
 });
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "700","800", "900"],
+  variable: "--font-sora",
+  display: "swap",
+});
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "700", "800", "900"],
@@ -48,7 +54,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${barlow.variable} ${sora.variable} ${lato.variable}`}
+      className={`${inter.variable} ${barlow.variable} ${sora.variable} ${lato.variable} ${montserrat.variable}`}
     >
       <body>
         <Navbar/>

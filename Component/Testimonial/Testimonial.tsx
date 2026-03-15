@@ -24,14 +24,14 @@ export default function Testimonials() {
         </p>
       </div>
 
-      {/* Cards */}
-      <div className="max-w-6xl mx-auto flex flex-wrap justify-center items-start gap-6 md:gap-8">
+      {/* Cards Grid */}
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
 
         {testimonials.map((testimonial, index) => {
           const isActive = index === active;
 
           return (
-            <div key={testimonial.id} className="flex flex-col items-center w-full sm:w-auto">
+            <div key={testimonial.id} className="flex flex-col items-start w-full">
 
               {/* Card */}
               <motion.div
@@ -42,7 +42,7 @@ export default function Testimonials() {
                   opacity: isActive ? 1 : 0.5
                 }}
                 transition={{ duration: 0.4 }}
-                className="relative w-full sm:w-[300px] rounded-xl border border-white/10
+                className="relative w-full rounded-xl border border-white/10
                 backdrop-blur-xl p-6 bg-white/[0.04] cursor-pointer"
               >
 
@@ -63,7 +63,7 @@ export default function Testimonials() {
 
               </motion.div>
 
-              {/* User */}
+              {/* User Info */}
               <div className="flex items-center gap-3 mt-6">
 
                 <Image
@@ -92,7 +92,6 @@ export default function Testimonials() {
 
       {/* Pagination */}
       <div className="flex justify-center gap-3 mt-10 md:mt-12">
-
         {testimonials.map((_, i) => (
           <button
             key={i}
@@ -101,7 +100,6 @@ export default function Testimonials() {
             ${active === i ? "bg-blue-500 border-blue-500" : ""}`}
           />
         ))}
-
       </div>
 
     </section>
