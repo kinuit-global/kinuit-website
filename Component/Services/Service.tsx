@@ -1,0 +1,145 @@
+"use client";
+import { useRef } from "react";
+import { motion } from "framer-motion";
+import { services } from "@/types/service";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
+
+const sectionVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+// Card animation
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
+
+export default function Services() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  return (
+    <motion.section
+      id="services"
+      ref={sectionRef}
+      className="relative py-15 lg:py-15 overflow-hidden"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={sectionVariants}
+    >
+      {/* Top blue glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[120px] pointer-events-none" />
+
+      {/* Grid background */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          backgroundImage: `
+          linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
+          radial-gradient(ellipse 90% 80% at 50% 70%, rgba(37,99,235,0.35) 0%, rgba(10,20,45,0.7) 45%, rgba(4,7,18,0.95) 85%)
+        `,
+          backgroundSize: "120px 120px, 120px 120px, 100% 100%",
+          backgroundRepeat: "repeat, repeat, no-repeat",
+          opacity: 0.95,
+        }}
+      />
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-6 mb-12">
+          <div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+              Our <span className="text-blue-500">Services</span>
+            </h2>
+
+            <p className="text-gray-400 mt-2 text-base">
+              Everything You Need to Dominate
+            </p>
+          </div>
+
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+           className="flex items-center gap-3 h-8 pr-4 rounded-full border border-[#2A2F45] bg-[#060A23]"
+          >
+              {/* ICON CIRCLE */}
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#0059FF]">
+                <ArrowUpRight
+                  size={14}
+                  strokeWidth={2.5}
+                  className=" text-black"
+                />
+              </span>
+
+              {/* TEXT */}
+              <span className="text-sm text-white font-medium">View All</span>
+          </motion.button>
+        </div>
+
+        {/* Cards */}
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          variants={sectionVariants}
+        >
+          {services.map((service) => (
+            <motion.div
+              key={service.num}
+              variants={cardVariants}
+              whileHover={{ y: -6 }}
+              className="bg-white/5 border border-white/10 rounded-xl p-6 flex flex-col hover:border-blue-500/40 transition"
+            >
+              <span className="text-xs text-gray-500 mb-4">{service.num}</span>
+
+              <h3 className="text-2xl font-semibold text-white mb-6 md:w-[50%] w-full">
+                {service.title}
+              </h3>
+
+              <div className="flex flex-wrap gap-2 mb-6">
+                {service.tags.map((tag: string) => (
+                  <span
+                    key={tag}
+                    className="text-xs px-3 py-2 rounded-full bg-white/5 text-white"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex justify-end mt-auto">
+                <motion.button
+                  whileHover={{ scale: 1.1, rotate: -45 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <Image
+                    src="/Subtract.png"
+                    width={20}
+                    height={20}
+                    alt="subtract image"
+                    className="w-full object-contain"
+                  />
+                </motion.button>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </motion.section>
+  );
+}
