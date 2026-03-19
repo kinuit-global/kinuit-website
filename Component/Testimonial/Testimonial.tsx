@@ -3,8 +3,9 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { Linkedin } from "lucide-react";
+import { Linkedin, MessageSquare } from "lucide-react";
 import { testimonials } from "@/lib/Testimonial";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 export default function Testimonials() {
   const [active, setActive] = useState(0);
@@ -48,14 +49,7 @@ export default function Testimonials() {
     <section className="relative py-20 px-4 sm:px-6 bg-[#050718] border-b border-t border-t-gray-900 border-b-gray-900 overflow-hidden">
       {/* Heading */}
       <div className="text-center mb-16 md:mb-20">
-        <motion.h4
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 0.75, y: 0 }}
-          viewport={{ once: true }}
-          className="uppercase text-xs md:text-sm font-black tracking-[0.2em] mb-8 text-blue-500"
-        >
-          CLIENT VOICE
-        </motion.h4>
+        <SectionBadge icon={MessageSquare} label="Client Voice" />
         <h2 className="text-white text-3xl md:text-5xl font-bold mb-6">
           Trusted by founders <span className="text-blue-500">who demand the best</span>
         </h2>

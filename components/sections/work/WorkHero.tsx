@@ -3,6 +3,8 @@ import Container from "@/components/ui/Container";
 import Link from "next/link";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { motion } from "framer-motion";
+import SectionBadge from "@/components/ui/SectionBadge";
+import { Briefcase } from "lucide-react";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -12,14 +14,14 @@ const fadeUp = {
 
 export default function WorkHero() {
   return (
-    <section className="bg-gradient-to-b from-[#050D1A] to-k-bg pt-40 pb-20 md:pt-48 md:pb-28 border-b border-white/5">
+    <section className="bg-linear-to-b from-[#050D1A] to-k-bg pt-40 pb-20 md:pt-48 md:pb-28 border-b border-white/5">
       <Container>
         <div className="max-w-4xl flex flex-col items-start text-left">
           <motion.div {...fadeUp} transition={{ delay: 0.1 }}>
             <Breadcrumb paths={[{ name: "Our Work" }]} />
           </motion.div>
 
-          <motion.div {...fadeUp} transition={{ delay: 0.2 }} className="text-[#0059FF] font-black tracking-widest text-sm mb-6 uppercase">SELECTED WORK</motion.div>
+            <SectionBadge icon={Briefcase} label="Selected Work" />
           <motion.h1 {...fadeUp} transition={{ delay: 0.3 }} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 text-white leading-tight tracking-tight">
             Work that moves the needle.
           </motion.h1>

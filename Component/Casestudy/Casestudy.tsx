@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/lib/projects";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Briefcase } from "lucide-react";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 export default function CaseStudies() {
   const [active, setActive] = useState(0);
@@ -81,18 +82,12 @@ export default function CaseStudies() {
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-white text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight"
+          className="text-white text-2xl mb-4 sm:text-3xl md:text-4xl font-bold tracking-tight"
         >
           Work that moves the needle.
         </motion.h2>
 
-        <div className="flex items-center justify-center gap-4 mt-4">
-          <div className="h-[1px] w-12 sm:w-16 md:w-24 bg-blue-500/20"></div>
-          <p className="text-blue-500 text-[10px] sm:text-xs tracking-[0.2em] uppercase whitespace-nowrap font-black">
-            SELECTED WORK
-          </p>
-          <div className="h-[1px] w-12 sm:w-16 md:w-24 bg-blue-500/20"></div>
-        </div>
+        <SectionBadge icon={Briefcase} label="Selected Work" />
       </div>
 
       {/* Carousel Section */}

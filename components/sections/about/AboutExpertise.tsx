@@ -1,5 +1,8 @@
+"use client";
 import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
+import SectionBadge from "@/components/ui/SectionBadge";
+import { ShieldCheck } from "lucide-react";
 
 export default function AboutExpertise() {
   return (
@@ -8,7 +11,7 @@ export default function AboutExpertise() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           
           <div className="max-w-xl">
-            <div className="text-[#0059FF] font-semibold tracking-widest text-sm mb-6 uppercase">OUR EXPERTISE</div>
+            <SectionBadge icon={ShieldCheck} label="Our Expertise" />
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-8 text-white leading-tight">
               Every discipline your brand needs.
             </h2>
@@ -22,7 +25,7 @@ export default function AboutExpertise() {
             </div>
           </div>
 
-          <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 shadow-2xl group">
+          <div className="relative w-full aspect-4/3 rounded-3xl overflow-hidden border border-white/10 shadow-2xl group">
             <img 
               src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" 
               alt="Our Expertise" 

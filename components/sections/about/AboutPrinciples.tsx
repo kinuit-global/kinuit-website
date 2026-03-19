@@ -1,12 +1,15 @@
+"use client";
 import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
+import SectionBadge from "@/components/ui/SectionBadge";
+import { Anchor } from "lucide-react";
 
 export default function AboutPrinciples() {
   return (
     <Section className="bg-k-bg border-t border-white/5 py-20 pb-32">
       <Container>
         <div className="max-w-3xl mb-16 text-center mx-auto">
-          <div className="text-[#0059FF] font-semibold tracking-widest text-sm mb-6 uppercase">WHAT WE STAND FOR</div>
+          <SectionBadge icon={Anchor} label="What We Stand For" />
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
             We believe in craft, commitment, and results.
           </h2>

@@ -11,6 +11,14 @@ const STATS = [
   { value: "10+", label: "Expert Team" },
 ];
 
+const TECHS = [
+  { name: "Web3", style: "font-medium tracking-wide text-base sm:text-lg text-white/90" },
+  { name: "Fintech", style: "font-medium tracking-wide text-base sm:text-lg text-white/90" },
+  { name: "AI", style: "font-bold tracking-widest text-lg sm:text-xl text-white", icon: "✦" },
+  { name: "Real Estate", style: "font-medium tracking-wide text-base sm:text-lg text-white/90" },
+  { name: "Edtech", style: "font-medium tracking-wide text-base sm:text-lg text-white/90" },
+];
+
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -25,7 +33,7 @@ export default function Hero() {
       relative min-h-screen
       flex flex-col justify-center
       px-4 sm:px-6
-      pt-24 sm:pt-28
+      pt-24 sm:pt-32 lg:pt-24
       bg-k-bg overflow-hidden
     "
     >
@@ -41,8 +49,8 @@ export default function Hero() {
             className="
           inline-flex items-center gap-2
           px-4 py-2
-          my-8 sm:my-10
-          rounded-full text-xs sm:text-sm text-gray-300
+          mt-4 mb-4 sm:mt-6 sm:mb-6
+          rounded-full text-[10px] sm:text-xs text-gray-300
           bg-white/5 border border-white/10 backdrop-blur-md
         "
           >
@@ -62,15 +70,11 @@ export default function Hero() {
             transition={{ delay: 0.1 }}
             className="
           font-black uppercase tracking-tight
-          leading-[1.1] sm:leading-[1.15] mb-5 sm:mb-6
-          text-xl sm:text-3xl md:text-4xl
+          leading-[1.1] sm:leading-[1.15] mb-4 sm:mb-5
+          text-3xl sm:text-4xl md:text-[2.5rem] lg:text-[3.25rem] lg:leading-[1.05]
         "
           >
-            The Team Behind Your
-            <br />
-            <span className="text-[#0059ff] font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
-              Biggest Move.
-            </span>
+            The Team Behind Your <br /> Biggest Move.
           </motion.h1>
 
           {/* Description */}
@@ -78,13 +82,13 @@ export default function Hero() {
             {...fadeUp}
             transition={{ delay: 0.2 }}
             className="
-          max-w-[540px] w-full
-          text-sm sm:text-base md:text-lg
+          max-w-[480px] w-full
+          text-xs sm:text-sm md:text-base
           font-thin
           tracking-normal
           text-white/90
           leading-[1.7] sm:leading-[1.8]
-          mb-10 sm:mb-12
+          mb-6 sm:mb-8
         "
           >
             In a world run by AI, the brands that win have the sharpest minds behind
@@ -98,10 +102,10 @@ export default function Hero() {
             {...fadeUp}
             transition={{ delay: 0.3 }}
             className="
-          flex flex-col sm:flex-row
+          flex flex-col sm:flex-row items-start sm:items-center
           gap-3
           justify-start
-          mb-8 sm:mb-10
+          mb-4 sm:mb-8
           w-full sm:w-auto
         "
           >
@@ -110,8 +114,8 @@ export default function Hero() {
               className="
             flex items-center justify-center gap-2
             bg-blue-600 hover:bg-blue-700
-            text-white text-sm font-semibold
-            px-7 py-3
+            text-white text-[13px] sm:text-sm font-semibold
+            px-4 py-2.5 sm:px-7 sm:py-3
             rounded-full
             transition hover:-translate-y-[2px]
           "
@@ -130,8 +134,8 @@ export default function Hero() {
               href="/work"
               className="
             flex items-center justify-center gap-2
-            text-white text-sm font-semibold
-            px-7 py-3
+            text-white text-[13px] sm:text-sm font-semibold
+            px-4 py-2.5 sm:px-7 sm:py-3
             rounded-full
             border border-white/10
             bg-white/5 backdrop-blur
@@ -148,18 +152,6 @@ export default function Hero() {
                 className="object-contain"
               />
             </Link>
-          </motion.div>
-
-          {/* Trusted By / Brands */}
-          <motion.div
-            {...fadeUp}
-            transition={{ delay: 0.35 }}
-            className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-[13px] text-white/50 mb-8 sm:mb-6 w-full tracking-wide"
-          >
-            <span>Chosen by brands in:</span>
-            <span className="text-white/80 font-medium">
-              Web3 <span className="text-white/30 px-1">&middot;</span> Fintech <span className="text-white/30 px-1">&middot;</span> AI <span className="text-white/30 px-1">&middot;</span> Real Estate <span className="text-white/30 px-1">&middot;</span> Edtech
-            </span>
           </motion.div>
 
           {/* Stats */}
@@ -184,7 +176,7 @@ export default function Hero() {
         </div> {/* Closes Left Column */}
 
         {/* Right Column (Visual Container) */}
-        <div className="relative w-full h-full flex items-center justify-center mt-12 md:mt-0">
+        <div className="relative w-full h-full flex items-center justify-center mt-6 md:mt-0">
           {/* Soft glow/gradient background behind visual */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#0059ff]/15 blur-[120px] rounded-full scale-100 pointer-events-none" />
 
@@ -193,7 +185,7 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: easeOut }}
-            className="relative w-full aspect-[4/3] sm:aspect-video lg:aspect-square xl:aspect-[4/3] flex items-center justify-center z-10"
+            className="relative w-full max-w-[280px] sm:max-w-none mx-auto aspect-[4/3] sm:aspect-video lg:aspect-[4/3] xl:aspect-[16/11] flex items-center justify-center z-10 lg:mt-8"
             style={{ perspective: "1200px" }}
           >
             {/* Main Mockup (Dashboard) */}
@@ -208,7 +200,7 @@ export default function Hero() {
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="w-full h-full max-w-lg lg:max-w-xl relative z-10 transform-gpu"
+              className="w-full h-full max-w-[360px] md:max-w-[400px] lg:max-w-[440px] relative z-10 transform-gpu"
               style={{ transformStyle: "preserve-3d" }}
             >
               <div className="w-full h-full rounded-xl sm:rounded-2xl border border-white/10 bg-[#060913]/90 backdrop-blur-xl overflow-hidden flex flex-col shadow-[0_20px_50px_rgba(0,89,255,0.15)] relative">
@@ -332,9 +324,52 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Techs Marquee */}
+      <div className="w-full relative z-10 mt-8 sm:mt-10 mb-4 sm:mb-8 px-0 overflow-hidden flex flex-col items-center">
+        <motion.p
+          {...fadeUp}
+          transition={{ delay: 0.4 }}
+          className="text-xs sm:text-[13px] text-white/50 mb-4 sm:mb-6 tracking-widest uppercase font-medium text-center px-4"
+        >
+          Chosen by brands in
+        </motion.p>
+
+        {/* Marquee Container */}
+        <div className="flex overflow-hidden w-full relative group">
+          {/* Gradient Masks */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-k-bg to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-k-bg to-transparent z-10 pointer-events-none" />
+
+          {/* Scrolling Content - To ensure seamless loop we need two wrappers of the items */}
+          <motion.div
+            className="flex w-max gap-3 sm:gap-4 lg:gap-6 pr-3 sm:pr-4 lg:pr-6"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              duration: 25,
+              ease: "linear",
+              repeat: Infinity,
+            }}
+          >
+            {[...TECHS, ...TECHS, ...TECHS].map((tech, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col items-center justify-center w-[130px] sm:w-[150px] lg:w-[180px] h-[40px] sm:h-[50px] rounded-lg sm:rounded-[14px] border border-white/[0.04] bg-white/[0.01] backdrop-blur-md opacity-60 hover:opacity-100 hover:bg-white/[0.03] transition-all duration-300 cursor-pointer hover:-translate-y-1"
+              >
+                <div className={`text-white transition-colors duration-300 flex items-center justify-center text-center w-full px-2`}>
+                  <div className={`flex items-center justify-center gap-1.5 ${tech.style}`}>
+                    {tech.icon && <span className="opacity-80 text-sm">{tech.icon}</span>}
+                    <span>{tech.name}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+
       {/* Bottom Gradient */}
       <div
-        className="absolute bottom-0 inset-x-0 h-24 pointer-events-none"
+        className="absolute bottom-0 inset-x-0 h-24 pointer-events-none z-20"
         style={{
           background:
             "linear-gradient(to bottom, transparent 0%, #080a18 100%)",

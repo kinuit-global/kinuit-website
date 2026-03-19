@@ -1,8 +1,7 @@
 "use client";
-
 import { motion } from "framer-motion";
 import { ApproachSteps } from "@/lib/Approach";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ShieldCheck, Combine, Zap } from "lucide-react";
 import Image from "next/image";
 
 export default function OurApproach() {
@@ -65,26 +64,22 @@ export default function OurApproach() {
               hover:bg-white/[0.04] hover:border-white/10 transition-all duration-300 flex flex-col items-start"
             >
               <div className="flex mb-6">
-                <div className="p-3 bg-white/5 flex rounded-xl border border-white/10">
-                  <Image
-                    src={step.image}
-                    alt={step.title}
-                    width={24}
-                    height={24}
-                    className="opacity-80"
-                  />
+                <div className="p-3 bg-white/5 flex rounded-xl border border-white/10 text-[#0059FF]">
+                  {step.title === "EXPERTISE" && <ShieldCheck size={24} />}
+                  {step.title === "INTEGRATION" && <Combine size={24} />}
+                  {step.title === "MOMENTUM" && <Zap size={24} />}
                 </div>
               </div>
 
               <h3 className="text-white text-2xl font-bold mb-3 tracking-tight">{step.title}</h3>
-              
+
               {step.statement && (
                 <div className="text-[#0059FF] font-semibold text-sm tracking-widest uppercase mb-4 opacity-100">
                   {step.statement}
                 </div>
               )}
 
-              <p className="text-white/60 tracking-normal font-light text-base md:text-lg leading-relaxed mt-auto">
+              <p className="text-white/60 tracking-normal font-light text-base md:text-lg leading-relaxed">
                 {step.description}
               </p>
             </motion.div>

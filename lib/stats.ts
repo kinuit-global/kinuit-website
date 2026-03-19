@@ -4,7 +4,7 @@ export interface StatItem {
 }
 
 export const STATS: StatItem[] = [
-  { value: "100+", label: "Projects delivered across industries and markets" },
-  { value: "5-in-1", label: "Every service. One team. Zero gaps." },
-  { value: "On Time", label: "Structured delivery with clear milestones, always" },
+  { value: "13+", label: "Years of Experience" },
+  { value: "15+", label: "Awards & Recognition" },
+  { value: "350+", label: "Satisfied Clients" },
 ];

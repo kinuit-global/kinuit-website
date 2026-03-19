@@ -1,66 +1,6 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-
 export default function HeroBackground() {
-const ref = useRef<HTMLCanvasElement>(null);
-
-useEffect(() => {
-const canvas = ref.current;
-if (!canvas) return;
-const ctx = canvas.getContext("2d");
-if (!ctx) return;
-
-const resize = () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-};
-
-resize();
-window.addEventListener("resize", resize);
-
-const stars = Array.from({ length: 180 }, () => ({
-  x: Math.random() * canvas.width,
-  y: Math.random() * canvas.height,
-  r: Math.random() * 1.4 + 0.2,
-  a: Math.random(),
-  da: (Math.random() - 0.5) * 0.006,
-}));
-
-let raf: number;
-
-const draw = () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  stars.forEach((s) => {
-    s.a = Math.max(0.04, Math.min(0.85, s.a + s.da));
-    if (s.a <= 0.04 || s.a >= 0.85) s.da *= -1;
-
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(200,210,255,${s.a})`;
-    ctx.fill();
-  });
-
-  raf = requestAnimationFrame(draw);
-};
-
-draw();
-
-return () => {
-  cancelAnimationFrame(raf);
-  window.removeEventListener("resize", resize);
-};
-
-}, []);
-
-return (
-<>
-{/* Stars */} <canvas
-     ref={ref}
-     className="absolute inset-0 pointer-events-none z-0"
-   />
-
+  return (
+    <>
   {/* Radial blue glow */}
   <div
     className="absolute pointer-events-none z-0"

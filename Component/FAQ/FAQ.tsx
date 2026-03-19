@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FAQItems } from "@/lib/FAQ";
+import { HelpCircle } from "lucide-react";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
@@ -10,9 +12,11 @@ export default function FAQ() {
   return (
     <section className="py-16 bg-[#020617] text-white">
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
 
-        {/* Heading */}
+        <div className="flex justify-center">
+          <SectionBadge icon={HelpCircle} label="Common Questions" />
+        </div>
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10 md:mb-12">
           Frequently <span className="text-[#0059FF]">Asked Questions</span>
         </h2>
@@ -39,7 +43,7 @@ export default function FAQ() {
 
                 <span
                   className="flex items-center justify-center 
-                  w-6 h-6 text-white text-sm font-bold flex-shrink-0"
+                  w-6 h-6 text-white text-sm font-bold shrink-0"
                 >
                   {open === index ? "−" : "+"}
                 </span>

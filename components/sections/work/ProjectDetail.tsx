@@ -4,6 +4,8 @@ import Section from "@/components/ui/Section";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { Project } from "@/lib/projects";
 import { motion } from "framer-motion";
+import SectionBadge from "@/components/ui/SectionBadge";
+import { Star } from "lucide-react";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -14,16 +16,14 @@ const fadeUp = {
 export default function ProjectDetail({ project }: { project: Project }) {
   return (
     <>
-      <section className="bg-gradient-to-b from-[#050D1A] to-k-bg pt-40 pb-20 md:pt-48 md:pb-28 border-b border-white/5">
+      <section className="bg-linear-to-b from-[#050D1A] to-k-bg pt-40 pb-20 md:pt-48 md:pb-28 border-b border-white/5">
         <Container>
           <div className="max-w-4xl flex flex-col items-start text-left">
             <motion.div {...fadeUp} transition={{ delay: 0.1 }}>
               <Breadcrumb paths={[{ name: "Our Work", href: "/work" }, { name: project.title }]} />
             </motion.div>
 
-            <motion.div {...fadeUp} transition={{ delay: 0.2 }} className="text-[#0059FF] font-black tracking-widest text-sm mb-6 uppercase">
-              {project.tag}
-            </motion.div>
+            <SectionBadge icon={Star} label={project.tag} />
             
             <motion.h1 {...fadeUp} transition={{ delay: 0.3 }} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 text-white leading-tight tracking-tight">
               {project.title}
@@ -38,7 +38,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
              initial={{ opacity: 0, y: 40 }}
              animate={{ opacity: 1, y: 0 }}
              transition={{ duration: 0.8, delay: 0.5 }}
-             className="w-full aspect-video rounded-[2rem] overflow-hidden mb-20 shadow-2xl border border-white/10"
+             className="w-full aspect-video rounded-4xl overflow-hidden mb-20 shadow-2xl border border-white/10"
            >
              <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
            </motion.div>

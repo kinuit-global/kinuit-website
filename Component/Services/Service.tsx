@@ -5,7 +5,8 @@ import { servicesItem } from "@/lib/service";
 import Link from "next/link";
 import { createSlug } from "@/lib/service";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Zap } from "lucide-react";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -69,16 +70,8 @@ export default function Services() {
 
 
           <div>
-            {/* Top Label */}
-            <motion.h4
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 0.75, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="uppercase text-xs md:text-sm font-bold tracking-[0.2em] mb-8"
-            >
-              What We Do
-            </motion.h4>
+            {/* Top Label Badge */}
+            <SectionBadge icon={Zap} label="What We Do" />
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
               Five disciplines. <span className="text-blue-500">One powerful team</span>
             </h2>

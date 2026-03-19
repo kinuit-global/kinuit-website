@@ -48,44 +48,44 @@ export default function Navbar() {
                 alt="logo img"
                 width={200}
                 height={200}
-                className="object-contain w-[140px] sm:w-[160px] lg:w-[200px]"
+                className="object-contain w-[140px] sm:w-[160px] lg:w-[150px]"
               />
             </motion.div>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1 border border-white/5 rounded-2xl">
+          <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.label}
                   href={link.href}
-                  className={`relative px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-2xl group ${isActive
-                    ? "text-white"
-                    : "text-white/50 hover:text-white/90"
+                  className={`relative py-1 flex items-center justify-center text-[15px] transition-colors duration-200 group ${isActive
+                    ? "text-white font-bold"
+                    : "text-white/60 hover:text-white/90 font-medium"
                     }`}
                 >
                   {isActive && (
                     <motion.span
-                      layoutId="nav-pill"
-                      className="absolute inset-0 bg-white/10 rounded-2xl"
+                      layoutId="nav-underline"
+                      className="absolute left-0 right-0 -bottom-1.5 h-[2px] bg-white rounded-full shadow-[0_0_8px_rgba(255,255,255,0.8)]"
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
-                  <span className="relative z-10">{link.label}</span>
+                  <span className="relative z-10 tracking-wide">{link.label}</span>
                 </Link>
               );
             })}
           </nav>
 
           {/* CTA Button */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center">
             <Link href="/contact">
               <motion.button
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
-                className="px-5 py-2.5 bg-[#081FF0] text-white text-sm font-semibold rounded-xl shadow-lg shadow-[#5BC4E0]/20 hover:shadow-[#5BC4E0]/40 transition-all duration-300"
+                className="px-6 h-11 flex items-center justify-center bg-[#081FF0] text-white text-sm font-semibold rounded-full transition-all duration-300"
               >
                 Get Started
               </motion.button>

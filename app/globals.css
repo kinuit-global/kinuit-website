@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -8,12 +9,12 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-sora: var(--font-sora);
-  --font-lato: var(--font-lato);
-  --font-poppins: var(--font-poppins)
+  --font-sans: "Onest", sans-serif;
+  --font-sora: "Onest", sans-serif;
+  --font-lato: "Onest", sans-serif;
+  --font-poppins: "Onest", sans-serif;
   --font-mono: var(--font-geist-mono);
-  --font-mont: var(--font-montserrat)
+  --font-mont: "Onest", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,7 +27,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sora);
+  font-family: "Onest", sans-serif;
 }
 
 @keyframes marquee {
@@ -42,5 +43,5 @@ body {
   animation: marquee 20s linear infinite;
 }
 button {
-  font-family:  var(--font-sora);
+  font-family: "Onest", sans-serif;
 }
