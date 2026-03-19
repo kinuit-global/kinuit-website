@@ -1,63 +1,65 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
+import { motion } from "framer-motion";
+
 export default function Story() {
   return (
-    <section id="about" className="py-15 bg-[#050814] text-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-10 items-center">
-          {/* IMAGE */}
-          <div className="flex justify-center items-center">
-            <div className="relative w-[300px] h-[300px] bg-[#e5e5e5] rounded-xl flex items-center justify-center">
-              <Image
-                src="/group1.png"
-                alt="Kinuit illustration"
-                fill
-                className="object-contain p-6"
-              />
-            </div>
-          </div>
+    <section
+      id="about"
+      className="relative w-full py-24 md:py-44 bg-[#081FF0] text-[#FFFFFF] overflow-hidden flex items-center justify-center"
+    >
+      {/* Subtle Radial Glow in Background */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-white opacity-[0.05] blur-[150px] rounded-full pointer-events-none" />
 
-          {/* Text */}
-          <div className="max-w-xl">
-            <h2
-              className="text-2xl md:text-3xl font-extrabold leading-tight mb-6"
-              style={{ fontFamily: "var(--font-lato)" }}
-            >
-              The <br></br>Story Of{" "}
-              <span className="text-blue-500">Kinuit</span>
-            </h2>
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 flex flex-col items-center text-center">
 
-            {/* underline */}
-            <div className="w-16 h-[2px] bg-gray-500 mb-6"></div>
+        {/* Top Label */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex items-center gap-4 mb-12"
+        >
+          <div className="h-[1px] w-8 bg-white/30"></div>
+          <h4 className="uppercase text-[10px] md:text-xs font-black tracking-[0.3em] text-white/70">
+            WHAT WE BELIEVE
+          </h4>
+          <div className="h-[1px] w-8 bg-white/30"></div>
+        </motion.div>
 
-            <p className="text-[#D2DFFF] mb-3 text-sm tracking-wide">
-              {" "}
-              We Love Creating{" "}
-            </p>
+        {/* Quote Container */}
+        <div className="relative mb-12 px-4 md:px-0">
+          {/* Decorative Quote Mark */}
+          <span className="absolute -top-12 -left-2 md:-left-16 text-[100px] md:text-[180px] text-white/10 font-serif leading-none pointer-events-none select-none drop-shadow-2xl">“</span>
 
-            <p
-              className="text-white font-light tracking-wider leading-relaxed mb-8 "
-              style={{ fontFamily: "var(--font-poppins)" }}
-            >
-              Kinuit is a team of experts from India, the US, Nigeria, and China
-              who work together as one. We joined forces because we believe that
-              a great idea should never be held back by a slow partner. By
-              connecting our teams across the world, we make sure your project
-              keeps moving and stays on track. Whether we are designing your
-              look, building your tech, or helping you find customers, we work
-              as a single unit focused on your success.
-            </p>
+          <motion.h2
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-medium italic leading-[1.1] md:leading-[1.1] tracking-tight text-white mb-2"
+            style={{ fontFamily: "var(--font-cormorant)" }}
+          >
+            The brands that move the world are not built by committees. They are built by the right people, fully aligned on one vision — and relentless about making it real.
+          </motion.h2>
 
-            <Link
-              href="#"
-              className="inline-flex items-center text-white font-medium bg-[#000000] px-6 py-3 border border-white rounded-full hover:border-white hover:bg-white hover:text-black transition"
-            >
-              Learn More
-            </Link>
-          </div>
+          {/* Decorative Quote Mark */}
+          <span className="absolute -bottom-24 -right-2 md:-right-16 text-[100px] md:text-[180px] text-white/10 font-serif leading-none pointer-events-none select-none drop-shadow-2xl">”</span>
         </div>
+
+        {/* Supporting Paragraph */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.7 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="text-base sm:text-lg md:text-xl font-medium max-w-[700px] leading-relaxed md:leading-loose tracking-wide pt-4"
+          style={{ fontFamily: "var(--font-lato)" }}
+        >
+          That is how Kinuit works. A dedicated team across strategy, design, technology, and marketing — fully aligned on your brand, your goals, and your growth.
+        </motion.p>
+
       </div>
     </section>
   );

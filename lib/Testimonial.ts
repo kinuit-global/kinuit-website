@@ -1,35 +1,52 @@
 import { Testimonial } from "@/types/Testimonial";
+
 export const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "Name one",
-    role: "Founder of Adobe Store",
+    name: "Ethan Walker",
+    role: "Founder · NovaLabs",
     image: "/case3.png",
     message:
-      "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s.",
+      "We launched in 6 weeks and raised $2.1M within the first 90 days.",
   },
   {
     id: 2,
-    name: "Name two",
-    role: "Head of Product at Xyz Innovations",
+    name: "Sophia Chen",
+    role: "Head of Product · Vertex AI",
     image: "/case4.png",
     message:
-      "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s.",
+      "Working with them felt like having an in-house team that actually delivers.",
   },
   {
     id: 3,
-    name: "Michal Jason",
-    role: "Marketing Manager",
+    name: "Daniel Brooks",
+    role: "Marketing Lead · GrowthForge",
     image: "/case3.png",
     message:
-      "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s.",
+      "We went from zero traction to a consistent growth engine in weeks.",
   },
   {
     id: 4,
-    name: "Sarah Adams",
-    role: "UX Designer",
+    name: "Olivia Martinez",
+    role: "CEO · Quantum Dynamics",
+    image: "/case4.png",
+    message:
+      "The execution was flawless and the results speak for themselves.",
+  },
+  {
+    id: 5,
+    name: "James Thompson",
+    role: "CTO · Nexus Systems",
     image: "/case3.png",
     message:
-      "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s.",
+      "They transformed our idea into a market-ready product in record time.",
+  },
+  {
+    id: 6,
+    name: "Ava Rodriguez",
+    role: "Founder · Bloom Collective",
+    image: "/case4.png",
+    message:
+      "Their strategic approach helped us scale our operations exponentially.",
   },
 ];

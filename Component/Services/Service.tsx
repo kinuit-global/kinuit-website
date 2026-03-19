@@ -2,6 +2,8 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { servicesItem } from "@/lib/service";
+import Link from "next/link";
+import { createSlug } from "@/lib/service";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
@@ -65,33 +67,47 @@ export default function Services() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-6 mb-12">
 
+
           <div>
+            {/* Top Label */}
+            <motion.h4
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 0.75, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="uppercase text-xs md:text-sm font-bold tracking-[0.2em] mb-8"
+            >
+              What We Do
+            </motion.h4>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-              Our <span className="text-blue-500">Services</span>
+              Five disciplines. <span className="text-blue-500">One powerful team</span>
             </h2>
 
             <p className="text-gray-400 mt-2 text-base">
-              Everything You Need to Dominate
+              From brand identity to full-scale campaigns — everything your brand needs to
+              grow, built and delivered by one expert team.
             </p>
           </div>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-3 h-8 pr-4 rounded-full border border-[#2A2F45] bg-[#060A23] w-fit"
-          >
-            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#0059FF]">
-              <ArrowUpRight
-                size={14}
-                strokeWidth={2.5}
-                className="text-black"
-              />
-            </span>
+          <Link href="/services">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-3 h-8 pr-4 rounded-full border border-[#2A2F45] bg-[#060A23] w-fit"
+            >
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#0059FF]">
+                <ArrowUpRight
+                  size={14}
+                  strokeWidth={2.5}
+                  className="text-black"
+                />
+              </span>
 
-            <span className="text-sm text-white font-medium">
-              View All
-            </span>
-          </motion.button>
+              <span className="text-sm text-white font-medium">
+                View All
+              </span>
+            </motion.button>
+          </Link>
 
         </div>
 
@@ -116,28 +132,26 @@ export default function Services() {
 
               <div className="flex flex-wrap gap-2 mb-6">
                 {service.tags.map((tag: string) => (
-                  <span
+                  <Link
+                    href={`/services/${createSlug(tag)}`}
                     key={tag}
-                    className="text-xs px-3 py-2 rounded-full bg-white/5 text-white"
+                    className="text-xs px-3 py-2 rounded-full bg-white/5 border border-white/10 text-white/80 hover:bg-[#0059ff] hover:text-white transition-all cursor-pointer"
                   >
                     {tag}
-                  </span>
+                  </Link>
                 ))}
               </div>
 
               <div className="flex justify-end mt-auto">
-                <motion.button
-                  whileHover={{ scale: 1.1, rotate: -45 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Image
-                    src="/Subtract.png"
-                    width={25}
-                    height={25}
-                    alt="subtract image"
-                    className="object-contain"
-                  />
-                </motion.button>
+                <Link href={`/services/${createSlug(service.title)}`}>
+                  <motion.button
+                    whileHover={{ scale: 1.1, rotate: -45 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-500 hover:bg-blue-500 hover:text-white transition-all"
+                  >
+                    <ArrowUpRight size={18} />
+                  </motion.button>
+                </Link>
               </div>
             </motion.div>
           ))}

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function CTASection() {
   return (
@@ -33,24 +34,26 @@ export default function CTASection() {
             To Start Your Project?
           </h2>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="mt-6 px-6 py-3 rounded-full
-            bg-white/10 border border-white/20
-            text-sm flex items-center gap-2
-            hover:bg-white/20 transition
-            md:mx-0"
-          >
-            Talk to the Team
-            <Image
-              src="/fwd.png"
-              alt="arrw-img"
-              width={15}
-              height={10}
-              className="object-contain"
-            />
-          </motion.button>
+          <Link href="/contact">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="mt-6 px-6 py-3 rounded-full
+              bg-white/10 border border-white/20
+              text-sm flex items-center gap-2
+              hover:bg-white/20 transition
+              md:mx-0"
+            >
+              Talk to the Team
+              <Image
+                src="/fwd.png"
+                alt="arrw-img"
+                width={15}
+                height={10}
+                className="object-contain"
+              />
+            </motion.button>
+          </Link>
 
         </div>
 
@@ -88,7 +91,7 @@ export default function CTASection() {
             </div>
 
             <button className="bg-blue-600 px-5 py-3 rounded-lg text-sm font-medium hover:bg-blue-700 transition whitespace-nowrap">
-              CTA-Here
+              Submit
             </button>
 
           </div>

@@ -2,56 +2,51 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
+import { Linkedin, Instagram, Twitter } from "lucide-react";
 
-const quickLinks = ["Service", "Resources", "About us"];
-const services = ["Service", "Resources", "About us"];
+const quickLinks = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Work", href: "/work" },
+  { label: "Services", href: "/services" },
+  { label: "Contact", href: "/contact" },
+];
+
+const services = [
+  { label: "Build", href: "/services/build" },
+  { label: "Design", href: "/services/design" },
+  { label: "Grow", href: "/services/grow" },
+  { label: "Plan", href: "/services/plan" },
+  { label: "Manage", href: "/services/manage" },
+];
 
 const socials = [
-  { label: "X", href: "#", img: "/xtwi.png" },
-  { label: "Facebook", href: "#", img: "/git.png" },
-  { label: "Instagram", href: "#", img: "/insta.png" },
-  { label: "LinkedIn", href: "#", img: "/in.png" },
-  { label: "TikTok", href: "#", img: "/git.png" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/kinuit-global", icon: <Linkedin size={18} /> },
+  { label: "Instagram", href: "https://www.instagram.com/kinuit_global/", icon: <Instagram size={18} /> },
+  { label: "Twitter", href: "https://x.com/kinuit_global", icon: <Twitter size={18} /> },
 ];
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  // Animation variants for the entire footer
-  const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeInOut" },
-    },
-  };
-
-  // Hover animation for links and icons
   const hoverEffect = { scale: 1.05, y: -3, transition: { duration: 0.3 } };
 
   return (
-    <motion.footer
-      initial="hidden"
-      animate="visible"
-      // variants={containerVariants}
-      className="relative bg-[#070B14] border-t border-white/5"
-    >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-14">
+    <footer className="relative bg-[#070B14] border-t border-white/5 pt-14 pb-10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* LEFT CONTENT */}
           <div className="space-y-6">
             <h2
-              className="text-white text-xl font-semibold"
+              className="uppercase text-white text-2xl font-semibold"
               style={{ fontFamily: "var(--font-lato)" }}
             >
-              Your Vision. Our Work. One Team.
+              Kinuit
             </h2>
 
             <p
-              className="text-white text-sm leading-relaxed max-w-sm"
+              className="text-white/60 text-sm leading-relaxed max-w-sm"
               style={{ fontFamily: "var(--font-lato)" }}
             >
               We are the experts who design your brand, build your tech, and
@@ -65,25 +60,21 @@ export default function Footer() {
                 <motion.a
                   key={social.label}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={hoverEffect}
                   aria-label={social.label}
                   className="
                     flex items-center justify-center
-                    w-10 h-10 sm:w-11 sm:h-11
+                    w-10 h-10
                     rounded-full
                     bg-white/5 border border-white/10
-                    text-white/70 hover:text-white
+                    text-white/70 hover:text-blue-500
                     hover:bg-white/10
                     transition-all duration-300
                     backdrop-blur-md"
                 >
-                  <Image
-                    src={social.img}
-                    alt={social.label}
-                    width={18}
-                    height={18}
-                    className="object-contain"
-                  />
+                  {social.icon}
                 </motion.a>
               ))}
             </div>
@@ -91,46 +82,46 @@ export default function Footer() {
 
           {/* QUICK LINKS */}
           <div>
-            <h4 className="text-white text-sm font-semibold mb-5">
-              Quick Links
+            <h4 className="text-white text-sm font-semibold mb-6 uppercase tracking-wider">
+              Navigation
             </h4>
 
             <ul className="space-y-3">
-              {quickLinks.map((item) => (
+              {quickLinks.map((link) => (
                 <motion.li
-                  key={item}
+                  key={link.label}
                   whileHover={hoverEffect}
                   className="cursor-pointer"
                 >
                   <Link
-                    href="#"
+                    href={link.href}
                     className="text-[#B9B3B3] text-sm hover:text-white transition"
                   >
-                    {item}
+                    {link.label}
                   </Link>
                 </motion.li>
               ))}
             </ul>
           </div>
 
-          {/* SERVICES */}
+          {/* EXPERTISE */}
           <div>
-            <h4 className="text-white text-sm font-semibold mb-5">
-              Our Services
+            <h4 className="text-white text-sm font-semibold mb-6 uppercase tracking-wider">
+              Expertise
             </h4>
 
             <ul className="space-y-3">
-              {services.map((item) => (
+              {services.map((service) => (
                 <motion.li
-                  key={item}
+                  key={service.label}
                   whileHover={hoverEffect}
                   className="cursor-pointer"
                 >
                   <Link
-                    href="#"
+                    href={service.href}
                     className="text-[#B9B3B3] text-sm hover:text-white transition"
                   >
-                    {item}
+                    {service.label}
                   </Link>
                 </motion.li>
               ))}
@@ -139,58 +130,57 @@ export default function Footer() {
 
           {/* CONTACT */}
           <div>
-            <h4 className="text-white text-sm font-semibold mb-5">
-              Contact Us
+            <h4 className="text-white text-sm font-semibold mb-6 uppercase tracking-wider">
+              Get In Touch
             </h4>
 
             <div className="space-y-4 text-sm text-white/40">
-              <div className="flex items-center gap-3">
-                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10">
-                  ✉
+              <a href="mailto:hello@kinuit.com" className="flex items-center gap-3 hover:text-gray-300 transition-colors group">
+                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 group-hover:bg-white/10 font-black italic">
+                  @
                 </span>
-                contact@youremail.com
-              </div>
+                hello@kinuit.com
+              </a>
 
-              <div className="flex items-center gap-3">
-                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10">
-                  ☎
+              <div className="flex items-start gap-3">
+                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 flex-shrink-0">
+                  📍
                 </span>
-                +91 1234567890
+                <span className="leading-relaxed">Available Worldwide · <br />Remote-First Team</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* DIVIDER */}
-        <div className="h-px bg-white/10 my-8" />
+        <div className="h-px bg-white/10 my-10" />
 
         {/* COPYRIGHT */}
         <motion.div
-          className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/40"
+          className="flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-white/40 uppercase tracking-[0.15em] font-medium"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <p>© Copyright {currentYear}. All Rights Reserved by Kinuit</p>
+          <p>© Copyright {currentYear} Kinuit Global. All Rights Reserved.</p>
 
-          <div className="flex gap-6">
-            <motion.a
-              href="#"
-              whileHover={hoverEffect}
+          <div className="flex gap-8">
+            <Link
+              href="/terms"
               className="cursor-pointer hover:text-white transition"
             >
               Terms & Conditions
-            </motion.a>
-            <motion.a
-              href="#"
-              whileHover={hoverEffect}
+            </Link>
+            <Link
+              href="/privacy"
               className="cursor-pointer hover:text-white transition"
             >
               Privacy Policy
-            </motion.a>
+            </Link>
           </div>
         </motion.div>
       </div>
-    </motion.footer>
+    </footer>
   );
 }
+

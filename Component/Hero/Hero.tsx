@@ -106,7 +106,7 @@ export default function Hero() {
         "
           >
             <Link
-              href="#cta"
+              href="/contact"
               className="
             flex items-center justify-center gap-2
             bg-blue-600 hover:bg-blue-700
@@ -127,7 +127,7 @@ export default function Hero() {
             </Link>
 
             <Link
-              href="#cases"
+              href="/work"
               className="
             flex items-center justify-center gap-2
             text-white text-sm font-semibold
@@ -163,7 +163,7 @@ export default function Hero() {
           </motion.div>
 
           {/* Stats */}
-          <motion.div
+          {/* <motion.div
             {...fadeUp}
             transition={{ delay: 0.4 }}
             className="w-full max-w-2xl"
@@ -180,7 +180,7 @@ export default function Hero() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </motion.div> */}
         </div> {/* Closes Left Column */}
 
         {/* Right Column (Visual Container) */}
@@ -257,8 +257,8 @@ export default function Hero() {
                               <stop offset="100%" stopColor="#0059ff" stopOpacity="0.0" />
                             </linearGradient>
                           </defs>
-                          <path d="M0,50 L0,35 C10,32 15,20 25,25 C35,30 40,15 50,18 C60,21 70,5 80,10 C90,15 95,5 100,0 L100,50 Z" fill="url(#chartGrad)"/>
-                          <path d="M0,35 C10,32 15,20 25,25 C35,30 40,15 50,18 C60,21 70,5 80,10 C90,15 95,5 100,0" fill="none" stroke="#0059ff" strokeWidth="1.5" className="drop-shadow-[0_0_8px_rgba(0,89,255,0.8)]"/>
+                          <path d="M0,50 L0,35 C10,32 15,20 25,25 C35,30 40,15 50,18 C60,21 70,5 80,10 C90,15 95,5 100,0 L100,50 Z" fill="url(#chartGrad)" />
+                          <path d="M0,35 C10,32 15,20 25,25 C35,30 40,15 50,18 C60,21 70,5 80,10 C90,15 95,5 100,0" fill="none" stroke="#0059ff" strokeWidth="1.5" className="drop-shadow-[0_0_8px_rgba(0,89,255,0.8)]" />
                         </svg>
                       </div>
                     </div>
