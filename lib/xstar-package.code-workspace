@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../../xstar-package"
+		},
+		{
+			"name": "kinuit-website",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}
