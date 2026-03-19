@@ -135,11 +135,11 @@ export default function Footer() {
             </h4>
 
             <div className="space-y-4 text-sm text-white/40">
-              <a href="mailto:hello@kinuit.com" className="flex items-center gap-3 hover:text-gray-300 transition-colors group">
+              <a href="mailto:kinuitoffl@gmail.com" className="flex items-center gap-3 hover:text-gray-300 transition-colors group">
                 <span className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 group-hover:bg-white/10 font-black italic">
                   @
                 </span>
-                hello@kinuit.com
+                kinuitoffl@gmail.com
               </a>
 
               <div className="flex items-start gap-3">

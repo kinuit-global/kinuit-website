@@ -1,6 +1,29 @@
 "use client";
 import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
+import { submitContactForm } from "@/app/actions/contact";
+import { useFormStatus } from "react-dom";
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <button 
+      type="submit" 
+      disabled={pending}
+      className={`w-full py-5 mt-2 bg-[#081FF0] text-white font-bold rounded-xl hover:shadow-[0_0_20px_rgba(91,196,224,0.3)] transition-all tracking-widest uppercase flex items-center justify-center gap-3 ${pending ? "opacity-70 cursor-not-allowed" : "hover:scale-[1.01] active:scale-[0.99]"}`}
+    >
+      {pending ? (
+        <>
+          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+          SENDING...
+        </>
+      ) : (
+        "Send Message"
+      )}
+    </button>
+  );
+}
 
 export default function ContactFormSection() {
   return (
@@ -14,22 +37,20 @@ export default function ContactFormSection() {
             <p className="text-white/70 text-lg">We will get back to you within 24 hours.</p>
           </div>
 
-          <form className="flex flex-col gap-6 backdrop-blur-xl bg-[#050D1A]/80 p-6 sm:p-10 rounded-2xl border border-white/10 shadow-2xl" onSubmit={(e) => e.preventDefault()}>
+          <form action={submitContactForm} className="flex flex-col gap-6 backdrop-blur-xl bg-[#050D1A]/80 p-6 sm:p-10 rounded-2xl border border-white/10 shadow-2xl">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <input type="text" placeholder="NAME" className="w-full p-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-[#0059FF] transition-colors text-white placeholder-white/40 tracking-wide text-sm" />
-              <input type="email" placeholder="EMAIL" className="w-full p-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-[#0059FF] transition-colors text-white placeholder-white/40 tracking-wide text-sm" />
+              <input name="name" type="text" required placeholder="NAME" className="w-full p-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-[#0059FF] transition-colors text-white placeholder-white/40 tracking-wide text-sm" />
+              <input name="email" type="email" required placeholder="EMAIL" className="w-full p-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-[#0059FF] transition-colors text-white placeholder-white/40 tracking-wide text-sm" />
             </div>
-            <input type="text" placeholder="COMPANY OR PROJECT NAME" className="w-full p-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-[#0059FF] transition-colors text-white placeholder-white/40 tracking-wide text-sm" />
-            <textarea placeholder="WHAT ARE YOU BUILDING?" rows={4} className="w-full p-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-[#0059FF] transition-colors text-white placeholder-white/40 resize-none tracking-wide text-sm"></textarea>
-            <input type="text" placeholder="SERVICES NEEDED" className="w-full p-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-[#0059FF] transition-colors text-white placeholder-white/40 tracking-wide text-sm" />
-            <button type="submit" className="w-full py-5 mt-2 bg-[#081FF0] text-white font-bold rounded-xl hover:shadow-[0_0_20px_rgba(91,196,224,0.3)] transition-shadow tracking-widest uppercase">
-              Send Message
-            </button>
+            <input name="company" type="text" required placeholder="COMPANY OR PROJECT NAME" className="w-full p-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-[#0059FF] transition-colors text-white placeholder-white/40 tracking-wide text-sm" />
+            <textarea name="message" required placeholder="WHAT ARE YOU BUILDING?" rows={4} className="w-full p-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-[#0059FF] transition-colors text-white placeholder-white/40 resize-none tracking-wide text-sm"></textarea>
+            <input name="services" type="text" placeholder="SERVICES NEEDED" className="w-full p-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-[#0059FF] transition-colors text-white placeholder-white/40 tracking-wide text-sm" />
+            <SubmitButton />
           </form>
 
           <div className="mt-12 text-center">
             <p className="text-white/60">
-              Prefer email? <a href="mailto:hello@kinuit.com" className="text-[#0059FF] hover:underline font-medium">hello@kinuit.com</a>
+              Prefer email? <a href="mailto:kinuitoffl@gmail.com" className="text-[#0059FF] hover:underline font-medium">kinuitoffl@gmail.com</a>
             </p>
           </div>
         </div>
