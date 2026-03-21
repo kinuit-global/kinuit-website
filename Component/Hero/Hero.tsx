@@ -136,26 +136,6 @@ export default function Hero() {
               <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
-
-          {/* Stats */}
-          {/* <motion.div
-            {...fadeUp}
-            transition={{ delay: 0.4 }}
-            className="w-full max-w-2xl"
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-3 overflow-hidden pb-10 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
-              {STATS.map((stat) => (
-                <div key={stat.label} className="py-4 text-left sm:pl-6 sm:pr-6 first:pl-0">
-                  <div className="text-2xl sm:text-3xl font-bold text-white">
-                    {stat.value}
-                  </div>
-                  <div className="text-xs sm:text-sm text-white font-thin">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div> */}
         </div> {/* Closes Centered Content */}
       </div>
 
