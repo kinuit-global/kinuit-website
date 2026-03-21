@@ -32,6 +32,7 @@ export const servicesItem: services[] = [
       "CGI",
       "Photography",
       "Social creative",
+      "Brand operations"
     ],
   },
   {
@@ -44,6 +45,7 @@ export const servicesItem: services[] = [
       "Crypto marketing",
       "PR",
       "Email marketing",
+      "Community management"
     ],
   },
   {
@@ -55,18 +57,20 @@ export const servicesItem: services[] = [
       "Tokenomics",
       "Investor marketing",
       "Go-to-market strategy",
-    ],
-  },
-  {
-    num: "05",
-    title: "Manage",
-    tags: [
       "HubSpot / Salesforce",
-      "Community management",
-      "Brand operations",
       "Crisis communications",
     ],
   },
+  // {
+  //   num: "05",
+  //   title: "Manage",
+  //   tags: [
+  //     "HubSpot / Salesforce",
+  //     "Community management",
+  //     "Brand operations",
+  //     "Crisis communications",
+  //   ],
+  // },
 ];
 
 // 2. Dynamic Service Details Data Layer (used on /services/[slug])
@@ -123,6 +127,7 @@ export const allServiceDetails: ServiceDetail[] = [
       "Concept design",
       "System creation",
       "Asset delivery",
+      "Brand operations"
     ],
     image:
       "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1600&q=80",
@@ -140,6 +145,7 @@ export const allServiceDetails: ServiceDetail[] = [
       "Crypto marketing",
       "PR",
       "Email marketing",
+      "Community management"
     ],
     process: ["Channel strategy", "Campaign setup", "Execution", "Optimization"],
     image:
@@ -156,38 +162,19 @@ export const allServiceDetails: ServiceDetail[] = [
       "Pitch decks",
       "Tokenomics",
       "Investor marketing",
-      "Go-to-market strategy",
+      "Go-to-market strategy"
     ],
     process: [
       "Research",
       "Strategic mapping",
       "Planning",
       "Execution guidance",
+      "HubSpot / Salesforce",
+      "Crisis communications"
     ],
     image:
       "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80",
-  },
-  {
-    slug: createSlug("Manage"),
-    category: "Manage",
-    title: "Manage",
-    description:
-      "The infrastructure that keeps growth from breaking your business. Growth creates complexity. We build the systems and processes that absorb it — so your team can keep building without the chaos catching up.",
-    benefits: [
-      "HubSpot / Salesforce",
-      "Community management",
-      "Brand operations",
-      "Crisis communications",
-    ],
-    process: [
-      "System setup",
-      "Workflow design",
-      "Integration",
-      "Ongoing management",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1600&q=80",
-  },
+  }
 ];
 
 export function getServiceDetailBySlug(slug: string): ServiceDetail {

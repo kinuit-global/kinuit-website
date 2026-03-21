@@ -54,12 +54,10 @@ export default function Services() {
         className="absolute inset-0 pointer-events-none z-0"
         style={{
           backgroundImage: `
-          linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
           radial-gradient(ellipse 90% 80% at 50% 70%, rgba(37,99,235,0.35) 0%, rgba(10,20,45,0.7) 45%, rgba(4,7,18,0.95) 85%)
         `,
-          backgroundSize: "120px 120px, 120px 120px, 100% 100%",
-          backgroundRepeat: "repeat, repeat, no-repeat",
+          backgroundSize: "100% 100%",
+          backgroundRepeat: "no-repeat",
           opacity: 0.95,
         }}
       />

@@ -68,7 +68,7 @@ export default function Globe({ size = 1200 }: GlobeProps) {
           showGlobe={true}
           showAtmosphere={true}
           atmosphereColor="#ffffff"
-          atmosphereAltitude={0.15}
+          atmosphereAltitude={0.1}
           globeMaterial={nativeGlobeMaterial}
           onGlobeReady={handleGlobeReady}
 
@@ -97,8 +97,8 @@ export default function Globe({ size = 1200 }: GlobeProps) {
 
       {/* Custom CSS edge glow fading matching the horizon perfectly */}
       <div
-        style={{ width: size * 0.6, height: size * 0.25 }}
-        className="absolute top-[32%] left-1/2 -translate-x-1/2 bg-white/10 blur-[80px] rounded-[100%] z-0"
+        style={{ width: size * 0.5, height: size * 0.2 }}
+        className="absolute top-[35%] left-1/2 -translate-x-1/2 bg-white/5 blur-[60px] rounded-[100%] z-0"
       />
     </div>
   );

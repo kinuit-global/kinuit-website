@@ -83,11 +83,11 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center">
             <Link href="/contact">
               <motion.button
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                className="px-6 h-11 flex items-center justify-center bg-[#081FF0] text-white text-sm font-semibold rounded-full transition-all duration-300"
+                whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(8, 31, 240, 0.5)" }}
+                whileTap={{ scale: 0.98 }}
+                className="px-8 h-12 flex items-center justify-center bg-linear-to-r from-[#081FF0] to-[#2563EB] text-white text-sm font-bold rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(8,31,240,0.3)]"
               >
-                Get Started
+                Let's Talk
               </motion.button>
             </Link>
           </div>
@@ -143,13 +143,11 @@ export default function Navbar() {
               ))}
               <Link href="/contact">
                 <motion.span
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.45 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => setMenuOpen(false)}
-                  className="mt-4 px-8 py-3 bg-[#081FF0] text-white font-semibold rounded-xl cursor-pointer block text-center"
+                  className="mt-6 px-10 py-4 bg-linear-to-r from-[#081FF0] to-[#2563EB] text-white font-bold rounded-full cursor-pointer block text-center shadow-[0_0_20px_rgba(8,31,240,0.4)]"
                 >
-                  Get Started
+                  Let's Talk
                 </motion.span>
               </Link>
             </nav>

@@ -4,12 +4,7 @@ import { motion } from "framer-motion";
 import { easeOut } from "framer-motion";
 import HeroBackground from "@/lib/StarCanvas";
 import Link from "next/link";
-
-const STATS = [
-  { value: "100+", label: "Successful Projects" },
-  { value: "25+", label: "Happy Customers" },
-  { value: "10+", label: "Expert Team" },
-];
+import { ChevronRight, ArrowRight } from "lucide-react";
 
 const TECHS = [
   { name: "Web3", style: "font-medium tracking-wide text-base sm:text-lg text-white/90" },
@@ -40,9 +35,9 @@ export default function Hero() {
       <HeroBackground />
 
       {/* Hero content wrapper */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
-        {/* Left Column (Content) */}
-        <div className="flex flex-col items-start text-left w-full">
+      <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center text-center">
+        {/* Centered Content */}
+        <div className="flex flex-col items-center text-center w-full">
           {/* Badge */}
           <motion.span
             {...fadeUp}
@@ -70,11 +65,11 @@ export default function Hero() {
             transition={{ delay: 0.1 }}
             className="
           font-black uppercase tracking-tight
-          leading-[1.1] sm:leading-[1.15] mb-4 sm:mb-5
-          text-3xl sm:text-4xl md:text-[2.5rem] lg:text-[3.25rem] lg:leading-[1.05]
+          leading-[1.1] sm:leading-[1.15] mb-4 sm:mb-6
+          text-3xl sm:text-4xl md:text-[2.5rem] lg:text-[4rem] lg:leading-[1.05]
         "
           >
-            The Team Behind Your <br /> Biggest Move.
+            The Team Behind <br /> Your <span className="bg-linear-to-r from-[#00D1FF] to-[#00FFF0] bg-clip-text text-transparent"> Biggest Move. </span>
           </motion.h1>
 
           {/* Description */}
@@ -82,7 +77,7 @@ export default function Hero() {
             {...fadeUp}
             transition={{ delay: 0.2 }}
             className="
-          max-w-[480px] w-full
+          max-w-[700px] w-full
           text-xs sm:text-sm md:text-base
           font-thin
           tracking-normal
@@ -92,7 +87,7 @@ export default function Hero() {
         "
           >
             In a world run by AI, the brands that win have the sharpest minds behind
-            them. We are that edge — strategy, creativity, and technology, working as
+            them. We are that <b>edge strategy, creativity, and technology,</b> working as
             one.
 
           </motion.p>
@@ -102,10 +97,10 @@ export default function Hero() {
             {...fadeUp}
             transition={{ delay: 0.3 }}
             className="
-          flex flex-col sm:flex-row items-start sm:items-center
-          gap-3
-          justify-start
-          mb-4 sm:mb-8
+          flex flex-col sm:flex-row items-center
+          gap-4
+          justify-center
+          mb-8 sm:mb-12
           w-full sm:w-auto
         "
           >
@@ -121,13 +116,7 @@ export default function Hero() {
           "
             >
               Start a Project
-              <Image
-                src="/fwd.png"
-                alt="arrw-img"
-                width={15}
-                height={10}
-                className="object-contain"
-              />
+              <ChevronRight className="w-4 h-4" />
             </Link>
 
             <Link
@@ -143,14 +132,8 @@ export default function Hero() {
             transition
           "
             >
-              Explore Our Work
-              <Image
-                src="/play.png"
-                alt="arrw-img"
-                width={15}
-                height={10}
-                className="object-contain"
-              />
+              View Case Studies
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
 
@@ -173,193 +156,44 @@ export default function Hero() {
               ))}
             </div>
           </motion.div> */}
-        </div> {/* Closes Left Column */}
-
-        {/* Right Column (Visual Container) */}
-        <div className="relative w-full h-full flex items-center justify-center mt-6 md:mt-0">
-          {/* Soft glow/gradient background behind visual */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#0059ff]/15 blur-[120px] rounded-full scale-100 pointer-events-none" />
-
-          {/* Visual/Mockup Container */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: easeOut }}
-            className="relative w-full max-w-[280px] sm:max-w-none mx-auto aspect-[4/3] sm:aspect-video lg:aspect-[4/3] xl:aspect-[16/11] flex items-center justify-center z-10 lg:mt-8"
-            style={{ perspective: "1200px" }}
-          >
-            {/* Main Mockup (Dashboard) */}
-            <motion.div
-              animate={{
-                y: [0, -12, 0],
-                rotateY: [-5, -6, -5],
-                scale: [1.02, 1.03, 1.02]
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="w-full h-full max-w-[360px] md:max-w-[400px] lg:max-w-[440px] relative z-10 transform-gpu"
-              style={{ transformStyle: "preserve-3d" }}
-            >
-              <div className="w-full h-full rounded-xl sm:rounded-2xl border border-white/10 bg-[#060913]/90 backdrop-blur-xl overflow-hidden flex flex-col shadow-[0_20px_50px_rgba(0,89,255,0.15)] relative">
-                {/* Mockup Top Bar */}
-                <div className="h-6 sm:h-8 border-b border-white/5 bg-white/[0.02] flex items-center px-3 sm:px-4 gap-1.5 sm:gap-2">
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-red-500/80" />
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-yellow-500/80" />
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-green-500/80" />
-                  <div className="ml-auto flex items-center gap-2 border border-white/10 bg-white/5 rounded-full px-2 py-0.5 sm:py-1">
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_5px_#4ade80]" />
-                    <div className="h-1.5 w-6 sm:w-8 bg-white/40 rounded-full" />
-                  </div>
-                </div>
-
-                {/* Mockup Content (simulated dashboard) */}
-                <div className="flex-1 p-4 sm:p-6 flex flex-col gap-4 relative overflow-hidden">
-                  {/* Subtle inner glow */}
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-[#0059ff]/10 blur-[80px] rounded-full" />
-
-                  {/* Dashboard header */}
-                  <div className="flex items-end justify-between z-10">
-                    <div className="flex flex-col gap-1.5">
-                      <div className="text-[10px] sm:text-[11px] text-white/50 uppercase tracking-widest font-medium">Total Portfolio</div>
-                      <div className="flex items-center gap-3">
-                        <span className="text-xl sm:text-2xl font-bold text-white tracking-tight">$2,458,210.00</span>
-                        <div className="flex items-center justify-center px-1.5 py-0.5 rounded-md text-[9px] sm:text-[10px] font-bold bg-green-500/20 text-green-400">+14.2%</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Dashboard body grid */}
-                  <div className="flex-1 grid grid-cols-3 gap-3 sm:gap-4 z-10">
-                    <div className="col-span-2 bg-gradient-to-br from-white/[0.03] to-transparent border border-white/5 rounded-lg p-3 sm:p-4 flex flex-col relative overflow-hidden">
-                      <div className="flex justify-between items-center mb-4">
-                        <div className="h-3 w-16 bg-white/20 rounded-full" />
-                        <div className="flex gap-1">
-                          <div className="h-1 w-3 bg-white/40 rounded-full" />
-                          <div className="h-1 w-3 bg-white/10 rounded-full" />
-                        </div>
-                      </div>
-                      <div className="flex-1 w-full relative flex items-end">
-                        <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 50">
-                          <defs>
-                            <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="0%" stopColor="#0059ff" stopOpacity="0.4" />
-                              <stop offset="100%" stopColor="#0059ff" stopOpacity="0.0" />
-                            </linearGradient>
-                          </defs>
-                          <path d="M0,50 L0,35 C10,32 15,20 25,25 C35,30 40,15 50,18 C60,21 70,5 80,10 C90,15 95,5 100,0 L100,50 Z" fill="url(#chartGrad)" />
-                          <path d="M0,35 C10,32 15,20 25,25 C35,30 40,15 50,18 C60,21 70,5 80,10 C90,15 95,5 100,0" fill="none" stroke="#0059ff" strokeWidth="1.5" className="drop-shadow-[0_0_8px_rgba(0,89,255,0.8)]" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col gap-3 sm:gap-4">
-                      <div className="flex-1 bg-white/[0.03] border border-white/5 rounded-lg p-3 flex flex-col justify-between">
-                        <div className="flex items-center gap-2">
-                          <div className="w-5 h-5 rounded-full bg-[#627EEA]/20 flex items-center justify-center shrink-0">
-                            <div className="w-2.5 h-2.5 rounded-full bg-[#627EEA]" />
-                          </div>
-                          <div className="h-2 w-8 bg-white/30 rounded-full" />
-                        </div>
-                        <div className="mt-auto">
-                          <div className="h-4 w-12 sm:w-16 bg-white/90 rounded-md mb-1.5" />
-                          <div className="h-2 w-8 sm:w-10 bg-green-400/80 rounded-full" />
-                        </div>
-                      </div>
-                      <div className="flex-1 bg-white/[0.03] border border-white/5 rounded-lg p-3 flex flex-col justify-between">
-                        <div className="flex items-center gap-2">
-                          <div className="w-5 h-5 rounded-full bg-[#F3BA2F]/20 flex items-center justify-center shrink-0">
-                            <div className="w-2.5 h-2.5 rounded-full bg-[#F3BA2F]" />
-                          </div>
-                          <div className="h-2 w-8 bg-white/30 rounded-full" />
-                        </div>
-                        <div className="mt-auto">
-                          <div className="h-4 w-10 sm:w-14 bg-white/90 rounded-md mb-1.5" />
-                          <div className="h-2 w-8 sm:w-10 bg-[#0059ff]/80 rounded-full" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Floating Element 1 (Top Right) */}
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute -right-2 top-4 lg:-right-8 lg:top-8 z-20 w-[140px] sm:w-[160px] hidden sm:flex flex-col gap-2 p-3 sm:p-4 rounded-xl border border-white/10 bg-[#0b0f1e]/80 backdrop-blur-md shadow-2xl transform-gpu"
-              style={{ transform: "translateZ(30px)" }}
-            >
-              <div className="flex items-center gap-2 sm:gap-3">
-                <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#627EEA]/20 flex items-center justify-center shrink-0 border border-[#627EEA]/30">
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#627EEA] shadow-[0_0_8px_#627EEA] rotate-45" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] sm:text-[11px] text-gray-400 font-thin uppercase tracking-wider">Network</span>
-                  <span className="text-xs sm:text-sm text-white font-medium leading-none mt-1">Ethereum</span>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Floating Element 2 (Bottom Left) */}
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              className="absolute -left-2 bottom-8 lg:-left-12 lg:bottom-12 z-20 w-[150px] sm:w-[180px] hidden sm:flex flex-col gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl border border-green-500/20 bg-green-500/5 backdrop-blur-md shadow-2xl transform-gpu"
-              style={{ transform: "translateZ(50px)" }}
-            >
-              <span className="text-[10px] sm:text-[11px] text-green-200/70 font-thin uppercase tracking-wider">Value Locked</span>
-              <div className="flex items-end gap-1.5 text-white mt-1">
-                <span className="text-xl sm:text-3xl font-bold leading-none">$14.2</span>
-                <span className="text-[10px] sm:text-xs text-green-200 mb-0.5">B</span>
-              </div>
-              <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden mt-1 px-0">
-                <div className="w-[92%] h-full bg-green-400 rounded-full shadow-[0_0_8px_#4ade80]" />
-              </div>
-            </motion.div>
-
-          </motion.div>
-        </div>
+        </div> {/* Closes Centered Content */}
       </div>
 
-      {/* Techs Marquee */}
-      <div className="w-full relative z-10 mt-8 sm:mt-10 mb-4 sm:mb-8 px-0 overflow-hidden flex flex-col items-center">
+      {/* Brand Tags Row */}
+      {/* Brand Tags Marquee */}
+      <div className="w-full relative z-10 mt-8 sm:mt-12 mb-8 sm:mb-16 flex flex-col items-center overflow-hidden">
         <motion.p
           {...fadeUp}
           transition={{ delay: 0.4 }}
-          className="text-xs sm:text-[13px] text-white/50 mb-4 sm:mb-6 tracking-widest uppercase font-medium text-center px-4"
+          className="text-xs sm:text-[13px] text-white/50 mb-6 sm:mb-8 tracking-widest uppercase font-medium text-center px-4"
         >
           Chosen by brands in
         </motion.p>
 
-        {/* Marquee Container */}
+        {/* Marquee Wrapper */}
         <div className="flex overflow-hidden w-full relative group">
           {/* Gradient Masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-k-bg to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-k-bg to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-linear-to-r from-k-bg to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-linear-to-l from-k-bg to-transparent z-10 pointer-events-none" />
 
-          {/* Scrolling Content - To ensure seamless loop we need two wrappers of the items */}
           <motion.div
-            className="flex w-max gap-3 sm:gap-4 lg:gap-6 pr-3 sm:pr-4 lg:pr-6"
+            className="flex w-max gap-6 sm:gap-8 md:gap-10 pr-6 sm:pr-8 md:pr-10"
             animate={{ x: ["0%", "-50%"] }}
             transition={{
-              duration: 25,
+              duration: 40,
               ease: "linear",
               repeat: Infinity,
             }}
+            style={{ willChange: "transform" }}
           >
             {[...TECHS, ...TECHS, ...TECHS].map((tech, idx) => (
               <div
                 key={idx}
-                className="flex flex-col items-center justify-center w-[130px] sm:w-[150px] lg:w-[180px] h-[40px] sm:h-[50px] rounded-lg sm:rounded-[14px] border border-white/[0.04] bg-white/[0.01] backdrop-blur-md opacity-60 hover:opacity-100 hover:bg-white/[0.03] transition-all duration-300 cursor-pointer hover:-translate-y-1"
+                className="flex items-center justify-center min-w-[140px] sm:min-w-[160px] px-6 py-3 sm:py-4 rounded-xl border border-white/8 bg-white/2 backdrop-blur-md hover:bg-white/5 transition-all duration-300 cursor-pointer hover:-translate-y-1 group"
               >
-                <div className={`text-white transition-colors duration-300 flex items-center justify-center text-center w-full px-2`}>
-                  <div className={`flex items-center justify-center gap-1.5 ${tech.style}`}>
-                    {tech.icon && <span className="opacity-80 text-sm">{tech.icon}</span>}
-                    <span>{tech.name}</span>
-                  </div>
+                <div className={`flex items-center justify-center gap-2 ${tech.style} group-hover:text-white`}>
+                  {tech.icon && <span className="opacity-80 text-sm">{tech.icon}</span>}
+                  <span className="whitespace-nowrap">{tech.name}</span>
                 </div>
               </div>
             ))}

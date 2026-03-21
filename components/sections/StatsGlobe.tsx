@@ -31,7 +31,7 @@ export default function StatsGlobe() {
   return (
     <section className="bg-[#050D1A] py-20 md:py-32 border-y border-white/5 overflow-hidden relative z-10">
       {/* Background Soft Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#0059ff]/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#0059ff]/5 blur-[120px] rounded-full pointer-events-none" />
 
       <Container className="relative z-10">
         <div className="flex justify-center">
