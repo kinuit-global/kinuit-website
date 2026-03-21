@@ -180,7 +180,7 @@ export default function Hero() {
             className="flex w-max gap-6 sm:gap-8 md:gap-10 pr-6 sm:pr-8 md:pr-10"
             animate={{ x: ["0%", "-50%"] }}
             transition={{
-              duration: 40,
+              duration: 50,
               ease: "linear",
               repeat: Infinity,
             }}
