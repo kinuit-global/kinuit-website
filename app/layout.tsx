@@ -55,6 +55,19 @@ export const metadata: Metadata = {
   },
   description:
     "A globally distributed partner for Branding, Development, and Strategy. We help ambitious brands build products that work, design identities that last, and grow with sustainable momentum.",
+  icons: {
+    icon: [
+      { url: "/16px.svg", sizes: "16x16" },
+      { url: "/32px.svg", sizes: "32x32" },
+    ],
+    apple: [
+      { url: "/180px.svg", sizes: "180x180" },
+    ],
+    other: [
+      { url: "/192px.svg", sizes: "192x192" },
+      { url: "/512px.svg", sizes: "512x512" },
+    ],
+  },
 };
 
 export default function RootLayout({

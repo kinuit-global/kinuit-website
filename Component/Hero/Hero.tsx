@@ -28,7 +28,7 @@ export default function Hero() {
       relative min-h-screen
       flex flex-col justify-center
       px-4 sm:px-6
-      pt-24 sm:pt-32 lg:pt-24
+      pt-32 sm:pt-32 lg:pt-24
       bg-k-bg overflow-hidden
     "
     >
@@ -44,7 +44,7 @@ export default function Hero() {
             className="
           inline-flex items-center gap-2
           px-4 py-2
-          mt-4 mb-4 sm:mt-6 sm:mb-6
+          mt-2 mb-4 sm:mt-6 sm:mb-6
           rounded-full text-[10px] sm:text-xs text-gray-300
           bg-white/5 border border-white/10 backdrop-blur-md
         "
@@ -147,7 +147,7 @@ export default function Hero() {
           transition={{ delay: 0.4 }}
           className="text-xs sm:text-[13px] text-white/50 mb-6 sm:mb-8 tracking-widest uppercase font-medium text-center px-4"
         >
-          Chosen by brands in
+          Built for brands in
         </motion.p>
 
         {/* Marquee Wrapper */}

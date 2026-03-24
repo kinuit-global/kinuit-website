@@ -25,13 +25,61 @@ export const projects: Project[] = [
     services: ["Design", "Build", "Grow"]
   },
   {
+    slug: "lumina-wellness",
+    tag: "HEALTH-TECH · AI PRODUCT",
+    title: "Lumina: AI-Driven Personalized Wellness",
+    challenge: "Developing a scalable AI platform that provides actionable health insights while maintaining a premium feel.",
+    solution: "Custom data visualization dashboard, AI engine integration, and an elegant, calm UI.",
+    outcome: "Increased user engagement by 45% and secured $2M in seed funding post-launch.",
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1600&q=80",
+    client: "Lumina Health",
+    year: "2024",
+    services: ["Design", "Build"]
+  },
+  {
+    slug: "horizon-capital",
+    tag: "FINTECH · INSTITUTIONAL BRIDGE",
+    title: "Horizon: Institutional Wealth Management",
+    challenge: "Building a trust-heavy platform for high-net-worth investors with complex reporting needs.",
+    solution: "A robust, security-first dashboard with real-time analytics and automated tax reporting.",
+    outcome: "Successfully onboarded 50+ institutional clients within the first 6 months.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
+    client: "Horizon Capital",
+    year: "2023",
+    services: ["Plan", "Design", "Build"]
+  },
+  {
+    slug: "vortex-exchange",
+    tag: "WEB3 · NFT INFRASTRUCTURE",
+    title: "Vortex: High-Speed Digital Asset Exchange",
+    challenge: "Designing a high-throughput exchange that remains intuitive for retail users.",
+    solution: "A optimized React frontend with low-latency sockets and a simplified trading bridge.",
+    outcome: "Handled $100M+ in volume during the first month without downtime.",
+    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1600&q=80",
+    client: "Vortex Labs",
+    year: "2024",
+    services: ["Build", "Grow"]
+  },
+  {
+    slug: "aura-creative",
+    tag: "LUXURY · DIGITAL SHOWCASE",
+    title: "Aura: Digital Experience for Global Brands",
+    challenge: "Creating a portfolio that reflects the luxury and precision of a world-class creative studio.",
+    solution: "A bespoke, immersive website with high-end motion graphics and editorial typography.",
+    outcome: "Won Awwwards 'Site of the Day' and tripled new business inquiries.",
+    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1600&q=80",
+    client: "Aura Studio",
+    year: "2024",
+    services: ["Design", "Build"]
+  },
+  {
     slug: "stealth-project",
     tag: "DEFI · IN DEVELOPMENT",
     title: "Project Zero: Modern RWA Infrastructure",
     challenge: "Confidential development of a scalable platform for real-world asset tokenization.",
     solution: "Custom enterprise-grade architecture and a premium institutional user experience.",
     outcome: "Under active development. Stealth launch scheduled for Q4 2024.",
-    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1600&q=80",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     client: "Project Zero",
     year: "2024",
     services: ["Plan", "Design", "Build"]
