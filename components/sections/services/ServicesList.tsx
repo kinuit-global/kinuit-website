@@ -2,6 +2,18 @@ import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
 import Link from "next/link";
 import { createSlug } from "@/lib/service";
+import SectionBadge from "@/components/ui/SectionBadge";
+import { Zap, Boxes, TrendingUp, Compass } from "lucide-react";
+
+const getIcon = (id: string) => {
+  switch (id) {
+    case "01": return Zap;
+    case "02": return Boxes;
+    case "03": return TrendingUp;
+    case "04": return Compass;
+    default: return Zap;
+  }
+};
 
 const servicesData = [
   {
@@ -60,12 +72,9 @@ export default function ServicesList() {
 
                 {/* Text Content */}
                 <div className={`lg:col-span-7 flex flex-col pt-2 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="text-white/40 font-mono text-xl">{svc.id}</div>
-                    <div className="w-12 h-[1px] bg-white/20"></div>
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0059FF] uppercase tracking-wider">
-                      {svc.title}
-                    </h2>
+                  <div className="mb-6 flex items-center gap-4">
+                    <div className="text-white/20 font-black text-2xl tracking-tighter">{svc.id}</div>
+                    <SectionBadge icon={getIcon(svc.id)} label={svc.title} />
                   </div>
 
                   <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight mb-6">

@@ -142,7 +142,7 @@ export default function Footer() {
               </a>
 
               <div className="flex items-start gap-3">
-                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 flex-shrink-0">
+                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 shrink-0">
                   📍
                 </span>
                 <span className="leading-relaxed">Available Worldwide · <br />Remote-First Team</span>
