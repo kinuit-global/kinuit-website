@@ -50,7 +50,7 @@ export default function ContactFormSection() {
 
           <div className="mt-12 text-center">
             <p className="text-white/60">
-              Prefer email? <a href="mailto:kinuitoffl@gmail.com" className="text-[#0059FF] hover:underline font-medium">kinuitoffl@gmail.com</a>
+              Prefer email? <a href="mailto:hello@kinuit.com" className="text-[#0059FF] hover:underline font-medium">hello@kinuit.com</a>
             </p>
           </div>
         </div>

@@ -49,9 +49,12 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Kinuit – Work That Moves While You Rest",
+  title: {
+    default: "Kinuit | Build, Design, Grow & Plan for Ambitious Brands",
+    template: "%s | Kinuit"
+  },
   description:
-    "A globally distributed partner for Branding, Development, and Strategy.",
+    "A globally distributed partner for Branding, Development, and Strategy. We help ambitious brands build products that work, design identities that last, and grow with sustainable momentum.",
 };
 
 export default function RootLayout({

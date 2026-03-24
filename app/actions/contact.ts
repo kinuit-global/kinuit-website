@@ -25,7 +25,7 @@ export async function submitContactForm(formData: FormData) {
 
       await resend.emails.send({
         from: 'Kinuit Contact Form <onboarding@resend.dev>',
-        to: 'kinuitoffl@gmail.com',
+        to: 'hello@kinuit.com',
         subject: `New Project Inquiry: ${company}`,
         html: `
           <div style="font-family: 'Inter', sans-serif; background-color: #f4f7f9; padding: 40px 20px;">

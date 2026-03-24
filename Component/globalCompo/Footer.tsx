@@ -13,11 +13,10 @@ const quickLinks = [
 ];
 
 const services = [
-  { label: "Build", href: "/services/build" },
-  { label: "Design", href: "/services/design" },
-  { label: "Grow", href: "/services/grow" },
-  { label: "Plan", href: "/services/plan" },
-  { label: "Manage", href: "/services/manage" },
+  { label: "BUILD", href: "/services/build" },
+  { label: "DESIGN", href: "/services/design" },
+  { label: "GROW", href: "/services/grow" },
+  { label: "PLAN", href: "/services/plan" },
 ];
 
 const socials = [
@@ -135,11 +134,11 @@ export default function Footer() {
             </h4>
 
             <div className="space-y-4 text-sm text-white/40">
-              <a href="mailto:kinuitoffl@gmail.com" className="flex items-center gap-3 hover:text-gray-300 transition-colors group">
+              <a href="mailto:hello@kinuit.com" className="flex items-center gap-3 hover:text-gray-300 transition-colors group">
                 <span className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 group-hover:bg-white/10 font-black italic">
                   @
                 </span>
-                kinuitoffl@gmail.com
+                hello@kinuit.com
               </a>
 
               <div className="flex items-start gap-3">

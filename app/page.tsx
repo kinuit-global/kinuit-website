@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Hero from "@/components/sections/Hero";
 import BrandStatement from "@/components/sections/BrandStatement";
 import Pillars from "@/components/sections/Pillars";
@@ -8,6 +9,11 @@ import FeaturedWork from "@/components/sections/FeaturedWork";
 import CTA from "@/components/sections/CTA";
 import FAQ from "@/Component/FAQ/FAQ";
 import Reveal from "@/components/ui/Reveal";
+
+export const metadata: Metadata = {
+  title: "Kinuit | Build, Design, Grow & Plan for Ambitious Brands",
+  description: "A globally distributed partner for Branding, Development, and Strategy. We build products that work and brands that last.",
+};
 
 export default function HomePage() {
   return (
