@@ -1,3 +1,4 @@
+"use client";
 import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
 import Link from "next/link";

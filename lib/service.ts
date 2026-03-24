@@ -80,6 +80,7 @@ export interface ServiceDetail {
   title: string;
   description: string;
   benefits: string[];
+  expertise?: string[]; // New: specifically for sub-service links
   process: string[];
   image: string;
 }
@@ -92,6 +93,12 @@ export const allServiceDetails: ServiceDetail[] = [
     description:
       "We build products that work and brands that last. From your first website to a full-scale AI product, we bring your vision to life with clean code, smart architecture, and a relentless focus on performance.",
     benefits: [
+      "Future-proof technical architecture tailored to your unique scaling needs.",
+      "High-performance codebases that reduce technical debt and maximize speed.",
+      "Seamless integration with your existing tools and enterprise workflows.",
+      "Security-first development practices to protect your data and users.",
+    ],
+    expertise: [
       "Custom websites",
       "Mobile apps",
       "AI products",
@@ -115,6 +122,12 @@ export const allServiceDetails: ServiceDetail[] = [
     description:
       "Brands that mean something before anyone reads a word. We design with intention. Every visual choice — from the logo to the layout — is rooted in your brand's story and built to make an impression that lasts.",
     benefits: [
+      "Cohesive brand systems that communicate authority and premium quality.",
+      "User-centric interfaces that reduce friction and drive measurable conversion.",
+      "High-impact motion and CGI that captures attention in crowded markets.",
+      "Scalable design operations that maintain consistency across all channels.",
+    ],
+    expertise: [
       "Brand identity",
       "UX / UI",
       "Motion graphics",
@@ -139,6 +152,12 @@ export const allServiceDetails: ServiceDetail[] = [
     description:
       "Marketing that earns attention and converts it. We build marketing systems that compound over time — organic reach, paid performance, and community, all working together toward one goal: sustainable growth.",
     benefits: [
+      "Data-driven growth audits that identify untapped market opportunities.",
+      "Multichannel campaign coordination for maximum brand reach and impact.",
+      "Conversion rate optimization (CRO) that turns traffic into actual revenue.",
+      "Transparent reporting and KPI tracking to measure real business ROI.",
+    ],
+    expertise: [
       "SEO",
       "Paid ads",
       "Social media",
@@ -158,6 +177,12 @@ export const allServiceDetails: ServiceDetail[] = [
     description:
       "The thinking that makes everything else work harder. Strategy is not a document. It is a decision-making framework that shapes everything your brand does. We build it with you, then help you execute it.",
     benefits: [
+      "Strategic clarity that aligns your entire team behind a single goal.",
+      "Go-to-market frameworks that reduce risk and accelerate time-to-market.",
+      "Investor-ready positioning that articulates your unique value proposition.",
+      "Operational strategy that streamlines internal workflows for maximum output.",
+    ],
+    expertise: [
       "Growth strategy",
       "Pitch decks",
       "Tokenomics",
@@ -194,7 +219,9 @@ export function getServiceDetailBySlug(slug: string): ServiceDetail {
       `Uncompromised focus on unlocking scalable ${formattedTitle} momentum.`,
       "Direct continuous integration alongside your internal team.",
       "Bespoke analytics mapping and rigorous post-deployment reviews.",
+      "Dedicated expertise focused on your specific industry challenges.",
     ],
+    // Expertise omitted for leaf nodes to avoid 404 links
     process: [
       "Deep-Dive Discovery & Audit",
       "Strategic Architecture Mapping",

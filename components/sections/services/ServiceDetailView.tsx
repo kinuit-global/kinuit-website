@@ -5,7 +5,8 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import { ServiceDetail, createSlug } from "@/lib/service";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, CheckCircle2 } from "lucide-react";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -24,7 +25,7 @@ export default function ServiceDetailView({
 }) {
   return (
     <>
-      <section className="bg-gradient-to-b from-[#050D1A] to-k-bg pt-40 pb-20 md:pt-48 md:pb-28 border-b border-white/5">
+      <section className="bg-linear-to-b from-[#050D1A] to-k-bg pt-40 pb-20 md:pt-48 md:pb-20 border-b border-white/5">
         <Container>
           <div className="max-w-4xl flex flex-col items-start text-left">
             <motion.div {...fadeUp} transition={{ delay: 0.1 }}>
@@ -35,11 +36,9 @@ export default function ServiceDetailView({
               ]} />
             </motion.div>
 
-            <motion.div {...fadeUp} transition={{ delay: 0.2 }} className="text-[#0059FF] font-black tracking-widest text-sm mb-6 uppercase">
-              {service.category}
-            </motion.div>
+            <SectionBadge label={service.category} />
             
-            <motion.h1 {...fadeUp} transition={{ delay: 0.3 }} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 text-white leading-tight tracking-tight">
+            <motion.h1 {...fadeUp} transition={{ delay: 0.3 }} className="text-4xl md:text-5xl lg:text-7xl font-bold mb-8 text-white leading-tight tracking-tight">
               {service.title}
             </motion.h1>
           </div>
@@ -52,7 +51,7 @@ export default function ServiceDetailView({
              initial={{ opacity: 0, y: 40 }}
              animate={{ opacity: 1, y: 0 }}
              transition={{ duration: 0.8, delay: 0.4 }}
-             className="w-full aspect-video md:aspect-[21/9] rounded-[2rem] overflow-hidden mb-20 shadow-2xl border border-white/10"
+             className="w-full aspect-video md:aspect-21/9 rounded-4xl overflow-hidden mb-20 shadow-2xl border border-white/10"
            >
              <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
            </motion.div>
@@ -72,7 +71,7 @@ export default function ServiceDetailView({
                    {service.benefits.map((benefit, i) => (
                      <div
                        key={i}
-                       className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/5"
+                       className="flex items-center gap-4 p-4 rounded-xl bg-white/2 border border-white/5"
                      >
                        <div className="w-2 h-2 rounded-full bg-[#0059FF]/50" />
                        <span className="text-white/60 text-lg font-medium">{benefit}</span>
@@ -93,7 +92,7 @@ export default function ServiceDetailView({
                            className={`group flex items-center justify-between p-4 rounded-xl border transition-all duration-300 ${
                              createSlug(related) === service.slug
                                ? "bg-[#0059FF]/20 border-[#0059FF]/50 pointer-events-none"
-                               : "bg-white/[0.03] border-white/10 hover:border-[#0059FF]/50 hover:bg-[#0059FF]/10"
+                               : "bg-white/3 border-white/10 hover:border-[#0059FF]/50 hover:bg-[#0059FF]/10"
                            }`}
                          >
                            <div className="flex items-center gap-4">
@@ -111,33 +110,33 @@ export default function ServiceDetailView({
                    </>
                  )}
 
-                 {!parentCategory && (
-                    <>
-                      <h3 className="text-xl font-bold text-white mt-12 mb-6 tracking-wide underline underline-offset-8 decoration-[#0059FF]/30">Expertise In</h3>
-                      <div className="grid grid-cols-1 gap-4">
-                        {service.benefits.map((benefit, i) => (
-                          <Link
-                            key={i}
-                            href={`/services/${service.slug}/${createSlug(benefit)}`}
-                            className="group flex items-center justify-between p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-[#0059FF]/50 hover:bg-[#0059FF]/10 transition-all duration-300"
-                          >
-                            <div className="flex items-center gap-4">
-                              <div className="w-2 h-2 rounded-full bg-[#0059FF] group-hover:scale-125 transition-transform" />
-                              <span className="text-white/80 group-hover:text-white text-lg transition-colors font-medium">{benefit}</span>
-                            </div>
-                            <ArrowUpRight size={18} className="text-[#0059FF] opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
-                          </Link>
-                        ))}
-                      </div>
-                    </>
-                 )}
+                  {service.expertise && service.expertise.length > 0 && (
+                     <>
+                       <h3 className="text-xl font-bold text-white mt-12 mb-6 tracking-wide underline underline-offset-8 decoration-[#0059FF]/30">Expertise In</h3>
+                       <div className="grid grid-cols-1 gap-4">
+                         {service.expertise.map((item, i) => (
+                           <Link
+                             key={i}
+                             href={`/services/${createSlug(item)}`}
+                             className="group flex items-center justify-between p-4 rounded-xl bg-white/3 border border-white/10 hover:border-[#0059FF]/50 hover:bg-[#0059FF]/10 transition-all duration-300"
+                           >
+                             <div className="flex items-center gap-4">
+                               <div className="w-2 h-2 rounded-full bg-[#0059FF] group-hover:scale-125 transition-transform" />
+                               <span className="text-white/80 group-hover:text-white text-lg transition-colors font-medium">{item}</span>
+                             </div>
+                             <ArrowUpRight size={18} className="text-[#0059FF] opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+                           </Link>
+                         ))}
+                       </div>
+                     </>
+                  )}
               </motion.div>
 
               <motion.div 
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, delay: 0.6 }}
-                className="p-8 md:p-12 rounded-[2rem] bg-white/[0.02] border border-white/10"
+                className="p-8 md:p-12 rounded-4xl bg-white/2 border border-white/10"
               >
                  <h2 className="text-2xl font-bold tracking-tight text-white mb-10">Our Implementation Process</h2>
                  <div className="space-y-8">
