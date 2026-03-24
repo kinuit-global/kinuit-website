@@ -29,7 +29,7 @@ export default function StatsGlobe() {
   }, []);
 
   return (
-    <section className="bg-[#050D1A] py-20 md:py-32 border-y border-white/5 overflow-hidden relative z-10">
+    <section className="bg-[#050D1A] py-20 md:py-32 overflow-hidden relative z-10">
       {/* Background Soft Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#0059ff]/5 blur-[120px] rounded-full pointer-events-none" />
 
@@ -43,20 +43,20 @@ export default function StatsGlobe() {
           transition={{ duration: 0.6 }}
           className="text-3xl md:text-4xl lg:text-5xl text-center font-extrabold text-white mb-8"
         >
-          OUR GLOBAL <span className="text-[#0059FF]">IMPACT</span>
+          OUR GLOBAL <span className="text-[#0059FF] ml-4">IMPACT</span>
         </motion.h2>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
 
           {/* Left: Stats Section (4 columns) */}
           <div className="lg:col-span-4 flex flex-col gap-6 h-full py-2 min-h-[400px] lg:min-h-[500px]">
-            <div className="flex flex-col gap-6 lg:gap-10 w-full h-full justify-center">
+            <div className="flex flex-col gap-10 w-full h-full justify-center">
               {STATS.map((stat, idx) => (
                 <motion.div
                   key={stat.label}
                   {...fadeUp}
                   transition={{ delay: idx * 0.1 }}
                   whileHover={{ x: 8, backgroundColor: "rgba(255,255,255,0.03)" }}
-                  className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 md:p-8 backdrop-blur-sm transition-all duration-300 flex flex-col justify-center min-h-[130px] md:min-h-[140px]"
+                  className="bg-white/2 border border-white/5 rounded-[28px] p-6 md:p-8 backdrop-blur-sm transition-all duration-300 flex flex-col justify-center min-h-[130px] md:min-h-[140px]"
                 >
                   <div className="text-3xl md:text-3xl font-extrabold text-white mb-1.5">{stat.value}</div>
                   <div className="text-[13px] text-white/50 font-medium tracking-wide leading-snug">{stat.label}</div>
@@ -66,7 +66,7 @@ export default function StatsGlobe() {
           </div>
 
           {/* Right: Globe Section (8 columns) */}
-          <div className="lg:col-span-8 relative w-full h-[350px] sm:h-[450px] lg:h-full min-h-[350px] lg:min-h-[500px] rounded-[2.5rem] bg-white/[0.01] border border-white/5 overflow-hidden flex flex-col items-center pt-10 sm:pt-16">
+          <div className="lg:col-span-8 relative w-full h-[350px] sm:h-[450px] lg:h-full min-h-[350px] lg:min-h-[500px] rounded-[48px] bg-white/1 border border-white/5 overflow-hidden flex flex-col items-center pt-10 sm:pt-16">
             {/* Text Overlay */}
             <motion.div
               {...fadeUp}
@@ -86,7 +86,7 @@ export default function StatsGlobe() {
             </div>
 
             {/* Bottom Inner Edge Fader */}
-            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#050D1A] to-transparent z-20 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-full h-32 bg-linear-to-t from-[#050D1A] to-transparent z-20 pointer-events-none" />
           </div>
 
         </div>

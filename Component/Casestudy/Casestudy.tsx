@@ -108,9 +108,10 @@ export default function CaseStudies() {
               {projectChunks[active]?.map((project) => (
                 <Link
                   key={project.slug}
-                  href={`/work/${project.slug}`}
-                  className={`group relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 flex-shrink-0 transition-all duration-500
-                    ${itemsPerSlide === 1 ? 'w-[85%] sm:w-[70%] max-w-[400px] aspect-[4/5]' : 'w-[38%] md:w-[40%] max-w-[420px] aspect-[16/20]'}
+                  href={project.slug === "stealth-project" ? "#" : `/work/${project.slug}`}
+                  className={`group relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 shrink-0 transition-all duration-500
+                    ${project.slug === "stealth-project" ? "pointer-events-none" : "cursor-pointer"}
+                    ${itemsPerSlide === 1 ? 'w-[85%] sm:w-[70%] max-w-[400px] aspect-4/5' : 'w-[38%] md:w-[40%] max-w-[420px] aspect-16/20'}
                   `}
                 >
                   <Image
@@ -122,7 +123,7 @@ export default function CaseStudies() {
                   />
 
                   {/* Overlay Meta Info */}
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-6 md:p-10">
+                  <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-6 md:p-10">
                     <span className="text-blue-500 text-[10px] md:text-xs font-black tracking-widest uppercase mb-1 md:mb-3">
                       {project.tag}
                     </span>
@@ -134,9 +135,9 @@ export default function CaseStudies() {
                     </p>
                     <div className="mt-4 flex items-center gap-2 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
                       <span className="text-blue-500 text-[10px] md:text-xs font-black tracking-widest uppercase">
-                        VIEW PROJECT
+                        {project.slug === "stealth-project" ? "STEALTH MODE" : "VIEW PROJECT"}
                       </span>
-                      <ArrowRight size={14} className="text-blue-500" />
+                      {project.slug !== "stealth-project" && <ArrowRight size={14} className="text-blue-500" />}
                     </div>
                   </div>
                 </Link>

@@ -15,9 +15,9 @@ export default function WorkGrid() {
             
             return (
               <Link 
-                href={`/work/${project.slug}`}
+                href={project.slug === "stealth-project" ? "#" : `/work/${project.slug}`}
                 key={project.slug} 
-                className={`flex flex-col group cursor-pointer ${isRightColumn ? 'md:mt-32' : ''}`}
+                className={`flex flex-col group ${project.slug === "stealth-project" ? 'pointer-events-none' : 'cursor-pointer'} ${isRightColumn ? 'md:mt-32' : ''}`}
               >
                 <div className="w-full aspect-4/3 rounded-3xl mb-8 flex items-center justify-center overflow-hidden relative shadow-2xl border border-white/10 group-hover:border-[#0059FF]/30 transition-colors duration-500">
                   <div className="absolute inset-0 bg-[#0059FF]/20 mix-blend-overlay z-10 group-hover:bg-transparent transition-colors duration-500" />
@@ -41,8 +41,8 @@ export default function WorkGrid() {
                   <p className="text-white font-medium mt-4">{project.outcome}</p>
                 </div>
                 
-                <div className="inline-flex items-center gap-2 text-white font-medium group-hover:text-[#0059FF] transition-colors mt-2 opacity-80 group-hover:opacity-100">
-                  View Project <ArrowUpRight size={18} className="transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                <div className="inline-flex items-center gap-2 text-white font-medium group-hover:text-[#0059FF] transition-colors mt-2 opacity-80 group-hover:opacity-100 uppercase tracking-widest text-xs">
+                  {project.slug === "stealth-project" ? "STEALTH MODE" : <>View Project <ArrowUpRight size={18} className="transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" /></>}
                 </div>
               </Link>
             );

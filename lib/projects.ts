@@ -13,52 +13,28 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: "defi-brand-launch",
-    tag: "WEB3 · BRAND + LAUNCH",
-    title: "Brand identity, website, and go-to-market campaign",
-    challenge: "A launch-ready brand for a DeFi protocol entering a crowded market.",
-    solution: "Full brand identity, website build, and launch campaign from one brief.",
-    outcome: "Live in 6 weeks. $2.1M raised in the first 90 days.",
+    slug: "nexus-protocol",
+    tag: "WEB3 · BRAND + INTERFACE",
+    title: "Nexus Protocol: Brand Identity & Go-to-Market",
+    challenge: "A launch-ready brand for a DeFi protocol entering a competitive market.",
+    solution: "Full brand system, high-performance website, and strategic launch assets.",
+    outcome: "Successfully launched with a cohesive brand identity and production-ready interface.",
     image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1600&q=80",
     client: "Nexus Protocol",
     year: "2023",
     services: ["Design", "Build", "Grow"]
   },
   {
-    slug: "enterprise-ai-platform",
-    tag: "AI PLATFORM · DESIGN + ENGINEERING",
-    title: "Next-gen interface for enterprise machine learning",
-    challenge: "Complex data models needed an intuitive, user-friendly dashboard for non-technical managers.",
-    solution: "Complete UX/UI overhaul and robust React frontend engineering.",
-    outcome: "Reduced user onboarding time by 40% and increased engagement.",
-    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80",
-    client: "Aura Analytics",
+    slug: "stealth-project",
+    tag: "DEFI · IN DEVELOPMENT",
+    title: "Project Zero: Modern RWA Infrastructure",
+    challenge: "Confidential development of a scalable platform for real-world asset tokenization.",
+    solution: "Custom enterprise-grade architecture and a premium institutional user experience.",
+    outcome: "Under active development. Stealth launch scheduled for Q4 2024.",
+    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1600&q=80",
+    client: "Project Zero",
     year: "2024",
     services: ["Plan", "Design", "Build"]
-  },
-  {
-    slug: "fintech-mobile-banking",
-    tag: "FINTECH APP · PRODUCT + GROWTH",
-    title: "Seamless mobile banking experience and acquisition",
-    challenge: "A legacy financial app losing market share to modern digital-only banks.",
-    solution: "A mobile-first product redesign paired with a targeted paid acquisition funnel.",
-    outcome: "Acquired 150,000 new active users in the first quarter post-launch.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-    client: "Vault Bank",
-    year: "2023",
-    services: ["Design", "Build", "Grow"]
-  },
-  {
-    slug: "luxury-ecommerce-headless",
-    tag: "E-COMMERCE · REBRAND + DEVELOPMENT",
-    title: "Headless commerce architecture mapping premium luxury",
-    challenge: "A high-end fashion retailer hindered by slow page loads and outdated brand presence.",
-    solution: "A complete visual rebrand deployed on a lightning-fast headless Next.js stack.",
-    outcome: "Increased conversion rates by 212% with sub-second page loads.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
-    client: "Atelier Maison",
-    year: "2024",
-    services: ["Build", "Manage", "Design"]
   }
 ];
 

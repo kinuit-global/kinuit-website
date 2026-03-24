@@ -15,20 +15,6 @@ export default function HeroBackground() {
     }}
   />
 
-  {/* Grid squares */}
-  <div
-    className="absolute bottom-0 inset-x-0 h-[45%] pointer-events-none z-[1]"
-    style={{
-      backgroundImage: `
-        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
-      `,
-      backgroundSize: "120px 120px",
-      maskImage:
-        "linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.6) 40%, transparent 100%)",
-    }}
-  />
-
   {/* Blue horizon glow */}
   <div
     className="absolute bottom-0 inset-x-0 h-[40%] pointer-events-none z-[2]"
