@@ -16,7 +16,7 @@ export default function WorkCTA() {
           </p>
           <div className="flex justify-center">
             <Link href="/contact">
-              <Button className="px-8 py-4 text-base">Start a Project</Button>
+              <Button variant="primary" className="px-10 py-4 text-base">Start a Project</Button>
             </Link>
           </div>
         </div>

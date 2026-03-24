@@ -108,11 +108,12 @@ export default function Hero() {
               href="/contact"
               className="
             flex items-center justify-center gap-2
-            bg-blue-600 hover:bg-blue-700
+            bg-[#1E50FF] hover:bg-blue-600
             text-white text-[13px] sm:text-sm font-semibold
             px-4 py-2.5 sm:px-7 sm:py-3
             rounded-full
-            transition hover:-translate-y-[2px]
+            shadow-lg shadow-blue-500/20
+            transition-all duration-300 hover:-translate-y-[2px]
           "
             >
               Start a Project
@@ -127,9 +128,8 @@ export default function Hero() {
             px-4 py-2.5 sm:px-7 sm:py-3
             rounded-full
             border border-white/10
-            bg-white/5 backdrop-blur
-            hover:-translate-y-[2px]
-            transition
+            bg-transparent hover:bg-white/5
+            transition-all duration-300 hover:-translate-y-[2px]
           "
             >
               View Case Studies

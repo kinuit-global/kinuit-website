@@ -60,18 +60,22 @@ export default function OurApproach() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
               className="p-8 rounded-2xl border border-white/5 
-              backdrop-blur-xl bg-white/[0.02]
-              hover:bg-white/[0.04] hover:border-white/10 transition-all duration-300 flex flex-col items-start"
+              backdrop-blur-xl bg-white/2
+              hover:bg-white/4 hover:border-white/10 transition-all duration-300 flex flex-col items-start"
             >
-              <div className="flex mb-6">
-                <div className="p-3 bg-white/5 flex rounded-xl border border-white/10 text-[#0059FF]">
+              <div className="relative mb-6">
+                <span className="text-5xl md:text-6xl font-black text-[#0059FF] opacity-20 absolute -top-8 -left-2 select-none">0{step.id}</span>
+                <div className="p-3 bg-white/5 flex rounded-xl border border-white/10 text-[#0059FF] relative z-10">
                   {step.title === "EXPERTISE" && <ShieldCheck size={24} />}
                   {step.title === "INTEGRATION" && <Combine size={24} />}
                   {step.title === "MOMENTUM" && <Zap size={24} />}
                 </div>
               </div>
 
-              <h3 className="text-white text-2xl font-bold mb-3 tracking-tight">{step.title}</h3>
+              <h3 className="text-white text-2xl font-extrabold mb-3 tracking-tight flex items-center gap-3">
+                <span className="text-[#0059FF]">0{step.id} —</span> 
+                {step.title}
+              </h3>
 
               {step.statement && (
                 <div className="text-[#0059FF] font-semibold text-sm tracking-widest uppercase mb-4 opacity-100">

@@ -2,12 +2,21 @@
 import { ButtonHTMLAttributes } from "react";
 import { motion } from "framer-motion";
 
-export default function Button({ children, className = "", ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "primary" | "secondary";
+}
+
+export default function Button({ children, className = "", variant = "primary", ...props }: ButtonProps) {
+  const variantStyles = {
+    primary: "bg-[#1E50FF] text-white border-transparent shadow-lg shadow-blue-500/20 hover:bg-blue-600",
+    secondary: "bg-transparent text-white border-white/10 hover:border-white/20 hover:bg-white/5 border backdrop-blur-sm shadow-none",
+  };
+
   return (
     <motion.button
-      whileHover={{ scale: 1.04 }}
-      whileTap={{ scale: 0.97 }}
-      className={`px-5 py-2.5 bg-[#081FF0] text-white text-sm font-semibold rounded-xl shadow-lg shadow-[#5BC4E0]/20 hover:shadow-[#5BC4E0]/40 transition-all duration-300 ${className}`}
+      whileHover={{ scale: 1.02, y: -2 }}
+      whileTap={{ scale: 0.98 }}
+      className={`px-6 py-3 text-sm font-semibold rounded-full transition-all duration-300 ${variantStyles[variant]} ${className}`}
       {...props as any}
     >
       {children}
