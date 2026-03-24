@@ -14,8 +14,9 @@ export default function Button({ children, className = "", variant = "primary", 
 
   return (
     <motion.button
-      whileHover={{ scale: 1.02, y: -2 }}
+      whileHover={{ scale: 1.05, y: -2 }}
       whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
       className={`px-6 py-3 text-sm font-semibold rounded-full transition-all duration-300 ${variantStyles[variant]} ${className}`}
       {...props as any}
     >

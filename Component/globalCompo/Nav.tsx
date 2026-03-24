@@ -61,19 +61,25 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className={`relative py-1 flex items-center justify-center text-[15px] transition-colors duration-200 group ${isActive
-                    ? "text-white font-bold"
-                    : "text-white/60 hover:text-white/90 font-medium"
+                  className={`relative px-4 py-2 flex items-center justify-center text-[15px] transition-all duration-300 group rounded-full overflow-hidden ${isActive
+                    ? "text-white"
+                    : "text-white/60 hover:text-white"
                     }`}
                 >
-                  {isActive && (
-                    <motion.span
-                      layoutId="nav-underline"
-                      className="absolute left-0 right-0 -bottom-1.5 h-[2px] bg-white rounded-full shadow-[0_0_8px_rgba(255,255,255,0.8)]"
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                    />
-                  )}
-                  <span className="relative z-10 tracking-wide">{link.label}</span>
+                  <AnimatePresence>
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-pill"
+                        className="absolute inset-0 bg-white/5 border border-white/10 rounded-full"
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      />
+                    )}
+                  </AnimatePresence>
+                  
+                  {/* Hover background */}
+                  <span className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/10 transition-colors duration-300 rounded-full -z-10" />
+
+                  <span className="relative z-10 tracking-wide font-medium">{link.label}</span>
                 </Link>
               );
             })}

@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/Component/globalCompo/Nav";
 import Footer from "@/Component/globalCompo/Footer";
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import CustomCursor from "@/components/ui/CustomCursor";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -68,6 +69,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <ScrollToTop />
+        <CustomCursor />
       </body>
     </html>
   );

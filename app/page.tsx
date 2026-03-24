@@ -7,19 +7,19 @@ import Testimonials from "@/components/sections/Testimonials";
 import FeaturedWork from "@/components/sections/FeaturedWork";
 import CTA from "@/components/sections/CTA";
 import FAQ from "@/Component/FAQ/FAQ";
+import Reveal from "@/components/ui/Reveal";
 
 export default function HomePage() {
   return (
     <main>
       <Hero />
-      <StatsGlobe />
-      {/* <BrandStatement /> */}
-      <Pillars />
-      <ServicesOverview />
-      <Testimonials />
-      <FeaturedWork />
-      <CTA />
-      <FAQ />
+      <Reveal><StatsGlobe /></Reveal>
+      <Reveal><Pillars /></Reveal>
+      <Reveal><ServicesOverview /></Reveal>
+      <Reveal><Testimonials /></Reveal>
+      <Reveal><FeaturedWork /></Reveal>
+      <Reveal><CTA /></Reveal>
+      <Reveal><FAQ /></Reveal>
     </main>
   );
 }
