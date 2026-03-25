@@ -12,7 +12,7 @@ export default function FAQ() {
   return (
     <section className="py-16 bg-[#020617] text-white">
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
         <div className="flex justify-center">
           <SectionBadge icon={HelpCircle} label="Common Questions" />

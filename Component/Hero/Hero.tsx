@@ -25,17 +25,17 @@ export default function Hero() {
     <section
       id="hero"
       className="
-      relative min-h-screen
-      flex flex-col justify-center
+      relative min-h-0 sm:min-h-screen
+      flex flex-col justify-start sm:justify-center
       px-4 sm:px-6
-      pt-32 sm:pt-32 lg:pt-24
+      pt-[120px] pb-2.5 sm:py-32 lg:py-24
       bg-k-bg overflow-hidden
     "
     >
       <HeroBackground />
 
       {/* Hero content wrapper */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center text-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 flex flex-col items-center text-center">
         {/* Centered Content */}
         <div className="flex flex-col items-center text-center w-full">
           {/* Badge */}
@@ -44,7 +44,7 @@ export default function Hero() {
             className="
           inline-flex items-center gap-2
           px-4 py-2
-          mt-2 mb-4 sm:mt-6 sm:mb-6
+          mt-4 mb-3 sm:mt-6 sm:mb-6
           rounded-full text-[10px] sm:text-xs text-gray-300
           bg-white/5 border border-white/10 backdrop-blur-md
         "
@@ -65,7 +65,7 @@ export default function Hero() {
             transition={{ delay: 0.1 }}
             className="
           font-black uppercase tracking-tight
-          leading-[1.1] sm:leading-[1.15] mb-4 sm:mb-6
+          leading-[1.1] sm:leading-[1.15] mb-2 sm:mb-6
           text-3xl sm:text-4xl md:text-[2.5rem] lg:text-[4rem] lg:leading-[1.05]
         "
           >
@@ -83,7 +83,7 @@ export default function Hero() {
           tracking-normal
           text-white/90
           leading-[1.7] sm:leading-[1.8]
-          mb-6 sm:mb-8
+          mb-4 sm:mb-8
         "
           >
             In a world run by AI, the brands that win have the sharpest strategy behind them. We are that <b>Strategy, Branding, Development, and Growth, engineered</b> for the new era.
@@ -98,7 +98,7 @@ export default function Hero() {
           flex flex-col sm:flex-row items-center
           gap-4
           justify-center
-          mb-8 sm:mb-12
+          mb-6 sm:mb-12
           w-full sm:w-auto
         "
           >
@@ -143,7 +143,7 @@ export default function Hero() {
         <motion.p
           {...fadeUp}
           transition={{ delay: 0.4 }}
-          className="text-xs sm:text-[13px] text-white/50 mb-6 sm:mb-8 tracking-widest uppercase font-medium text-center px-4"
+          className="text-[10px] sm:text-[13px] text-white/50 mb-4 sm:mb-8 tracking-widest uppercase font-medium text-center px-4"
         >
           Built for brands in
         </motion.p>

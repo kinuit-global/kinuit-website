@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function CTASection() {
   return (
-    <section className="relative py-16 px-4 sm:px-6 bg-[#020617] flex justify-center">
+    <section className="relative py-16 px-6 lg:px-8 bg-[#020617] flex justify-center">
 
       {/* Glow background */}
       <div className="absolute inset-0 flex justify-center pointer-events-none">
@@ -19,7 +19,7 @@ export default function CTASection() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="relative max-w-6xl w-full rounded-2xl
+        className="relative max-w-7xl w-full rounded-2xl
         bg-[#1447B8] p-6 sm:p-8 md:p-10
         flex flex-col md:flex-row
         items-start md:items-center justify-between gap-8"
