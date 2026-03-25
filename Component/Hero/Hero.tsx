@@ -28,7 +28,7 @@ export default function Hero() {
       relative min-h-0 sm:min-h-screen
       flex flex-col justify-start sm:justify-center
       px-4 sm:px-6
-      pt-[120px] pb-2.5 sm:py-32 lg:py-24
+      pt-[120px] pb-2.5 sm:py-24 lg:py-32
       bg-k-bg overflow-hidden
     "
     >
@@ -139,7 +139,7 @@ export default function Hero() {
 
       {/* Brand Tags Row */}
       {/* Brand Tags Marquee */}
-      <div className="w-full relative z-10 mt-8 sm:mt-12 mb-8 sm:mb-16 flex flex-col items-center overflow-hidden">
+      <div className="w-full relative z-10 mt-8 sm:mt-12 mb-0 sm:mb-8 flex flex-col items-center overflow-hidden">
         <motion.p
           {...fadeUp}
           transition={{ delay: 0.4 }}

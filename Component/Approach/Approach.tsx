@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function OurApproach() {
   return (
-    <section id="approach" className="bg-[#050816] py-20 md:py-32 px-6 w-full text-white">
+    <section id="approach" className="bg-[#050816] py-20 md:py-20 px-6 w-full text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center mb-16 md:mb-24">
         <motion.h2
           initial={{ opacity: 0, y: 40 }}

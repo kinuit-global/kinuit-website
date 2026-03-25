@@ -29,7 +29,7 @@ export default function StatsGlobe() {
   }, []);
 
   return (
-    <section className="bg-[#050D1A] py-20 md:py-32 overflow-hidden relative z-10">
+    <section className="bg-[#050D1A] py-10 md:py-20 overflow-hidden relative z-10">
       {/* Background Soft Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#0059ff]/5 blur-[120px] rounded-full pointer-events-none" />
 

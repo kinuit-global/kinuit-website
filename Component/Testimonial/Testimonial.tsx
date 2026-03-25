@@ -18,7 +18,7 @@ export default function TestimonialSection() {
   }, []);
 
   return (
-    <section className="bg-[#050816] py-24 md:py-32 overflow-hidden border-y border-white/5">
+    <section className="bg-[#050816] py-24 md:py-20 overflow-hidden border-y border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col items-center text-center mb-16">
           <motion.div
