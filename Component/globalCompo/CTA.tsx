@@ -29,9 +29,9 @@ export default function CTASection() {
         <div className="text-left md:text-left flex-1">
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-snug">
-            Are You Ready
+            Ready to make your
             <br />
-            To Start Your Project?
+            biggest move?
           </h2>
 
           <Link href="/contact">

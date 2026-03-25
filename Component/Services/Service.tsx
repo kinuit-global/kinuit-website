@@ -71,7 +71,7 @@ export default function Services() {
             {/* Top Label Badge */}
             <SectionBadge icon={Zap} label="What We Do" />
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-              Five disciplines. <span className="text-blue-500">One powerful team</span>
+              Four disciplines. <span className="text-blue-500">One powerful team</span>
             </h2>
 
             <p className="text-gray-400 mt-2 text-base">

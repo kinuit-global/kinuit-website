@@ -2,7 +2,7 @@ import { FAQItem } from "@/types/FAQ";
 
 export const FAQItems: FAQItem[] = [
   {
-    qsn: "What types tem of projects does Kinuit work on?",
+    qsn: "What types of projects does Kinuit work on?",
     answ: "We work on branding, web development, digital marketing, and growth strategy for startups and businesses."
   },
   {

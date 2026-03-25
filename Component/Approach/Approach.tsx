@@ -73,7 +73,7 @@ export default function OurApproach() {
               </div>
 
               <h3 className="text-white text-2xl font-extrabold mb-3 tracking-tight flex items-center gap-3">
-                <span className="text-[#0059FF]">0{step.id} —</span> 
+                {/* <span className="text-[#0059FF]">0{step.id} —</span>  */}
                 {step.title}
               </h3>
 

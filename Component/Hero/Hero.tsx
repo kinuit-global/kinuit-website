@@ -86,9 +86,7 @@ export default function Hero() {
           mb-6 sm:mb-8
         "
           >
-            In a world run by AI, the brands that win have the sharpest minds behind
-            them. We are that <b>edge strategy, creativity, and technology,</b> working as
-            one.
+            In a world run by AI, the brands that win have the sharpest strategy behind them. We are that <b>Strategy, Branding, Development, and Growth, engineered</b> for the new era.
 
           </motion.p>
 
