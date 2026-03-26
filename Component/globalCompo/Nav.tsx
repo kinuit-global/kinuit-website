@@ -121,7 +121,7 @@ export default function Navbar() {
 
             {/* Mobile/Tablet Hamburger */}
             <div className="flex items-center gap-4 lg:hidden">
-              <ThemeToggle />
+              {/* <ThemeToggle /> */}
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 className="flex flex-col gap-1.5 p-2"
