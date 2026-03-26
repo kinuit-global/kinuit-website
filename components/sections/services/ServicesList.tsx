@@ -53,7 +53,7 @@ const servicesData = [
 
 export default function ServicesList() {
   return (
-    <Section className="bg-k-bg border-t border-white/5 py-12 md:py-24">
+    <Section className="bg-k-bg border-t border-k-border py-12 md:py-24">
       <Container>
         <div className="space-y-24 md:space-y-32">
           {servicesData.map((svc, index) => {
@@ -62,7 +62,7 @@ export default function ServicesList() {
               <div key={svc.id} className={`grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center ${isEven ? 'lg:flex-row-reverse' : ''}`}>
 
                 {/* Image Placeholder */}
-                <div className={`lg:col-span-5 w-full aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative group ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
+                <div className={`lg:col-span-5 w-full aspect-square rounded-3xl overflow-hidden border border-k-border shadow-2xl dark:shadow-none relative group ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
                   <div className="absolute inset-0 bg-[#0059FF]/10 mix-blend-overlay z-10 group-hover:bg-transparent transition-colors duration-500" />
                   <img
                     src={svc.image}
@@ -74,14 +74,14 @@ export default function ServicesList() {
                 {/* Text Content */}
                 <div className={`lg:col-span-7 flex flex-col pt-2 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
                   <div className="mb-6 flex items-center gap-4">
-                    <div className="text-white/20 font-black text-2xl tracking-tighter">{svc.id}</div>
+                    <div className="text-k-text opacity-20 font-black text-2xl tracking-tighter">{svc.id}</div>
                     <SectionBadge icon={getIcon(svc.id)} label={svc.title} />
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight mb-6">
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-k-text leading-tight mb-6">
                     {svc.heading}
                   </h3>
-                  <p className="text-white/70 text-lg leading-relaxed mb-8">
+                  <p className="text-k-text-muted text-lg leading-relaxed mb-8">
                     {svc.description}
                   </p>
 
@@ -90,7 +90,7 @@ export default function ServicesList() {
                       <Link
                         href={`/services/${createSlug(tag)}`}
                         key={tag}
-                        className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-white/80 hover:bg-[#0059FF] hover:text-white transition-all cursor-pointer"
+                        className="px-4 py-2 bg-k-card-bg border border-k-border rounded-full text-k-text-muted hover:bg-k-primary hover:text-white transition-all cursor-pointer shadow-sm"
                       >
                         {tag}
                       </Link>

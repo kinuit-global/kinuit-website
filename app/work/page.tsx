@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function WorkPage() {
   return (
-    <main className="min-h-screen bg-k-bg text-white">
+    <main className="min-h-screen bg-k-bg text-k-text">
       <WorkHero />
       <WorkGrid />
       <WorkCTA />

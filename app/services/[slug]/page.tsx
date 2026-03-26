@@ -18,7 +18,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   }
 
   return (
-    <main className="min-h-screen bg-k-bg text-white">
+    <main className="min-h-screen bg-k-bg text-k-text">
       <ServiceDetailView service={service} />
       <ServicesCTA />
     </main>

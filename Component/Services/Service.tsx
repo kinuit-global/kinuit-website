@@ -54,7 +54,7 @@ export default function Services() {
         className="absolute inset-0 pointer-events-none z-0"
         style={{
           backgroundImage: `
-          radial-gradient(ellipse 90% 80% at 50% 70%, rgba(37,99,235,0.35) 0%, rgba(10,20,45,0.7) 45%, rgba(4,7,18,0.95) 85%)
+          radial-gradient(ellipse 90% 80% at 50% 70%, rgba(37,99,235,0.15) 0%, var(--k-bg) 45%, var(--k-hero-gradient-end) 85%)
         `,
           backgroundSize: "100% 100%",
           backgroundRepeat: "no-repeat",
@@ -70,11 +70,11 @@ export default function Services() {
           <div>
             {/* Top Label Badge */}
             <SectionBadge icon={Zap} label="What We Do" />
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-              Four disciplines. <span className="text-blue-500">One powerful team</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-k-text">
+              Four disciplines. <span className="text-k-primary">One powerful team</span>
             </h2>
 
-            <p className="text-gray-400 mt-2 text-base">
+            <p className="text-k-text-muted mt-2 text-base">
               From brand identity to full-scale campaigns — everything your brand needs to
               grow, built and delivered by one expert team.
             </p>
@@ -84,9 +84,9 @@ export default function Services() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-3 h-8 pr-4 rounded-full border border-[#2A2F45] bg-[#060A23] w-fit"
+              className="flex items-center gap-3 h-8 pr-4 rounded-full border border-k-border bg-k-card-bg w-fit"
             >
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#0059FF]">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-k-primary">
                 <ArrowUpRight
                   size={14}
                   strokeWidth={2.5}
@@ -94,7 +94,7 @@ export default function Services() {
                 />
               </span>
 
-              <span className="text-sm text-white font-medium">
+              <span className="text-sm text-k-text font-medium">
                 View All
               </span>
             </motion.button>
@@ -111,13 +111,13 @@ export default function Services() {
             <motion.div
               key={service.num}
               whileHover={{ y: -6 }}
-              className="bg-white/5 border border-white/10 rounded-xl p-6 flex flex-col hover:border-blue-500/40 transition"
+              className="bg-k-card-bg border border-k-border rounded-xl p-6 flex flex-col hover:border-k-primary/40 transition"
             >
-              <span className="text-xs text-gray-500 mb-4">
+              <span className="text-xs text-k-text-muted mb-4">
                 {service.num}
               </span>
 
-              <h3 className="text-2xl font-semibold text-white mb-6 md:w-[50%] w-full">
+              <h3 className="text-2xl font-semibold text-k-text mb-6 md:w-[50%] w-full">
                 {service.title}
               </h3>
 
@@ -126,7 +126,7 @@ export default function Services() {
                   <Link
                     href={`/services/${createSlug(tag)}`}
                     key={tag}
-                    className="text-xs px-3 py-2 rounded-full bg-white/5 border border-white/10 text-white/80 hover:bg-[#0059ff] hover:text-white transition-all cursor-pointer"
+                    className="text-xs px-3 py-2 rounded-full bg-k-card-bg border border-k-border text-k-text-muted hover:bg-k-primary hover:text-white transition-all cursor-pointer shadow-sm"
                   >
                     {tag}
                   </Link>
@@ -138,7 +138,7 @@ export default function Services() {
                   <motion.button
                     whileHover={{ scale: 1.1, rotate: -45 }}
                     whileTap={{ scale: 0.9 }}
-                    className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-500 hover:bg-blue-500 hover:text-white transition-all"
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-k-primary/10 border border-k-primary/20 text-k-primary hover:bg-k-primary hover:text-white transition-all"
                   >
                     <ArrowUpRight size={18} />
                   </motion.button>

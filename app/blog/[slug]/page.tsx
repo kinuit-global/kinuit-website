@@ -48,26 +48,26 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
     .slice(0, 3);
 
   return (
-    <article className="min-h-screen bg-k-bg text-white pb-24">
+    <article className="min-h-screen bg-k-bg text-k-text pb-24">
       {/* Article Hero */}
-      <section className="relative pt-40 pb-20 overflow-hidden border-b border-white/5">
+      <section className="relative pt-40 pb-20 overflow-hidden border-b border-k-border">
         <Container>
           <Link 
             href="/blog" 
-            className="inline-flex items-center gap-2 text-blue-500 text-[10px] font-black tracking-widest uppercase mb-12 hover:gap-3 transition-all"
+            className="inline-flex items-center gap-2 text-k-primary text-[10px] font-black tracking-widest uppercase mb-12 hover:gap-3 transition-all"
           >
             <ChevronLeft size={16} /> Back to Insights
           </Link>
           
           <div className="max-w-4xl">
             <div className="flex items-center gap-3 mb-8">
-              <span className="px-3 py-1 bg-blue-600 text-white text-[10px] font-black tracking-widest rounded-full uppercase">
+              <span className="px-3 py-1 bg-k-primary text-white text-[10px] font-black tracking-widest rounded-full uppercase">
                 {post.category}
               </span>
-              <div className="h-px w-8 bg-white/20" />
-              <div className="flex items-center gap-4 text-white/40 text-[10px] font-black tracking-widest uppercase">
-                <span className="flex items-center gap-1.5"><CalendarDays size={14} className="text-blue-500" /> {post.date}</span>
-                <span className="flex items-center gap-1.5"><Clock size={14} className="text-blue-500" /> {post.readTime}</span>
+              <div className="h-px w-8 bg-k-border" />
+              <div className="flex items-center gap-4 text-k-text-muted text-[10px] font-black tracking-widest uppercase">
+                <span className="flex items-center gap-1.5"><CalendarDays size={14} className="text-k-primary" /> {post.date}</span>
+                <span className="flex items-center gap-1.5"><Clock size={14} className="text-k-primary" /> {post.readTime}</span>
               </div>
             </div>
             
@@ -81,7 +81,7 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
       {/* Hero Image */}
       <section className="mb-20">
         <Container>
-          <div className="relative aspect-video lg:aspect-21/9 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+          <div className="relative aspect-video lg:aspect-21/9 rounded-3xl overflow-hidden border border-k-border shadow-2xl dark:shadow-none">
             <Image
               src={post.image}
               alt={post.title}
@@ -99,9 +99,9 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             {/* Sidebar / Author */}
             <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
-              <div className="p-8 rounded-3xl bg-white/2 border border-white/5 backdrop-blur-sm">
+              <div className="p-8 rounded-3xl bg-k-card-bg border border-k-border backdrop-blur-sm">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-blue-500/30">
+                  <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-k-primary/30">
                     <Image
                       src={post.author.avatar}
                       alt={post.author.name}
@@ -109,18 +109,18 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
                     />
                   </div>
                   <div>
-                    <h4 className="text-white font-black text-sm tracking-tight uppercase">{post.author.name}</h4>
-                    <p className="text-blue-500 text-[10px] font-black tracking-widest uppercase leading-none">{post.author.role}</p>
+                    <h4 className="text-k-text font-black text-sm tracking-tight uppercase">{post.author.name}</h4>
+                    <p className="text-k-primary text-[10px] font-black tracking-widest uppercase leading-none">{post.author.role}</p>
                   </div>
                 </div>
-                <p className="text-white/40 text-xs leading-relaxed font-light mt-4">
+                <p className="text-k-text-muted text-xs leading-relaxed font-light mt-4">
                   Expert perspectives from the frontlines of digital innovation at Kinuit Global.
                 </p>
-                <div className="mt-8 pt-8 border-t border-white/5">
-                  <h5 className="text-white/20 text-[10px] font-black tracking-widest uppercase mb-4">Share Article</h5>
+                <div className="mt-8 pt-8 border-t border-k-border">
+                  <h5 className="text-k-text-muted/40 text-[10px] font-black tracking-widest uppercase mb-4">Share Article</h5>
                   <div className="flex gap-4">
-                    <button className="text-white/40 hover:text-blue-500 transition-colors text-xs font-black">X / TWITTER</button>
-                    <button className="text-white/40 hover:text-blue-500 transition-colors text-xs font-black">LINKEDIN</button>
+                    <button className="text-k-text-muted hover:text-k-primary transition-colors text-xs font-black">X / TWITTER</button>
+                    <button className="text-k-text-muted hover:text-k-primary transition-colors text-xs font-black">LINKEDIN</button>
                   </div>
                 </div>
               </div>
@@ -134,15 +134,15 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
               />
 
               {/* Tags/Categories bottom */}
-              <div className="mt-20 pt-10 border-t border-white/5 flex flex-wrap gap-3">
-                <span className="text-white/20 text-[10px] font-black tracking-widest uppercase self-center mr-4">Topic:</span>
-                <span className="px-5 py-2 bg-white/5 border border-white/10 text-white/60 text-[10px] font-black tracking-widest rounded-full uppercase">
+              <div className="mt-20 pt-10 border-t border-k-border flex flex-wrap gap-3">
+                <span className="text-k-text-muted/40 text-[10px] font-black tracking-widest uppercase self-center mr-4">Topic:</span>
+                <span className="px-5 py-2 bg-k-card-bg border border-k-border text-k-text-muted text-[10px] font-black tracking-widest rounded-full uppercase">
                   {post.category}
                 </span>
-                <span className="px-5 py-2 bg-white/5 border border-white/10 text-white/60 text-[10px] font-black tracking-widest rounded-full uppercase">
+                <span className="px-5 py-2 bg-k-card-bg border border-k-border text-k-text-muted text-[10px] font-black tracking-widest rounded-full uppercase">
                   STRATEGY
                 </span>
-                <span className="px-5 py-2 bg-white/5 border border-white/10 text-white/60 text-[10px] font-black tracking-widest rounded-full uppercase">
+                <span className="px-5 py-2 bg-k-card-bg border border-k-border text-k-text-muted text-[10px] font-black tracking-widest rounded-full uppercase">
                   INNOVATION
                 </span>
               </div>
@@ -153,16 +153,16 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
 
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
-        <section className="mt-32 pt-32 border-t border-white/5">
+        <section className="mt-32 pt-32 border-t border-k-border">
           <Container>
-            <h3 className="text-2xl md:text-4xl font-black text-white mb-12 uppercase tracking-tight">Keep <span className="text-blue-500">Reading.</span></h3>
+            <h3 className="text-2xl md:text-4xl font-black text-k-text mb-12 uppercase tracking-tight">Keep <span className="text-k-primary">Reading.</span></h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {relatedPosts.map((p) => (
                 <Link key={p.id} href={`/blog/${p.slug}`} className="group">
-                  <div className="relative aspect-video rounded-2xl overflow-hidden mb-4 border border-white/10">
+                  <div className="relative aspect-video rounded-2xl overflow-hidden mb-4 border border-k-border shadow-md dark:shadow-none">
                     <Image src={p.image} alt={p.title} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
                   </div>
-                  <h4 className="text-white font-bold group-hover:text-blue-500 transition-colors line-clamp-2">{p.title}</h4>
+                  <h4 className="text-k-text font-bold group-hover:text-k-primary transition-colors line-clamp-2">{p.title}</h4>
                 </Link>
               ))}
             </div>

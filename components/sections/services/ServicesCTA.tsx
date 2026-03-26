@@ -5,13 +5,13 @@ import Link from "next/link";
 
 export default function ServicesCTA() {
   return (
-    <Section className="bg-[#050816] border-t border-white/5 py-24 text-center">
+    <Section className="bg-k-bg border-t border-k-border py-24 text-center">
       <Container>
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 text-white leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 text-k-text leading-tight">
             Not sure where to start?
           </h2>
-          <p className="text-white/70 text-lg mb-10 leading-relaxed">
+          <p className="text-k-text-muted text-lg mb-10 leading-relaxed">
             Most of our best work started with one conversation. Tell us what you are building — we will tell you exactly how we can help.
           </p>
           <div className="flex justify-center">

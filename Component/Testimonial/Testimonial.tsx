@@ -18,20 +18,20 @@ export default function TestimonialSection() {
   }, []);
 
   return (
-    <section className="bg-[#050816] py-24 md:py-20 overflow-hidden border-y border-white/5">
+    <section className="bg-k-bg py-24 md:py-20 overflow-hidden border-y border-k-border">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col items-center text-center mb-16">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            className="p-3 bg-blue-500/10 rounded-2xl border border-blue-500/20 text-blue-500 mb-6"
+            className="p-3 bg-k-primary/10 rounded-2xl border border-k-primary/20 text-k-primary mb-6"
           >
             <Quote size={32} />
           </motion.div>
-          <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-4 uppercase">
-            Built on <span className="text-blue-500">Trust</span>
+          <h2 className="text-3xl md:text-5xl font-black text-k-text tracking-tight mb-4 uppercase">
+            Built on <span className="text-k-primary">Trust</span>
           </h2>
-          <p className="text-white/60 text-lg max-w-2xl font-light">
+          <p className="text-k-text-muted text-lg max-w-2xl font-light">
             We measure our success by the momentum of our partners.
           </p>
         </div>
@@ -46,12 +46,12 @@ export default function TestimonialSection() {
               transition={{ duration: 0.5, ease: "easeInOut" }}
               className="flex flex-col items-center text-center"
             >
-              <p className="text-xl md:text-2xl lg:text-3xl text-white font-medium italic leading-relaxed mb-12">
+              <p className="text-xl md:text-2xl lg:text-3xl text-k-text font-medium italic leading-relaxed mb-12">
                 "{testimonials[index].message}"
               </p>
 
               <div className="flex items-center gap-4">
-                <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-blue-500/30">
+                <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-k-primary/30">
                   <Image
                     src={testimonials[index].image}
                     alt={testimonials[index].name}
@@ -60,8 +60,8 @@ export default function TestimonialSection() {
                   />
                 </div>
                 <div className="text-left">
-                  <h4 className="text-white font-bold text-lg">{testimonials[index].name}</h4>
-                  <p className="text-blue-500 text-sm font-semibold tracking-wide uppercase">
+                  <h4 className="text-k-text font-bold text-lg">{testimonials[index].name}</h4>
+                  <p className="text-k-primary text-sm font-semibold tracking-wide uppercase">
                     {testimonials[index].role}
                   </p>
                 </div>
@@ -73,13 +73,13 @@ export default function TestimonialSection() {
           <div className="flex justify-center gap-4 mt-12 lg:mt-0 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:w-full lg:justify-between lg:-mx-12">
             <button
               onClick={prev}
-              className="p-3 rounded-full bg-white/5 border border-white/10 text-white hover:bg-blue-500 hover:border-blue-500 transition-all"
+              className="p-3 rounded-full bg-k-card-bg border border-k-border text-k-text hover:bg-k-primary hover:border-k-primary hover:text-white transition-all shadow-sm"
             >
               <ChevronLeft size={24} />
             </button>
             <button
               onClick={next}
-              className="p-3 rounded-full bg-white/5 border border-white/10 text-white hover:bg-blue-500 hover:border-blue-500 transition-all"
+              className="p-3 rounded-full bg-k-card-bg border border-k-border text-k-text hover:bg-k-primary hover:border-k-primary hover:text-white transition-all shadow-sm"
             >
               <ChevronRight size={24} />
             </button>
@@ -92,7 +92,7 @@ export default function TestimonialSection() {
             <button
               key={i}
               onClick={() => setIndex(i)}
-              className={`h-1.5 transition-all duration-300 rounded-full ${i === index ? "w-8 bg-blue-500" : "w-2 bg-white/20"}`}
+              className={`h-1.5 transition-all duration-300 rounded-full ${i === index ? "w-8 bg-k-primary" : "w-2 bg-k-text/20"}`}
             />
           ))}
         </div>

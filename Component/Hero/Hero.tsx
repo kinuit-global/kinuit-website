@@ -7,11 +7,11 @@ import Link from "next/link";
 import { ChevronRight, ArrowRight } from "lucide-react";
 
 const TECHS = [
-  { name: "Web3", style: "font-medium tracking-wide text-base sm:text-lg text-white/90" },
-  { name: "Fintech", style: "font-medium tracking-wide text-base sm:text-lg text-white/90" },
-  { name: "AI", style: "font-bold tracking-widest text-lg sm:text-xl text-white", icon: "✦" },
-  { name: "Real Estate", style: "font-medium tracking-wide text-base sm:text-lg text-white/90" },
-  { name: "Edtech", style: "font-medium tracking-wide text-base sm:text-lg text-white/90" },
+  { name: "Web3", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
+  { name: "Fintech", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
+  { name: "AI", style: "font-bold tracking-widest text-lg sm:text-xl text-k-text", icon: "✦" },
+  { name: "Real Estate", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
+  { name: "Edtech", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
 ];
 
 const fadeUp = {
@@ -45,8 +45,8 @@ export default function Hero() {
           inline-flex items-center gap-2
           px-4 py-2
           mt-4 mb-3 sm:mt-6 sm:mb-6
-          rounded-full text-[10px] sm:text-xs text-gray-300
-          bg-white/5 border border-white/10 backdrop-blur-md
+          rounded-full text-[10px] sm:text-xs text-k-text-muted
+          bg-k-glass-bg border border-k-glass-border backdrop-blur-md
         "
           >
             <motion.div
@@ -79,9 +79,9 @@ export default function Hero() {
             className="
           max-w-[700px] w-full
           text-xs sm:text-sm md:text-base
-          font-thin
+          font-normal
           tracking-normal
-          text-white/90
+          text-k-text/80
           leading-[1.7] sm:leading-[1.8]
           mb-4 sm:mb-8
         "
@@ -122,11 +122,11 @@ export default function Hero() {
               href="/work"
               className="
             flex items-center justify-center gap-2
-            text-white text-[13px] sm:text-sm font-semibold
+            text-k-text text-[13px] sm:text-sm font-semibold
             px-4 py-2.5 sm:px-7 sm:py-3
             rounded-full
-            border border-white/10
-            bg-transparent hover:bg-white/5
+            border border-k-glass-border
+            bg-transparent hover:bg-k-glass-bg
             transition-all duration-300 hover:-translate-y-[2px]
           "
             >
@@ -143,7 +143,7 @@ export default function Hero() {
         <motion.p
           {...fadeUp}
           transition={{ delay: 0.4 }}
-          className="text-[10px] sm:text-[13px] text-white/50 mb-4 sm:mb-8 tracking-widest uppercase font-medium text-center px-4"
+          className="text-[10px] sm:text-[13px] text-k-text-muted mb-4 sm:mb-8 tracking-widest uppercase font-medium text-center px-4"
         >
           Built for brands in
         </motion.p>
@@ -167,9 +167,9 @@ export default function Hero() {
             {[...TECHS, ...TECHS, ...TECHS].map((tech, idx) => (
               <div
                 key={idx}
-                className="flex items-center justify-center min-w-[140px] sm:min-w-[160px] px-6 py-3 sm:py-4 rounded-xl border border-white/8 bg-white/2 backdrop-blur-md hover:bg-white/5 transition-all duration-300 cursor-pointer hover:-translate-y-1 group"
+                className="flex items-center justify-center min-w-[140px] sm:min-w-[160px] px-6 py-3 sm:py-4 rounded-xl border border-k-border bg-k-card-bg backdrop-blur-md hover:bg-k-glass-bg transition-all duration-300 cursor-pointer hover:-translate-y-1 group"
               >
-                <div className={`flex items-center justify-center gap-2 ${tech.style} group-hover:text-white`}>
+                <div className={`flex items-center justify-center gap-2 ${tech.style} group-hover:text-k-text`}>
                   {tech.icon && <span className="opacity-80 text-sm">{tech.icon}</span>}
                   <span className="whitespace-nowrap">{tech.name}</span>
                 </div>
@@ -184,7 +184,7 @@ export default function Hero() {
         className="absolute bottom-0 inset-x-0 h-24 pointer-events-none z-20"
         style={{
           background:
-            "linear-gradient(to bottom, transparent 0%, #080a18 100%)",
+            "linear-gradient(to bottom, transparent 0%, var(--k-hero-gradient-end) 100%)",
         }}
       />
     </section>

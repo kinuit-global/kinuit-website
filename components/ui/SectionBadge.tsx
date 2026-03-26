@@ -14,10 +14,10 @@ export default function SectionBadge({ icon: Icon, label }: SectionBadgeProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/5 rounded-full border border-white/10 backdrop-blur-md mb-8 group hover:bg-white/10 transition-colors duration-300"
+      className="inline-flex items-center gap-2.5 px-4 py-2 bg-k-card-bg rounded-full border border-k-border backdrop-blur-md mb-8 group hover:bg-k-primary/5 transition-colors duration-300 shadow-sm"
     >
-      {Icon && <Icon size={14} className="text-[#0059FF] group-hover:scale-110 transition-transform duration-300" />}
-      <span className="text-white/70 text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase">
+      {Icon && <Icon size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />}
+      <span className="text-k-text-muted text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase">
         {label}
       </span>
     </motion.div>

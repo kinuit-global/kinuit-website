@@ -2,26 +2,52 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F0F0F0;
+  /* Phantom White */
+  --foreground: #020617;
+  /* High contrast dark blue */
+  --k-bg: #F8F9FA;
+  --k-text: #020617;
+  --k-text-muted: #334155;
+  --k-border: #E2E8F0;
+  --k-glass-bg: rgba(255, 255, 255, 0.82);
+  --k-glass-border: rgba(0, 0, 0, 0.08);
+  --k-card-bg: #FFFFFF;
+  --k-primary: #1E50FF;
+  --k-hero-gradient-end: #F1F5F9;
+}
+
+.dark {
+  --background: #050D1A;
+  --foreground: #f8fafc;
+  --k-bg: #050D1A;
+  --k-text: #ffffff;
+  --k-text-muted: rgba(255, 255, 255, 0.7);
+  --k-border: rgba(255, 255, 255, 0.12);
+  --k-glass-bg: rgba(255, 255, 255, 0.03);
+  --k-glass-border: rgba(255, 255, 255, 0.1);
+  --k-card-bg: rgba(255, 255, 255, 0.05);
+  --k-primary: #1E50FF;
+  --k-hero-gradient-end: #080a18;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-k-bg: var(--k-bg);
+  --color-k-text: var(--k-text);
+  --color-k-text-muted: var(--k-text-muted);
+  --color-k-border: var(--k-border);
+  --color-k-glass-bg: var(--k-glass-bg);
+  --color-k-glass-border: var(--k-glass-border);
+  --color-k-card-bg: var(--k-card-bg);
+  --color-k-primary: var(--k-primary);
   --font-sans: "Onest", sans-serif;
   --font-sora: "Onest", sans-serif;
   --font-lato: "Onest", sans-serif;
   --font-poppins: "Onest", sans-serif;
   --font-mono: var(--font-geist-mono);
   --font-mont: "Onest", sans-serif;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
@@ -34,6 +60,7 @@ body {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-20%);
   }
@@ -42,13 +69,16 @@ body {
 .animate-marquee {
   animation: marquee 20s linear infinite;
 }
+
 button {
   font-family: "Onest", sans-serif;
 }
 
 /* Blog Content Styles */
-.prose-content h1, .prose-content h2, .prose-content h3 {
-  color: #ffffff;
+.prose-content h1,
+.prose-content h2,
+.prose-content h3 {
+  color: var(--foreground);
   font-weight: 800;
   margin-top: 2.5rem;
   margin-bottom: 1.25rem;
@@ -56,28 +86,33 @@ button {
   letter-spacing: -0.02em;
 }
 
-.prose-content h2 { font-size: 2.25rem; }
-.prose-content h3 { font-size: 1.875rem; }
+.prose-content h2 {
+  font-size: 2.25rem;
+}
+
+.prose-content h3 {
+  font-size: 1.875rem;
+}
 
 .prose-content p {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--k-text-muted);
   font-size: 1.125rem;
   line-height: 1.8;
   margin-bottom: 1.5rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .prose-content strong {
-  color: #ffffff;
+  color: var(--foreground);
   font-weight: 700;
 }
 
 .prose-content blockquote {
-  border-left: 4px solid #3b82f6;
-  background: rgba(59, 130, 246, 0.05);
+  border-left: 4px solid var(--k-primary);
+  background: var(--k-glass-bg);
   padding: 1.5rem 2rem;
   margin: 2.5rem 0;
   font-style: italic;
   font-size: 1.25rem;
-  color: #ffffff;
+  color: var(--foreground);
 }

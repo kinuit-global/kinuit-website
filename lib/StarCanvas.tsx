@@ -17,7 +17,7 @@ export default function HeroBackground() {
 
   {/* Blue horizon glow */}
   <div
-    className="absolute bottom-0 inset-x-0 h-[40%] pointer-events-none z-[2]"
+    className="absolute bottom-0 inset-x-0 h-[40%] pointer-events-none z-2"
     style={{
       background:
         "radial-gradient(ellipse 80% 120% at 50% 100%, rgba(37,99,235,0.35) 0%, rgba(37,99,235,0.18) 35%, transparent 70%)",
@@ -26,10 +26,10 @@ export default function HeroBackground() {
 
   {/* Bottom fade */}
   <div
-    className="absolute bottom-0 inset-x-0 h-24 pointer-events-none z-[4]"
+    className="absolute bottom-0 inset-x-0 h-24 pointer-events-none z-4"
     style={{
       background:
-        "linear-gradient(to bottom, transparent 0%, #080a18 100%)",
+        "linear-gradient(to bottom, transparent 0%, var(--k-hero-gradient-end) 100%)",
     }}
   />
 </>

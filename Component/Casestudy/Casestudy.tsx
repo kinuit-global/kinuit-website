@@ -75,14 +75,14 @@ export default function CaseStudies() {
   if (!projectChunks.length) return null;
 
   return (
-    <section className="bg-[#0f0f21] py-16 px-4 sm:px-6 border-t border-t-[#1B1B1B66] border-b border-b-[#1B1B1B66] overflow-hidden">
+    <section className="bg-k-bg py-16 px-4 sm:px-6 border-t border-k-border border-b overflow-hidden">
       {/* Title Section */}
       <div className="text-center mb-12 md:mb-14">
         <motion.h2
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-white text-2xl mb-4 sm:text-3xl md:text-4xl font-bold tracking-tight"
+          className="text-k-text text-2xl mb-4 sm:text-3xl md:text-4xl font-bold tracking-tight"
         >
           Work that moves the needle.
         </motion.h2>
@@ -109,7 +109,7 @@ export default function CaseStudies() {
                 <Link
                   key={project.slug}
                   href={project.slug === "stealth-project" ? "#" : `/work/${project.slug}`}
-                  className={`group relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 shrink-0 transition-all duration-500
+                  className={`group relative rounded-2xl overflow-hidden shadow-xl dark:shadow-none border border-k-border shrink-0 transition-all duration-500
                     ${project.slug === "stealth-project" ? "pointer-events-none" : "cursor-pointer"}
                     ${itemsPerSlide === 1 ? 'w-[85%] sm:w-[70%] max-w-[400px] aspect-4/5' : 'w-[38%] md:w-[40%] max-w-[420px] aspect-16/20'}
                   `}
@@ -124,20 +124,20 @@ export default function CaseStudies() {
 
                   {/* Overlay Meta Info */}
                   <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-6 md:p-10">
-                    <span className="text-blue-500 text-[10px] md:text-xs font-black tracking-widest uppercase mb-1 md:mb-3">
+                    <span className="text-k-primary text-[10px] md:text-xs font-black tracking-widest uppercase mb-1 md:mb-3">
                       {project.tag}
                     </span>
                     <h3 className="text-white text-lg md:text-2xl font-bold mb-2 md:mb-4 line-clamp-2 leading-tight">
                       {project.title}
                     </h3>
-                    <p className="text-gray-300 text-[10px] md:text-sm max-w-2xl line-clamp-3 hidden sm:block leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <p className="text-white/80 text-[10px] md:text-sm max-w-2xl line-clamp-3 hidden sm:block leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       {project.challenge}
                     </p>
                     <div className="mt-4 flex items-center gap-2 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                      <span className="text-blue-500 text-[10px] md:text-xs font-black tracking-widest uppercase">
+                      <span className="text-k-primary text-[10px] md:text-xs font-black tracking-widest uppercase">
                         {project.slug === "stealth-project" ? "STEALTH MODE" : "VIEW PROJECT"}
                       </span>
-                      {project.slug !== "stealth-project" && <ArrowRight size={14} className="text-blue-500" />}
+                      {project.slug !== "stealth-project" && <ArrowRight size={14} className="text-k-primary" />}
                     </div>
                   </div>
                 </Link>
@@ -148,13 +148,13 @@ export default function CaseStudies() {
           {/* Desktop Navigation */}
           <button
             onClick={() => { prevSlide(); handleInteraction(); }}
-            className="absolute -left-2 md:-left-8 z-30 p-4 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition backdrop-blur-md hidden lg:block"
+            className="absolute -left-2 md:-left-8 z-30 p-4 rounded-full bg-k-glass-bg border border-k-glass-border text-k-text hover:bg-k-glass-bg transition backdrop-blur-md hidden lg:block"
           >
             <ArrowLeft size={28} />
           </button>
           <button
             onClick={() => { nextSlide(); handleInteraction(); }}
-            className="absolute -right-2 md:-right-8 z-30 p-4 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition backdrop-blur-md hidden lg:block"
+            className="absolute -right-2 md:-right-8 z-30 p-4 rounded-full bg-k-glass-bg border border-k-glass-border text-k-text hover:bg-k-glass-bg transition backdrop-blur-md hidden lg:block"
           >
             <ArrowRight size={28} />
           </button>
@@ -166,7 +166,7 @@ export default function CaseStudies() {
             <button
               key={i}
               onClick={() => { setActive(i); handleInteraction(); }}
-              className={`h-1.5 transition-all duration-500 rounded-full ${active === i ? "w-10 bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.4)]" : "w-2.5 bg-gray-700 hover:bg-gray-600"
+              className={`h-1.5 transition-all duration-500 rounded-full ${active === i ? "w-10 bg-k-primary shadow-[0_0_15px_rgba(30,80,255,0.4)]" : "w-2.5 bg-k-border hover:bg-k-text/20"
                 }`}
             />
           ))}

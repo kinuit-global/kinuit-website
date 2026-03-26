@@ -70,6 +70,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { ThemeProvider } from "@/components/theme-provider";
+
 export default function RootLayout({
   children,
 }: {
@@ -79,13 +81,21 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${barlow.variable} ${sora.variable} ${lato.variable} ${montserrat.variable} ${poppins.variable} ${cormorant.variable}`}
+      suppressHydrationWarning
     >
       <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <ScrollToTop />
-        <CustomCursor />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+          <ScrollToTop />
+          <CustomCursor />
+        </ThemeProvider>
       </body>
     </html>
   );

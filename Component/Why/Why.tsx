@@ -10,27 +10,27 @@ export default function WhyKinuit() {
   const slide = WhyKinuitSlides[id];
 
   return (
-    <section className="py-16 bg-[#050816] text-white">
+    <section className="py-16 bg-k-bg text-k-text">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
 
         {/* HEADER */}
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 mb-10 md:mb-12">
           
           <div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold mb-2">
+            <h2 className="text-3xl sm:text-4xl font-extrabold mb-2 text-k-text">
               Why Choose Kinuit
             </h2>
 
-            <p className="text-xl sm:text-[1.6rem] font-extrabold text-white">
+            <p className="text-xl sm:text-[1.6rem] font-extrabold text-k-text">
               Built for{" "}
-              <span className="text-[#0059FF] font-semibold">
+              <span className="text-k-primary font-semibold">
                 Performance
               </span>
             </p>
           </div>
 
-          <button className="flex items-center gap-3 h-8 pr-4 rounded-full border border-[#2A2F45] bg-[#060A23] w-fit">
-            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#0059FF]">
+          <button className="flex items-center gap-3 h-8 pr-4 rounded-full border border-k-border bg-k-card-bg w-fit shadow-sm">
+            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-k-primary">
               <ArrowUpRight
                 size={14}
                 strokeWidth={2.5}
@@ -38,7 +38,7 @@ export default function WhyKinuit() {
               />
             </span>
 
-            <span className="text-sm text-white font-medium">
+            <span className="text-sm text-k-text font-medium">
               How We Work
             </span>
           </button>
@@ -52,32 +52,32 @@ export default function WhyKinuit() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.35 }}
-            className="relative border border-[#616161CC] rounded-2xl p-6 sm:p-8 md:p-10 grid md:grid-cols-2 gap-8 md:gap-12 bg-gradient-to-br from-[#070b24] to-[#050816]"
+            className="relative border border-k-border rounded-2xl p-6 sm:p-8 md:p-10 grid md:grid-cols-2 gap-8 md:gap-12 bg-k-card-bg shadow-xl dark:shadow-none"
           >
             {/* TOP RIGHT ICON */}
-            <button className="absolute top-4 right-4 sm:top-6 sm:right-6 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-gray-700 flex items-center justify-center">
+            <button className="absolute top-4 right-4 sm:top-6 sm:right-6 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-k-border flex items-center justify-center text-k-text/50">
               ↗
             </button>
 
             {/* TEXT */}
             <div className="max-w-[520px]">
-              <span className="text-gray-400 text-base sm:text-lg block mb-4 sm:mb-6">
+              <span className="text-k-text-muted text-base sm:text-lg block mb-4 sm:mb-6">
                 {slide.num}
               </span>
 
-              <h3 className="text-2xl sm:text-3xl font-extrabold mb-4 leading-snug">
+              <h3 className="text-2xl sm:text-3xl font-extrabold mb-4 leading-snug text-k-text">
                 {slide.title} <br />
-                <span className="text-white">{slide.em}</span>
+                <span className="text-k-primary">{slide.em}</span>
               </h3>
 
-              <p className="text-white/80 text-sm sm:text-base font-light leading-relaxed">
+              <p className="text-k-text-muted text-sm sm:text-base font-light leading-relaxed">
                 {slide.body}
               </p>
             </div>
 
             {/* IMAGE */}
             <div className="flex justify-center md:justify-end items-center">
-              <div className="relative w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] md:w-[300px] md:h-[300px] bg-[#e5e5e5] rounded-xl flex items-center justify-center">
+              <div className="relative w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] md:w-[300px] md:h-[300px] bg-k-bg rounded-xl flex items-center justify-center">
                 <Image
                   src="/group1.png"
                   alt="Kinuit illustration"
@@ -97,7 +97,7 @@ export default function WhyKinuit() {
                 (id - 1 + WhyKinuitSlides.length) % WhyKinuitSlides.length
               )
             }
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1a1f3a] flex items-center justify-center hover:bg-blue-500 transition"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-k-card-bg border border-k-border text-k-text flex items-center justify-center hover:bg-k-primary hover:text-white transition shadow-sm"
           >
             <ChevronLeft />
           </button>
@@ -106,7 +106,7 @@ export default function WhyKinuit() {
             onClick={() =>
               setId((id + 1) % WhyKinuitSlides.length)
             }
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#222222] flex items-center justify-center hover:bg-blue-500 transition"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-k-card-bg border border-k-border text-k-text flex items-center justify-center hover:bg-k-primary hover:text-white transition shadow-sm"
           >
             <ChevronRight />
           </button>

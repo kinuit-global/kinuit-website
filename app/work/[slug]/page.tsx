@@ -18,7 +18,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   }
 
   return (
-    <main className="min-h-screen bg-k-bg text-white">
+    <main className="min-h-screen bg-k-bg text-k-text">
       <ProjectDetail project={project} />
       <WorkCTA />
     </main>

@@ -6,21 +6,21 @@ import Image from "next/image";
 
 export default function OurApproach() {
   return (
-    <section id="approach" className="bg-[#050816] py-20 md:py-20 px-6 w-full text-white">
+    <section id="approach" className="bg-k-bg py-20 md:py-20 px-6 w-full text-k-text">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center mb-16 md:mb-24">
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4"
+          className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-k-text mb-4"
         >
-          THE KINUIT <span className="text-[#0059FF]">STANDARD</span>
+          THE KINUIT <span className="text-k-primary">STANDARD</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 0.6, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-white/60 text-lg md:text-xl font-medium"
+          className="text-k-text-muted text-lg md:text-xl font-medium"
         >
           We hold ourselves to a different standard.
         </motion.p>
@@ -59,31 +59,30 @@ export default function OurApproach() {
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
-              className="p-8 rounded-2xl border border-white/5 
-              backdrop-blur-xl bg-white/2
-              hover:bg-white/4 hover:border-white/10 transition-all duration-300 flex flex-col items-start"
+              className="p-8 rounded-2xl border border-k-border 
+              backdrop-blur-xl bg-k-card-bg
+              hover:bg-k-glass-bg hover:border-k-glass-border transition-all duration-300 flex flex-col items-start"
             >
               <div className="relative mb-6">
-                <span className="text-5xl md:text-6xl font-black text-[#0059FF] opacity-20 absolute -top-8 -left-2 select-none">0{step.id}</span>
-                <div className="p-3 bg-white/5 flex rounded-xl border border-white/10 text-[#0059FF] relative z-10">
+                <span className="text-5xl md:text-6xl font-black text-k-primary opacity-30 dark:opacity-20 absolute -top-8 -left-2 select-none">0{step.id}</span>
+                <div className="p-3 bg-k-glass-bg flex rounded-xl border border-k-glass-border text-k-primary relative z-10">
                   {step.title === "EXPERTISE" && <ShieldCheck size={24} />}
                   {step.title === "INTEGRATION" && <Combine size={24} />}
                   {step.title === "MOMENTUM" && <Zap size={24} />}
                 </div>
               </div>
 
-              <h3 className="text-white text-2xl font-extrabold mb-3 tracking-tight flex items-center gap-3">
-                {/* <span className="text-[#0059FF]">0{step.id} —</span>  */}
+              <h3 className="text-k-text text-2xl font-extrabold mb-3 tracking-tight flex items-center gap-3">
                 {step.title}
               </h3>
 
               {step.statement && (
-                <div className="text-[#0059FF] font-semibold text-sm tracking-widest uppercase mb-4 opacity-100">
+                <div className="text-k-primary font-semibold text-sm tracking-widest uppercase mb-4 opacity-100">
                   {step.statement}
                 </div>
               )}
 
-              <p className="text-white/60 tracking-normal font-light text-base md:text-lg leading-relaxed">
+              <p className="text-k-text-muted tracking-normal font-light text-base md:text-lg leading-relaxed">
                 {step.description}
               </p>
             </motion.div>

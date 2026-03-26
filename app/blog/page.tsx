@@ -23,9 +23,9 @@ export default function BlogListingPage() {
   });
 
   return (
-    <main className="min-h-screen bg-k-bg text-white pb-24">
+    <main className="min-h-screen bg-k-bg text-k-text pb-24">
       {/* Hero Section */}
-      <section className="relative pt-40 pb-20 overflow-hidden border-b border-white/5">
+      <section className="relative pt-40 pb-20 overflow-hidden border-b border-k-border">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
         <Container>
           <div className="max-w-3xl">
@@ -43,12 +43,12 @@ export default function BlogListingPage() {
             >
               The <span className="text-blue-500">Standard</span> Insights.
             </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-white/60 text-lg md:text-xl font-light max-w-2xl leading-relaxed"
-            >
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-k-text-muted text-lg md:text-xl font-light max-w-2xl leading-relaxed"
+              >
               Perspectives on building, designing, and growing ambitious brands in the digital age.
             </motion.p>
           </div>
@@ -56,7 +56,7 @@ export default function BlogListingPage() {
       </section>
 
       {/* Filters & Search */}
-      <section className="sticky top-20 z-40 bg-k-bg/80 backdrop-blur-md border-b border-white/5 py-4">
+      <section className="sticky top-20 z-40 bg-k-bg/80 backdrop-blur-md border-b border-k-border py-4">
         <Container>
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
@@ -66,8 +66,8 @@ export default function BlogListingPage() {
                   onClick={() => setActiveCategory(cat)}
                   className={`px-5 py-2 rounded-full text-[10px] font-black tracking-widest uppercase transition-all whitespace-nowrap border ${
                     activeCategory === cat 
-                      ? "bg-blue-600 border-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.3)]" 
-                      : "bg-white/5 border-white/10 text-white/40 hover:text-white hover:border-white/20"
+                      ? "bg-k-primary border-k-primary text-white shadow-[0_0_20px_rgba(30,80,255,0.3)]" 
+                      : "bg-k-card-bg border-k-border text-k-text-muted hover:text-k-text hover:border-k-text/20"
                   }`}
                 >
                   {cat}
@@ -76,13 +76,13 @@ export default function BlogListingPage() {
             </div>
 
             <div className="relative group max-w-md w-full">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-blue-500 transition-colors" size={18} />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-k-text-muted/40 group-focus-within:text-k-primary transition-colors" size={18} />
               <input
                 type="text"
                 placeholder="SEARCH ARTICLES..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-full py-3 pl-12 pr-6 outline-none focus:border-blue-500 transition-all text-sm tracking-wider placeholder:text-white/20 uppercase"
+                className="w-full bg-k-card-bg border border-k-border rounded-full py-3 pl-12 pr-6 outline-none focus:border-k-primary transition-all text-sm tracking-wider placeholder:text-k-text-muted/40 uppercase text-k-text"
               />
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function BlogListingPage() {
                   className="group"
                 >
                   <Link href={`/blog/${post.slug}`} className="block">
-                    <div className="relative aspect-video rounded-2xl overflow-hidden mb-6 border border-white/10 shadow-2xl">
+                    <div className="relative aspect-video rounded-2xl overflow-hidden mb-6 border border-k-border shadow-2xl dark:shadow-none">
                       <Image
                         src={post.image}
                         alt={post.title}
@@ -112,27 +112,27 @@ export default function BlogListingPage() {
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       <div className="absolute top-4 left-4">
-                        <span className="px-3 py-1 bg-blue-600 text-white text-[10px] font-black tracking-widest rounded-full uppercase shadow-lg">
+                        <span className="px-3 py-1 bg-k-primary text-white text-[10px] font-black tracking-widest rounded-full uppercase shadow-lg">
                           {post.category}
                         </span>
                       </div>
                     </div>
 
                     <div className="space-y-4">
-                      <div className="flex items-center gap-4 text-white/40 text-[10px] font-black tracking-widest uppercase">
-                        <span className="flex items-center gap-1.5"><Calendar size={14} className="text-blue-500" /> {post.date}</span>
-                        <span className="flex items-center gap-1.5"><Clock size={14} className="text-blue-500" /> {post.readTime}</span>
+                      <div className="flex items-center gap-4 text-k-text-muted text-[10px] font-black tracking-widest uppercase">
+                        <span className="flex items-center gap-1.5"><Calendar size={14} className="text-k-primary" /> {post.date}</span>
+                        <span className="flex items-center gap-1.5"><Clock size={14} className="text-k-primary" /> {post.readTime}</span>
                       </div>
                       
-                      <h2 className="text-2xl font-black text-white group-hover:text-blue-500 transition-colors leading-tight tracking-tight">
+                      <h2 className="text-2xl font-black text-k-text group-hover:text-k-primary transition-colors leading-tight tracking-tight">
                         {post.title}
                       </h2>
                       
-                      <p className="text-white/60 text-sm line-clamp-3 leading-relaxed font-light">
+                      <p className="text-k-text-muted text-sm line-clamp-3 leading-relaxed font-light">
                         {post.excerpt}
                       </p>
                       
-                      <div className="pt-2 flex items-center text-blue-500 text-[10px] font-black uppercase tracking-widest gap-2 group-hover:gap-3 transition-all">
+                      <div className="pt-2 flex items-center text-k-primary text-[10px] font-black uppercase tracking-widest gap-2 group-hover:gap-3 transition-all">
                         READ FULL STORY <ArrowRight size={14} />
                       </div>
                     </div>
@@ -141,8 +141,8 @@ export default function BlogListingPage() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-40 border border-white/5 rounded-3xl bg-white/2">
-              <h3 className="text-2xl font-black text-white/20 uppercase tracking-widest italic">No articles found matching your criteria.</h3>
+            <div className="text-center py-40 border border-k-border rounded-3xl bg-k-card-bg">
+              <h3 className="text-2xl font-black text-k-text-muted/20 uppercase tracking-widest italic">No articles found matching your criteria.</h3>
             </div>
           )}
         </Container>

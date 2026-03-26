@@ -16,7 +16,7 @@ const fadeUp = {
 
 export default function AboutHero() {
   return (
-    <section className="bg-[#050D1A] pt-40 pb-20 md:pt-48 md:pb-32 border-b border-white/5 overflow-hidden relative">
+    <section className="bg-k-bg pt-40 pb-20 md:pt-48 md:pb-32 border-b border-k-border overflow-hidden relative">
       {/* Background Soft Glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#0059ff]/10 blur-[150px] rounded-full pointer-events-none" />
 
@@ -30,11 +30,11 @@ export default function AboutHero() {
 
             <SectionBadge icon={User} label="Who We Are" />
 
-          <motion.h1 {...fadeUp} transition={{ delay: 0.3 }} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 text-white leading-tight tracking-tight">
+          <motion.h1 {...fadeUp} transition={{ delay: 0.3 }} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 text-k-text leading-tight tracking-tight">
             We are not just another agency.
           </motion.h1>
 
-          <motion.p {...fadeUp} transition={{ delay: 0.4 }} className="text-white/90 text-sm sm:text-base md:text-lg font-thin leading-[1.8] max-w-2xl">
+          <motion.p {...fadeUp} transition={{ delay: 0.4 }} className="text-k-text-muted text-sm sm:text-base md:text-lg font-light leading-[1.8] max-w-2xl">
             We are a Synergy Collective — a dedicated team of specialists across strategy, design, technology, and marketing, built to work as one.
           </motion.p>
         </div>

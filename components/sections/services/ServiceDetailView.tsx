@@ -25,7 +25,7 @@ export default function ServiceDetailView({
 }) {
   return (
     <>
-      <section className="bg-linear-to-b from-[#050D1A] to-k-bg pt-40 pb-20 md:pt-48 md:pb-20 border-b border-white/5">
+      <section className="bg-k-bg pt-40 pb-20 md:pt-48 md:pb-20 border-b border-k-border">
         <Container>
           <div className="max-w-4xl flex flex-col items-start text-left">
             <motion.div {...fadeUp} transition={{ delay: 0.1 }}>
@@ -38,7 +38,7 @@ export default function ServiceDetailView({
 
             <SectionBadge label={service.category} />
             
-            <motion.h1 {...fadeUp} transition={{ delay: 0.3 }} className="text-4xl md:text-5xl lg:text-7xl font-bold mb-8 text-white leading-tight tracking-tight">
+            <motion.h1 {...fadeUp} transition={{ delay: 0.3 }} className="text-4xl md:text-5xl lg:text-7xl font-bold mb-8 text-k-text leading-tight tracking-tight">
               {service.title}
             </motion.h1>
           </div>
@@ -51,7 +51,7 @@ export default function ServiceDetailView({
              initial={{ opacity: 0, y: 40 }}
              animate={{ opacity: 1, y: 0 }}
              transition={{ duration: 0.8, delay: 0.4 }}
-             className="w-full aspect-video md:aspect-21/9 rounded-4xl overflow-hidden mb-20 shadow-2xl border border-white/10"
+             className="w-full aspect-video md:aspect-21/9 rounded-4xl overflow-hidden mb-20 shadow-2xl dark:shadow-none border border-k-border"
            >
              <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
            </motion.div>
@@ -63,25 +63,25 @@ export default function ServiceDetailView({
                 transition={{ duration: 0.7, delay: 0.5 }}
                 className="space-y-8"
               >
-                 <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">Overview</h2>
-                 <p className="text-white/70 text-lg leading-relaxed">{service.description}</p>
+                 <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-k-text">Overview</h2>
+                 <p className="text-k-text-muted text-lg leading-relaxed">{service.description}</p>
                  
-                 <h3 className="text-xl font-bold text-white mt-12 mb-6 tracking-wide underline underline-offset-8 decoration-[#0059FF]/30">Key Benefits</h3>
+                 <h3 className="text-xl font-bold text-k-text mt-12 mb-6 tracking-wide underline underline-offset-8 decoration-k-primary/30">Key Benefits</h3>
                  <div className="grid grid-cols-1 gap-4 mb-12">
                    {service.benefits.map((benefit, i) => (
                      <div
                        key={i}
-                       className="flex items-center gap-4 p-4 rounded-xl bg-white/2 border border-white/5"
+                       className="flex items-center gap-4 p-4 rounded-xl bg-k-card-bg border border-k-border"
                      >
-                       <div className="w-2 h-2 rounded-full bg-[#0059FF]/50" />
-                       <span className="text-white/60 text-lg font-medium">{benefit}</span>
+                       <div className="w-2 h-2 rounded-full bg-k-primary/50" />
+                       <span className="text-k-text-muted text-lg font-medium">{benefit}</span>
                      </div>
                    ))}
                  </div>
 
                  {relatedServices && relatedServices.length > 0 && (
                    <>
-                     <h3 className="text-xl font-bold text-white mt-12 mb-6 tracking-wide underline underline-offset-8 decoration-[#0059FF]/30">
+                     <h3 className="text-xl font-bold text-k-text mt-12 mb-6 tracking-wide underline underline-offset-8 decoration-k-primary/30">
                        Other {service.category} Services
                      </h3>
                      <div className="grid grid-cols-1 gap-4">
@@ -91,18 +91,18 @@ export default function ServiceDetailView({
                            href={`${parentCategory?.href}/${createSlug(related)}`}
                            className={`group flex items-center justify-between p-4 rounded-xl border transition-all duration-300 ${
                              createSlug(related) === service.slug
-                               ? "bg-[#0059FF]/20 border-[#0059FF]/50 pointer-events-none"
-                               : "bg-white/3 border-white/10 hover:border-[#0059FF]/50 hover:bg-[#0059FF]/10"
+                               ? "bg-k-primary/20 border-k-primary/50 pointer-events-none"
+                               : "bg-k-card-bg border-k-border hover:border-k-primary/50 hover:bg-k-primary/10"
                            }`}
                          >
                            <div className="flex items-center gap-4">
-                             <div className={`w-2 h-2 rounded-full ${createSlug(related) === service.slug ? "bg-[#0059FF]" : "bg-white/20"} group-hover:scale-125 transition-transform`} />
-                             <span className={`text-lg transition-colors font-medium ${createSlug(related) === service.slug ? "text-white" : "text-white/80 group-hover:text-white"}`}>
+                             <div className={`w-2 h-2 rounded-full ${createSlug(related) === service.slug ? "bg-k-primary" : "bg-k-text/20"} group-hover:scale-125 transition-transform`} />
+                             <span className={`text-lg transition-colors font-medium ${createSlug(related) === service.slug ? "text-k-text" : "text-k-text-muted group-hover:text-k-text"}`}>
                                {related}
                              </span>
                            </div>
                            {createSlug(related) !== service.slug && (
-                             <ArrowUpRight size={18} className="text-[#0059FF] opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+                             <ArrowUpRight size={18} className="text-k-primary opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
                            )}
                          </Link>
                        ))}
@@ -112,19 +112,19 @@ export default function ServiceDetailView({
 
                   {service.expertise && service.expertise.length > 0 && (
                      <>
-                       <h3 className="text-xl font-bold text-white mt-12 mb-6 tracking-wide underline underline-offset-8 decoration-[#0059FF]/30">Expertise In</h3>
+                       <h3 className="text-xl font-bold text-k-text mt-12 mb-6 tracking-wide underline underline-offset-8 decoration-k-primary/30">Expertise In</h3>
                        <div className="grid grid-cols-1 gap-4">
                          {service.expertise.map((item, i) => (
                            <Link
                              key={i}
                              href={`/services/${createSlug(item)}`}
-                             className="group flex items-center justify-between p-4 rounded-xl bg-white/3 border border-white/10 hover:border-[#0059FF]/50 hover:bg-[#0059FF]/10 transition-all duration-300"
+                             className="group flex items-center justify-between p-4 rounded-xl bg-k-card-bg border border-k-border hover:border-k-primary/50 hover:bg-k-primary/10 transition-all duration-300"
                            >
                              <div className="flex items-center gap-4">
-                               <div className="w-2 h-2 rounded-full bg-[#0059FF] group-hover:scale-125 transition-transform" />
-                               <span className="text-white/80 group-hover:text-white text-lg transition-colors font-medium">{item}</span>
+                               <div className="w-2 h-2 rounded-full bg-k-primary" />
+                               <span className="text-k-text-muted group-hover:text-k-text text-lg transition-colors font-medium">{item}</span>
                              </div>
-                             <ArrowUpRight size={18} className="text-[#0059FF] opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+                             <ArrowUpRight size={18} className="text-k-primary opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
                            </Link>
                          ))}
                        </div>
@@ -136,16 +136,16 @@ export default function ServiceDetailView({
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, delay: 0.6 }}
-                className="p-8 md:p-12 rounded-4xl bg-white/2 border border-white/10"
+                className="p-8 md:p-12 rounded-4xl bg-k-card-bg border border-k-border shadow-sm"
               >
-                 <h2 className="text-2xl font-bold tracking-tight text-white mb-10">Our Implementation Process</h2>
+                 <h2 className="text-2xl font-bold tracking-tight text-k-text mb-10">Our Implementation Process</h2>
                  <div className="space-y-8">
                    {service.process.map((step, i) => (
                      <div key={i} className="flex flex-row gap-6 items-start">
-                       <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white/20 bg-white/5 text-[#0059FF] font-bold text-sm shrink-0">
+                       <div className="flex items-center justify-center w-10 h-10 rounded-full border border-k-border bg-k-bg text-k-primary font-bold text-sm shrink-0">
                          {i + 1}
                        </div>
-                       <div className="pt-2 text-white font-medium text-lg w-full pb-8 border-b border-white/5 last:border-0 last:pb-0">
+                       <div className="pt-2 text-k-text font-medium text-lg w-full pb-8 border-b border-k-border last:border-0 last:pb-0">
                          {step}
                        </div>
                      </div>

@@ -27,30 +27,30 @@ function SubmitButton() {
 
 export default function ContactFormSection() {
   return (
-    <Section className="bg-k-bg border-t border-white/5 py-20 relative overflow-hidden" id="contact-form">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#0059ff]/10 blur-[120px] rounded-full pointer-events-none" />
+    <Section className="bg-k-bg border-t border-k-border py-20 relative overflow-hidden" id="contact-form">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-k-primary/10 blur-[120px] rounded-full pointer-events-none" />
       <Container className="relative z-10">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
-            <div className="text-white/50 text-xs font-bold tracking-widest uppercase mb-2">CONTACT FORM:</div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-white">TELL US ABOUT YOUR PROJECT</h2>
-            <p className="text-white/70 text-lg">We will get back to you within 24 hours.</p>
+            <div className="text-k-text-muted/50 text-xs font-bold tracking-widest uppercase mb-2">CONTACT FORM:</div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-k-text">TELL US ABOUT YOUR PROJECT</h2>
+            <p className="text-k-text-muted text-lg">We will get back to you within 24 hours.</p>
           </div>
 
-          <form action={submitContactForm} className="flex flex-col gap-6 backdrop-blur-xl bg-[#050D1A]/80 p-6 sm:p-10 rounded-2xl border border-white/10 shadow-2xl">
+          <form action={submitContactForm} className="flex flex-col gap-6 backdrop-blur-xl bg-k-card-bg/80 p-6 sm:p-10 rounded-2xl border border-k-border shadow-2xl dark:shadow-none">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <input name="name" type="text" required placeholder="NAME" className="w-full p-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-[#0059FF] transition-colors text-white placeholder-white/40 tracking-wide text-sm" />
-              <input name="email" type="email" required placeholder="EMAIL" className="w-full p-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-[#0059FF] transition-colors text-white placeholder-white/40 tracking-wide text-sm" />
+              <input name="name" type="text" required placeholder="NAME" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm" />
+              <input name="email" type="email" required placeholder="EMAIL" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm" />
             </div>
-            <input name="company" type="text" required placeholder="COMPANY OR PROJECT NAME" className="w-full p-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-[#0059FF] transition-colors text-white placeholder-white/40 tracking-wide text-sm" />
-            <textarea name="message" required placeholder="WHAT ARE YOU BUILDING?" rows={4} className="w-full p-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-[#0059FF] transition-colors text-white placeholder-white/40 resize-none tracking-wide text-sm"></textarea>
-            <input name="services" type="text" placeholder="SERVICES NEEDED" className="w-full p-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-[#0059FF] transition-colors text-white placeholder-white/40 tracking-wide text-sm" />
+            <input name="company" type="text" required placeholder="COMPANY OR PROJECT NAME" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm" />
+            <textarea name="message" required placeholder="WHAT ARE YOU BUILDING?" rows={4} className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 resize-none tracking-wide text-sm"></textarea>
+            <input name="services" type="text" placeholder="SERVICES NEEDED" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm" />
             <SubmitButton />
           </form>
 
           <div className="mt-12 text-center">
-            <p className="text-white/60">
-              Prefer email? <a href="mailto:hello@kinuit.com" className="text-[#0059FF] hover:underline font-medium">hello@kinuit.com</a>
+            <p className="text-k-text-muted">
+              Prefer email? <a href="mailto:hello@kinuit.com" className="text-k-primary hover:underline font-medium">hello@kinuit.com</a>
             </p>
           </div>
         </div>
