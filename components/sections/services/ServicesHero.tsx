@@ -21,7 +21,7 @@ export default function ServicesHero() {
             <Breadcrumb paths={[{ name: "Services" }]} />
           </motion.div>
 
-          <SectionBadge icon={Zap} label="What We Offer" />
+          <SectionBadge icon={<Zap size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label="What We Offer" />
           
           <motion.h1 {...fadeUp} transition={{ delay: 0.3 }} className="text-4xl md:text-5xl lg:text-7xl font-bold mb-8 text-k-text leading-tight tracking-tight">
             Everything your brand needs.<br/>

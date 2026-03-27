@@ -35,7 +35,7 @@ export default function StatsGlobe() {
 
       <Container className="relative z-10">
         <div className="flex justify-center">
-          <SectionBadge icon={GlobeIcon} label="Our Global Impact" />
+          <SectionBadge icon={<GlobeIcon size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label="Our Global Impact" />
         </div>
         <motion.h2
           initial={{ opacity: 0, y: 40 }}

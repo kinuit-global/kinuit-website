@@ -87,7 +87,7 @@ export default function CaseStudies() {
           Work that moves the needle.
         </motion.h2>
 
-        <SectionBadge icon={Briefcase} label="Selected Work" />
+        <SectionBadge icon={<Briefcase size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label="Selected Work" />
       </div>
 
       {/* Carousel Section */}

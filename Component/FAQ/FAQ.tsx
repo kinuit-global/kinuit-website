@@ -1,78 +1,62 @@
-"use client";
-
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { FAQItems } from "@/lib/FAQ";
 import { HelpCircle } from "lucide-react";
 import SectionBadge from "@/components/ui/SectionBadge";
 
 export default function FAQ() {
-  const [open, setOpen] = useState<number | null>(null);
-
   return (
-    <section className="py-16 bg-k-bg text-k-text">
+    <section className="py-24 bg-k-bg text-k-text border-y border-k-border" id="faq">
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": FAQItems.map((item) => ({
+              "@type": "Question",
+              "name": item.qsn,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.answ
+              }
+            }))
+          })
+        }}
+      />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-
         <div className="flex justify-center">
-          <SectionBadge icon={HelpCircle} label="Common Questions" />
+          <SectionBadge icon={<HelpCircle size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label="Common Questions" />
         </div>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10 md:mb-12 text-k-text">
+        <h2 className="text-3xl md:text-5xl font-black text-center mb-16 text-k-text uppercase tracking-tight">
           Frequently <span className="text-k-primary">Asked Questions</span>
         </h2>
 
-        {/* FAQ Container */}
-        <div className="flex flex-col gap-3 bg-k-card-bg rounded-2xl p-6 sm:p-8 md:p-10 border border-k-border shadow-sm">
-
+        <div className="max-w-3xl mx-auto flex flex-col gap-4">
           {FAQItems.map((faq, index: number) => (
-            <div
+            <details
               key={index}
-              className="rounded-xl border border-k-border 
-              bg-k-bg/50 backdrop-blur-md overflow-hidden"
+              className="group rounded-2xl border border-k-border bg-k-card-bg/30 backdrop-blur-md overflow-hidden transition-all duration-300 hover:border-k-primary/30"
             >
-
-              {/* Question */}
-              <button
-                onClick={() => setOpen(open === index ? null : index)}
-                className="flex items-center justify-between w-full px-4 sm:px-5 py-4 text-left"
-              >
-
-                <span className="text-[13px] sm:text-sm md:text-base font-semibold text-k-text pr-3">
+              <summary className="flex items-center justify-between w-full px-6 py-5 text-left cursor-pointer list-none outline-none focus:bg-k-primary/5">
+                <span className="text-base md:text-lg font-bold text-k-text pr-6 tracking-tight">
                   {faq.qsn}
                 </span>
-
-                <span
-                  className="flex items-center justify-center 
-                  w-6 h-6 text-k-text text-sm font-bold shrink-0"
-                >
-                  {open === index ? "−" : "+"}
+                <span className="flex items-center justify-center w-8 h-8 rounded-full border border-k-border text-k-text group-open:rotate-45 transition-transform duration-300">
+                  <span className="text-lg font-light">+</span>
                 </span>
-
-              </button>
-
-              {/* Answer */}
-              <motion.div
-                initial={false}
-                animate={{ 
-                  height: open === index ? "auto" : 0,
-                  opacity: open === index ? 1 : 0
-                }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="overflow-hidden"
-              >
-                <p className="px-4 sm:px-5 pb-4 text-[13px] sm:text-sm text-k-text-muted leading-relaxed">
+              </summary>
+              <div className="px-6 pb-6 pt-2">
+                <p className="text-sm md:text-base text-k-text-muted leading-relaxed font-light">
                   {faq.answ}
                 </p>
-              </motion.div>
-
-
-            </div>
+              </div>
+            </details>
           ))}
-
         </div>
-
       </div>
 
     </section>
   );
 }
+

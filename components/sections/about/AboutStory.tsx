@@ -19,7 +19,7 @@ export default function AboutStory() {
           </div>
 
           <div className="order-1 lg:order-2 max-w-xl">
-            <SectionBadge icon={History} label="How We Started" />
+            <SectionBadge icon={<History size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label="How We Started" />
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-8 text-k-text leading-tight">
               Built with one purpose. To make your brand extraordinary.
             </h2>

@@ -75,7 +75,10 @@ export default function ServicesList() {
                 <div className={`lg:col-span-7 flex flex-col pt-2 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
                   <div className="mb-6 flex items-center gap-4">
                     <div className="text-k-text opacity-20 font-black text-2xl tracking-tighter">{svc.id}</div>
-                    <SectionBadge icon={getIcon(svc.id)} label={svc.title} />
+                    {(() => {
+                      const Icon = getIcon(svc.id);
+                      return <SectionBadge icon={<Icon size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label={svc.title} />;
+                    })()}
                   </div>
 
                   <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-k-text leading-tight mb-6">

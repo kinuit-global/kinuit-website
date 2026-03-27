@@ -20,7 +20,7 @@ export default function BlogPreview() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <div className="max-w-2xl text-left">
-            <SectionBadge icon={BookOpen} label="Insights & Perspectives" />
+            <SectionBadge icon={<BookOpen size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label="Insights & Perspectives" />
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

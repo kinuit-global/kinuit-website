@@ -9,7 +9,7 @@ export default function AboutPrinciples() {
     <Section className="bg-k-bg border-t border-k-border py-20 pb-32">
       <Container>
         <div className="max-w-3xl mb-16 text-center mx-auto">
-          <SectionBadge icon={Anchor} label="What We Stand For" />
+          <SectionBadge icon={<Anchor size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label="What We Stand For" />
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-k-text leading-tight">
             We believe in craft, commitment, and results.
           </h2>

@@ -28,7 +28,7 @@ export default function AboutHero() {
             <Breadcrumb paths={[{ name: "About" }]} />
           </motion.div>
 
-            <SectionBadge icon={User} label="Who We Are" />
+            <SectionBadge icon={<User size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label="Who We Are" />
 
           <motion.h1 {...fadeUp} transition={{ delay: 0.3 }} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 text-k-text leading-tight tracking-tight">
             We are not just another agency.

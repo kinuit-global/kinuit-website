@@ -16,30 +16,11 @@ export const metadata: Metadata = {
   description: "Kinuit is a full-service agency for ambitious brands — strategy, branding, custom development, and growth, engineered for the new era.",
 };
 
-import { FAQItems } from "@/lib/FAQ";
-
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": FAQItems.map((item) => ({
-    "@type": "Question",
-    "name": item.qsn,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": item.answ,
-    },
-  })),
-};
-
 export default function HomePage() {
   return (
     <main>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
-
       <Hero />
+
       <Reveal><StatsGlobe /></Reveal>
       <Reveal><Pillars /></Reveal>
       <Reveal><ServicesOverview /></Reveal>

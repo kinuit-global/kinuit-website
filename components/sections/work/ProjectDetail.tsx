@@ -23,7 +23,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
               <Breadcrumb paths={[{ name: "Our Work", href: "/work" }, { name: project.title }]} />
             </motion.div>
 
-            <SectionBadge icon={Star} label={project.tag} />
+            <SectionBadge icon={<Star size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label={project.tag} />
             
             <motion.h1 {...fadeUp} transition={{ delay: 0.3 }} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 text-k-text leading-tight tracking-tight">
               {project.title}

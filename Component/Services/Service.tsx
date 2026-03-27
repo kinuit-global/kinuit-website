@@ -69,7 +69,7 @@ export default function Services() {
 
           <div>
             {/* Top Label Badge */}
-            <SectionBadge icon={Zap} label="What We Do" />
+            <SectionBadge icon={<Zap size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label="What We Do" />
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-k-text">
               Four disciplines. <span className="text-k-primary">One powerful team</span>
             </h2>

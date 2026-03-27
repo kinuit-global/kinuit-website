@@ -21,7 +21,7 @@ export default function WorkHero() {
             <Breadcrumb paths={[{ name: "Our Work" }]} />
           </motion.div>
 
-            <SectionBadge icon={Briefcase} label="Selected Work" />
+            <SectionBadge icon={<Briefcase size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label="Selected Work" />
           <motion.h1 {...fadeUp} transition={{ delay: 0.3 }} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 text-k-text leading-tight tracking-tight">
             Work that moves the needle.
           </motion.h1>

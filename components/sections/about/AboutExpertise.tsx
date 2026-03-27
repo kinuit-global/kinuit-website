@@ -11,7 +11,7 @@ export default function AboutExpertise() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           
           <div className="max-w-xl">
-            <SectionBadge icon={ShieldCheck} label="Our Expertise" />
+            <SectionBadge icon={<ShieldCheck size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label="Our Expertise" />
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-8 text-k-text leading-tight">
               Every discipline your brand needs.
             </h2>

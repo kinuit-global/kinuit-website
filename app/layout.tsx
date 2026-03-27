@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     siteName: "Kinuit",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://www.kinuit.com/assets/og-preview.jpg",
         width: 1200,
         height: 630,
         alt: "Kinuit | Build, Design, Grow & Plan for Ambitious Brands",
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kinuit | Build, Design, Grow & Plan for Ambitious Brands",
     description: "Kinuit is a full-service agency for ambitious brands — strategy, branding, custom development, and growth, engineered for the new era.",
-    images: ["/og-image.png"],
+    images: ["https://www.kinuit.com/assets/og-preview.jpg"],
   },
   robots: {
     index: true,

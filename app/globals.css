@@ -116,3 +116,11 @@ button {
   font-size: 1.25rem;
   color: var(--foreground);
 }
+
+/* FAQ Details Marker Fix */
+details summary::-webkit-details-marker {
+  display: none;
+}
+details summary {
+  list-style: none;
+}

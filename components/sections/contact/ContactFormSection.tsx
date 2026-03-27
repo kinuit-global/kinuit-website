@@ -42,11 +42,12 @@ export default function ContactFormSection() {
             <p className="text-k-text-muted text-lg">We will get back to you within 24 hours.</p>
           </div>
 
-          <AnimatePresence mode="wait">
-            {state?.success ? (
+          <div className="relative">
+            {/* Success Message - Hidden by default */}
+            <div className={`${state?.success ? "block" : "hidden"}`}>
               <motion.div 
                 initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
+                animate={state?.success ? { opacity: 1, scale: 1 } : {}}
                 className="backdrop-blur-xl bg-k-card-bg/80 p-10 sm:p-16 rounded-2xl border border-k-primary/30 shadow-2xl text-center"
               >
                 <div className="w-20 h-20 bg-k-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
@@ -63,26 +64,25 @@ export default function ContactFormSection() {
                   Send another message
                 </button>
               </motion.div>
-            ) : (
-              <motion.form 
-                action={formAction}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="flex flex-col gap-6 backdrop-blur-xl bg-k-card-bg/80 p-6 sm:p-10 rounded-2xl border border-k-border shadow-2xl dark:shadow-none"
-              >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <input name="name" type="text" required placeholder="NAME" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm font-medium" />
-                  <input name="email" type="email" required placeholder="EMAIL" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm font-medium" />
-                </div>
-                <input name="company" type="text" required placeholder="COMPANY OR PROJECT NAME" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm font-medium" />
-                <textarea name="message" required placeholder="WHAT ARE YOU BUILDING?" rows={4} className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 resize-none tracking-wide text-sm font-medium"></textarea>
-                <input name="services" type="text" placeholder="SERVICES NEEDED" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm font-medium" />
-                
-                <SubmitButton />
-              </motion.form>
-            )}
-          </AnimatePresence>
+            </div>
+
+            {/* Contact Form - Always in HTML, Hidden on Success */}
+            <form 
+              action={formAction}
+              className={`flex flex-col gap-6 backdrop-blur-xl bg-k-card-bg/80 p-6 sm:p-10 rounded-2xl border border-k-border shadow-2xl dark:shadow-none ${state?.success ? "hidden" : "flex"}`}
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <input name="name" type="text" required placeholder="NAME" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm font-medium" />
+                <input name="email" type="email" required placeholder="EMAIL" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm font-medium" />
+              </div>
+              <input name="company" type="text" required placeholder="COMPANY OR PROJECT NAME" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm font-medium" />
+              <textarea name="message" required placeholder="WHAT ARE YOU BUILDING?" rows={4} className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 resize-none tracking-wide text-sm font-medium"></textarea>
+              <input name="services" type="text" placeholder="SERVICES NEEDED" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm font-medium" />
+              
+              <SubmitButton />
+            </form>
+          </div>
+
 
           <div className="mt-12 text-center">
             <p className="text-k-text-muted">
