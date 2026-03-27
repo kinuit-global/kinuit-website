@@ -49,12 +49,42 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.kinuit.com'),
   title: {
     default: "Kinuit | Build, Design, Grow & Plan for Ambitious Brands",
     template: "%s | Kinuit"
   },
   description:
-    "A globally distributed partner for Branding, Development, and Strategy. We help ambitious brands build products that work, design identities that last, and grow with sustainable momentum.",
+    "Kinuit is a full-service agency for ambitious brands — strategy, branding, custom development, and growth, engineered for the new era.",
+  openGraph: {
+    title: "Kinuit | Build, Design, Grow & Plan for Ambitious Brands",
+    description: "Kinuit is a full-service agency for ambitious brands — strategy, branding, custom development, and growth, engineered for the new era.",
+    url: "https://www.kinuit.com",
+    siteName: "Kinuit",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Kinuit | Build, Design, Grow & Plan for Ambitious Brands",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kinuit | Build, Design, Grow & Plan for Ambitious Brands",
+    description: "Kinuit is a full-service agency for ambitious brands — strategy, branding, custom development, and growth, engineered for the new era.",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: "https://www.kinuit.com",
+  },
   icons: {
     icon: [
       { url: "/16px.svg", sizes: "16x16" },
@@ -70,6 +100,21 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Kinuit",
+  "url": "https://www.kinuit.com",
+  "logo": "https://www.kinuit.com/logoj.png",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "hello@kinuit.com",
+    "contactType": "customer service"
+  },
+  "sameAs": [],
+  "description": "Full-service agency for ambitious brands."
+};
+
 import { ThemeProvider } from "@/components/theme-provider";
 
 export default function RootLayout({
@@ -83,7 +128,17 @@ export default function RootLayout({
       className={`${inter.variable} ${barlow.variable} ${sora.variable} ${lato.variable} ${montserrat.variable} ${poppins.variable} ${cormorant.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>
+
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

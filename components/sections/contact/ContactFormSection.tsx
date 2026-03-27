@@ -1,8 +1,11 @@
 "use client";
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
 import { submitContactForm } from "@/app/actions/contact";
-import { useFormStatus } from "react-dom";
+import { CheckCircle2, Send } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -11,7 +14,7 @@ function SubmitButton() {
     <button 
       type="submit" 
       disabled={pending}
-      className={`w-full py-5 mt-2 bg-[#081FF0] text-white font-bold rounded-xl hover:shadow-[0_0_20px_rgba(91,196,224,0.3)] transition-all tracking-widest uppercase flex items-center justify-center gap-3 ${pending ? "opacity-70 cursor-not-allowed" : "hover:scale-[1.01] active:scale-[0.99]"}`}
+      className={`w-full py-5 mt-2 bg-[#081FF0] text-white font-bold rounded-xl hover:shadow-[0_0_20px_rgba(8,31,240,0.3)] transition-all tracking-widest uppercase flex items-center justify-center gap-3 ${pending ? "opacity-70 cursor-not-allowed" : "hover:scale-[1.01] active:scale-[0.99]"}`}
     >
       {pending ? (
         <>
@@ -26,6 +29,8 @@ function SubmitButton() {
 }
 
 export default function ContactFormSection() {
+  const [state, formAction] = useActionState(submitContactForm, { success: false });
+
   return (
     <Section className="bg-k-bg border-t border-k-border py-20 relative overflow-hidden" id="contact-form">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-k-primary/10 blur-[120px] rounded-full pointer-events-none" />
@@ -37,16 +42,47 @@ export default function ContactFormSection() {
             <p className="text-k-text-muted text-lg">We will get back to you within 24 hours.</p>
           </div>
 
-          <form action={submitContactForm} className="flex flex-col gap-6 backdrop-blur-xl bg-k-card-bg/80 p-6 sm:p-10 rounded-2xl border border-k-border shadow-2xl dark:shadow-none">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <input name="name" type="text" required placeholder="NAME" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm" />
-              <input name="email" type="email" required placeholder="EMAIL" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm" />
-            </div>
-            <input name="company" type="text" required placeholder="COMPANY OR PROJECT NAME" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm" />
-            <textarea name="message" required placeholder="WHAT ARE YOU BUILDING?" rows={4} className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 resize-none tracking-wide text-sm"></textarea>
-            <input name="services" type="text" placeholder="SERVICES NEEDED" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm" />
-            <SubmitButton />
-          </form>
+          <AnimatePresence mode="wait">
+            {state?.success ? (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="backdrop-blur-xl bg-k-card-bg/80 p-10 sm:p-16 rounded-2xl border border-k-primary/30 shadow-2xl text-center"
+              >
+                <div className="w-20 h-20 bg-k-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
+                  <CheckCircle2 className="text-k-primary" size={48} />
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-k-text mb-4" style={{ fontFamily: "var(--font-lato)" }}>Message Received!</h3>
+                <p className="text-k-text-muted mb-8 text-lg" style={{ fontFamily: "var(--font-lato)" }}>
+                  Thank you for reaching out. A strategist from our team will review your brief and contact you shortly.
+                </p>
+                <button 
+                  onClick={() => window.location.reload()}
+                  className="text-k-primary font-bold tracking-widest uppercase text-sm hover:underline"
+                >
+                  Send another message
+                </button>
+              </motion.div>
+            ) : (
+              <motion.form 
+                action={formAction}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="flex flex-col gap-6 backdrop-blur-xl bg-k-card-bg/80 p-6 sm:p-10 rounded-2xl border border-k-border shadow-2xl dark:shadow-none"
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <input name="name" type="text" required placeholder="NAME" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm font-medium" />
+                  <input name="email" type="email" required placeholder="EMAIL" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm font-medium" />
+                </div>
+                <input name="company" type="text" required placeholder="COMPANY OR PROJECT NAME" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm font-medium" />
+                <textarea name="message" required placeholder="WHAT ARE YOU BUILDING?" rows={4} className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 resize-none tracking-wide text-sm font-medium"></textarea>
+                <input name="services" type="text" placeholder="SERVICES NEEDED" className="w-full p-4 bg-k-bg border border-k-border rounded-xl outline-none focus:border-k-primary transition-colors text-k-text placeholder-k-text-muted/40 tracking-wide text-sm font-medium" />
+                
+                <SubmitButton />
+              </motion.form>
+            )}
+          </AnimatePresence>
 
           <div className="mt-12 text-center">
             <p className="text-k-text-muted">
@@ -58,3 +94,4 @@ export default function ContactFormSection() {
     </Section>
   );
 }
+

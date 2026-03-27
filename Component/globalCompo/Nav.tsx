@@ -77,11 +77,13 @@ export default function Navbar() {
                   <Link
                     key={link.label}
                     href={link.href}
-                    className={`relative px-4 py-2 flex items-center justify-center text-[15px] transition-all duration-300 group rounded-full overflow-hidden ${isActive
+                    aria-current={isActive ? "page" : undefined}
+                    className={`relative px-4 py-2 flex items-center justify-center text-[15px] transition-all duration-300 group rounded-full overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-k-primary ${isActive
                       ? "text-k-text"
                       : "text-k-text-muted hover:text-k-text"
                       }`}
                   >
+
                     <AnimatePresence>
                       {isActive && (
                         <motion.span
@@ -156,22 +158,29 @@ export default function Navbar() {
             className="fixed inset-0 z-40 bg-k-bg/95 backdrop-blur-2xl flex flex-col items-center justify-center lg:hidden px-6"
           >
             <nav className="flex flex-col items-center gap-6">
-              {navLinks.map((link, i) => (
-                <Link key={link.label} href={link.href}>
-                  <motion.span
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.07 }}
-                    onClick={() => {
-                      setMenuOpen(false);
-                    }}
-                    className={`text-3xl font-light hover:text-k-text transition-colors cursor-pointer ${pathname === link.href ? "text-k-text" : "text-k-text-muted"
-                      }`}
+              {navLinks.map((link, i) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link 
+                    key={link.label} 
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    aria-current={isActive ? "page" : undefined}
+                    className="w-full text-center"
                   >
-                    {link.label}
-                  </motion.span>
-                </Link>
-              ))}
+                    <motion.span
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.07 }}
+                      className={`text-3xl font-light hover:text-k-text transition-colors cursor-pointer block py-2 ${isActive ? "text-k-text font-medium" : "text-k-text-muted"
+                        }`}
+                    >
+                      {link.label}
+                    </motion.span>
+                  </Link>
+                );
+              })}
+
               <Link href="/contact">
                 <motion.span
                   whileTap={{ scale: 0.95 }}

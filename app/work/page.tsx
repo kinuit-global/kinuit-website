@@ -5,8 +5,9 @@ import WorkCTA from "@/components/sections/work/WorkCTA";
 
 export const metadata: Metadata = {
   title: "Our Work | Case Studies",
-  description: "Discover our latest projects and case studies. Strategic solutions for branding, development, and growth.",
+  description: "Case studies and selected work from Kinuit — real projects, real results for ambitious brands globally.",
 };
+
 
 export default function WorkPage() {
   return (

@@ -36,66 +36,57 @@ export default function TestimonialSection() {
           </p>
         </div>
 
-        <div className="relative max-w-4xl mx-auto">
-          <AnimatePresence mode="wait">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {testimonials.slice(0, 3).map((testimonial, idx) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="flex flex-col items-center text-center"
+              key={testimonial.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.1 }}
+              viewport={{ once: true }}
+              className="flex flex-col bg-k-card-bg border border-k-border p-8 rounded-3xl relative hover:border-k-primary/30 transition-all duration-500 shadow-xl dark:shadow-none"
+              itemScope
+              itemType="https://schema.org/Review"
             >
-              <p className="text-xl md:text-2xl lg:text-3xl text-k-text font-medium italic leading-relaxed mb-12">
-                "{testimonials[index].message}"
+              <div className="text-k-primary/20 absolute top-6 right-8">
+                <Quote size={40} />
+              </div>
+
+              <div className="mb-8" itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                <meta itemProp="ratingValue" content="5" />
+                <div className="flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-k-primary text-xs">★</span>
+                  ))}
+                </div>
+              </div>
+
+              <p className="text-k-text font-medium italic leading-relaxed mb-8 relative z-10 text-sm md:text-base" itemProp="reviewBody">
+                "{testimonial.message}"
               </p>
 
-              <div className="flex items-center gap-4">
-                <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-k-primary/30">
+              <div className="mt-auto flex items-center gap-4" itemProp="author" itemScope itemType="https://schema.org/Person">
+                <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-k-primary/30">
                   <Image
-                    src={testimonials[index].image}
-                    alt={testimonials[index].name}
+                    src={testimonial.image}
+                    alt={testimonial.name}
                     fill
                     className="object-cover"
+                    itemProp="image"
                   />
                 </div>
-                <div className="text-left">
-                  <h4 className="text-k-text font-bold text-lg">{testimonials[index].name}</h4>
-                  <p className="text-k-primary text-sm font-semibold tracking-wide uppercase">
-                    {testimonials[index].role}
-                  </p>
+                <div>
+                  <h4 className="text-k-text font-bold text-base" itemProp="name">{testimonial.name}</h4>
+                  <cite className="text-k-primary text-[10px] font-black tracking-widest uppercase not-italic">
+                    {testimonial.role}
+                  </cite>
+                  <meta itemProp="publisher" content="Kinuit" />
                 </div>
               </div>
             </motion.div>
-          </AnimatePresence>
-
-          {/* Controls */}
-          <div className="flex justify-center gap-4 mt-12 lg:mt-0 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:w-full lg:justify-between lg:-mx-12">
-            <button
-              onClick={prev}
-              className="p-3 rounded-full bg-k-card-bg border border-k-border text-k-text hover:bg-k-primary hover:border-k-primary hover:text-white transition-all shadow-sm"
-            >
-              <ChevronLeft size={24} />
-            </button>
-            <button
-              onClick={next}
-              className="p-3 rounded-full bg-k-card-bg border border-k-border text-k-text hover:bg-k-primary hover:border-k-primary hover:text-white transition-all shadow-sm"
-            >
-              <ChevronRight size={24} />
-            </button>
-          </div>
-        </div>
-
-        {/* Indicators */}
-        <div className="flex justify-center gap-2 mt-8">
-          {testimonials.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setIndex(i)}
-              className={`h-1.5 transition-all duration-300 rounded-full ${i === index ? "w-8 bg-k-primary" : "w-2 bg-k-text/20"}`}
-            />
           ))}
         </div>
+
       </div>
     </section>
   );

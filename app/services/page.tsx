@@ -5,8 +5,9 @@ import ServicesCTA from "@/components/sections/services/ServicesCTA";
 
 export const metadata: Metadata = {
   title: "Our Services | Build, Design, Grow & Plan",
-  description: "Explore our core services: Build, Design, Grow, and Plan. Expert Branding, Development, and Strategy for ambitious brands.",
+  description: "Explore Kinuit's four service pillars: Build, Design, Grow, and Plan — everything your brand needs to win.",
 };
+
 
 export default function ServicesPage() {
   return (

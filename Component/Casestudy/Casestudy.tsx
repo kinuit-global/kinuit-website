@@ -105,44 +105,75 @@ export default function CaseStudies() {
               onDragEnd={handleDragEnd}
               className="absolute w-full flex gap-4 md:gap-10 justify-center cursor-grab active:cursor-grabbing px-2"
             >
-              {projectChunks[active]?.map((project) => (
-                <Link
-                  key={project.slug}
-                  href={project.slug === "stealth-project" ? "#" : `/work/${project.slug}`}
-                  className={`group relative rounded-2xl overflow-hidden shadow-xl dark:shadow-none border border-k-border shrink-0 transition-all duration-500
-                    ${project.slug === "stealth-project" ? "pointer-events-none" : "cursor-pointer"}
-                    ${itemsPerSlide === 1 ? 'w-[85%] sm:w-[70%] max-w-[400px] aspect-4/5' : 'w-[38%] md:w-[40%] max-w-[420px] aspect-16/20'}
-                  `}
-                >
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    priority
-                  />
-
-                  {/* Overlay Meta Info */}
-                  <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-6 md:p-10">
-                    <span className="text-k-primary text-[10px] md:text-xs font-black tracking-widest uppercase mb-1 md:mb-3">
-                      {project.tag}
-                    </span>
-                    <h3 className="text-white text-lg md:text-2xl font-bold mb-2 md:mb-4 line-clamp-2 leading-tight">
-                      {project.title}
-                    </h3>
-                    <p className="text-white/80 text-[10px] md:text-sm max-w-2xl line-clamp-3 hidden sm:block leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      {project.challenge}
-                    </p>
-                    <div className="mt-4 flex items-center gap-2 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                      <span className="text-k-primary text-[10px] md:text-xs font-black tracking-widest uppercase">
-                        {project.slug === "stealth-project" ? "STEALTH MODE" : "VIEW PROJECT"}
+              {[...projects, { slug: "coming-soon", tag: "FUTURE", title: "More coming soon", challenge: "", solution: "", outcome: "", image: "/coming-soon.jpg", imageAlt: "More coming soon", client: "", year: "", services: [] }].slice(active * itemsPerSlide, (active + 1) * itemsPerSlide).map((project) => (
+                project.slug === "coming-soon" ? (
+                  <div
+                    key="coming-soon"
+                    className={`group relative rounded-2xl overflow-hidden shadow-xl dark:shadow-none border border-k-border shrink-0 transition-all duration-500 bg-k-card-bg flex flex-col items-center justify-center p-10 text-center
+                      ${itemsPerSlide === 1 ? 'w-[85%] sm:w-[70%] max-w-[400px] aspect-4/5' : 'w-[38%] md:w-[40%] max-w-[420px] aspect-16/20'}
+                    `}
+                  >
+                    <div className="absolute inset-0 bg-linear-to-b from-transparent to-k-primary/10" />
+                    <div className="relative z-10">
+                      <div className="w-16 h-16 rounded-full bg-k-primary/20 flex items-center justify-center mx-auto mb-6">
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                        >
+                          <Briefcase className="text-k-primary" size={32} />
+                        </motion.div>
+                      </div>
+                      <span className="text-k-primary text-[10px] md:text-xs font-black tracking-widest uppercase mb-2 block">
+                        NEXT CHAPTER
                       </span>
-                      {project.slug !== "stealth-project" && <ArrowRight size={14} className="text-k-primary" />}
+                      <h3 className="text-k-text text-xl md:text-3xl font-bold mb-4 leading-tight">
+                        More Coming <span className="text-blue-500">Soon.</span>
+                      </h3>
+                      <p className="text-k-text-muted text-[10px] md:text-sm max-w-[200px] mx-auto leading-relaxed">
+                        We are currently wrapping up several high-impact projects. Stay tuned.
+                      </p>
                     </div>
                   </div>
-                </Link>
+                ) : (
+                  <Link
+                    key={project.slug}
+                    href={project.slug === "stealth-project" ? "#" : `/work/${project.slug}`}
+                    className={`group relative rounded-2xl overflow-hidden shadow-xl dark:shadow-none border border-k-border shrink-0 transition-all duration-500
+                      ${project.slug === "stealth-project" ? "pointer-events-none" : "cursor-pointer"}
+                      ${itemsPerSlide === 1 ? 'w-[85%] sm:w-[70%] max-w-[400px] aspect-4/5' : 'w-[38%] md:w-[40%] max-w-[420px] aspect-16/20'}
+                    `}
+                  >
+                    <Image
+                      src={project.image}
+                      alt={project.imageAlt}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      priority
+                    />
+
+                    {/* Overlay Meta Info */}
+                    <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-6 md:p-10">
+                      <span className="text-k-primary text-[10px] md:text-xs font-black tracking-widest uppercase mb-1 md:mb-3">
+                        {project.tag}
+                      </span>
+                      <h3 className="text-white text-lg md:text-2xl font-bold mb-2 md:mb-4 line-clamp-2 leading-tight">
+                        {project.title}
+                      </h3>
+                      <p className="text-white/80 text-[10px] md:text-sm max-w-2xl line-clamp-3 hidden sm:block leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        {project.challenge}
+                      </p>
+                      <div className="mt-4 flex items-center gap-2 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                        <span className="text-k-primary text-[10px] md:text-xs font-black tracking-widest uppercase">
+                          {project.slug === "stealth-project" ? "STEALTH MODE" : "VIEW PROJECT"}
+                        </span>
+                        {project.slug !== "stealth-project" && <ArrowRight size={14} className="text-k-primary" />}
+                      </div>
+                    </div>
+                  </Link>
+                )
               ))}
             </motion.div>
+
           </AnimatePresence>
 
           {/* Desktop Navigation */}

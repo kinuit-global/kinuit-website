@@ -1,12 +1,12 @@
 "use server";
 
-import { redirect } from "next/navigation";
+
 
 // Since we may not have the 'resend' package installed yet, 
 // we'll handle the email submission logic gracefully.
 // The user should run: npm install resend
 
-export async function submitContactForm(formData: FormData) {
+export async function submitContactForm(prevState: any, formData: FormData) {
   const name = formData.get("name") as string;
   const email = formData.get("email") as string;
   const company = formData.get("company") as string;
@@ -14,6 +14,7 @@ export async function submitContactForm(formData: FormData) {
   const services = formData.get("services") as string;
 
   console.log("Contact Form Submission:", { name, email, company, message, services });
+
 
   // Handle Resend integration dynamically to avoid build errors if package is missing
   try {
@@ -55,10 +56,12 @@ export async function submitContactForm(formData: FormData) {
                     <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #111827; font-size: 16px; font-weight: 500;">${company}</td>
                   </tr>
                   <tr>
-                    <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #6b7280; font-size: 14px; text-transform: uppercase; font-weight: 600;">Expertise Needed</td>
-                    <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #111827; font-size: 16px; font-weight: 500;">${services || 'Not specified'}</td>
+                    <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #6b7280; font-size: 14px; text-transform: uppercase; font-weight: 600;">Services Needed</td>
+                    <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #111827; font-size: 16px; font-weight: 500;">${services}</td>
                   </tr>
                 </table>
+
+
                 
                 <div style="margin-top: 32px; background-color: #f9fafb; border-radius: 12px; padding: 24px; border: 1px solid #f3f4f6;">
                   <h4 style="color: #6b7280; margin-top: 0; margin-bottom: 12px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Project Brief</h4>
@@ -89,6 +92,6 @@ export async function submitContactForm(formData: FormData) {
     // In production, you might want to show an error if it's critical
   }
 
-  // Redirect to success page
-  redirect("/contact/thanks");
+  return { success: true };
 }
+

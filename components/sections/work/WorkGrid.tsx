@@ -1,6 +1,7 @@
 import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/lib/projects";
 
@@ -21,12 +22,14 @@ export default function WorkGrid() {
               >
                 <div className="w-full aspect-4/3 rounded-3xl mb-8 flex items-center justify-center overflow-hidden relative shadow-2xl dark:shadow-none border border-k-border group-hover:border-k-primary/30 transition-colors duration-500">
                   <div className="absolute inset-0 bg-[#0059FF]/20 mix-blend-overlay z-10 group-hover:bg-transparent transition-colors duration-500" />
-                  <img 
+                  <Image 
                     src={project.image} 
-                    alt={project.title} 
+                    alt={project.imageAlt} 
+                    fill
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                   />
                 </div>
+
                 
                 <div className="text-[#0059FF] font-semibold tracking-widest text-xs mb-3 uppercase">
                   {project.tag}

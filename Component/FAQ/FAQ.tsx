@@ -51,25 +51,20 @@ export default function FAQ() {
               </button>
 
               {/* Answer */}
-              <AnimatePresence>
+              <motion.div
+                initial={false}
+                animate={{ 
+                  height: open === index ? "auto" : 0,
+                  opacity: open === index ? 1 : 0
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="overflow-hidden"
+              >
+                <p className="px-4 sm:px-5 pb-4 text-[13px] sm:text-sm text-k-text-muted leading-relaxed">
+                  {faq.answ}
+                </p>
+              </motion.div>
 
-                {open === index && (
-                  <motion.div
-                    initial={{ height: 0 }}
-                    animate={{ height: "auto" }}
-                    exit={{ height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-
-                    <p className="px-4 sm:px-5 pb-4 text-[13px] sm:text-sm text-k-text-muted leading-relaxed">
-                      {faq.answ}
-                    </p>
-
-                  </motion.div>
-                )}
-
-              </AnimatePresence>
 
             </div>
           ))}

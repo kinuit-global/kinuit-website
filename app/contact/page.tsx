@@ -5,8 +5,9 @@ import ContactFormSection from "@/components/sections/contact/ContactFormSection
 
 export const metadata: Metadata = {
   title: "Get in Touch | Start Your Project",
-  description: "Ready to move when you move. Contact Kinuit to start your branding, development, or strategy project.",
+  description: "Start your next project with Kinuit. No long forms. No sales pitch. Just a direct conversation about your brand.",
 };
+
 
 export default function ContactPage() {
   return (
