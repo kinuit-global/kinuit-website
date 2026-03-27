@@ -81,9 +81,9 @@ export default function Footer() {
 
           {/* QUICK LINKS */}
           <div>
-            <h4 className="text-k-text text-sm font-semibold mb-6 uppercase tracking-wider">
+            <h3 className="text-k-text text-sm font-semibold mb-6 uppercase tracking-wider">
               Navigation
-            </h4>
+            </h3>
 
             <ul className="space-y-3">
               {quickLinks.map((link) => (
@@ -105,9 +105,9 @@ export default function Footer() {
 
           {/* EXPERTISE */}
           <div>
-            <h4 className="text-k-text text-sm font-semibold mb-6 uppercase tracking-wider">
+            <h3 className="text-k-text text-sm font-semibold mb-6 uppercase tracking-wider">
               Expertise
-            </h4>
+            </h3>
 
             <ul className="space-y-3">
               {services.map((service) => (
@@ -129,9 +129,9 @@ export default function Footer() {
 
           {/* CONTACT */}
           <div>
-            <h4 className="text-k-text text-sm font-semibold mb-6 uppercase tracking-wider">
+            <h3 className="text-k-text text-sm font-semibold mb-6 uppercase tracking-wider">
               Get In Touch
-            </h4>
+            </h3>
 
             <div className="space-y-4 text-sm text-k-text-muted">
               <a href="mailto:hello@kinuit.com" className="flex items-center gap-3 hover:text-k-text transition-colors group">
@@ -156,7 +156,7 @@ export default function Footer() {
 
         {/* COPYRIGHT */}
         <motion.div
-          className="flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-k-text-muted/60 uppercase tracking-[0.15em] font-medium"
+          className="flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-k-text-muted uppercase tracking-[0.15em] font-medium"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}

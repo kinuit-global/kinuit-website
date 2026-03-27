@@ -179,12 +179,14 @@ export default function CaseStudies() {
           {/* Desktop Navigation */}
           <button
             onClick={() => { prevSlide(); handleInteraction(); }}
+            aria-label="Previous projects"
             className="absolute -left-2 md:-left-8 z-30 p-4 rounded-full bg-k-glass-bg border border-k-glass-border text-k-text hover:bg-k-glass-bg transition backdrop-blur-md hidden lg:block"
           >
             <ArrowLeft size={28} />
           </button>
           <button
             onClick={() => { nextSlide(); handleInteraction(); }}
+            aria-label="Next projects"
             className="absolute -right-2 md:-right-8 z-30 p-4 rounded-full bg-k-glass-bg border border-k-glass-border text-k-text hover:bg-k-glass-bg transition backdrop-blur-md hidden lg:block"
           >
             <ArrowRight size={28} />
@@ -197,6 +199,7 @@ export default function CaseStudies() {
             <button
               key={i}
               onClick={() => { setActive(i); handleInteraction(); }}
+              aria-label={`Go to slide ${i + 1}`}
               className={`h-1.5 transition-all duration-500 rounded-full ${active === i ? "w-10 bg-k-primary shadow-[0_0_15px_rgba(30,80,255,0.4)]" : "w-2.5 bg-k-border hover:bg-k-text/20"
                 }`}
             />

@@ -80,7 +80,7 @@ export default function Services() {
             </p>
           </div>
 
-          <Link href="/services">
+          <Link href="/services" aria-label="View all our services">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -134,10 +134,11 @@ export default function Services() {
               </div>
 
               <div className="flex justify-end mt-auto">
-                <Link href={`/services/${createSlug(service.title)}`}>
+                <Link href={`/services/${createSlug(service.title)}`} aria-label={`Learn more about ${service.title}`}>
                   <motion.button
                     whileHover={{ scale: 1.1, rotate: -45 }}
                     whileTap={{ scale: 0.9 }}
+                    aria-label={`Explore ${service.title} services`}
                     className="flex items-center justify-center w-8 h-8 rounded-full bg-k-primary/10 border border-k-primary/20 text-k-primary hover:bg-k-primary hover:text-white transition-all"
                   >
                     <ArrowUpRight size={18} />

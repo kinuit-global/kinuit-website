@@ -44,7 +44,7 @@ export default function BlogPreview() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <Link href="/blog">
+          <Link href="/blog" aria-label="View all blog posts">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

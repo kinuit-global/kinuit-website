@@ -51,7 +51,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between relative">
           {/* Logo - Left aligned */}
           <div className="flex-1 flex justify-start">
-            <Link href="/">
+            <Link href="/" aria-label="Kinuit Home">
               <motion.div
                 className="flex items-center gap-3 group"
                 whileHover={{ scale: 1.02 }}

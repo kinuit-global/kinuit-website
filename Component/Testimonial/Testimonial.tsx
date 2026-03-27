@@ -76,7 +76,7 @@ export default function TestimonialSection() {
                   />
                 </div>
                 <div>
-                  <h4 className="text-k-text font-bold text-base" itemProp="name">{testimonial.name}</h4>
+                  <h3 className="text-k-text font-bold text-base" itemProp="name">{testimonial.name}</h3>
                   <cite className="text-k-primary text-[10px] font-black tracking-widest uppercase not-italic">
                     {testimonial.role}
                   </cite>
