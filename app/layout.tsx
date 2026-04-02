@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import { Barlow, Barlow_Condensed, Inter, Sora, Lato, Poppins, Montserrat, Cormorant_Garamond } from "next/font/google";
+import { Barlow, Inter, Sora, Lato, Poppins, Montserrat, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/Component/globalCompo/Nav";
-import Footer from "@/Component/globalCompo/Footer";
-import ScrollToTop from "@/components/ui/ScrollToTop";
-import CustomCursor from "@/components/ui/CustomCursor";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -78,13 +75,6 @@ export const metadata: Metadata = {
     description: "Kinuit is a full-service agency for ambitious brands — strategy, branding, custom development, and growth, engineered for the new era.",
     images: ["https://www.kinuit.com/assets/og-preview.jpg"],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: "https://www.kinuit.com",
-  },
   icons: {
     icon: [
       { url: "/16px.svg", sizes: "16x16" },
@@ -92,10 +82,6 @@ export const metadata: Metadata = {
     ],
     apple: [
       { url: "/180px.svg", sizes: "180x180" },
-    ],
-    other: [
-      { url: "/192px.svg", sizes: "192x192" },
-      { url: "/512px.svg", sizes: "512x512" },
     ],
   },
 };
@@ -111,11 +97,8 @@ const jsonLd = {
     "email": "hello@kinuit.com",
     "contactType": "customer service"
   },
-  "sameAs": [],
   "description": "Full-service agency for ambitious brands."
 };
-
-import { ThemeProvider } from "@/components/theme-provider";
 
 export default function RootLayout({
   children,
@@ -129,27 +112,19 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://images.unsplash.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body>
-
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-          <ScrollToTop />
-          <CustomCursor />
+          {children}
         </ThemeProvider>
       </body>
     </html>

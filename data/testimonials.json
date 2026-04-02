@@ -1,0 +1,39 @@
+{
+  "submissions": [
+    {
+      "id": "78435945",
+      "fullName": "John Doe",
+      "phone": "1234567890",
+      "email": "john@example.com",
+      "companyName": "Test Corp",
+      "testimonial": "This is a test testimonial content. It is meant to be a bit long to see how it looks and if the server action handles it correctly. Kinuit provided excellent service and the team was very professional. Highly recommended!",
+      "submittedAt": "2026-04-02T05:32:41.252Z",
+      "attachments": {
+        "logo": null,
+        "profile": null,
+        "video": null,
+        "audio": null,
+        "images": []
+      }
+    },
+    {
+      "id": "81f977da-3ac7-4512-b5f5-3738f03ec19c",
+      "fullName": "Siva",
+      "phone": "+919095506362",
+      "email": "sivavj002@gmail.com",
+      "companyName": "LeadOps Studio",
+      "testimonial": "This is a sample testimonial content.",
+      "submittedAt": "2026-04-02T08:09:01.558Z",
+      "attachments": {
+        "logo": "/uploads/testimonials/81f977da-3ac7-4512-b5f5-3738f03ec19c/logo_1775117341411_favicon_dark.ico",
+        "profile": "/uploads/testimonials/81f977da-3ac7-4512-b5f5-3738f03ec19c/profile_1775117341420_client-2.png",
+        "video": "/uploads/testimonials/81f977da-3ac7-4512-b5f5-3738f03ec19c/video_1775117341481_Video_Project.mp4",
+        "audio": null,
+        "images": [
+          "/uploads/testimonials/81f977da-3ac7-4512-b5f5-3738f03ec19c/image_0_1775117341527_1768365992719.jpg",
+          "/uploads/testimonials/81f977da-3ac7-4512-b5f5-3738f03ec19c/image_1_1775117341545_1768366173966.jpg"
+        ]
+      }
+    }
+  ]
+}
