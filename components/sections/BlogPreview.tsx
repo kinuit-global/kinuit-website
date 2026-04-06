@@ -1,6 +1,6 @@
 "use client";
 
-import { blogPosts } from "@/lib/blog";
+import { getBlogPosts } from "@/lib/blog";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,8 +9,8 @@ import Button from "@/components/ui/Button";
 import SectionBadge from "@/components/ui/SectionBadge";
 
 export default function BlogPreview() {
-  // Take top 3 for preview
-  const featuredPosts = blogPosts.slice(0, 3);
+  // Take top 3 for preview (getBlogPosts already sorts by newest first)
+  const featuredPosts = getBlogPosts().slice(0, 3);
 
   return (
     <section className="bg-k-bg py-24 md:py-32 border-t border-k-border relative overflow-hidden">

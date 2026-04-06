@@ -18,6 +18,8 @@ import { format } from "date-fns";
 import Link from "next/link";
 import { removeTestimonial } from "@/app/actions/testimonial";
 import DataTable, { Column } from "./DataTable";
+import ConfirmModal from "@/components/ui/ConfirmModal";
+import toast from "react-hot-toast";
 
 interface Testimonial {
   id: string;
@@ -38,12 +40,18 @@ interface Testimonial {
 
 export default function TestimonialsTable({ testimonials }: { testimonials: Testimonial[] }) {
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [confirmId, setConfirmId] = useState<string | null>(null);
 
   const handleDelete = async (id: string) => {
-    if (confirm("Are you sure you want to delete this testimonial? All associated files will be removed.")) {
-      setDeletingId(id);
+    setDeletingId(id);
+    try {
       await removeTestimonial(id);
+      toast.success("Testimonial removed successfully");
+    } catch (error) {
+      toast.error("Failed to remove testimonial");
+    } finally {
       setDeletingId(null);
+      setConfirmId(null);
     }
   };
 
@@ -148,7 +156,7 @@ export default function TestimonialsTable({ testimonials }: { testimonials: Test
           </Link>
           <button 
             disabled={deletingId === t.id}
-            onClick={() => handleDelete(t.id)}
+            onClick={() => setConfirmId(t.id)}
             className="p-2.5 bg-white/5 border border-white/10 rounded-xl text-white/40 hover:bg-red-500/10 hover:border-red-500/30 hover:text-red-500 transition-all disabled:opacity-30 disabled:cursor-not-allowed group/btn"
             title="Delete"
           >
@@ -161,6 +169,7 @@ export default function TestimonialsTable({ testimonials }: { testimonials: Test
   ];
 
   return (
+    <>
     <DataTable 
       columns={columns} 
       data={testimonials} 
@@ -173,5 +182,15 @@ export default function TestimonialsTable({ testimonials }: { testimonials: Test
       }
       emptyMessage="No testimonials found"
     />
+
+    <ConfirmModal 
+      isOpen={!!confirmId}
+      onClose={() => setConfirmId(null)}
+      onConfirm={() => confirmId && handleDelete(confirmId)}
+      title="Delete Testimonial"
+      message="Are you sure you want to delete this testimonial? All associated files will be permanently removed."
+      confirmText={deletingId ? "Deleting..." : "Delete"}
+    />
+    </>
   );
 }

@@ -4,5 +4,6 @@ declare namespace NodeJS {
     EMAIL_TO: string;
     ADMIN_USERNAME: string;
     ADMIN_PASSWORD: string;
+    GEMINI_API_KEY: string;
   }
 }

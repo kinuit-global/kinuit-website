@@ -1,10 +1,11 @@
-import { blogPosts, BlogPost } from "@/lib/blog";
+import { getBlogPosts, BlogPost } from "@/lib/blog";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Calendar, Clock, ChevronLeft, CalendarDays, User } from "lucide-react";
 import Container from "@/components/ui/Container";
+import ShareButtons from "@/components/ui/ShareButtons";
 
 interface BlogPageProps {
   params: {
@@ -13,6 +14,7 @@ interface BlogPageProps {
 }
 
 export async function generateStaticParams() {
+  const blogPosts = getBlogPosts();
   return blogPosts.map((post) => ({
     slug: post.slug,
   }));
@@ -20,15 +22,17 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
   const { slug } = await params;
+  const blogPosts = getBlogPosts();
   const post = blogPosts.find((p) => p.slug === slug);
   if (!post) return { title: "Post Not Found" };
 
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: post.metaTitle || post.title,
+    description: post.metaDescription || post.excerpt,
+    keywords: post.keywords ? post.keywords.split(',').map(k => k.trim()) : undefined,
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
+      title: post.metaTitle || post.title,
+      description: post.metaDescription || post.excerpt,
       images: [post.image],
       type: "article",
     },
@@ -37,6 +41,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
 
 export default async function BlogPostPage({ params }: BlogPageProps) {
   const { slug } = await params;
+  const blogPosts = getBlogPosts();
   const post = blogPosts.find((p) => p.slug === slug);
 
   if (!post) {
@@ -118,10 +123,7 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
                 </p>
                 <div className="mt-8 pt-8 border-t border-k-border">
                   <h5 className="text-k-text-muted/40 text-[10px] font-black tracking-widest uppercase mb-4">Share Article</h5>
-                  <div className="flex gap-4">
-                    <button className="text-k-text-muted hover:text-k-primary transition-colors text-xs font-black">X / TWITTER</button>
-                    <button className="text-k-text-muted hover:text-k-primary transition-colors text-xs font-black">LINKEDIN</button>
-                  </div>
+                  <ShareButtons title={post.title} />
                 </div>
               </div>
             </div>

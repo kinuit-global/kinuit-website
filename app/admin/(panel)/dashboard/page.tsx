@@ -1,4 +1,5 @@
 import React from "react";
+export const dynamic = "force-dynamic";
 import { getTestimonials } from "@/app/actions/testimonial";
 import { 
   MessageSquareQuote, 
@@ -12,6 +13,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
+import { getBlogPosts } from "@/lib/blog";
+import { servicesItem } from "@/lib/service";
 
 export default async function DashboardPage() {
   const testimonials = await getTestimonials();
@@ -29,11 +32,15 @@ export default async function DashboardPage() {
     .sort((a,b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime())
     .slice(0, 3);
 
+  const blogPosts = getBlogPosts();
+  // Count all sub-services (tags) for a more accurate "Active Services" count
+  const totalSubServices = servicesItem.reduce((acc, service) => acc + service.tags.length, 0);
+
   const stats = [
     { title: "Total Testimonials", value: totalSubmissions, icon: MessageSquareQuote, color: "text-blue-500", bg: "bg-blue-500/10" },
     { title: "Recent (7d)", value: recentSubmissions, icon: TrendingUp, color: "text-green-500", bg: "bg-green-500/10" },
-    { title: "Active Services", value: "8", icon: Briefcase, color: "text-purple-500", bg: "bg-purple-500/10" },
-    { title: "Blog Posts", value: "24", icon: FileText, color: "text-orange-500", bg: "bg-orange-500/10" },
+    { title: "Active Services", value: totalSubServices, icon: Briefcase, color: "text-purple-500", bg: "bg-purple-500/10" },
+    { title: "Blog Posts", value: blogPosts.length, icon: FileText, color: "text-orange-500", bg: "bg-orange-500/10" },
   ];
 
   return (

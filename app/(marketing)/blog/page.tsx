@@ -1,6 +1,6 @@
 "use client";
 
-import { blogPosts } from "@/lib/blog";
+import { getBlogPosts } from "@/lib/blog";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,6 +15,7 @@ export default function BlogListingPage() {
 
   const categories = ["ALL", "BUILD", "DESIGN", "GROW", "PLAN"];
 
+  const blogPosts = getBlogPosts();
   const filteredPosts = blogPosts.filter((post) => {
     const matchesCategory = activeCategory === "ALL" || post.category === activeCategory;
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 

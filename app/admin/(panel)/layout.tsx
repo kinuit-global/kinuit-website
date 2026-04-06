@@ -7,6 +7,7 @@ import { logout } from "@/app/actions/auth";
 import AdminSidebar from "./components/AdminSidebar";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
@@ -26,6 +27,30 @@ export default function AdminLayout({
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/5 blur-[120px] rounded-full" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/5 blur-[120px] rounded-full" />
       </div>
+
+      <Toaster 
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: "#121212",
+            color: "#fff",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            borderRadius: "16px",
+            fontSize: "13px",
+            fontWeight: "bold",
+            textTransform: "uppercase",
+            letterSpacing: "0.05em",
+            backdropFilter: "blur(8px)",
+          },
+          success: {
+            iconTheme: {
+              primary: "#3b82f6",
+              secondary: "#fff",
+            },
+          },
+        }}
+      />
 
       {/* Sidebar */}
       <AdminSidebar 
