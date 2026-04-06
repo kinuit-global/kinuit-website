@@ -93,57 +93,103 @@ export default function BlogsAdminPage() {
               </div>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[800px] text-left border-collapse">
-                <thead>
-                  <tr className="border-b border-white/10 text-xs font-black uppercase tracking-widest text-white/40">
-                    <th className="p-4">Title</th>
-                    <th className="p-4">Category</th>
-                    <th className="p-4">Date</th>
-                    <th className="p-4 text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {paginatedPosts.map((post) => (
-                    <tr key={post.id} className="border-b border-white/5 hover:bg-white/5 transition-colors group">
-                      <td className="p-4">
-                        <div className="flex items-center gap-3">
-                          <img src={post.image} alt={post.title} className="w-12 h-12 rounded-lg object-cover" />
-                          <div>
-                            <p className="font-bold text-sm line-clamp-1">{post.title}</p>
-                            <p className="text-xs text-white/40 line-clamp-1">{post.slug}</p>
-                          </div>
+            <div className="space-y-6">
+              {/* Mobile Card View */}
+              <div className="grid grid-cols-1 gap-4 md:hidden">
+                {paginatedPosts.map((post) => (
+                  <div key={post.id} className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-4 hover:bg-white/[0.07] transition-all duration-300">
+                    <div className="flex items-start gap-4">
+                      <div className="relative group/img shrink-0">
+                        <div className="absolute -inset-1 bg-blue-500/20 rounded-xl blur opacity-0 group-hover/img:opacity-100 transition duration-500"></div>
+                        <img src={post.image} alt={post.title} className="relative w-20 h-20 rounded-xl object-cover border border-white/10" />
+                      </div>
+                      <div className="flex-1 min-w-0 space-y-1">
+                        <div className="flex items-center gap-2">
+                          <span className="px-2 py-0.5 bg-blue-500/10 border border-blue-500/20 rounded text-[9px] font-black uppercase text-blue-400 tracking-tighter">
+                            {post.category}
+                          </span>
                         </div>
-                      </td>
-                      <td className="p-4">
-                        <span className="px-2 py-1 bg-white/10 rounded text-[10px] font-black uppercase">{post.category}</span>
-                      </td>
-                      <td className="p-4">
-                        <div className="flex items-center gap-2 text-xs text-white/60">
-                          <Calendar size={14} /> {post.date}
+                        <h3 className="font-bold text-sm leading-tight text-white line-clamp-2">{post.title}</h3>
+                        <div className="flex items-center gap-2 text-[10px] text-white/40 font-medium italic">
+                          <Calendar size={10} /> {post.date}
                         </div>
-                      </td>
-                      <td className="p-4">
-                        <div className="flex items-center justify-end gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
-                          <Link 
-                            href={`/admin/blogs/editor/${post.id}`}
-                            className="p-2 rounded-xl bg-white/5 hover:bg-blue-500/20 text-white/60 hover:text-blue-400 transition-colors"
-                          >
-                            <Edit size={16} />
-                          </Link>
-                          <button 
-                            onClick={() => setDeleteConfirmId(post.id)}
-                            disabled={isDeleting === post.id}
-                            className="p-2 rounded-xl bg-white/5 hover:bg-red-500/20 text-white/60 hover:text-red-400 transition-colors disabled:opacity-50"
-                          >
-                            <Trash2 size={16} />
-                          </button>
-                        </div>
-                      </td>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 pt-2">
+                      <Link 
+                        href={`/admin/blogs/editor/${post.id}`}
+                        className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white/5 hover:bg-blue-500/20 text-white/60 hover:text-blue-400 transition-all text-[10px] font-black uppercase tracking-widest border border-white/5 group/btn"
+                      >
+                        <Edit size={14} className="group-hover/btn:scale-110 transition-transform" />
+                        Edit Post
+                      </Link>
+                      <button 
+                        onClick={() => setDeleteConfirmId(post.id)}
+                        disabled={isDeleting === post.id}
+                        className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white/5 hover:bg-red-500/20 text-white/60 hover:text-red-400 transition-all text-[10px] font-black uppercase tracking-widest border border-white/5 group/btn"
+                      >
+                        <Trash2 size={14} className="group-hover/btn:scale-110 transition-transform" />
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop Table View */}
+              <div className="hidden md:block overflow-x-auto">
+                <table className="w-full min-w-[800px] text-left border-collapse">
+                  <thead>
+                    <tr className="border-b border-white/10 text-xs font-black uppercase tracking-widest text-white/40">
+                      <th className="p-4">Title</th>
+                      <th className="p-4">Category</th>
+                      <th className="p-4">Date</th>
+                      <th className="p-4 text-right">Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {paginatedPosts.map((post) => (
+                      <tr key={post.id} className="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td className="p-4">
+                          <div className="flex items-center gap-3">
+                            <img src={post.image} alt={post.title} className="w-12 h-12 rounded-lg object-cover border border-white/5" />
+                            <div>
+                              <p className="font-bold text-sm line-clamp-1">{post.title}</p>
+                              <p className="text-xs text-white/40 line-clamp-1">{post.slug}</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="p-4">
+                          <span className="px-2 py-1 bg-white/10 rounded text-[10px] font-black uppercase">{post.category}</span>
+                        </td>
+                        <td className="p-4">
+                          <div className="flex items-center gap-2 text-xs text-white/60">
+                            <Calendar size={14} /> {post.date}
+                          </div>
+                        </td>
+                        <td className="p-4">
+                          <div className="flex items-center justify-end gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                            <Link 
+                              href={`/admin/blogs/editor/${post.id}`}
+                              className="p-2 rounded-xl bg-white/5 hover:bg-blue-500/20 text-white/60 hover:text-blue-400 transition-colors"
+                            >
+                              <Edit size={16} />
+                            </Link>
+                            <button 
+                              onClick={() => setDeleteConfirmId(post.id)}
+                              disabled={isDeleting === post.id}
+                              className="p-2 rounded-xl bg-white/5 hover:bg-red-500/20 text-white/60 hover:text-red-400 transition-colors disabled:opacity-50"
+                            >
+                              <Trash2 size={16} />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
 

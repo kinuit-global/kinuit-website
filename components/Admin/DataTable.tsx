@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { Search, Inbox } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Search, Inbox, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -19,6 +19,7 @@ interface DataTableProps<T> {
   searchKey?: keyof T;
   filterFn?: (item: T, searchTerm: string) => boolean;
   emptyMessage?: string;
+  pageSize?: number;
 }
 
 export default function DataTable<T extends { id: string | number }>({
@@ -27,9 +28,16 @@ export default function DataTable<T extends { id: string | number }>({
   searchPlaceholder = "Search...",
   searchKey,
   filterFn,
-  emptyMessage = "No results found"
+  emptyMessage = "No results found",
+  pageSize = 8
 }: DataTableProps<T>) {
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Reset to first page when searching
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
 
   const filteredData = data.filter((item) => {
     if (!searchTerm) return true;
@@ -38,6 +46,12 @@ export default function DataTable<T extends { id: string | number }>({
     const value = item[searchKey];
     return String(value).toLowerCase().includes(searchTerm.toLowerCase());
   });
+
+  const totalPages = Math.ceil(filteredData.length / pageSize);
+  const paginatedData = filteredData.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
 
   return (
     <div className="flex flex-col w-full h-full">
@@ -75,7 +89,7 @@ export default function DataTable<T extends { id: string | number }>({
           </thead>
           <tbody className="divide-y divide-white/5">
             <AnimatePresence mode="popLayout">
-              {filteredData.map((item, idx) => (
+              {paginatedData.map((item, idx) => (
                 <motion.tr 
                   key={item.id}
                   initial={{ opacity: 0, y: 10 }}
@@ -101,7 +115,7 @@ export default function DataTable<T extends { id: string | number }>({
       {/* Mobile Card View */}
       <div className="md:hidden p-4 space-y-4">
         <AnimatePresence mode="popLayout">
-          {filteredData.map((item, idx) => (
+          {paginatedData.map((item, idx) => (
             <motion.div 
               key={item.id}
               initial={{ opacity: 0, x: -20 }}
@@ -136,6 +150,52 @@ export default function DataTable<T extends { id: string | number }>({
                 <Inbox size={48} />
                 <p className="text-sm font-black uppercase tracking-[0.3em]">{emptyMessage}</p>
             </div>
+        </div>
+      )}
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="p-6 border-t border-white/5 flex items-center justify-between">
+          <p className="text-[10px] font-black uppercase tracking-widest text-white/40">
+            Showing <span className="text-white">{(currentPage - 1) * pageSize + 1}</span>-
+            <span className="text-white">{Math.min(currentPage * pageSize, filteredData.length)}</span> of 
+            <span className="text-white"> {filteredData.length}</span> results
+          </p>
+          
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              disabled={currentPage === 1}
+              className="p-2 rounded-xl bg-white/5 border border-white/10 text-white/40 hover:text-white hover:bg-white/10 disabled:opacity-20 transition-all"
+            >
+              <ChevronLeft size={18} />
+            </button>
+            
+            <div className="flex items-center gap-1">
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={cn(
+                    "w-8 h-8 rounded-lg text-[10px] font-black transition-all",
+                    currentPage === i + 1 
+                      ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20" 
+                      : "text-white/40 hover:bg-white/5 hover:text-white"
+                  )}
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+
+            <button 
+              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+              disabled={currentPage === totalPages}
+              className="p-2 rounded-xl bg-white/5 border border-white/10 text-white/40 hover:text-white hover:bg-white/10 disabled:opacity-20 transition-all"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
         </div>
       )}
     </div>

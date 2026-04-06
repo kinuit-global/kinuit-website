@@ -67,50 +67,57 @@ export default function BlogPreview() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredPosts.map((post, index) => (
-            <motion.article
-              key={post.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="group cursor-pointer"
-            >
-              <Link href={`/blog/${post.slug}`}>
-                <div className="relative aspect-video rounded-2xl overflow-hidden mb-6 border border-k-border shadow-md dark:shadow-none">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-k-primary text-white text-[10px] font-black tracking-widest rounded-full uppercase">
-                      {post.category}
-                    </span>
+          {featuredPosts.length > 0 ? (
+            featuredPosts.map((post, index) => (
+              <motion.article
+                key={post.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="group cursor-pointer"
+              >
+                <Link href={`/blog/${post.slug}`}>
+                  <div className="relative aspect-video rounded-2xl overflow-hidden mb-6 border border-k-border shadow-md dark:shadow-none">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3 py-1 bg-k-primary text-white text-[10px] font-black tracking-widest rounded-full uppercase">
+                        {post.category}
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                <div className="space-y-3">
-                  <div className="flex items-center gap-4 text-k-text-muted/60 text-xs font-medium uppercase tracking-wider">
-                    <span className="flex items-center gap-1.5"><Calendar size={14} /> {post.date}</span>
-                    <span className="flex items-center gap-1.5"><Clock size={14} /> {post.readTime}</span>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-4 text-k-text-muted/60 text-xs font-medium uppercase tracking-wider">
+                      <span className="flex items-center gap-1.5"><Calendar size={14} /> {post.date}</span>
+                      <span className="flex items-center gap-1.5"><Clock size={14} /> {post.readTime}</span>
+                    </div>
+                    
+                    <h3 className="text-xl font-bold text-k-text group-hover:text-k-primary transition-colors leading-tight">
+                      {post.title}
+                    </h3>
+                    
+                    <p className="text-k-text-muted text-sm line-clamp-2 leading-relaxed">
+                      {post.excerpt}
+                    </p>
+                    
+                    <div className="pt-2 flex items-center text-k-primary text-xs font-bold uppercase tracking-widest gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                      Read Story <ArrowRight size={14} />
+                    </div>
                   </div>
-                  
-                  <h3 className="text-xl font-bold text-k-text group-hover:text-k-primary transition-colors leading-tight">
-                    {post.title}
-                  </h3>
-                  
-                  <p className="text-k-text-muted text-sm line-clamp-2 leading-relaxed">
-                    {post.excerpt}
-                  </p>
-                  
-                  <div className="pt-2 flex items-center text-k-primary text-xs font-bold uppercase tracking-widest gap-2 opacity-0 group-hover:opacity-100 transition-all">
-                    Read Story <ArrowRight size={14} />
-                  </div>
-                </div>
-              </Link>
-            </motion.article>
-          ))}
+                </Link>
+              </motion.article>
+            ))
+          ) : (
+            <div className="col-span-full py-20 text-center border border-dashed border-k-border rounded-3xl bg-k-card-bg/50">
+              <BookOpen className="mx-auto text-k-text-muted/20 mb-4" size={48} />
+              <p className="text-k-text-muted text-sm font-black uppercase tracking-widest italic opacity-50">No blog posts found at the moment.</p>
+            </div>
+          )}
         </div>
       </div>
     </section>

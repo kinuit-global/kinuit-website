@@ -37,54 +37,61 @@ export default function TestimonialSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.slice(0, 3).map((testimonial, idx) => (
-            <motion.div
-              key={testimonial.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
-              viewport={{ once: true }}
-              className="flex flex-col bg-k-card-bg border border-k-border p-8 rounded-3xl relative hover:border-k-primary/30 transition-all duration-500 shadow-xl dark:shadow-none"
-              itemScope
-              itemType="https://schema.org/Review"
-            >
-              <div className="text-k-primary/20 absolute top-6 right-8">
-                <Quote size={40} />
-              </div>
-
-              <div className="mb-8" itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
-                <meta itemProp="ratingValue" content="5" />
-                <div className="flex gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-k-primary text-xs">★</span>
-                  ))}
+          {testimonials.length > 0 ? (
+            testimonials.slice(0, 3).map((testimonial, idx) => (
+              <motion.div
+                key={testimonial.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1 }}
+                viewport={{ once: true }}
+                className="flex flex-col bg-k-card-bg border border-k-border p-8 rounded-3xl relative hover:border-k-primary/30 transition-all duration-500 shadow-xl dark:shadow-none"
+                itemScope
+                itemType="https://schema.org/Review"
+              >
+                <div className="text-k-primary/20 absolute top-6 right-8">
+                  <Quote size={40} />
                 </div>
-              </div>
 
-              <p className="text-k-text font-medium italic leading-relaxed mb-8 relative z-10 text-sm md:text-base" itemProp="reviewBody">
-                "{testimonial.message}"
-              </p>
+                <div className="mb-8" itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                  <meta itemProp="ratingValue" content="5" />
+                  <div className="flex gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className="text-k-primary text-xs">★</span>
+                    ))}
+                  </div>
+                </div>
 
-              <div className="mt-auto flex items-center gap-4" itemProp="author" itemScope itemType="https://schema.org/Person">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-k-primary/30">
-                  <Image
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    fill
-                    className="object-cover"
-                    itemProp="image"
-                  />
+                <p className="text-k-text font-medium italic leading-relaxed mb-8 relative z-10 text-sm md:text-base" itemProp="reviewBody">
+                  "{testimonial.message}"
+                </p>
+
+                <div className="mt-auto flex items-center gap-4" itemProp="author" itemScope itemType="https://schema.org/Person">
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-k-primary/30">
+                    <Image
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      fill
+                      className="object-cover"
+                      itemProp="image"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="text-k-text font-bold text-base" itemProp="name">{testimonial.name}</h3>
+                    <cite className="text-k-primary text-[10px] font-black tracking-widest uppercase not-italic">
+                      {testimonial.role}
+                    </cite>
+                    <meta itemProp="publisher" content="Kinuit" />
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-k-text font-bold text-base" itemProp="name">{testimonial.name}</h3>
-                  <cite className="text-k-primary text-[10px] font-black tracking-widest uppercase not-italic">
-                    {testimonial.role}
-                  </cite>
-                  <meta itemProp="publisher" content="Kinuit" />
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))
+          ) : (
+            <div className="col-span-full py-16 text-center border border-dashed border-k-border rounded-3xl bg-k-card-bg/50">
+              <Quote className="mx-auto text-k-text-muted/20 mb-4" size={48} />
+              <p className="text-k-text-muted text-sm font-black uppercase tracking-widest italic opacity-50">No testimonials shared yet.</p>
+            </div>
+          )}
         </div>
 
       </div>

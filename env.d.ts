@@ -5,5 +5,6 @@ declare namespace NodeJS {
     ADMIN_USERNAME: string;
     ADMIN_PASSWORD: string;
     GEMINI_API_KEY: string;
+    AUTH_SECRET: string;
   }
 }

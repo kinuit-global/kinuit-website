@@ -72,7 +72,20 @@ export default function CaseStudies() {
     }
   };
 
-  if (!projectChunks.length) return null;
+  if (!projectChunks.length) {
+    return (
+      <section className="bg-k-bg py-24 px-4 sm:px-6 border-t border-k-border border-b overflow-hidden">
+        <div className="text-center mb-12 flex flex-col items-center">
+            <h2 className="text-k-text text-2xl mb-4 sm:text-3xl md:text-4xl font-bold tracking-tight">Work that moves the needle.</h2>
+            <SectionBadge icon={<Briefcase size={14} className="text-k-primary" />} label="Selected Work" />
+        </div>
+        <div className="max-w-7xl mx-auto py-20 text-center border border-dashed border-k-border rounded-3xl bg-k-card-bg/30">
+          <Briefcase className="mx-auto text-k-text-muted/20 mb-4" size={48} />
+          <p className="text-k-text-muted text-sm font-black uppercase tracking-widest italic opacity-50">No case studies available at the moment.</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="bg-k-bg py-16 px-4 sm:px-6 border-t border-k-border border-b overflow-hidden">

@@ -56,54 +56,64 @@ export default function ServicesList() {
     <Section className="bg-k-bg border-t border-k-border py-12 md:py-24">
       <Container>
         <div className="space-y-24 md:space-y-32">
-          {servicesData.map((svc, index) => {
-            const isEven = index % 2 !== 0;
-            return (
-              <div key={svc.id} className={`grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center ${isEven ? 'lg:flex-row-reverse' : ''}`}>
+          {servicesData.length > 0 ? (
+            servicesData.map((svc, index) => {
+              const isEven = index % 2 !== 0;
+              return (
+                <div key={svc.id} className={`grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center ${isEven ? 'lg:flex-row-reverse' : ''}`}>
 
-                {/* Image Placeholder */}
-                <div className={`lg:col-span-5 w-full aspect-square rounded-3xl overflow-hidden border border-k-border shadow-2xl dark:shadow-none relative group ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
-                  <div className="absolute inset-0 bg-[#0059FF]/10 mix-blend-overlay z-10 group-hover:bg-transparent transition-colors duration-500" />
-                  <img
-                    src={svc.image}
-                    alt={svc.title}
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
-
-                {/* Text Content */}
-                <div className={`lg:col-span-7 flex flex-col pt-2 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
-                  <div className="mb-6 flex items-center gap-4">
-                    <div className="text-k-text opacity-20 font-black text-2xl tracking-tighter">{svc.id}</div>
-                    {(() => {
-                      const Icon = getIcon(svc.id);
-                      return <SectionBadge icon={<Icon size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label={svc.title} />;
-                    })()}
+                  {/* Image Placeholder */}
+                  <div className={`lg:col-span-5 w-full aspect-square rounded-3xl overflow-hidden border border-k-border shadow-2xl dark:shadow-none relative group ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
+                    <div className="absolute inset-0 bg-[#0059FF]/10 mix-blend-overlay z-10 group-hover:bg-transparent transition-colors duration-500" />
+                    <img
+                      src={svc.image}
+                      alt={svc.title}
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    />
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-k-text leading-tight mb-6">
-                    {svc.heading}
-                  </h3>
-                  <p className="text-k-text-muted text-lg leading-relaxed mb-8">
-                    {svc.description}
-                  </p>
+                  {/* Text Content */}
+                  <div className={`lg:col-span-7 flex flex-col pt-2 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
+                    <div className="mb-6 flex items-center gap-4">
+                      <div className="text-k-text opacity-20 font-black text-2xl tracking-tighter">{svc.id}</div>
+                      {(() => {
+                        const Icon = getIcon(svc.id);
+                        return <SectionBadge icon={<Icon size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label={svc.title} />;
+                      })()}
+                    </div>
 
-                  <div className="flex flex-wrap gap-2 text-sm">
-                    {svc.tags.map((tag) => (
-                      <Link
-                        href={`/services/${createSlug(tag)}`}
-                        key={tag}
-                        className="px-4 py-2 bg-k-card-bg border border-k-border rounded-full text-k-text-muted hover:bg-k-primary hover:text-white transition-all cursor-pointer shadow-sm"
-                      >
-                        {tag}
-                      </Link>
-                    ))}
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-k-text leading-tight mb-6">
+                      {svc.heading}
+                    </h3>
+                    <p className="text-k-text-muted text-lg leading-relaxed mb-8">
+                      {svc.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 text-sm">
+                      {svc.tags.map((tag) => (
+                        <Link
+                          href={`/services/${createSlug(tag)}`}
+                          key={tag}
+                          className="px-4 py-2 bg-k-card-bg border border-k-border rounded-full text-k-text-muted hover:bg-k-primary hover:text-white transition-all cursor-pointer shadow-sm"
+                        >
+                          {tag}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-              </div>
-            );
-          })}
+                </div>
+              );
+            })
+          ) : (
+            <div className="py-24 text-center border border-dashed border-k-border rounded-[40px] bg-k-card-bg/50">
+              <Boxes className="mx-auto text-k-text-muted/20 mb-6" size={64} />
+              <h4 className="text-2xl font-black text-k-text/40 uppercase tracking-tighter mb-2">No services listed yet</h4>
+              <p className="text-k-text-muted text-sm max-w-sm mx-auto font-light leading-relaxed">
+                We are currently refining our service offerings. Please check back soon or contact us for custom inquiries.
+              </p>
+            </div>
+          )}
         </div>
       </Container>
     </Section>

@@ -104,49 +104,56 @@ export default function Services() {
 
         {/* Cards */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
           variants={sectionVariants}
         >
-          {servicesItem.map((service) => (
-            <motion.div
-              key={service.num}
-              whileHover={{ y: -6 }}
-              className="bg-k-card-bg border border-k-border rounded-xl p-6 flex flex-col hover:border-k-primary/40 transition"
-            >
-              <span className="text-xs text-k-text-muted mb-4">
-                {service.num}
-              </span>
+          {servicesItem.length > 0 ? (
+            servicesItem.map((service) => (
+              <motion.div
+                key={service.num}
+                whileHover={{ y: -6 }}
+                className="bg-k-card-bg border border-k-border rounded-xl p-6 flex flex-col hover:border-k-primary/40 transition"
+              >
+                <span className="text-xs text-k-text-muted mb-4">
+                  {service.num}
+                </span>
 
-              <h3 className="text-2xl font-semibold text-k-text mb-6 md:w-[50%] w-full">
-                {service.title}
-              </h3>
+                <h3 className="text-2xl font-semibold text-k-text mb-6 md:w-[50%] w-full">
+                  {service.title}
+                </h3>
 
-              <div className="flex flex-wrap gap-2 mb-6">
-                {service.tags.map((tag: string) => (
-                  <Link
-                    href={`/services/${createSlug(tag)}`}
-                    key={tag}
-                    className="text-xs px-3 py-2 rounded-full bg-k-card-bg border border-k-border text-k-text-muted hover:bg-k-primary hover:text-white transition-all cursor-pointer shadow-sm"
-                  >
-                    {tag}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {service.tags.map((tag: string) => (
+                    <Link
+                      href={`/services/${createSlug(tag)}`}
+                      key={tag}
+                      className="text-xs px-3 py-2 rounded-full bg-k-card-bg border border-k-border text-k-text-muted hover:bg-k-primary hover:text-white transition-all cursor-pointer shadow-sm"
+                    >
+                      {tag}
+                    </Link>
+                  ))}
+                </div>
+
+                <div className="flex justify-end mt-auto">
+                  <Link href={`/services/${createSlug(service.title)}`} aria-label={`Learn more about ${service.title}`}>
+                    <motion.button
+                      whileHover={{ scale: 1.1, rotate: -45 }}
+                      whileTap={{ scale: 0.9 }}
+                      aria-label={`Explore ${service.title} services`}
+                      className="flex items-center justify-center w-8 h-8 rounded-full bg-k-primary/10 border border-k-primary/20 text-k-primary hover:bg-k-primary hover:text-white transition-all"
+                    >
+                      <ArrowUpRight size={18} />
+                    </motion.button>
                   </Link>
-                ))}
-              </div>
-
-              <div className="flex justify-end mt-auto">
-                <Link href={`/services/${createSlug(service.title)}`} aria-label={`Learn more about ${service.title}`}>
-                  <motion.button
-                    whileHover={{ scale: 1.1, rotate: -45 }}
-                    whileTap={{ scale: 0.9 }}
-                    aria-label={`Explore ${service.title} services`}
-                    className="flex items-center justify-center w-8 h-8 rounded-full bg-k-primary/10 border border-k-primary/20 text-k-primary hover:bg-k-primary hover:text-white transition-all"
-                  >
-                    <ArrowUpRight size={18} />
-                  </motion.button>
-                </Link>
-              </div>
-            </motion.div>
-          ))}
+                </div>
+              </motion.div>
+            ))
+          ) : (
+            <div className="col-span-full py-16 text-center border border-dashed border-k-border rounded-2xl bg-k-card-bg/50">
+              <Zap className="mx-auto text-k-text-muted/20 mb-4" size={48} />
+              <p className="text-k-text-muted text-sm font-black uppercase tracking-widest italic opacity-50">No services explored yet.</p>
+            </div>
+          )}
         </motion.div>
 
       </div>

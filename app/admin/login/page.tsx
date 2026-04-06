@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { ShieldCheck, User, Lock, Loader2, ArrowRight } from "lucide-react";
+import { ShieldCheck, User, Lock, Loader2, ArrowRight, Eye, EyeOff } from "lucide-react";
 import { login } from "@/app/actions/auth";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
@@ -67,11 +68,19 @@ export default function LoginPage() {
                 </div>
                 <input 
                   required
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   placeholder="••••••••"
-                  className="w-full bg-black/50 border border-white/5 rounded-2xl py-4 pl-12 pr-4 focus:outline-none focus:border-blue-500/50 transition-all text-white font-medium"
+                  className="w-full bg-black/50 border border-white/5 rounded-2xl py-4 pl-12 pr-12 focus:outline-none focus:border-blue-500/50 transition-all text-white font-medium"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white/20 hover:text-white transition-colors focus:outline-none"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
               </div>
             </div>
 
