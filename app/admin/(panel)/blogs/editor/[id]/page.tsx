@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef, use } from "react";
-import { ChevronLeft, Save, Sparkles, Wand2, ArrowRightLeft, AlignLeft, Search, FileText, Image as ImageIcon, Eye, PencilLine, UploadCloud } from "lucide-react";
+import { ChevronLeft, Save, Sparkles, Wand2, ArrowRightLeft, AlignLeft, Search, FileText, Image as ImageIcon, Eye, PencilLine, UploadCloud, CheckCircle2, XCircle, History } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { BlogPost } from "@/lib/blog";
@@ -17,6 +18,8 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
   const [aiLoading, setAiLoading] = useState<string | null>(null);
   const [mode, setMode] = useState<"write" | "preview">("write");
   const [uploadingImage, setUploadingImage] = useState<"cover" | "content" | null>(null);
+  const [pendingAIContent, setPendingAIContent] = useState<string | null>(null);
+  const [showAIReview, setShowAIReview] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -44,9 +47,9 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
     const { name, value } = e.target;
     if (name.startsWith("author.")) {
       const authorField = name.split(".")[1];
-      setBlogData(prev => ({ ...prev, author: { ...prev.author!, [authorField]: value } }));
+      setBlogData((prev: any) => ({ ...prev, author: { ...prev.author!, [authorField]: value } }));
     } else {
-      setBlogData(prev => ({ ...prev, [name]: value }));
+      setBlogData((prev: any) => ({ ...prev, [name]: value }));
     }
   };
 
@@ -91,10 +94,10 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
       
       if (data.success) {
         if (uploadingImage === "cover") {
-          setBlogData(prev => ({ ...prev, image: data.url }));
+          setBlogData((prev: any) => ({ ...prev, image: data.url }));
         } else if (uploadingImage === "content") {
           const imgTag = `<img src="${data.url}" alt="Blog Image" class="w-full rounded-2xl my-6 shadow-xl border border-white/10" />\n`;
-          setBlogData(prev => ({ ...prev, content: (prev.content || "") + imgTag }));
+          setBlogData((prev: any) => ({ ...prev, content: (prev.content || "") + imgTag }));
           toast.success("Image uploaded and inserted");
         }
       } else {
@@ -136,20 +139,41 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
   const handleRewriteContent = async () => {
     if (!blogData.content) return;
     const res = await runAI("rewrite", blogData.content);
-    if (res && res.result) setBlogData(prev => ({ ...prev, content: res.result }));
+    if (res && res.result) {
+      setPendingAIContent(res.result);
+      setShowAIReview(true);
+    }
   };
 
   const handleCorrectGrammar = async () => {
     if (!blogData.content) return;
     const res = await runAI("correct", blogData.content);
-    if (res && res.result) setBlogData(prev => ({ ...prev, content: res.result }));
+    if (res && res.result) {
+      setPendingAIContent(res.result);
+      setShowAIReview(true);
+    }
+  };
+
+  const handleAcceptAI = () => {
+    if (pendingAIContent) {
+      setBlogData((prev: any) => ({ ...prev, content: pendingAIContent }));
+      setPendingAIContent(null);
+      setShowAIReview(false);
+      toast.success("AI draft accepted!");
+    }
+  };
+
+  const handleDiscardAI = () => {
+    setPendingAIContent(null);
+    setShowAIReview(false);
+    toast.success("AI draft discarded.");
   };
 
   const handleGenerateSEO = async () => {
     if (!blogData.content) return toast.error("Write some content first!");
     const res = await runAI("seo");
     if (res && res.seo) {
-      setBlogData(prev => ({ 
+      setBlogData((prev: any) => ({ 
         ...prev, 
         metaTitle: res.seo.metaTitle, 
         metaDescription: res.seo.metaDescription, 
@@ -371,6 +395,86 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
           </div>
         </div>
       </div>
+
+      {/* AI Review Modal */}
+      <AnimatePresence>
+        {showAIReview && pendingAIContent && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={handleDiscardAI}
+              className="absolute inset-0 bg-black/80 backdrop-blur-xl"
+            />
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-5xl bg-zinc-950 border border-white/10 rounded-[2.5rem] overflow-hidden flex flex-col max-h-[90vh] shadow-2xl shadow-blue-500/10"
+            >
+              <div className="p-8 border-b border-white/10 flex items-center justify-between shrink-0 bg-white/[0.02]">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-blue-500/20 flex items-center justify-center">
+                    <Sparkles className="text-blue-500" size={24} />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-black uppercase tracking-tighter">Review AI <span className="text-blue-500 italic">Gen</span></h2>
+                    <p className="text-white/40 text-[10px] font-black uppercase tracking-widest leading-none">Side-by-side comparison</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-3">
+                  <button onClick={handleDiscardAI} className="px-6 py-3 rounded-2xl border border-white/10 hover:bg-white/5 transition-colors text-[10px] font-black uppercase tracking-widest text-white/50">
+                    Discard
+                  </button>
+                  <button onClick={handleAcceptAI} className="px-6 py-3 rounded-2xl bg-blue-600 hover:bg-blue-700 transition-all font-black uppercase tracking-widest text-[10px] shadow-lg shadow-blue-600/20">
+                    Accept Changes
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex-1 overflow-hidden grid grid-cols-1 md:grid-cols-2">
+                <div className="border-r border-white/10 flex flex-col min-h-0 bg-black/40">
+                  <div className="p-6 border-b border-white/5 flex items-center justify-between">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-white/30 flex items-center gap-2">
+                      <History size={12} /> Original Content
+                    </span>
+                  </div>
+                  <div className="p-8 overflow-y-auto w-full text-sm font-mono text-white/40 leading-relaxed opacity-50 select-none pointer-events-none">
+                    {blogData.content}
+                  </div>
+                </div>
+
+                <div className="flex flex-col min-h-0 bg-blue-500/[0.02]">
+                  <div className="p-6 border-b border-white/5 flex items-center justify-between">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-blue-500/80 flex items-center gap-2">
+                      <CheckCircle2 size={12} /> Revised Version
+                    </span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 bg-blue-500/10 px-2 py-1 rounded-lg">AI Optimized</span>
+                  </div>
+                  <div className="p-8 overflow-y-auto w-full text-sm font-mono text-white leading-relaxed">
+                    {pendingAIContent}
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-6 border-t border-white/10 bg-black/60 flex items-center justify-center gap-8 shrink-0">
+                 <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/20">
+                    <CheckCircle2 size={12} className="text-green-500/50" /> High Ticket Style
+                 </div>
+                 <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/20">
+                    <CheckCircle2 size={12} className="text-green-500/50" /> SEO Optimized
+                 </div>
+                 <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/20">
+                    <XCircle size={12} className="text-red-500/50" /> Grammar Error Free
+                 </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
