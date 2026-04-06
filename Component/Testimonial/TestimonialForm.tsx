@@ -17,6 +17,7 @@ import {
   Plus
 } from 'lucide-react';
 import { submitTestimonial } from '@/app/actions/testimonial';
+import { toast } from 'react-hot-toast';
 
 export default function TestimonialForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -62,15 +63,39 @@ export default function TestimonialForm() {
     setIsSubmitting(true);
     setError(null);
 
-    const formData = new FormData(e.currentTarget);
-    const result = await submitTestimonial(formData);
+    const loadingToast = toast.loading("Sending testimonial and uploading media...");
 
-    if (result.success) {
-      setIsSuccess(true);
-    } else {
-      setError(result.error || "Something went wrong. Please try again.");
+    try {
+        const formData = new FormData(e.currentTarget);
+        const result = (await submitTestimonial(formData)) as any;
+
+        if (result.success) {
+            const stats = result.uploadStats || {};
+            const failures = Object.entries(stats)
+                .filter(([_, stat]: any) => !stat.success)
+                .map(([name, stat]: any) => `${name} (${stat.error || "Upload failed"})`);
+
+            if (failures.length > 0) {
+                // Partial success (Text saved, some media failed)
+                toast.error(
+                    `Testimonial saved, but failed to upload: ${failures.join(', ')}`, 
+                    { id: loadingToast, duration: 8000 }
+                );
+            } else {
+                // Full success
+                toast.success("Testimonial submitted successfully!", { id: loadingToast });
+            }
+            setIsSuccess(true);
+        } else {
+            toast.error(result.error || "Failed to submit testimonial. Please try again.", { id: loadingToast });
+            setError(result.error || "Failed to submit testimonial. Please try again.");
+        }
+    } catch (err) {
+        toast.error("An unexpected error occurred. Please try again.", { id: loadingToast });
+        console.error("Submission error:", err);
+    } finally {
+        setIsSubmitting(false);
     }
-    setIsSubmitting(false);
   };
 
   if (isSuccess) {

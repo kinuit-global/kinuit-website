@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+import { v2 as cloudinary } from "cloudinary";
+
+// Configure Cloudinary with the official SDK and Signed uploads
+// This eliminates the "Preset not found" issue by using your API Key/Secret.
+cloudinary.config({
+  cloudinary_api_url: process.env.CLOUDINARY_URL,
+});
 
 export async function POST(req: Request) {
   try {
@@ -11,24 +16,42 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: "No file uploaded" }, { status: 400 });
     }
 
-    const buffer = Buffer.from(await file.arrayBuffer());
-    const originalName = file.name;
-    const cleanName = originalName.replace(/[^a-zA-Z0-9.\-]/g, "_");
-    const uniqueName = Date.now() + "_" + cleanName;
-    
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
+    // Convert to Buffer for the SDK
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
 
-    const filePath = path.join(uploadDir, uniqueName);
-    fs.writeFileSync(filePath, buffer);
+    // Perform a Secure (Signed) upload via the official SDK
+    const result = await new Promise<any>((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          folder: "blogs",
+          resource_type: "auto", // Handles all file types automatically
+        },
+        (error, result) => {
+          if (error) {
+            console.error("[SDK API] Upload Error:", error.message);
+            reject(error);
+          } else {
+            resolve(result);
+          }
+        }
+      );
 
-    const fileUrl = `/uploads/${uniqueName}`;
+      uploadStream.end(buffer);
+    });
 
-    return NextResponse.json({ success: true, url: fileUrl });
+    // Return the secure, persistent Cloudinary URL
+    // v: "sdk-signed-v1" helps us verify that the new SDK logic is running.
+    return NextResponse.json({ 
+      success: true, 
+      url: result.secure_url, 
+      v: "sdk-signed-v1" 
+    });
   } catch (error: any) {
-    console.error("Upload error:", error);
-    return NextResponse.json({ success: false, error: error.message || "Failed to upload file" }, { status: 500 });
+    console.error("[SDK API] Critical Error:", error.message);
+    return NextResponse.json({ 
+      success: false, 
+      error: error.message || "An unexpected error occurred during upload." 
+    }, { status: 500 });
   }
 }

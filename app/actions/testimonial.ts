@@ -1,9 +1,53 @@
 "use server";
 
-import fs from 'fs/promises';
-import path from 'path';
+import { v2 as cloudinary } from 'cloudinary';
 import { saveSubmission, getAllSubmissions, deleteSubmission, type Submission } from '@/lib/testimonial-store';
 import { revalidatePath } from 'next/cache';
+
+// Configure Cloudinary with the URL from environment variables
+// This automatically handles the Cloud Name, API Key, and API Secret.
+cloudinary.config({
+  cloudinary_api_url: process.env.CLOUDINARY_URL,
+});
+
+/**
+ * Uploads a file to Cloudinary using the official Node.js SDK (Signed)
+ * Returns { success: boolean, url?: string, error?: string }
+ */
+async function uploadToCloudinary(value: any, folder: string) {
+  if (!value || typeof value === 'string' || !(value instanceof Blob) || value.size === 0) {
+    return { success: true, url: null };
+  }
+
+  try {
+    const file = value as File;
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    return new Promise<{ success: boolean; url?: string; error?: string }>((resolve) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          folder: `testimonials/${folder}`,
+          resource_type: "auto", // Works for images, videos, and audio!
+        },
+        (error, result) => {
+          if (error) {
+            console.error(`[SDK Debug] Fail (${file.name}):`, error.message);
+            resolve({ success: false, error: error.message });
+          } else {
+            console.log(`[SDK Debug] Success (${file.name}): ${result?.secure_url}`);
+            resolve({ success: true, url: result?.secure_url });
+          }
+        }
+      );
+
+      uploadStream.end(buffer);
+    });
+  } catch (error: any) {
+    console.error("[SDK Debug] Exception:", error.message);
+    return { success: false, error: error.message || "Network Error" };
+  }
+}
 
 export async function submitTestimonial(formData: FormData) {
   const fullName = formData.get("fullName") as string;
@@ -13,42 +57,53 @@ export async function submitTestimonial(formData: FormData) {
   const testimonialText = formData.get("testimonial") as string;
 
   const id = crypto.randomUUID();
+  
+  // Track individual upload results for frontend feedback
+  const uploadStats: Record<string, { success: boolean, error?: string }> = {};
+
+  const handleUpload = async (key: string, fieldName: string) => {
+    const file = formData.get(fieldName);
+    if (!file || (file instanceof Blob && file.size === 0)) return null;
+    
+    // Switch to Secure (Signed) SDK Uploads
+    const res = await uploadToCloudinary(file, id);
+    if (res.success) {
+      uploadStats[key] = { success: true };
+      return res.url;
+    } else {
+      uploadStats[key] = { success: false, error: res.error };
+      return null;
+    }
+  };
 
   try {
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'testimonials', id);
-    await fs.mkdir(uploadDir, { recursive: true });
-
-    const saveFile = async (value: any, category: string) => {
-      //formData.get returns string if empty or no file selected in some environments
-      if (!value || typeof value === 'string' || !(value instanceof Blob) || value.size === 0) {
-        return null;
-      }
-      
-      const file = value as File;
-      const buffer = Buffer.from(await file.arrayBuffer());
-      const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
-      const fileName = `${category}_${Date.now()}_${safeName}`;
-      const filePath = path.join(uploadDir, fileName);
-      
-      await fs.writeFile(filePath, buffer);
-      return `/uploads/testimonials/${id}/${fileName}`;
-    };
-
-    // Single file uploads
-    const logoUrl = await saveFile(formData.get("companyLogo") as File, "logo");
-    const profileUrl = await saveFile(formData.get("profilePhoto") as File, "profile");
-    const videoUrl = await saveFile(formData.get("video") as File, "video");
-    const audioUrl = await saveFile(formData.get("audio") as File, "audio");
+    const logoUrl = await handleUpload("Company Logo", "companyLogo");
+    const profileUrl = await handleUpload("Profile Photo", "profilePhoto");
+    const videoUrl = await handleUpload("Video Testimonial", "video");
+    const audioUrl = await handleUpload("Audio Testimonial", "audio");
 
     // Multiple images
     const imageFiles = formData.getAll("images") as File[];
     const imageUrls = [];
+    let imageFailures = 0;
+    let lastImageError = "";
+    
     for (let i = 0; i < imageFiles.length; i++) {
-        const url = await saveFile(imageFiles[i], `image_${i}`);
-        if (url) imageUrls.push(url);
+        const res = await uploadToCloudinary(imageFiles[i], id);
+        if (res.success && res.url) {
+            imageUrls.push(res.url);
+        } else if (imageFiles[i].size > 0) {
+            imageFailures++;
+            lastImageError = res.error || "Upload failed";
+        }
+    }
+    
+    if (imageFailures > 0) {
+        uploadStats[`Supporting Images (${imageFailures} failed)`] = { success: false, error: lastImageError };
+    } else if (imageFiles.length > 0 && imageFiles[0].size > 0) {
+        uploadStats["Supporting Images"] = { success: true };
     }
 
-    // Save metadata
     await saveSubmission({
       id,
       fullName,
@@ -58,20 +113,23 @@ export async function submitTestimonial(formData: FormData) {
       testimonial: testimonialText,
       submittedAt: new Date().toISOString(),
       attachments: {
-        logo: logoUrl,
-        profile: profileUrl,
-        video: videoUrl,
-        audio: audioUrl,
+        logo: logoUrl || "",
+        profile: profileUrl || "",
+        video: videoUrl || "",
+        audio: audioUrl || "",
         images: imageUrls
       }
     });
 
     revalidatePath('/admin/dashboard');
 
-    return { success: true };
-  } catch (error) {
-    console.error("Submission error:", error);
-    return { success: false, error: "Failed to process submission. Please try again." };
+    return { 
+      success: true, 
+      uploadStats 
+    };
+  } catch (error: any) {
+    console.error("[Testimonial] Error:", error.message);
+    return { success: false, error: "Failed to save submission." };
   }
 }
 
@@ -82,13 +140,6 @@ export async function getTestimonials() {
 export async function removeTestimonial(id: string) {
   const success = await deleteSubmission(id);
   if (success) {
-    // Optionally remove folder in public/uploads but let's keep it simple for now or perform cleanup
-    try {
-        const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'testimonials', id);
-        await fs.rm(uploadDir, { recursive: true, force: true });
-    } catch (e) {
-        console.error("Failed to delete attachments directory:", e);
-    }
     revalidatePath('/admin/dashboard');
   }
   return { success };
