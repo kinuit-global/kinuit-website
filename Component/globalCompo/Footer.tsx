@@ -141,11 +141,11 @@ export default function Footer() {
                 hello@kinuit.com
               </a>
 
-              <div className="flex items-start gap-3">
+              <div className="flex items-center gap-3">
                 <span className="w-8 h-8 flex items-center justify-center rounded-full bg-k-glass-bg border border-k-glass-border shrink-0">
                   📍
                 </span>
-                <span className="leading-relaxed">Available Worldwide · <br />Remote-First Team</span>
+                <span className="text-sm">Available Worldwide</span>
               </div>
             </div>
           </div>

@@ -49,8 +49,8 @@ export default function Hero() {
             className="
           inline-flex items-center gap-2
           px-4 py-2
-          mt-4 mb-3 sm:mt-6 sm:mb-6
-          rounded-full text-[10px] sm:text-xs text-k-text-muted
+          mt-4 mb-0.5 sm:mt-6 sm:mb-6
+          rounded-full text-[9px] sm:text-xs text-k-text-muted
           bg-k-glass-bg border border-k-glass-border backdrop-blur-md
         "
           >
@@ -69,14 +69,17 @@ export default function Hero() {
             {...fadeUp}
             transition={{ delay: 0.1 }}
             className="
-          font-black uppercase tracking-tight
-          leading-[1.1] sm:leading-[1.15] mb-2 sm:mb-6
+          tracking-tight sm:font-black sm:uppercase
+          leading-[1.4] sm:leading-[1.15] mb-6 sm:mb-8
           text-3xl sm:text-4xl md:text-[2.5rem] lg:text-[4rem] lg:leading-[1.05]
         "
           >
-            Branding That Builds <span className="bg-linear-to-r from-[#00D1FF] to-[#00FFF0] bg-clip-text text-transparent"> Authority. </span>
-            <br />
-            Strategy That Drives <span className="bg-linear-to-r from-[#00D1FF] to-[#00FFF0] bg-clip-text text-transparent"> Growth. </span>
+            <span className="uppercase block mb-1 sm:mb-0 font-bold sm:font-black">
+              Branding That Builds <span className="bg-linear-to-r from-[#00D1FF] to-[#00FFF0] bg-clip-text text-transparent"> Authority. </span>
+            </span>
+            <span className="text-[1.7rem] sm:text-4xl md:text-[2.5rem] lg:text-[4rem] block font-semibold sm:font-black sm:uppercase text-k-text/90 sm:text-k-text">
+              Strategy That Drives <span className="bg-linear-to-r from-[#00D1FF] to-[#00FFF0] bg-clip-text text-transparent"> Growth. </span>
+            </span>
           </motion.h1>
 
           {/* Description */}
@@ -90,7 +93,7 @@ export default function Hero() {
           tracking-normal
           text-k-text/80
           leading-[1.7] sm:leading-[1.8]
-          mb-4 sm:mb-8
+          mb-3 sm:mb-8
         "
           >
             From branding to development, we build content ecosystems designed to dominate search, elevate authority, and accelerate revenue.
