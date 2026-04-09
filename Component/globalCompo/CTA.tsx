@@ -28,11 +28,13 @@ export default function CTASection() {
         {/* LEFT SIDE */}
         <div className="text-left md:text-left flex-1">
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-snug text-white">
-            Ready to make your
-            <br />
-            biggest move?
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight text-white max-w-[500px]">
+            Turn Content Into Your Strongest Growth Channel
           </h2>
+
+          <p className="mt-4 text-white/80 text-base max-w-[450px]">
+            Partner with Kinuit to create strategy-led content built for visibility, trust, and conversions.
+          </p>
 
           <Link href="/contact">
             <motion.button
@@ -44,7 +46,7 @@ export default function CTASection() {
               hover:bg-white/20 transition
               md:mx-0 text-white"
             >
-              Talk to the Team
+              Work With Us
               <Image
                 src="/fwd.png"
                 alt="arrw-img"

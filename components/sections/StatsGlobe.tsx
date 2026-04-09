@@ -73,7 +73,7 @@ export default function StatsGlobe() {
               transition={{ delay: 0.3 }}
               className="relative z-30 flex flex-col items-center mb-8 text-center px-6"
             >
-              <h3 className="text-k-text text-lg md:text-xl font-bold tracking-tight mb-2.5">Based in Tamilnadu, India</h3>
+              <h3 className="text-k-text text-lg md:text-xl font-bold tracking-tight mb-2.5">Based in India</h3>
               <div className="flex items-center gap-2 px-3.5 py-1.5 bg-k-glass-bg rounded-full border border-k-glass-border backdrop-blur-md">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#1DE038] animate-pulse shadow-[0_0_8px_#1DE038]"></div>
                 <span className="text-k-text-muted text-[10px] font-bold tracking-[0.2em] uppercase">Available Worldwide</span>

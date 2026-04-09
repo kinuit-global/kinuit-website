@@ -71,11 +71,11 @@ export default function Services() {
             {/* Top Label Badge */}
             <SectionBadge icon={<Zap size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label="What We Do" />
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-k-text">
-              Four disciplines. <span className="text-k-primary">One powerful team</span>
+              Four disciplines. <span className="text-k-primary">One Powerful Team</span>
             </h2>
 
             <p className="text-k-text-muted mt-2 text-base">
-              From brand identity to full-scale campaigns — everything your brand needs to
+              From brand identity to full-scale campaigns, everything your brand needs to
               grow, built and delivered by one expert team.
             </p>
           </div>
@@ -95,7 +95,7 @@ export default function Services() {
               </span>
 
               <span className="text-sm text-k-text font-medium">
-                View All
+                Explore all
               </span>
             </motion.button>
           </Link>

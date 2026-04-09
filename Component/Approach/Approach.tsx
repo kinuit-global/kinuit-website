@@ -22,7 +22,7 @@ export default function OurApproach() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-k-text-muted text-lg md:text-xl font-medium"
         >
-          We hold ourselves to a different standard.
+          Built on clarity, driven by strategy, executed for impact.
         </motion.p>
       </div>
 
@@ -66,9 +66,9 @@ export default function OurApproach() {
               <div className="relative mb-6">
                 <span className="text-5xl md:text-6xl font-black text-k-primary opacity-30 dark:opacity-20 absolute -top-8 -left-2 select-none">0{step.id}</span>
                 <div className="p-3 bg-k-glass-bg flex rounded-xl border border-k-glass-border text-k-primary relative z-10">
-                  {step.title === "EXPERTISE" && <ShieldCheck size={24} />}
-                  {step.title === "INTEGRATION" && <Combine size={24} />}
-                  {step.title === "MOMENTUM" && <Zap size={24} />}
+                  {step.title === "Strategic by Design" && <ShieldCheck size={24} />}
+                  {step.title === "Built for Consistency" && <Combine size={24} />}
+                  {step.title === "Focused on Impact" && <Zap size={24} />}
                 </div>
               </div>
 

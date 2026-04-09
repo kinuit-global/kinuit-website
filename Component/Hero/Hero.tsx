@@ -8,10 +8,15 @@ import { ChevronRight, ArrowRight } from "lucide-react";
 
 const TECHS = [
   { name: "Web3", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
-  { name: "Fintech", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
-  { name: "AI", style: "font-bold tracking-widest text-lg sm:text-xl text-k-text", icon: "✦" },
-  { name: "Real Estate", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
-  { name: "Edtech", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
+  { name: "Health & wellness", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
+  { name: "Immigration", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
+  { name: "Legal", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
+  { name: "SaaS", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
+  { name: "Edu Tech", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
+  { name: "Fin Tech", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
+  { name: "Real-estate", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
+  { name: "Insurance", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
+  { name: "Enterprises", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
 ];
 
 const fadeUp = {
@@ -69,7 +74,9 @@ export default function Hero() {
           text-3xl sm:text-4xl md:text-[2.5rem] lg:text-[4rem] lg:leading-[1.05]
         "
           >
-            The Team Behind <br /> Your <span className="bg-linear-to-r from-[#00D1FF] to-[#00FFF0] bg-clip-text text-transparent"> Biggest Move. </span>
+            Branding That Builds <span className="bg-linear-to-r from-[#00D1FF] to-[#00FFF0] bg-clip-text text-transparent"> Authority. </span>
+            <br />
+            Strategy That Drives <span className="bg-linear-to-r from-[#00D1FF] to-[#00FFF0] bg-clip-text text-transparent"> Growth. </span>
           </motion.h1>
 
           {/* Description */}
@@ -86,8 +93,7 @@ export default function Hero() {
           mb-4 sm:mb-8
         "
           >
-            In a world run by AI, the brands that win have the sharpest strategy behind them. We are that <b>Strategy, Branding, Development, and Growth, engineered</b> for the new era.
-
+            From branding to development, we build content ecosystems designed to dominate search, elevate authority, and accelerate revenue.
           </motion.p>
 
           {/* Buttons */}
@@ -114,12 +120,12 @@ export default function Hero() {
             transition-all duration-300 hover:-translate-y-[2px]
           "
             >
-              Start a Project
+              Launch Your Brand
               <ChevronRight className="w-4 h-4" />
             </Link>
 
             <Link
-              href="/work"
+              href="/about"
               className="
             flex items-center justify-center gap-2
             text-k-text text-[13px] sm:text-sm font-semibold
@@ -130,7 +136,7 @@ export default function Hero() {
             transition-all duration-300 hover:-translate-y-[2px]
           "
             >
-              View Case Studies
+              Get to Know More
               <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
@@ -170,7 +176,7 @@ export default function Hero() {
                 className="flex items-center justify-center min-w-[140px] sm:min-w-[160px] px-6 py-3 sm:py-4 rounded-xl border border-k-border bg-k-card-bg backdrop-blur-md hover:bg-k-glass-bg transition-all duration-300 cursor-pointer hover:-translate-y-1 group"
               >
                 <div className={`flex items-center justify-center gap-2 ${tech.style} group-hover:text-k-text`}>
-                  {tech.icon && <span className="opacity-80 text-sm">{tech.icon}</span>}
+                  {/* {tech.icon && <span className="opacity-80 text-sm">{tech.icon}</span>} */}
                   <span className="whitespace-nowrap">{tech.name}</span>
                 </div>
               </div>

@@ -20,14 +20,14 @@ export default function BlogPreview() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <div className="max-w-2xl text-left">
-            <SectionBadge icon={<BookOpen size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label="Insights & Perspectives" />
+            <SectionBadge icon={<BookOpen size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label="INSIGHT & PERSPECTIVES" />
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               className="text-3xl md:text-4xl lg:text-5xl font-bold text-k-text tracking-tight"
             >
-              Latest from the <span className="text-k-primary">Standard.</span>
+              Latest from the <span className="text-k-primary">standard</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -35,7 +35,7 @@ export default function BlogPreview() {
               transition={{ delay: 0.2 }}
               className="text-k-text-muted mt-2 text-base font-light"
             >
-              From custom engineering to strategic growth — explore the thinking that moves ambitious brands forward.
+              Exploring content, strategy, and the thinking behind ambitious brands.
             </motion.p>
           </div>
           
@@ -59,7 +59,7 @@ export default function BlogPreview() {
                 </span>
 
                 <span className="text-sm text-k-text font-medium">
-                  View All
+                  Explore all
                 </span>
               </motion.button>
             </Link>
