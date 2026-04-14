@@ -4,8 +4,24 @@ import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useActionState, useEffect, useRef } from "react";
+import { subscribeToNewsletter } from "@/app/actions/newsletter";
+import toast from "react-hot-toast";
+import { CheckCircle2, Loader2, Send } from "lucide-react";
 
 export default function CTASection() {
+  const [state, formAction, isPending] = useActionState(subscribeToNewsletter, { success: false });
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (state.success) {
+      toast.success("Welcome to the community!");
+      formRef.current?.reset();
+    } else if (state.error) {
+      toast.error(state.error);
+    }
+  }, [state]);
+
   return (
     <section className="relative py-16 px-6 lg:px-8 bg-k-bg flex justify-center">
 
@@ -80,23 +96,41 @@ export default function CTASection() {
           </p>
 
           {/* Input */}
-          <div className="flex flex-col sm:flex-row gap-3">
+          {state.success ? (
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="flex bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 items-center gap-3"
+            >
+              <CheckCircle2 className="text-blue-500 shrink-0" size={20} />
+              <p className="text-xs font-bold uppercase tracking-widest text-blue-500">You're subscribed!</p>
+            </motion.div>
+          ) : (
+            <form 
+              ref={formRef}
+              action={formAction}
+              className="flex flex-col sm:flex-row gap-3"
+            >
+              <div className="flex items-center gap-2 bg-k-card-bg px-4 py-3 rounded-lg flex-1 border border-k-border group focus-within:border-blue-500/50 transition-all">
+                <Mail size={16} className="text-k-text-muted/40 group-focus-within:text-blue-500 transition-colors" />
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="Your Email Address"
+                  className="bg-transparent outline-none text-sm flex-1 text-k-text placeholder:text-k-text-muted/40 font-medium"
+                />
+              </div>
 
-            <div className="flex items-center gap-2 bg-k-card-bg px-4 py-3 rounded-lg flex-1 border border-k-border">
-              <Mail size={16} className="text-k-text-muted/40" />
-
-              <input
-                type="email"
-                placeholder="Your Email Address"
-                className="bg-transparent outline-none text-sm flex-1 text-k-text placeholder-k-text-muted/40"
-              />
-            </div>
-
-            <button className="bg-k-primary px-5 py-3 rounded-lg text-sm font-medium hover:scale-[1.02] active:scale-[0.98] transition text-white whitespace-nowrap">
-              Submit
-            </button>
-
-          </div>
+              <button 
+                type="submit"
+                disabled={isPending}
+                className="bg-k-primary px-6 py-3 rounded-lg text-xs font-black uppercase tracking-widest hover:scale-[1.02] active:scale-[0.98] transition text-white whitespace-nowrap disabled:opacity-50 flex items-center justify-center gap-2 min-w-[100px]"
+              >
+                {isPending ? <Loader2 className="animate-spin" size={16} /> : "Submit"}
+              </button>
+            </form>
+          )}
 
         </motion.div>
 

@@ -25,7 +25,7 @@ export async function submitContactForm(prevState: any, formData: FormData) {
       const resend = new Resend(process.env.RESEND_API_KEY);
 
       await resend.emails.send({
-        from: 'Kinuit Contact Form <onboarding@resend.dev>',
+        from: 'Kinuit Contact Form <hello@kinuit.com>',
         to: process.env.EMAIL_TO || 'hello@kinuit.com',
         subject: `New Project Inquiry: ${company}`,
         html: `
