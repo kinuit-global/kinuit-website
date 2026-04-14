@@ -33,7 +33,7 @@ export default function Hero() {
       relative min-h-0 sm:min-h-screen
       flex flex-col justify-start sm:justify-center
       px-4 sm:px-6
-      pt-[120px] pb-2.5 sm:py-24 lg:py-32
+      pt-[120px] pb-16 sm:py-24 lg:py-32
       bg-k-bg overflow-hidden
     "
     >
@@ -70,14 +70,14 @@ export default function Hero() {
             transition={{ delay: 0.1 }}
             className="
           tracking-tight sm:font-black sm:uppercase
-          leading-[1.4] sm:leading-[1.15] mb-6 sm:mb-8
+          leading-[1.2] sm:leading-[1.15] mb-4 sm:mb-8
           text-3xl sm:text-4xl md:text-[2.5rem] lg:text-[4rem] lg:leading-[1.05]
         "
           >
-            <span className="uppercase block mb-1 sm:mb-0 font-bold sm:font-black">
+            <span className="block mb-1 sm:mb-0 font-bold sm:font-black">
               Branding That Builds <span className="bg-linear-to-r from-[#00D1FF] to-[#00FFF0] bg-clip-text text-transparent"> Authority. </span>
             </span>
-            <span className="text-[1.7rem] sm:text-4xl md:text-[2.5rem] lg:text-[4rem] block font-semibold sm:font-black sm:uppercase text-k-text/90 sm:text-k-text">
+            <span className="block font-bold sm:font-black sm:uppercase text-k-text/90 sm:text-k-text">
               Strategy That Drives <span className="bg-linear-to-r from-[#00D1FF] to-[#00FFF0] bg-clip-text text-transparent"> Growth. </span>
             </span>
           </motion.h1>
@@ -92,8 +92,8 @@ export default function Hero() {
           font-normal
           tracking-normal
           text-k-text/80
-          leading-[1.7] sm:leading-[1.8]
-          mb-3 sm:mb-8
+          leading-[1.6] sm:leading-[1.8]
+          mb-6 sm:mb-8
         "
           >
             From branding to development, we build content ecosystems designed to dominate search, elevate authority, and accelerate revenue.
@@ -107,7 +107,7 @@ export default function Hero() {
           flex flex-col sm:flex-row items-center
           gap-4
           justify-center
-          mb-6 sm:mb-12
+          mb-4 sm:mb-12
           w-full sm:w-auto
         "
           >
@@ -148,7 +148,7 @@ export default function Hero() {
 
       {/* Brand Tags Row */}
       {/* Brand Tags Marquee */}
-      <div className="w-full relative z-10 mt-8 sm:mt-12 mb-0 sm:mb-8 flex flex-col items-center overflow-hidden">
+      <div className="w-full relative z-10 mt-2 sm:mt-12 mb-0 sm:mb-8 flex flex-col items-center overflow-hidden">
         <motion.p
           {...fadeUp}
           transition={{ delay: 0.4 }}
@@ -160,25 +160,25 @@ export default function Hero() {
         {/* Marquee Wrapper */}
         <div className="flex overflow-hidden w-full relative group">
           {/* Gradient Masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-linear-to-r from-k-bg to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-linear-to-l from-k-bg to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-40 bg-linear-to-r from-k-bg to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-40 bg-linear-to-l from-k-bg to-transparent z-10 pointer-events-none" />
 
           <motion.div
-            className="flex w-max gap-6 sm:gap-8 md:gap-10 pr-6 sm:pr-8 md:pr-10"
+            className="flex w-max gap-4 sm:gap-8 md:gap-10 pr-4 sm:pr-8 md:pr-10"
             animate={{ x: ["0%", "-50%"] }}
             transition={{
-              duration: 50,
+              duration: 35,
               ease: "linear",
               repeat: Infinity,
             }}
             style={{ willChange: "transform" }}
           >
-            {[...TECHS, ...TECHS, ...TECHS].map((tech, idx) => (
+            {[...TECHS, ...TECHS].map((tech, idx) => (
               <div
                 key={idx}
-                className="flex items-center justify-center min-w-[140px] sm:min-w-[160px] px-6 py-3 sm:py-4 rounded-xl border border-k-border bg-k-card-bg backdrop-blur-md hover:bg-k-glass-bg transition-all duration-300 cursor-pointer hover:-translate-y-1 group"
+                className="flex items-center justify-center min-w-[120px] sm:min-w-[160px] px-4 py-3 sm:py-4 rounded-xl border border-k-border bg-k-card-bg backdrop-blur-md hover:bg-k-glass-bg transition-all duration-300 cursor-pointer hover:-translate-y-1 group"
               >
-                <div className={`flex items-center justify-center gap-2 ${tech.style} group-hover:text-k-text`}>
+                <div className={`flex items-center justify-center gap-2 font-medium tracking-wide text-sm sm:text-lg text-white group-hover:text-white`}>
                   {/* {tech.icon && <span className="opacity-80 text-sm">{tech.icon}</span>} */}
                   <span className="whitespace-nowrap">{tech.name}</span>
                 </div>

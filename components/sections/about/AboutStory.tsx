@@ -21,17 +21,17 @@ export default function AboutStory() {
           <div className="order-1 lg:order-2 max-w-xl">
             <SectionBadge icon={<History size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label="How We Started" />
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-8 text-k-text leading-tight">
-              Built with one purpose. To make your brand extraordinary.
+              We Saw the Gap. <br/> We Built the Solution.
             </h2>
             <div className="space-y-6 text-k-text-muted text-base md:text-lg leading-relaxed">
               <p>
-                Kinuit was built on a simple belief — that great brands deserve great teams. Not a rotating cast of generalists. Not five separate vendors who have never spoken to each other.
+                Kinuit was built on the conviction that great brands can’t be built in fragments. Not through scattered teams. Not through misaligned execution. Not through vendors working in silos.
               </p>
               <p>
-                A single, unified team that lives and breathes your brand from the first brief to the final delivery.
+                But through one unified team that takes complete ownership, from the first idea to the final execution.
               </p>
               <p>
-                That is what we built. And it shows in the work.
+                So that’s what we built. And that’s what defines every piece of work we deliver.
               </p>
             </div>
           </div>

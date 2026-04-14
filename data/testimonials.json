@@ -20,53 +20,21 @@
       }
     },
     {
-      "id": "4eab019a-1054-4a90-90bb-19eced6f91df",
-      "fullName": "xzczxcxzc",
-      "phone": "Q2323234234",
-      "email": "John@gmail.com",
+      "id": "94ae3c96-e74e-4983-a510-f0d253ebb1fa",
+      "fullName": "Jane Smith",
+      "phone": "09095676657",
+      "email": "jane@gmail.com",
       "companyName": "Kinuit",
-      "testimonial": "SFSDFSDFSDFSDFSDF",
-      "submittedAt": "2026-04-06T16:29:51.540Z",
+      "testimonial": "Kinuit translated our vision into a visual language that feels both timeless and cutting-edge. Every design choice is rooted in strategy.",
+      "submittedAt": "2026-04-14T13:29:32.705Z",
       "attachments": {
-        "logo": "",
-        "profile": "",
-        "video": "",
-        "audio": "",
-        "images": []
-      }
-    },
-    {
-      "id": "4f17af99-4d36-479e-b961-ecf92af54907",
-      "fullName": "xcvxcvcxv",
-      "phone": "32454354",
-      "email": "fsfsdfds@dffgfg.vodf",
-      "companyName": "asdsadsad",
-      "testimonial": "sdfsdfsdfsdf",
-      "submittedAt": "2026-04-06T16:35:14.092Z",
-      "attachments": {
-        "logo": "",
-        "profile": "",
-        "video": "",
-        "audio": "",
-        "images": []
-      }
-    },
-    {
-      "id": "8324db8d-dbff-4d7c-9f75-925d612583e1",
-      "fullName": "sdsdfsdf",
-      "phone": "2323213",
-      "email": "adithyaadith615@gmail.com",
-      "companyName": "Kinuit",
-      "testimonial": "zxczxczcxzc",
-      "submittedAt": "2026-04-06T16:43:43.983Z",
-      "attachments": {
-        "logo": "https://res.cloudinary.com/dftinj9h6/image/upload/v1775493811/testimonials/8324db8d-dbff-4d7c-9f75-925d612583e1/sha9aipbc98dumd0kind.png",
-        "profile": "https://res.cloudinary.com/dftinj9h6/image/upload/v1775493813/testimonials/8324db8d-dbff-4d7c-9f75-925d612583e1/unv2xpxhvf1cbppoogjr.jpg",
-        "video": "https://res.cloudinary.com/dftinj9h6/video/upload/v1775493820/testimonials/8324db8d-dbff-4d7c-9f75-925d612583e1/udg3ldwpoxoq9thgqmas.mp4",
-        "audio": "",
+        "logo": "https://res.cloudinary.com/dftinj9h6/image/upload/v1776173358/testimonials/94ae3c96-e74e-4983-a510-f0d253ebb1fa/hise3jdq20osu98lxtdj.png",
+        "profile": "https://res.cloudinary.com/dftinj9h6/image/upload/v1776173360/testimonials/94ae3c96-e74e-4983-a510-f0d253ebb1fa/yubudcforikw95aoutv8.png",
+        "video": "https://res.cloudinary.com/dftinj9h6/video/upload/v1776173365/testimonials/94ae3c96-e74e-4983-a510-f0d253ebb1fa/qumjsbspbx542uq1w5hm.mp4",
+        "audio": "https://res.cloudinary.com/dftinj9h6/video/upload/v1776173368/testimonials/94ae3c96-e74e-4983-a510-f0d253ebb1fa/bfqoryvixhpz01hgis1c.mp3",
         "images": [
-          "https://res.cloudinary.com/dftinj9h6/image/upload/v1775493822/testimonials/8324db8d-dbff-4d7c-9f75-925d612583e1/sorlonttaozzedr7jdqr.png",
-          "https://res.cloudinary.com/dftinj9h6/image/upload/v1775493823/testimonials/8324db8d-dbff-4d7c-9f75-925d612583e1/inkmuzfzpfwxp7oagkhm.jpg"
+          "https://res.cloudinary.com/dftinj9h6/image/upload/v1776173370/testimonials/94ae3c96-e74e-4983-a510-f0d253ebb1fa/qa7wfry10c8aosvoy9py.jpg",
+          "https://res.cloudinary.com/dftinj9h6/image/upload/v1776173371/testimonials/94ae3c96-e74e-4983-a510-f0d253ebb1fa/gbvtjieztk5jyi0owdyr.jpg"
         ]
       }
     }

@@ -19,7 +19,7 @@ export default function AboutPrinciples() {
           <div className="p-10 bg-k-card-bg border border-k-border rounded-3xl hover:bg-k-glass-bg transition-colors duration-300">
             <h3 className="text-xl font-bold text-k-text mb-4">Craft</h3>
             <p className="text-k-text-muted leading-relaxed text-sm md:text-base">
-              We believe the best work comes from teams that are fully invested — not just contracted.
+              We believe exceptional brands are built through attention to detail, strong storytelling, and intentional design. Not rushed work. Not templated outputs.
             </p>
           </div>
           
@@ -27,14 +27,14 @@ export default function AboutPrinciples() {
             <div className="absolute top-0 right-0 w-32 h-32 bg-k-primary/10 blur-3xl rounded-full" />
             <h3 className="text-xl font-bold text-k-text mb-4 relative z-10">Commitment</h3>
             <p className="text-k-text-muted leading-relaxed text-sm md:text-base relative z-10">
-              We believe great strategy and great design are not luxuries. They are the difference between a brand that leads and one that follows.
+              We don’t just deliver tasks, we deliver outcomes. Every strategy, every campaign, every asset is built to move your business forward.
             </p>
           </div>
           
           <div className="p-10 bg-k-card-bg border border-k-border rounded-3xl hover:bg-k-glass-bg transition-colors duration-300">
             <h3 className="text-xl font-bold text-k-text mb-4">Results</h3>
             <p className="text-k-text-muted leading-relaxed text-sm md:text-base">
-              We believe in delivering what we promise. On time. Every time.
+              Execution means nothing without impact. We focus on measurable growth: visibility, engagement, and conversions that scale.
             </p>
           </div>
         </div>
