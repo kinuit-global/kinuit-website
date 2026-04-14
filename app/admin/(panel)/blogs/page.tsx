@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { FileText, Plus, Edit, Trash2, Calendar, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { BlogPost } from "@/lib/blog";
 import toast from "react-hot-toast";
 import ConfirmModal from "@/components/ui/ConfirmModal";
@@ -13,6 +14,7 @@ export default function BlogsAdminPage() {
   const [error, setError] = useState("");
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
+  const router = useRouter();
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -41,7 +43,17 @@ export default function BlogsAdminPage() {
     try {
       const res = await fetch(`/api/admin/blogs?id=${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Failed to delete");
-      setPosts(posts.filter((p) => p.id !== id));
+      
+      const newPosts = posts.filter((p) => p.id !== id);
+      setPosts(newPosts);
+      
+      // Safeguard pagination: if current page is now empty, go back
+      const newTotalPages = Math.ceil(newPosts.length / itemsPerPage);
+      if (currentPage > newTotalPages && newTotalPages > 0) {
+        setCurrentPage(newTotalPages);
+      }
+      
+      router.refresh();
       toast.success("Blog post deleted successfully");
     } catch (err: any) {
       toast.error(err.message || "Error deleting post");

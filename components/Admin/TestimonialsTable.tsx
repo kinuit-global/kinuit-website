@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { 
   Trash2, 
   Building2, 
@@ -39,13 +40,22 @@ interface Testimonial {
 }
 
 export default function TestimonialsTable({ testimonials }: { testimonials: Testimonial[] }) {
+  const [localTestimonials, setLocalTestimonials] = useState<Testimonial[]>(testimonials);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [confirmId, setConfirmId] = useState<string | null>(null);
+  const router = useRouter();
+
+  // Sync with props if they change
+  useEffect(() => {
+    setLocalTestimonials(testimonials);
+  }, [testimonials]);
 
   const handleDelete = async (id: string) => {
     setDeletingId(id);
     try {
       await removeTestimonial(id);
+      setLocalTestimonials(prev => prev.filter(t => t.id !== id));
+      router.refresh();
       toast.success("Testimonial removed successfully");
     } catch (error) {
       toast.error("Failed to remove testimonial");
@@ -172,7 +182,7 @@ export default function TestimonialsTable({ testimonials }: { testimonials: Test
     <>
     <DataTable 
       columns={columns} 
-      data={testimonials} 
+      data={localTestimonials} 
       searchPlaceholder="Search name, company, message..."
       filterFn={(t, term) => 
         t.fullName.toLowerCase().includes(term.toLowerCase()) ||
