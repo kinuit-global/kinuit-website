@@ -20,7 +20,6 @@ export default function HomePage() {
   return (
     <main>
       <Hero />
-
       <Reveal><StatsGlobe /></Reveal>
       <Reveal><Pillars /></Reveal>
       <Reveal><ServicesOverview /></Reveal>

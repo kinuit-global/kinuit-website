@@ -13,10 +13,10 @@ const quickLinks = [
 ];
 
 const services = [
-  { label: "BUILD", href: "/services/build" },
-  { label: "DESIGN", href: "/services/design" },
-  { label: "GROW", href: "/services/grow" },
-  { label: "PLAN", href: "/services/plan" },
+  { label: "Build", href: "/services/build" },
+  { label: "Design", href: "/services/design" },
+  { label: "Grow", href: "/services/grow" },
+  { label: "Plan", href: "/services/plan" },
 ];
 
 const socials = [
@@ -161,7 +161,7 @@ export default function Footer() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <p>© Copyright {currentYear} Kinuit Global. All Rights Reserved.</p>
+          <p className="text-center">© Copyright {currentYear} Kinuit Global. All Rights Reserved.</p>
 
           <div className="flex gap-8">
             <Link

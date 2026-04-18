@@ -16,7 +16,7 @@ const TECHS = [
   { name: "Fin Tech", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
   { name: "Real-estate", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
   { name: "Insurance", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
-  { name: "Enterprises", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
+  { name: "E-Commerce/Q-Commerce", style: "font-medium tracking-wide text-base sm:text-lg text-k-text/90" },
 ];
 
 const fadeUp = {
@@ -49,7 +49,7 @@ export default function Hero() {
             className="
           inline-flex items-center gap-2
           px-4 py-2
-          mt-4 mb-0.5 sm:mt-6 sm:mb-6
+          mt-4 mb-4 mb-0.5 sm:mt-6 sm:mb-6
           rounded-full text-[9px] sm:text-xs text-k-text-muted
           bg-k-glass-bg border border-k-glass-border backdrop-blur-md
         "
@@ -69,16 +69,16 @@ export default function Hero() {
             {...fadeUp}
             transition={{ delay: 0.1 }}
             className="
-          tracking-tight sm:font-black sm:uppercase
+          tracking-tight sm:font-black
           leading-[1.2] sm:leading-[1.15] mb-4 sm:mb-8
           text-3xl sm:text-4xl md:text-[2.5rem] lg:text-[4rem] lg:leading-[1.05]
         "
           >
-            <span className="block mb-1 sm:mb-0 font-bold sm:font-black">
-              Branding That Builds <span className="bg-linear-to-r from-[#00D1FF] to-[#00FFF0] bg-clip-text text-transparent"> Authority. </span>
+            <span className="block mb-1 sm:mb-0 font-bold sm:font-bold">
+              Branding That Builds <span className="text-[#1E50FF]"> Authority. </span>
             </span>
-            <span className="block font-bold sm:font-black sm:uppercase text-k-text/90 sm:text-k-text">
-              Strategy That Drives <span className="bg-linear-to-r from-[#00D1FF] to-[#00FFF0] bg-clip-text text-transparent"> Growth. </span>
+            <span className="block font-bold sm:font-bold text-k-text/90 sm:text-k-text">
+              Strategy That Drives <span className="text-[#1E50FF]"> Growth. </span>
             </span>
           </motion.h1>
 

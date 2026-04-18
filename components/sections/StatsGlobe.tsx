@@ -43,20 +43,20 @@ export default function StatsGlobe() {
           transition={{ duration: 0.6 }}
           className="text-3xl md:text-4xl lg:text-5xl text-center font-extrabold text-k-text mb-8"
         >
-          OUR GLOBAL <span className="text-k-primary ml-4">IMPACT</span>
+          OUR GLOBAL<span className="text-k-primary ml-4">IMPACT</span>
         </motion.h2>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
 
           {/* Left: Stats Section (4 columns) */}
-          <div className="lg:col-span-4 flex flex-col gap-6 h-full py-2 min-h-[400px] lg:min-h-[500px]">
-            <div className="flex flex-col gap-10 w-full h-full justify-center">
+          <div className="lg:col-span-4 flex flex-col h-full min-h-[400px] lg:min-h-[500px]">
+            <div className="flex flex-col w-full h-full justify-between gap-6">
               {STATS.map((stat, idx) => (
                 <motion.div
                   key={stat.label}
                   {...fadeUp}
                   transition={{ delay: idx * 0.1 }}
                   whileHover={{ x: 8, filter: "brightness(1.1)" }}
-                  className="bg-k-card-bg border border-k-border rounded-[28px] p-6 md:p-8 hover:border-k-primary/30 transition-all duration-300 flex flex-col justify-center min-h-[130px] md:min-h-[140px]"
+                  className="bg-k-card-bg border border-k-border rounded-xl p-6 md:p-8 hover:border-k-primary/30 transition-all duration-300 flex flex-col justify-center min-h-[130px] md:min-h-[140px]"
                 >
                   <div className="text-3xl md:text-3xl font-extrabold text-k-text mb-1.5">{stat.value}</div>
                   <div className="text-[13px] text-k-text-muted font-medium tracking-wide leading-snug">{stat.label}</div>
@@ -66,7 +66,7 @@ export default function StatsGlobe() {
           </div>
 
           {/* Right: Globe Section (8 columns) */}
-          <div className="lg:col-span-8 relative w-full h-[350px] sm:h-[450px] lg:h-full min-h-[350px] lg:min-h-[500px] rounded-[48px] bg-k-card-bg border border-k-border shadow-sm dark:shadow-none overflow-hidden flex flex-col items-center pt-10 sm:pt-16">
+          <div className="lg:col-span-8 relative w-full h-[350px] sm:h-[450px] lg:h-full min-h-[350px] lg:min-h-[500px] rounded-xl bg-k-card-bg border border-k-border shadow-sm dark:shadow-none overflow-hidden flex flex-col items-center pt-10 sm:pt-16">
             {/* Text Overlay */}
             <motion.div
               {...fadeUp}
@@ -81,7 +81,7 @@ export default function StatsGlobe() {
             </motion.div>
 
             {/* Massive Globe Positioned carefully */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[-10%] pointer-events-none opacity-80 z-10 w-full h-full flex items-center justify-center">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[-15%] pointer-events-none opacity-80 z-10 w-full h-full flex items-center justify-center">
               <Globe size={globeSize * 1.2} />
             </div>
 
