@@ -62,11 +62,11 @@ export default function AboutExpertise() {
             </p>
           </div>
 
-          <div className="relative w-full aspect-square lg:aspect-[3/4] rounded-3xl overflow-hidden border border-k-border shadow-2xl group lg:sticky lg:top-32 bg-slate-50 flex items-center justify-center">
+          <div className="relative w-full aspect-square lg:aspect-[6/8]  overflow-hidden group lg:sticky lg:top-32 flex items-center justify-center">
             {/* @ts-ignore */}
             <dotlottie-wc
               src="https://lottie.host/60222ba2-1baa-49cb-95db-fbc30c7f1e09/PVmF6xhzOJ.lottie"
-              style={{ width: "100%", height: "100%" }}
+              style={{ width: "100%", height: "100%", paddingTop: "60px" }}
               autoplay
               loop
             />

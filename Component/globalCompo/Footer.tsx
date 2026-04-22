@@ -47,7 +47,7 @@ export default function Footer() {
                 alt="logo img"
                 width={220}
                 height={220}
-                className="object-contain w-[160px] sm:w-[180px] lg:w-[175px] transition-all duration-300 brightness-0 invert"
+                className="object-contain w-[160px] sm:w-[180px] lg:w-[175px] transition-all duration-300 brightness-0 invert -ml-4"
               />
             </h2>
 
