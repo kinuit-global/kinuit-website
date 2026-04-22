@@ -5,7 +5,6 @@ import Globe from "@/components/ui/Globe";
 import Container from "@/components/ui/Container";
 import { useState, useEffect } from "react";
 import { Globe as GlobeIcon } from "lucide-react";
-import SectionBadge from "@/components/ui/SectionBadge";
 
 const fadeUp: any = {
   initial: { opacity: 0, y: 20 },
@@ -29,19 +28,31 @@ export default function StatsGlobe() {
   }, []);
 
   return (
-    <section className="bg-k-bg py-10 md:py-20 overflow-hidden relative z-10">
+    <section className="bg-[#0e1114] pt-16 pb-10 md:pt-18 md:pb-20 overflow-hidden relative z-10">
       {/* Background Soft Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#0059ff]/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-[20%] left-[30%] w-[600px] h-[400px] bg-[#081ff0]/10 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[10%] w-[500px] h-[300px] bg-[#081ff0]/10 blur-[120px] rounded-full pointer-events-none" />
 
       <Container className="relative z-10">
         <div className="flex justify-center">
-          <SectionBadge icon={<GlobeIcon size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label="Our Global Impact" />
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="inline-flex items-center gap-2.5 px-4 py-2 bg-[#15191e] rounded-full border border-slate-800 backdrop-blur-md mb-8 group hover:bg-k-primary/10 transition-colors duration-300 shadow-sm"
+          >
+            <GlobeIcon size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />
+            <span className="text-slate-400 text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase">
+              Our Global Impact
+            </span>
+          </motion.div>
         </div>
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl lg:text-5xl text-center font-extrabold text-k-text mb-8"
+          className="text-3xl md:text-4xl lg:text-5xl text-center font-extrabold text-white mb-8"
         >
           OUR GLOBAL<span className="text-k-primary ml-4">IMPACT</span>
         </motion.h2>
@@ -55,28 +66,28 @@ export default function StatsGlobe() {
                   key={stat.label}
                   {...fadeUp}
                   transition={{ delay: idx * 0.1 }}
-                  whileHover={{ x: 8, filter: "brightness(1.1)" }}
-                  className="bg-k-card-bg border border-k-border rounded-xl p-6 md:p-8 hover:border-k-primary/30 transition-all duration-300 flex flex-col justify-center min-h-[130px] md:min-h-[140px]"
+                  whileHover={{ y: -4, boxShadow: "0 20px 40px -10px rgba(0,0,0,0.3)" }}
+                  className="relative group bg-[#121820] border border-[#1f2937] rounded-2xl p-6 md:p-8 transition-all duration-300 flex flex-col justify-center min-h-[130px] md:min-h-[140px] shadow-[0_4px_20px_rgb(0,0,0,0.2)] overflow-hidden"
                 >
-                  <div className="text-3xl md:text-3xl font-extrabold text-k-text mb-1.5">{stat.value}</div>
-                  <div className="text-[13px] text-k-text-muted font-medium tracking-wide leading-snug">{stat.label}</div>
+                  <div className="text-3xl md:text-3xl font-extrabold text-white mb-1.5">{stat.value}</div>
+                  <div className="text-[13px] text-slate-400 font-semibold tracking-wide leading-snug">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
           </div>
 
           {/* Right: Globe Section (8 columns) */}
-          <div className="lg:col-span-8 relative w-full h-[350px] sm:h-[450px] lg:h-full min-h-[350px] lg:min-h-[500px] rounded-xl bg-k-card-bg border border-k-border shadow-sm dark:shadow-none overflow-hidden flex flex-col items-center pt-10 sm:pt-16">
+          <div className="lg:col-span-8 relative w-full h-[350px] sm:h-[450px] lg:h-full min-h-[350px] lg:min-h-[500px] rounded-2xl bg-[#121820] border border-[#1f2937] shadow-[0_4px_20px_rgb(0,0,0,0.2)] overflow-hidden flex flex-col items-center pt-10 sm:pt-16">
             {/* Text Overlay */}
             <motion.div
               {...fadeUp}
               transition={{ delay: 0.3 }}
               className="relative z-30 flex flex-col items-center mb-8 text-center px-6"
             >
-              <h3 className="text-k-text text-lg md:text-xl font-bold tracking-tight mb-2.5">Based in India</h3>
-              <div className="flex items-center gap-2 px-3.5 py-1.5 bg-k-glass-bg rounded-full border border-k-glass-border backdrop-blur-md">
+              <h3 className="text-white text-lg md:text-xl font-bold tracking-tight mb-2.5">Based in India</h3>
+              <div className="flex items-center gap-2 px-3.5 py-1.5 bg-[#161c24] rounded-full border border-[#263140] shadow-sm">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#1DE038] animate-pulse shadow-[0_0_8px_#1DE038]"></div>
-                <span className="text-k-text-muted text-[10px] font-bold tracking-[0.2em] uppercase">Available Worldwide</span>
+                <span className="text-slate-300 text-[10px] font-bold tracking-[0.15em] uppercase">Available Worldwide</span>
               </div>
             </motion.div>
 
@@ -86,7 +97,7 @@ export default function StatsGlobe() {
             </div>
 
             {/* Bottom Inner Edge Fader */}
-            <div className="absolute bottom-0 left-0 w-full h-32 bg-linear-to-t from-k-card-bg to-transparent z-20 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#121820] via-[#121820]/80 to-transparent z-20 pointer-events-none opacity-30" />
           </div>
 
         </div>

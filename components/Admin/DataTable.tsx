@@ -56,13 +56,13 @@ export default function DataTable<T extends { id: string | number }>({
   return (
     <div className="flex flex-col w-full h-full">
       {/* Header with Search */}
-      <div className="p-6 border-b border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <h2 className="text-xl font-black text-white uppercase tracking-tighter">
-            ALL <span className="text-blue-200">SUBMISSIONS</span>
+      <div className="p-6 border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <h2 className="text-xl font-black text-slate-950 uppercase tracking-tighter">
+            ALL <span className="text-[#081ff0]">SUBMISSIONS</span>
         </h2>
         
         <div className="relative group w-full md:w-80">
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-blue-500 transition-colors">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#081ff0] transition-colors">
                 <Search size={16} />
             </div>
             <input 
@@ -70,7 +70,7 @@ export default function DataTable<T extends { id: string | number }>({
                 placeholder={searchPlaceholder}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 pl-12 pr-4 focus:outline-none focus:border-blue-500/50 transition-all text-sm font-medium text-white placeholder:text-white/20"
+                className="w-full bg-slate-50 border border-slate-200 rounded-2xl py-3 pl-12 pr-4 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-sm font-semibold text-slate-900 placeholder:text-slate-300 shadow-sm"
             />
         </div>
       </div>
@@ -79,7 +79,7 @@ export default function DataTable<T extends { id: string | number }>({
       <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-white/3 text-[10px] font-black uppercase tracking-[0.2em] text-white/40">
+            <tr className="bg-slate-50 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
               {columns.map((column, i) => (
                 <th key={i} className={cn("px-6 py-4", column.className)}>
                   {column.header}
@@ -87,7 +87,7 @@ export default function DataTable<T extends { id: string | number }>({
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/5">
+          <tbody className="divide-y divide-slate-100">
             <AnimatePresence mode="popLayout">
               {paginatedData.map((item, idx) => (
                 <motion.tr 
@@ -96,13 +96,15 @@ export default function DataTable<T extends { id: string | number }>({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ delay: idx * 0.05 }}
-                  className="group hover:bg-white/2 transition-colors"
+                  className="group hover:bg-slate-50/50 transition-colors bg-white"
                 >
                   {columns.map((column, i) => (
                     <td key={i} className={cn("px-6 py-6", column.className)}>
-                      {typeof column.accessor === "function" 
-                        ? column.accessor(item) 
-                        : (item[column.accessor] as React.ReactNode)}
+                      <div className="text-slate-900">
+                        {typeof column.accessor === "function" 
+                          ? column.accessor(item) 
+                          : (item[column.accessor] as React.ReactNode)}
+                      </div>
                     </td>
                   ))}
                 </motion.tr>
@@ -122,16 +124,16 @@ export default function DataTable<T extends { id: string | number }>({
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ delay: idx * 0.05 }}
-              className="bg-white/5 border border-white/10 rounded-3xl p-6 space-y-6"
+              className="bg-white border border-slate-200 rounded-3xl p-6 space-y-6 shadow-sm"
             >
               {columns.map((column, i) => (
                 <div key={i} className={cn("space-y-2", column.className)}>
                   {column.header !== "Actions" && (
-                    <p className="text-[10px] font-black uppercase tracking-widest text-white/20">
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
                       {column.header}
                     </p>
                   )}
-                  <div className="text-white">
+                  <div className="text-slate-900">
                     {typeof column.accessor === "function" 
                       ? column.accessor(item) 
                       : (item[column.accessor] as React.ReactNode)}
@@ -146,27 +148,27 @@ export default function DataTable<T extends { id: string | number }>({
       {/* Empty State */}
       {filteredData.length === 0 && (
         <div className="py-20 text-center">
-            <div className="flex flex-col items-center justify-center space-y-4 opacity-20">
-                <Inbox size={48} />
-                <p className="text-sm font-black uppercase tracking-[0.3em]">{emptyMessage}</p>
+            <div className="flex flex-col items-center justify-center space-y-4 opacity-10">
+                <Inbox size={48} className="text-slate-900" />
+                <p className="text-sm font-black uppercase tracking-[0.3em] text-slate-900">{emptyMessage}</p>
             </div>
         </div>
       )}
 
       {/* Pagination Controls */}
       {totalPages > 1 && (
-        <div className="p-6 border-t border-white/5 flex items-center justify-between">
-          <p className="text-[10px] font-black uppercase tracking-widest text-white/40">
-            Showing <span className="text-white">{(currentPage - 1) * pageSize + 1}</span>-
-            <span className="text-white">{Math.min(currentPage * pageSize, filteredData.length)}</span> of 
-            <span className="text-white"> {filteredData.length}</span> results
+        <div className="p-6 border-t border-slate-200 flex items-center justify-between">
+          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+            Showing <span className="text-slate-900">{(currentPage - 1) * pageSize + 1}</span>-
+            <span className="text-slate-900">{Math.min(currentPage * pageSize, filteredData.length)}</span> of 
+            <span className="text-slate-900"> {filteredData.length}</span> results
           </p>
           
           <div className="flex items-center gap-2">
             <button 
               onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
               disabled={currentPage === 1}
-              className="p-2 rounded-xl bg-white/5 border border-white/10 text-white/40 hover:text-white hover:bg-white/10 disabled:opacity-20 transition-all"
+              className="p-2 rounded-xl bg-white border border-slate-200 text-slate-400 hover:text-[#081ff0] hover:bg-slate-50 disabled:opacity-20 transition-all shadow-sm"
             >
               <ChevronLeft size={18} />
             </button>
@@ -179,8 +181,8 @@ export default function DataTable<T extends { id: string | number }>({
                   className={cn(
                     "w-8 h-8 rounded-lg text-[10px] font-black transition-all",
                     currentPage === i + 1 
-                      ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20" 
-                      : "text-white/40 hover:bg-white/5 hover:text-white"
+                      ? "bg-[#081ff0] text-white shadow-lg shadow-[#081ff0]/20" 
+                      : "text-slate-400 hover:bg-slate-50 hover:text-slate-900"
                   )}
                 >
                   {i + 1}
@@ -191,7 +193,7 @@ export default function DataTable<T extends { id: string | number }>({
             <button 
               onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
               disabled={currentPage === totalPages}
-              className="p-2 rounded-xl bg-white/5 border border-white/10 text-white/40 hover:text-white hover:bg-white/10 disabled:opacity-20 transition-all"
+              className="p-2 rounded-xl bg-white border border-slate-200 text-slate-400 hover:text-[#081ff0] hover:bg-slate-50 disabled:opacity-20 transition-all shadow-sm"
             >
               <ChevronRight size={18} />
             </button>

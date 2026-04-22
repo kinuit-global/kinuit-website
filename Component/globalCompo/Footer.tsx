@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { Linkedin, Instagram, Twitter } from "lucide-react";
 
 const quickLinks = [
@@ -31,21 +32,27 @@ export default function Footer() {
   const hoverEffect = { scale: 1.05, y: -3, transition: { duration: 0.3 } };
 
   return (
-    <footer className="relative bg-k-bg border-t border-k-border pt-14 pb-10">
+    <footer className="relative bg-[#0e1114] border-t border-[#1f2937] pt-14 pb-10">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* LEFT CONTENT */}
           <div className="space-y-6">
             <h2
-              className="uppercase text-k-text text-2xl font-semibold"
+              className="uppercase text-white text-2xl font-semibold"
               style={{ fontFamily: "var(--font-lato)" }}
             >
-              Kinuit
+              <Image
+                src="/logo.png"
+                alt="logo img"
+                width={220}
+                height={220}
+                className="object-contain w-[160px] sm:w-[180px] lg:w-[175px] transition-all duration-300 brightness-0 invert"
+              />
             </h2>
 
             <p
-              className="text-k-text-muted text-sm leading-relaxed max-w-sm"
+              className="text-slate-400 text-sm leading-relaxed max-w-sm"
               style={{ fontFamily: "var(--font-lato)" }}
             >
               We are the experts who design your brand, build your tech, and
@@ -67,11 +74,10 @@ export default function Footer() {
                     flex items-center justify-center
                     w-10 h-10
                     rounded-full
-                    bg-k-glass-bg border border-k-glass-border
-                    text-k-text-muted hover:text-blue-500
-                    hover:bg-k-glass-bg
-                    transition-all duration-300
-                    backdrop-blur-md"
+                    bg-[#15191e] border border-[#263140]
+                    text-slate-400 hover:text-white
+                    hover:bg-[#081ff0] hover:border-transparent
+                    transition-all duration-300"
                 >
                   {social.icon}
                 </motion.a>
@@ -81,7 +87,7 @@ export default function Footer() {
 
           {/* QUICK LINKS */}
           <div>
-            <h3 className="text-k-text text-sm font-semibold mb-6 uppercase tracking-wider">
+            <h3 className="text-white text-sm font-semibold mb-6 uppercase tracking-wider">
               Navigation
             </h3>
 
@@ -94,7 +100,7 @@ export default function Footer() {
                 >
                   <Link
                     href={link.href}
-                    className="text-k-text-muted text-sm hover:text-k-text transition"
+                    className="text-slate-400 text-sm hover:text-white transition"
                   >
                     {link.label}
                   </Link>
@@ -105,7 +111,7 @@ export default function Footer() {
 
           {/* EXPERTISE */}
           <div>
-            <h3 className="text-k-text text-sm font-semibold mb-6 uppercase tracking-wider">
+            <h3 className="text-white text-sm font-semibold mb-6 uppercase tracking-wider">
               Expertise
             </h3>
 
@@ -118,7 +124,7 @@ export default function Footer() {
                 >
                   <Link
                     href={service.href}
-                    className="text-k-text-muted text-sm hover:text-k-text transition"
+                    className="text-slate-400 text-sm hover:text-white transition"
                   >
                     {service.label}
                   </Link>
@@ -129,20 +135,20 @@ export default function Footer() {
 
           {/* CONTACT */}
           <div>
-            <h3 className="text-k-text text-sm font-semibold mb-6 uppercase tracking-wider">
+            <h3 className="text-white text-sm font-semibold mb-6 uppercase tracking-wider">
               Get In Touch
             </h3>
 
-            <div className="space-y-4 text-sm text-k-text-muted">
-              <a href="mailto:hello@kinuit.com" className="flex items-center gap-3 hover:text-k-text transition-colors group">
-                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-k-glass-bg border border-k-glass-border group-hover:bg-k-glass-bg font-black italic">
+            <div className="space-y-4 text-sm text-slate-400">
+              <a href="mailto:hello@kinuit.com" className="flex items-center gap-3 hover:text-white transition-colors group">
+                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-[#15191e] border border-[#263140] group-hover:bg-[#081ff0] group-hover:border-[#081ff0] group-hover:text-white font-black italic transition-colors">
                   @
                 </span>
                 hello@kinuit.com
               </a>
 
               <div className="flex items-center gap-3">
-                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-k-glass-bg border border-k-glass-border shrink-0">
+                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-[#15191e] border border-[#263140] shrink-0">
                   📍
                 </span>
                 <span className="text-sm">Available Worldwide</span>
@@ -152,11 +158,11 @@ export default function Footer() {
         </div>
 
         {/* DIVIDER */}
-        <div className="h-px bg-k-border my-10" />
+        <div className="h-px bg-[#1f2937] my-10" />
 
         {/* COPYRIGHT */}
         <motion.div
-          className="flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-k-text-muted uppercase tracking-[0.15em] font-medium"
+          className="flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-400 uppercase tracking-[0.15em] font-medium"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
@@ -166,13 +172,13 @@ export default function Footer() {
           <div className="flex gap-8">
             <Link
               href="/terms"
-              className="cursor-pointer hover:text-k-text transition"
+              className="cursor-pointer hover:text-white transition"
             >
               Terms & Conditions
             </Link>
             <Link
               href="/privacy"
-              className="cursor-pointer hover:text-k-text transition"
+              className="cursor-pointer hover:text-white transition"
             >
               Privacy Policy
             </Link>

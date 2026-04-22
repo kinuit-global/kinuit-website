@@ -27,56 +27,64 @@ export default function ConfirmModal({
 }: ConfirmModalProps) {
   if (!isOpen) return null;
 
-  const colorMap = {
-    danger: "text-red-500 bg-red-500/10 border-red-500/20 hover:bg-red-600 shadow-red-600/20",
-    warning: "text-yellow-500 bg-yellow-500/10 border-yellow-500/20 hover:bg-yellow-600 shadow-yellow-600/20",
-    info: "text-blue-500 bg-blue-500/10 border-blue-500/20 hover:bg-blue-600 shadow-blue-600/20",
+  const typeStyles = {
+    danger: {
+      icon: "text-red-600",
+      iconBg: "bg-red-50 border-red-100",
+      button: "bg-red-600 hover:bg-red-700 shadow-red-600/20",
+    },
+    warning: {
+      icon: "text-amber-600",
+      iconBg: "bg-amber-50 border-amber-100",
+      button: "bg-amber-600 hover:bg-amber-700 shadow-amber-600/20",
+    },
+    info: {
+      icon: "text-[#081ff0]",
+      iconBg: "bg-blue-50 border-blue-100",
+      button: "bg-[#081ff0] hover:bg-[#0618cc] shadow-[#081ff0]/20",
+    },
   };
 
-  const btnColor = colorMap[type].split(" ")[3];
-  const shadowColor = colorMap[type].split(" ")[4];
+  const styles = typeStyles[type];
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
           />
 
           {/* Modal Container */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative w-full max-w-md bg-white/5 border border-white/10 rounded-3xl backdrop-blur-xl p-8 shadow-2xl overflow-hidden"
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            className="relative w-full max-w-md bg-white border border-slate-200 rounded-[2.5rem] p-8 shadow-2xl overflow-hidden"
           >
-            {/* Background Glow */}
-            <div className={`absolute -top-24 -right-24 w-48 h-48 rounded-full blur-[80px] opacity-20 ${type === 'danger' ? 'bg-red-500' : 'bg-blue-500'}`} />
-
             <div className="relative z-10 space-y-6">
               <div className="flex items-center justify-between">
-                <div className={`p-3 rounded-2xl ${colorMap[type].split(" ").slice(1, 3).join(" ")} text-white`}>
-                  <AlertCircle size={24} className={colorMap[type].split(" ")[0]} />
+                <div className={`p-4 rounded-2xl ${styles.iconBg} border flex items-center justify-center`}>
+                  <AlertCircle size={28} className={styles.icon} />
                 </div>
                 <button
                   onClick={onClose}
-                  className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-white/40 hover:text-white transition-colors"
+                  className="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-400 hover:text-slate-900 transition-colors border border-slate-100"
                 >
                   <X size={20} />
                 </button>
               </div>
 
-              <div className="space-y-2">
-                <h3 className="text-2xl font-black text-white uppercase tracking-tight">
+              <div className="space-y-3">
+                <h3 className="text-3xl font-black text-slate-950 uppercase tracking-tighter leading-none">
                   {title}
                 </h3>
-                <p className="text-white/60 text-sm leading-relaxed">
+                <p className="text-slate-600 text-sm font-medium leading-relaxed">
                   {message}
                 </p>
               </div>
@@ -84,7 +92,7 @@ export default function ConfirmModal({
               <div className="flex gap-4 pt-2">
                 <button
                   onClick={onClose}
-                  className="flex-1 px-6 py-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-black uppercase tracking-widest transition-all"
+                  className="flex-1 px-6 py-4 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-900 text-xs font-black uppercase tracking-widest transition-all"
                 >
                   {cancelText}
                 </button>
@@ -93,7 +101,7 @@ export default function ConfirmModal({
                     onConfirm();
                     onClose();
                   }}
-                  className={`flex-1 px-6 py-3 rounded-2xl text-white text-xs font-black uppercase tracking-widest transition-all shadow-lg ${btnColor} ${shadowColor}`}
+                  className={`flex-1 px-6 py-4 rounded-2xl text-white text-xs font-black uppercase tracking-widest transition-all shadow-lg ${styles.button}`}
                 >
                   {confirmText}
                 </button>

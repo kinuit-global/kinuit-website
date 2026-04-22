@@ -38,7 +38,7 @@ export default function ShareButtons({ title }: ShareButtonsProps) {
     <div className="flex flex-wrap gap-3 mt-4">
       <button
         onClick={shareOnTwitter}
-        className="flex items-center gap-2 px-3 py-2 bg-white/5 border border-white/10 rounded-xl hover:bg-blue-500/10 hover:border-blue-500/30 text-white/40 hover:text-white transition-all text-[10px] font-black uppercase tracking-widest group"
+        className="flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl hover:bg-blue-50 hover:border-blue-200 text-slate-400 hover:text-[#1DA1F2] transition-all text-[10px] font-black uppercase tracking-widest group shadow-sm"
         title="Share on X"
       >
         <Twitter size={14} className="group-hover:text-[#1DA1F2] transition-colors" />
@@ -47,7 +47,7 @@ export default function ShareButtons({ title }: ShareButtonsProps) {
 
       <button
         onClick={shareOnLinkedin}
-        className="flex items-center gap-2 px-3 py-2 bg-white/5 border border-white/10 rounded-xl hover:bg-blue-500/10 hover:border-blue-500/30 text-white/40 hover:text-white transition-all text-[10px] font-black uppercase tracking-widest group"
+        className="flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl hover:bg-blue-50 hover:border-blue-200 text-slate-400 hover:text-[#0077B5] transition-all text-[10px] font-black uppercase tracking-widest group shadow-sm"
         title="Share on LinkedIn"
       >
         <Linkedin size={14} className="group-hover:text-[#0077B5] transition-colors" />
@@ -56,7 +56,7 @@ export default function ShareButtons({ title }: ShareButtonsProps) {
 
       <button
         onClick={handleCopy}
-        className="flex items-center gap-2 px-3 py-2 bg-white/5 border border-white/10 rounded-xl hover:bg-blue-500/10 hover:border-blue-500/30 text-white/40 hover:text-white transition-all text-[10px] font-black uppercase tracking-widest group"
+        className="flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl hover:bg-blue-50 hover:border-blue-200 text-slate-400 hover:text-k-primary transition-all text-[10px] font-black uppercase tracking-widest group shadow-sm"
         title="Copy Link"
       >
         {copied ? (

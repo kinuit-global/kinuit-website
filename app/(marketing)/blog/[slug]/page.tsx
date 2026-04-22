@@ -122,7 +122,7 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
                   Expert perspectives from the frontlines of digital innovation at Kinuit Global.
                 </p>
                 <div className="mt-8 pt-8 border-t border-k-border">
-                  <h5 className="text-k-text-muted/40 text-[10px] font-black tracking-widest uppercase mb-4">Share Article</h5>
+                  <h5 className="text-slate-400 text-[10px] font-black tracking-widest uppercase mb-4">Share Article</h5>
                   <ShareButtons title={post.title} />
                 </div>
               </div>

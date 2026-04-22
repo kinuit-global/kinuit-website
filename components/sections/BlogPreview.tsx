@@ -46,21 +46,14 @@ export default function BlogPreview() {
           >
           <Link href="/blog" aria-label="View all blog posts">
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-3 h-8 pr-4 rounded-full border border-k-border bg-k-card-bg w-fit"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="group flex items-center justify-center gap-3 text-k-text text-[13px] sm:text-sm font-semibold pl-6 pr-2.5 py-2 rounded-full border border-[#e2e8f0] bg-white hover:bg-slate-50 transition-all duration-300 shadow-sm"
               >
-                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-k-primary">
-                  <ArrowUpRight
-                    size={14}
-                    strokeWidth={2.5}
-                    className="text-black"
-                  />
-                </span>
-
-                <span className="text-sm text-k-text font-medium">
-                  Explore all
-                </span>
+                Explore all
+                <div className="w-8 h-8 rounded-full bg-[#081ff0] flex items-center justify-center shadow-sm">
+                  <ArrowUpRight className="w-4 h-4 text-white group-hover:translate-x-[1.5px] group-hover:-translate-y-[1.5px] transition-transform duration-300" strokeWidth={2.5} />
+                </div>
               </motion.button>
             </Link>
           </motion.div>

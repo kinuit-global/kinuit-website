@@ -68,7 +68,7 @@ export default function AdminSidebar({
       {/* Mobile Backdrop */}
       <div 
         className={cn(
-          "fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] lg:hidden transition-opacity duration-300",
+          "fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[100] lg:hidden transition-opacity duration-300",
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         )}
         onClick={onClose}
@@ -76,7 +76,7 @@ export default function AdminSidebar({
 
       <aside 
         className={cn(
-          "fixed left-0 top-0 h-screen bg-[#0A0A0A] border-r border-white/5 flex flex-col transition-all duration-300 z-[110] overflow-hidden",
+          "fixed left-0 top-0 h-screen bg-white border-r border-slate-200 flex flex-col transition-all duration-300 z-[110] overflow-hidden shadow-xl lg:shadow-none",
           // Width logic
           isOpen ? "w-64" : "w-0 lg:w-16", 
           !isCollapsed && "xl:w-64", 

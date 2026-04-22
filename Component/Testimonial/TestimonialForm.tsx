@@ -141,7 +141,7 @@ export default function TestimonialForm() {
                   required
                   name="fullName"
                   placeholder="Jane Smith"
-                  className="w-full bg-k-bg/50 border border-k-border rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-k-primary/50 transition-colors text-k-text"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-k-text placeholder-slate-400 font-semibold shadow-sm hover:border-slate-400"
                 />
               </div>
             </div>
@@ -154,7 +154,7 @@ export default function TestimonialForm() {
                   required
                   name="phone"
                   placeholder="+1 (555) 000-0000"
-                  className="w-full bg-k-bg/50 border border-k-border rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-k-primary/50 transition-colors text-k-text"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-k-text placeholder-slate-400 font-semibold shadow-sm hover:border-slate-400"
                 />
               </div>
             </div>
@@ -168,7 +168,7 @@ export default function TestimonialForm() {
                   type="email"
                   name="email"
                   placeholder="jane@example.com"
-                  className="w-full bg-k-bg/50 border border-k-border rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-k-primary/50 transition-colors text-k-text"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-k-text placeholder-slate-400 font-semibold shadow-sm hover:border-slate-400"
                 />
               </div>
             </div>
@@ -182,7 +182,7 @@ export default function TestimonialForm() {
                 required
                 name="companyName"
                 placeholder="Acme Corp"
-                className="w-full bg-k-bg/50 border border-k-border rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-k-primary/50 transition-colors text-k-text"
+                className="w-full bg-slate-50 border border-slate-300 rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-k-text placeholder-slate-400 font-semibold shadow-sm hover:border-slate-400"
               />
             </div>
           </div>
@@ -264,7 +264,7 @@ export default function TestimonialForm() {
               name="testimonial"
               placeholder="Tell us about your experience working with us..."
               rows={5}
-              className="w-full bg-k-bg/50 border border-k-border rounded-2xl p-4 focus:outline-none focus:border-k-primary/50 transition-colors text-k-text resize-none"
+              className="w-full bg-slate-50 border border-slate-300 rounded-2xl p-4 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-k-text placeholder-slate-400 font-semibold shadow-sm hover:border-slate-400 resize-none"
             />
           </div>
         </div>

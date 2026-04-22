@@ -28,42 +28,42 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-[80vh] flex flex-col items-center justify-center p-6 bg-transparent">
+    <div className="min-h-[80vh] flex flex-col items-center justify-center p-6 bg-slate-50">
       <div className="w-full max-w-md space-y-8 animate-in fade-in slide-in-from-bottom-5 duration-700">
         <div className="flex flex-col items-center text-center space-y-4">
-          <div className="w-20 h-20 bg-blue-500/10 rounded-2xl flex items-center justify-center border border-blue-500/20 shadow-2xl relative group">
-            <ShieldCheck size={40} className="text-blue-500 group-hover:scale-110 transition-transform duration-500" />
-            <div className="absolute inset-0 bg-blue-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          <div className="w-20 h-20 bg-[#081ff0]/10 rounded-2xl flex items-center justify-center border border-[#081ff0]/20 shadow-xl relative group">
+            <ShieldCheck size={40} className="text-[#081ff0] group-hover:scale-110 transition-transform duration-500" />
+            <div className="absolute inset-0 bg-[#081ff0]/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
           </div>
-          <h1 className="text-4xl font-black text-white uppercase tracking-tighter">
-            ADMIN <span className="text-blue-500 italic">LOGIN</span>
+          <h1 className="text-4xl font-black text-slate-900 uppercase tracking-tighter">
+            ADMIN <span className="text-[#081ff0] italic">LOGIN</span>
           </h1>
-          <p className="text-white/40 text-sm font-medium max-w-xs uppercase tracking-widest">
+          <p className="text-slate-500 text-sm font-medium max-w-xs uppercase tracking-widest">
             Enter your credentials to access the Kinuit agency management dashboard.
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="bg-white/3 border border-white/10 rounded-3xl p-8 shadow-2xl backdrop-blur-sm space-y-6">
+          <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-xl space-y-6">
             <div className="space-y-2">
-              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 ml-1">Username</label>
+              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Username</label>
               <div className="relative group">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-blue-500 transition-colors">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#081ff0] transition-colors">
                   <User size={18} />
                 </div>
                 <input 
                   required
                   name="username"
                   placeholder="kinuit_admin"
-                  className="w-full bg-black/50 border border-white/5 rounded-2xl py-4 pl-12 pr-4 focus:outline-none focus:border-blue-500/50 transition-all text-white font-medium"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-2xl py-4 pl-12 pr-4 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-slate-900 font-semibold placeholder:text-slate-300 shadow-sm"
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 ml-1">Password</label>
+              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Password</label>
               <div className="relative group">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-blue-500 transition-colors">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#081ff0] transition-colors">
                   <Lock size={18} />
                 </div>
                 <input 
@@ -71,12 +71,12 @@ export default function LoginPage() {
                   type={showPassword ? "text" : "password"}
                   name="password"
                   placeholder="••••••••"
-                  className="w-full bg-black/50 border border-white/5 rounded-2xl py-4 pl-12 pr-12 focus:outline-none focus:border-blue-500/50 transition-all text-white font-medium"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-2xl py-4 pl-12 pr-12 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-slate-900 font-semibold placeholder:text-slate-300 shadow-sm"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white/20 hover:text-white transition-colors focus:outline-none"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors focus:outline-none"
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -92,7 +92,7 @@ export default function LoginPage() {
 
             <button 
               disabled={isSubmitting}
-              className="w-full bg-white text-[#070707] font-black py-4 rounded-2xl uppercase tracking-[0.2em] text-sm hover:bg-blue-500 hover:text-white transition-all flex items-center justify-center gap-2 group disabled:opacity-50"
+              className="w-full bg-[#081ff0] text-white font-black py-4 rounded-2xl uppercase tracking-[0.2em] text-sm hover:bg-[#0618cc] shadow-lg shadow-[#081ff0]/20 transition-all flex items-center justify-center gap-2 group disabled:opacity-50"
             >
               {isSubmitting ? (
                 <Loader2 className="animate-spin" size={18} />
@@ -106,7 +106,7 @@ export default function LoginPage() {
           </div>
         </form>
 
-        <p className="text-center text-white/20 text-[10px] font-black uppercase tracking-[0.3em]">
+        <p className="text-center text-slate-400 text-[10px] font-black uppercase tracking-[0.3em]">
           Secure Access System v1.0
         </p>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { ApproachSteps } from "@/lib/Approach";
-import { ArrowRight, ShieldCheck, Combine, Zap } from "lucide-react";
+import { ArrowRight, Puzzle, RefreshCw, Target } from "lucide-react";
 import Image from "next/image";
 
 export default function OurApproach() {
@@ -20,7 +20,7 @@ export default function OurApproach() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 0.6, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-k-text-muted text-lg md:text-xl font-medium"
+          className="text-k-tex text-lg md:text-xl font-medium"
         >
           Built on clarity, driven by strategy, executed for impact.
         </motion.p>
@@ -52,27 +52,26 @@ export default function OurApproach() {
         */}
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
           {ApproachSteps.map((step, index) => (
             <motion.div
               key={step.id}
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
-              className="p-8 rounded-2xl border border-k-border 
-              backdrop-blur-xl bg-k-card-bg
-              hover:bg-k-glass-bg hover:border-k-glass-border transition-all duration-300 flex flex-col items-start"
+              className="p-8 md:p-10 rounded-[28px] border border-[#a5b4fc] shadow-[0_8px_30px_rgb(0,0,0,0.04)] 
+              bg-k-card-bg
+              hover:scale-[1.03] hover:-translate-y-1 hover:shadow-[0_16px_40px_rgb(0,0,0,0.08)] transition-all duration-300 flex flex-col items-start"
             >
-              <div className="relative mb-6">
-                <span className="text-5xl md:text-6xl font-black text-k-primary opacity-30 dark:opacity-20 absolute -top-8 -left-2 select-none">0{step.id}</span>
-                <div className="p-3 bg-k-glass-bg flex rounded-xl border border-k-glass-border text-k-primary relative z-10">
-                  {step.title === "Strategic by Design" && <ShieldCheck size={24} />}
-                  {step.title === "Built for Consistency" && <Combine size={24} />}
-                  {step.title === "Focused on Impact" && <Zap size={24} />}
+              <div className="relative mb-8">
+                <div className="w-[52px] h-[52px] bg-[#081ff0] flex items-center justify-center rounded-[16px] text-white shadow-md">
+                  {step.title === "Strategic by Design" && <Puzzle size={24} strokeWidth={2} />}
+                  {step.title === "Built for Consistency" && <RefreshCw size={24} strokeWidth={2} />}
+                  {step.title === "Focused on Impact" && <Target size={24} strokeWidth={2} />}
                 </div>
               </div>
 
-              <h3 className="text-k-text text-2xl font-extrabold mb-3 tracking-tight flex items-center gap-3">
+              <h3 className="text-k-text text-xl md:text-[22px] font-bold mb-4 tracking-tight flex items-center gap-3">
                 {step.title}
               </h3>
 
@@ -82,7 +81,7 @@ export default function OurApproach() {
                 </div>
               )}
 
-              <p className="text-k-text-muted tracking-normal font-light text-base md:text-lg leading-relaxed">
+              <p className="text-k-text/70 tracking-normal font-normal text-[15px] leading-[1.7]">
                 {step.description}
               </p>
             </motion.div>

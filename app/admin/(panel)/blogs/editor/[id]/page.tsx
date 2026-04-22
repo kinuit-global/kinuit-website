@@ -182,10 +182,10 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
     }
   };
 
-  if (loading) return <div className="text-white p-12">Loading editor...</div>;
+  if (loading) return <div className="text-slate-400 p-12">Loading editor...</div>;
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 pb-24 text-white">
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 pb-24 text-slate-900">
       <input 
         type="file" 
         accept="image/*" 
@@ -194,20 +194,20 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
         onChange={handleFileUpload} 
       />
 
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-6">
         <div className="flex items-center gap-4">
-          <Link href="/admin/blogs" className="p-3 bg-white/5 hover:bg-white/10 rounded-2xl transition-colors">
-            <ChevronLeft size={20} />
+          <Link href="/admin/blogs" className="p-3 bg-white border border-slate-200 hover:bg-slate-50 rounded-2xl transition-colors shadow-sm">
+            <ChevronLeft size={20} className="text-slate-600" />
           </Link>
           <h1 className="text-3xl font-black uppercase tracking-tighter">
-            {isNew ? "CREATE" : "EDIT"} <span className="text-blue-500 italic">POST</span>
+            {isNew ? "CREATE" : "EDIT"} <span className="text-[#081ff0] italic">POST</span>
           </h1>
         </div>
         
         <button 
           onClick={handleSave}
           disabled={saving || !!uploadingImage}
-          className="flex items-center justify-center w-full md:w-auto gap-2 px-8 py-3 rounded-2xl bg-blue-600 hover:bg-blue-700 transition-all font-black uppercase tracking-widest text-xs shadow-lg shadow-blue-600/20 disabled:opacity-50"
+          className="flex items-center justify-center w-full md:w-auto gap-2 px-8 py-3 rounded-2xl bg-[#081ff0] hover:bg-[#0618cc] transition-all font-black uppercase tracking-widest text-xs shadow-lg shadow-[#081ff0]/20 text-white disabled:opacity-50"
         >
           <Save size={16} /> {saving ? "SAVING..." : "SAVE POST"}
         </button>
@@ -217,54 +217,56 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
         {/* Left Column: Editor */}
         <div className="lg:col-span-2 space-y-8">
           {/* Basic Info */}
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 space-y-6 isolate">
-            <h2 className="text-xl font-bold uppercase tracking-widest text-white/40 mb-6 flex items-center gap-2">
-              <AlignLeft size={18} className="text-blue-500" /> Core Meta
+          <div className="bg-white border border-slate-200 rounded-3xl p-8 space-y-6 shadow-sm">
+            <h2 className="text-xl font-bold uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
+              <AlignLeft size={18} className="text-[#081ff0]" /> Core Meta
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2 md:col-span-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-white/50">Title</label>
-                <input name="title" value={blogData.title} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition-all text-sm font-bold" placeholder="High-Impact Title" />
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Title</label>
+                <input name="title" value={blogData.title} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-sm font-bold text-slate-900" placeholder="High-Impact Title" />
               </div>
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-white/50">Slug</label>
-                <input name="slug" value={blogData.slug} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition-all text-sm" placeholder="url-friendly-slug" />
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Slug</label>
+                <input name="slug" value={blogData.slug} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-sm text-slate-900" placeholder="url-friendly-slug" />
               </div>
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-white/50">Category</label>
-                <select name="category" value={blogData.category} onChange={handleChange as any} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition-all text-sm appearance-none">
-                  <option value="BUILD" className="bg-black text-white">BUILD</option>
-                  <option value="DESIGN" className="bg-black text-white">DESIGN</option>
-                  <option value="GROW" className="bg-black text-white">GROW</option>
-                  <option value="PLAN" className="bg-black text-white">PLAN</option>
-                </select>
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Category</label>
+                <div className="relative">
+                  <select name="category" value={blogData.category} onChange={handleChange as any} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-sm appearance-none text-slate-900">
+                    <option value="BUILD">BUILD</option>
+                    <option value="DESIGN">DESIGN</option>
+                    <option value="GROW">GROW</option>
+                    <option value="PLAN">PLAN</option>
+                  </select>
+                </div>
               </div>
               <div className="space-y-2 md:col-span-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-white/50">Excerpt</label>
-                <textarea name="excerpt" value={blogData.excerpt} onChange={handleChange} className="w-full h-20 bg-black/20 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition-all text-sm resize-none" placeholder="Short description..." />
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Excerpt</label>
+                <textarea name="excerpt" value={blogData.excerpt} onChange={handleChange} className="w-full h-20 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-sm resize-none text-slate-900" placeholder="Short description..." />
               </div>
             </div>
           </div>
 
           {/* Content Editor */}
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 space-y-6 relative overflow-hidden flex flex-col h-[700px]">
+          <div className="bg-white border border-slate-200 rounded-3xl p-8 space-y-6 shadow-sm relative overflow-hidden flex flex-col h-[700px]">
              
             <div className="flex items-center justify-between mb-4 flex-wrap gap-4">
-              <h2 className="text-xl font-bold uppercase tracking-widest text-white/40 flex items-center gap-2">
+              <h2 className="text-xl font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2">
                 <FileText size={18} className="text-purple-500" /> Story Content
               </h2>
               
-              <div className="flex bg-black/20 p-1 rounded-xl border border-white/5">
+              <div className="flex bg-slate-50 p-1 rounded-xl border border-slate-200">
                 <button 
                   onClick={() => setMode("write")} 
-                  className={`px-4 py-2 rounded-lg text-[10px] font-black tracking-widest uppercase transition-all flex items-center gap-2 ${mode === "write" ? "bg-white/10 text-white" : "text-white/40 hover:text-white"}`}
+                  className={`px-4 py-2 rounded-lg text-[10px] font-black tracking-widest uppercase transition-all flex items-center gap-2 ${mode === "write" ? "bg-white text-[#081ff0] shadow-sm" : "text-slate-400 hover:text-slate-900"}`}
                 >
                   <PencilLine size={14} /> Write
                 </button>
                 <button 
                   onClick={() => setMode("preview")} 
-                  className={`px-4 py-2 rounded-lg text-[10px] font-black tracking-widest uppercase transition-all flex items-center gap-2 ${mode === "preview" ? "bg-white/10 text-white" : "text-white/40 hover:text-white"}`}
+                  className={`px-4 py-2 rounded-lg text-[10px] font-black tracking-widest uppercase transition-all flex items-center gap-2 ${mode === "preview" ? "bg-white text-[#081ff0] shadow-sm" : "text-slate-400 hover:text-slate-900"}`}
                 >
                   <Eye size={14} /> Preview
                 </button>
@@ -278,15 +280,15 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
                   <button 
                     onClick={() => triggerUpload("content")} 
                     disabled={!!uploadingImage}
-                    className="px-3 py-1.5 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-lg text-[10px] font-black tracking-widest flex items-center gap-2 transition-all disabled:opacity-50"
+                    className="px-3 py-1.5 bg-white hover:bg-slate-50 text-slate-600 border border-slate-200 rounded-lg text-[10px] font-black tracking-widest flex items-center gap-2 transition-all disabled:opacity-50 shadow-sm"
                   >
                     <ImageIcon size={12} /> {uploadingImage === "content" ? "UPLOADING..." : "INSERT IMAGE"}
                   </button>
                    
-                  <button onClick={handleCorrectGrammar} disabled={!!aiLoading} className="px-3 py-1.5 bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/30 rounded-lg text-[10px] font-black tracking-widest flex items-center gap-2 transition-all disabled:opacity-50 md:ml-auto">
+                  <button onClick={handleCorrectGrammar} disabled={!!aiLoading} className="px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-600 border border-purple-200 rounded-lg text-[10px] font-black tracking-widest flex items-center gap-2 transition-all disabled:opacity-50 md:ml-auto shadow-sm">
                      <Wand2 size={12} /> {aiLoading === "correct" ? "WORKING..." : "FIX GRAMMAR"}
                   </button>
-                  <button onClick={handleRewriteContent} disabled={!!aiLoading} className="px-3 py-1.5 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded-lg text-[10px] font-black tracking-widest flex items-center gap-2 transition-all disabled:opacity-50">
+                  <button onClick={handleRewriteContent} disabled={!!aiLoading} className="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-[#081ff0] border border-blue-100 rounded-lg text-[10px] font-black tracking-widest flex items-center gap-2 transition-all disabled:opacity-50 shadow-sm">
                      <ArrowRightLeft size={12} /> {aiLoading === "rewrite" ? "WORKING..." : "PRO REWRITE"}
                   </button>
                 </div>
@@ -295,16 +297,16 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
                   name="content" 
                   value={blogData.content} 
                   onChange={handleChange} 
-                  className="w-full flex-1 bg-black/20 border border-white/10 rounded-xl px-6 py-5 outline-none focus:border-purple-500 transition-all text-sm font-mono leading-relaxed resize-none shadow-inner" 
+                  className="w-full flex-1 bg-slate-50 border border-slate-200 rounded-xl px-6 py-5 outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-sm font-mono leading-relaxed resize-none shadow-inner text-slate-900" 
                   placeholder="<p>Write your amazing story here...</p>" 
                 />
               </>
             ) : (
-              <div className="flex-1 bg-black/40 border border-white/5 rounded-xl p-8 overflow-y-auto w-full prose-content">
+              <div className="flex-1 bg-white border border-slate-100 rounded-xl p-8 overflow-y-auto w-full prose-content text-slate-800">
                 {blogData.content ? (
                   <div dangerouslySetInnerHTML={{ __html: blogData.content }} />
                 ) : (
-                  <p className="text-white/20 italic">No content to preview.</p>
+                  <p className="text-slate-300 italic text-center py-12">No content to preview.</p>
                 )}
               </div>
             )}
@@ -314,82 +316,82 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
         {/* Right Column: SEO & Settings */}
         <div className="space-y-8">
           {/* SEO Block */}
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 space-y-6">
+          <div className="bg-white border border-slate-200 rounded-3xl p-8 space-y-6 shadow-sm">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold uppercase tracking-widest text-white/40 flex items-center gap-2">
+              <h2 className="text-xl font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2">
                 <Search size={18} className="text-green-500" /> Search Engine
               </h2>
-              <button onClick={handleGenerateSEO} disabled={!!aiLoading} className="w-8 h-8 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center hover:bg-green-500/40 transition-colors disabled:opacity-50" title="Generate SEO from Content">
+              <button onClick={handleGenerateSEO} disabled={!!aiLoading} className="w-8 h-8 rounded-full bg-green-50 border border-green-100 text-green-600 flex items-center justify-center hover:bg-green-100 transition-colors disabled:opacity-50" title="Generate SEO from Content">
                 <Sparkles size={14} className={aiLoading === 'seo' ? 'animate-spin' : ''} />
               </button>
             </div>
             
             <div className="space-y-4">
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-white/50">Meta Title</label>
-                <input name="metaTitle" value={blogData.metaTitle} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-green-500 transition-all text-sm" placeholder="SEO optimized title" />
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Meta Title</label>
+                <input name="metaTitle" value={blogData.metaTitle} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-green-500 transition-all text-sm text-slate-900" placeholder="SEO optimized title" />
               </div>
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-white/50">Meta Description</label>
-                <textarea name="metaDescription" value={blogData.metaDescription} onChange={handleChange} className="w-full h-24 bg-black/20 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-green-500 transition-all text-sm resize-none" placeholder="Compelling meta description" />
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Meta Description</label>
+                <textarea name="metaDescription" value={blogData.metaDescription} onChange={handleChange} className="w-full h-24 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-green-500 transition-all text-sm resize-none text-slate-900" placeholder="Compelling meta description" />
               </div>
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-white/50">Keywords</label>
-                <input name="keywords" value={blogData.keywords} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-green-500 transition-all text-sm" placeholder="comma, separated, tags" />
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Keywords</label>
+                <input name="keywords" value={blogData.keywords} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-green-500 transition-all text-sm text-slate-900" placeholder="comma, separated, tags" />
               </div>
             </div>
           </div>
 
           {/* Media & Meta */}
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 space-y-6">
-             <h2 className="text-xl font-bold uppercase tracking-widest text-white/40 mb-6 flex items-center gap-2">
+          <div className="bg-white border border-slate-200 rounded-3xl p-8 space-y-6 shadow-sm">
+             <h2 className="text-xl font-bold uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
               <ImageIcon size={18} className="text-yellow-500" /> Media & Meta
             </h2>
             <div className="space-y-4">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-white/50">Cover Image URL</label>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Cover Image URL</label>
                   <button 
                     onClick={() => triggerUpload("cover")}
                     disabled={!!uploadingImage}
-                    className="text-[10px] font-black uppercase tracking-widest text-blue-400 hover:text-blue-300 flex items-center gap-1 transition-colors"
+                    className="text-[10px] font-black uppercase tracking-widest text-[#081ff0] hover:text-[#0618cc] flex items-center gap-1 transition-colors"
                   >
                     <UploadCloud size={12} /> {uploadingImage === "cover" ? "UP..." : "UPLOAD"}
                   </button>
                 </div>
-                <input name="image" value={blogData.image} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-yellow-500 transition-all text-sm" placeholder="https://" />
+                <input name="image" value={blogData.image} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-yellow-500 transition-all text-sm text-slate-900" placeholder="https://" />
               </div>
               {blogData.image && (
-                <div className="w-full aspect-video rounded-xl overflow-hidden border border-white/10">
+                <div className="w-full aspect-video rounded-xl overflow-hidden border border-slate-200">
                   <img src={blogData.image} alt="Cover Preview" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-white/50">Date</label>
-                  <input name="date" value={blogData.date} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-yellow-500 transition-all text-sm" />
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Date</label>
+                  <input name="date" value={blogData.date} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-yellow-500 transition-all text-sm text-slate-900" />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-white/50">Read Time</label>
-                  <input name="readTime" value={blogData.readTime} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-yellow-500 transition-all text-sm" />
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Read Time</label>
+                  <input name="readTime" value={blogData.readTime} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-yellow-500 transition-all text-sm text-slate-900" />
                 </div>
               </div>
             </div>
           </div>
           
           {/* Author */}
-           <div className="bg-white/5 border border-white/10 rounded-3xl p-8 space-y-6">
-             <h2 className="text-xl font-bold uppercase tracking-widest text-white/40 mb-6 flex items-center gap-2">
+           <div className="bg-white border border-slate-200 rounded-3xl p-8 space-y-6 shadow-sm">
+             <h2 className="text-xl font-bold uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
               <FileText size={18} className="text-indigo-500" /> Author Details
             </h2>
             <div className="space-y-4">
                <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-white/50">Name</label>
-                <input name="author.name" value={blogData.author?.name} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-indigo-500 transition-all text-sm" />
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Name</label>
+                <input name="author.name" value={blogData.author?.name} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-indigo-500 transition-all text-sm text-slate-900" />
               </div>
                <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-white/50">Role</label>
-                <input name="author.role" value={blogData.author?.role} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-indigo-500 transition-all text-sm" />
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Role</label>
+                <input name="author.role" value={blogData.author?.role} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-indigo-500 transition-all text-sm text-slate-900" />
               </div>
             </div>
           </div>
@@ -405,69 +407,69 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={handleDiscardAI}
-              className="absolute inset-0 bg-black/80 backdrop-blur-xl"
+              className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
             />
             
             <motion.div 
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-5xl bg-zinc-950 border border-white/10 rounded-[2.5rem] overflow-hidden flex flex-col max-h-[90vh] shadow-2xl shadow-blue-500/10"
+              className="relative w-full max-w-5xl bg-white border border-slate-200 rounded-[2.5rem] overflow-hidden flex flex-col max-h-[90vh] shadow-2xl"
             >
-              <div className="p-8 border-b border-white/10 flex items-center justify-between shrink-0 bg-white/[0.02]">
+              <div className="p-8 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/50">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-blue-500/20 flex items-center justify-center">
-                    <Sparkles className="text-blue-500" size={24} />
+                  <div className="w-12 h-12 rounded-2xl bg-[#081ff0]/10 flex items-center justify-center">
+                    <Sparkles className="text-[#081ff0]" size={24} />
                   </div>
                   <div>
-                    <h2 className="text-xl font-black uppercase tracking-tighter">Review AI <span className="text-blue-500 italic">Gen</span></h2>
-                    <p className="text-white/40 text-[10px] font-black uppercase tracking-widest leading-none">Side-by-side comparison</p>
+                    <h2 className="text-xl font-black uppercase tracking-tighter text-slate-900">Review AI <span className="text-[#081ff0] italic">Gen</span></h2>
+                    <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest leading-none">Side-by-side comparison</p>
                   </div>
                 </div>
                 
                 <div className="flex items-center gap-3">
-                  <button onClick={handleDiscardAI} className="px-6 py-3 rounded-2xl border border-white/10 hover:bg-white/5 transition-colors text-[10px] font-black uppercase tracking-widest text-white/50">
+                  <button onClick={handleDiscardAI} className="px-6 py-3 rounded-2xl border border-slate-200 hover:bg-slate-50 transition-colors text-[10px] font-black uppercase tracking-widest text-slate-400">
                     Discard
                   </button>
-                  <button onClick={handleAcceptAI} className="px-6 py-3 rounded-2xl bg-blue-600 hover:bg-blue-700 transition-all font-black uppercase tracking-widest text-[10px] shadow-lg shadow-blue-600/20">
+                  <button onClick={handleAcceptAI} className="px-6 py-3 rounded-2xl bg-[#081ff0] hover:bg-[#0618cc] transition-all font-black uppercase tracking-widest text-[10px] text-white shadow-lg shadow-[#081ff0]/20">
                     Accept Changes
                   </button>
                 </div>
               </div>
 
               <div className="flex-1 overflow-hidden grid grid-cols-1 md:grid-cols-2">
-                <div className="border-r border-white/10 flex flex-col min-h-0 bg-black/40">
-                  <div className="p-6 border-b border-white/5 flex items-center justify-between">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-white/30 flex items-center gap-2">
+                <div className="border-r border-slate-100 flex flex-col min-h-0 bg-slate-50/30">
+                  <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
                       <History size={12} /> Original Content
                     </span>
                   </div>
-                  <div className="p-8 overflow-y-auto w-full text-sm font-mono text-white/40 leading-relaxed opacity-50 select-none pointer-events-none">
+                  <div className="p-8 overflow-y-auto w-full text-sm font-mono text-slate-400 leading-relaxed opacity-50 select-none pointer-events-none">
                     {blogData.content}
                   </div>
                 </div>
 
-                <div className="flex flex-col min-h-0 bg-blue-500/[0.02]">
-                  <div className="p-6 border-b border-white/5 flex items-center justify-between">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-blue-500/80 flex items-center gap-2">
+                <div className="flex flex-col min-h-0 bg-[#081ff0]/[0.01]">
+                  <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-[#081ff0]/80 flex items-center gap-2">
                       <CheckCircle2 size={12} /> Revised Version
                     </span>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 bg-blue-500/10 px-2 py-1 rounded-lg">AI Optimized</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-[#081ff0] bg-[#081ff0]/10 px-2 py-1 rounded-lg">AI Optimized</span>
                   </div>
-                  <div className="p-8 overflow-y-auto w-full text-sm font-mono text-white leading-relaxed">
+                  <div className="p-8 overflow-y-auto w-full text-sm font-mono text-slate-900 leading-relaxed">
                     {pendingAIContent}
                   </div>
                 </div>
               </div>
 
-              <div className="p-6 border-t border-white/10 bg-black/60 flex items-center justify-center gap-8 shrink-0">
-                 <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/20">
+              <div className="p-6 border-t border-slate-100 bg-slate-50/50 flex items-center justify-center gap-8 shrink-0">
+                 <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400">
                     <CheckCircle2 size={12} className="text-green-500/50" /> High Ticket Style
                  </div>
-                 <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/20">
+                 <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400">
                     <CheckCircle2 size={12} className="text-green-500/50" /> SEO Optimized
                  </div>
-                 <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/20">
+                 <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400">
                     <XCircle size={12} className="text-red-500/50" /> Grammar Error Free
                  </div>
               </div>

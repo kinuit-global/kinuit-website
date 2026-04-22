@@ -27,7 +27,7 @@ export default function BlogListingPage() {
     <main className="min-h-screen bg-k-bg text-k-text pb-24">
       {/* Hero Section */}
       <section className="relative pt-40 pb-20 overflow-hidden border-b border-k-border">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-[#081ff0]/5 blur-[120px] rounded-full pointer-events-none" />
         <Container>
           <div className="max-w-3xl">
             <motion.div
@@ -42,7 +42,7 @@ export default function BlogListingPage() {
               transition={{ delay: 0.1 }}
               className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 leading-tight tracking-tight"
             >
-              The <span className="text-blue-500">Standard</span> Insights.
+              The <span className="text-[#081ff0]">Standard</span> Insights.
             </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -77,13 +77,13 @@ export default function BlogListingPage() {
             </div>
 
             <div className="relative group max-w-md w-full">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-k-text-muted/40 group-focus-within:text-k-primary transition-colors" size={18} />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#081ff0] transition-colors" size={18} />
               <input
                 type="text"
                 placeholder="SEARCH ARTICLES..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-k-card-bg border border-k-border rounded-full py-3 pl-12 pr-6 outline-none focus:border-k-primary transition-all text-sm tracking-wider placeholder:text-k-text-muted/40 uppercase text-k-text"
+                className="w-full bg-slate-50 border border-slate-300 hover:border-slate-400 rounded-full py-3 pl-12 pr-6 outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-sm font-semibold tracking-wider placeholder:text-slate-400 uppercase text-k-text shadow-sm"
               />
             </div>
           </div>

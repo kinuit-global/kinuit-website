@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
   <defs>
     <style>
       .cls-1 {
-        fill: #1d1b1c;
+        fill: #0e1114;
+      }
+
+      .cls-2 {
+        fill: #f6f6f6;
       }
     </style>
   </defs>
-  <rect class="cls-1" x="15.14" y="5.07" width="2.37" height="5.51" transform="translate(24.15 -8.51) rotate(90)"/>
-  <rect class="cls-1" x="15.14" y="20.18" width="2.37" height="5.51" transform="translate(39.26 6.6) rotate(90)"/>
-  <rect class="cls-1" x="15.14" y="13.59" width="2.37" height="11.13" transform="translate(35.48 2.83) rotate(90)"/>
-  <rect class="cls-1" x="14.94" y="13.59" width="2.37" height="11.13" transform="translate(35.28 3.03) rotate(90)"/>
-  <rect class="cls-1" x="15.33" y="6.04" width="2.37" height="11.13" transform="translate(28.12 -4.92) rotate(90)"/>
-  <rect class="cls-1" x="15.14" y="7" width="2.37" height="16.74" transform="translate(31.71 -.95) rotate(90)"/>
+  <rect class="cls-1" width="16" height="16"/>
+  <path class="cls-2" d="M7.23,10.6l3.37-3.37v1.94h2.6V2.78h-6.39v2.6h1.95l-3.37,3.37V2.78h-2.6v10.43h2.6v-2.72l.65.65,1.91,2.06h5.26v-2.6h-5.98ZM10.6,5.28l.1.1h-.1v-.1Z"/>
 </svg>

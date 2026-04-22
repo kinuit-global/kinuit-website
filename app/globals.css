@@ -1,34 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap');
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark-mode-disabled, .dark-mode-disabled *));
 
 :root {
-  --background: #F0F0F0;
-  /* Phantom White */
-  --foreground: #020617;
-  /* High contrast dark blue */
-  --k-bg: #F8F9FA;
-  --k-text: #020617;
+  --background: #F6F6F6;
+  --foreground: #0e1114;
+  --k-bg: #F6F6F6;
+  --k-text: #0e1114;
   --k-text-muted: #334155;
   --k-border: #E2E8F0;
   --k-glass-bg: rgba(255, 255, 255, 0.82);
   --k-glass-border: rgba(0, 0, 0, 0.08);
   --k-card-bg: #FFFFFF;
-  --k-primary: #1E50FF;
+  --k-primary: #081ff0;
   --k-hero-gradient-end: #F1F5F9;
-}
-
-.dark {
-  --background: #050D1A;
-  --foreground: #f8fafc;
-  --k-bg: #050D1A;
-  --k-text: #ffffff;
-  --k-text-muted: rgba(255, 255, 255, 0.7);
-  --k-border: rgba(255, 255, 255, 0.12);
-  --k-glass-bg: rgba(255, 255, 255, 0.03);
-  --k-glass-border: rgba(255, 255, 255, 0.1);
-  --k-card-bg: rgba(255, 255, 255, 0.05);
-  --k-primary: #1E50FF;
-  --k-hero-gradient-end: #080a18;
 }
 
 @theme inline {

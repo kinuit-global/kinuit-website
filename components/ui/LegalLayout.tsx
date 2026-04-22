@@ -11,17 +11,17 @@ interface LegalLayoutProps {
 
 export default function LegalLayout({ title, lastUpdated, children }: LegalLayoutProps) {
   return (
-    <main className="min-h-screen bg-k-bg text-white pt-32 pb-20">
+    <main className="min-h-screen bg-k-bg text-k-text pt-32 pb-20">
       <Section>
         <Container>
           <div className="max-w-4xl mx-auto">
             <Breadcrumb paths={[{ name: title }]} />
             
             <div className="mb-16">
-              <h1 className="text-4xl md:text-5xl lg:text-3xl font-bold mb-4 text-white uppercase tracking-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-3xl font-bold mb-4 text-k-text uppercase tracking-tight">
                 {title}
               </h1>
-              <p className="text-white/40 text-sm font-medium tracking-widest uppercase">
+              <p className="text-k-text-muted text-sm font-medium tracking-widest uppercase">
                 Last Updated: {lastUpdated}
               </p>
             </div>

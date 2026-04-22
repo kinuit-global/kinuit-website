@@ -111,14 +111,14 @@ export default function CTASection() {
               action={formAction}
               className="flex flex-col sm:flex-row gap-3"
             >
-              <div className="flex items-center gap-2 bg-k-card-bg px-4 py-3 rounded-lg flex-1 border border-k-border group focus-within:border-blue-500/50 transition-all">
-                <Mail size={16} className="text-k-text-muted/40 group-focus-within:text-blue-500 transition-colors" />
+              <div className="flex items-center gap-2 bg-slate-50 px-4 py-3 rounded-lg flex-1 border border-slate-300 group focus-within:border-[#081ff0] focus-within:ring-1 focus-within:ring-[#081ff0] shadow-sm hover:border-slate-400 transition-all">
+                <Mail size={16} className="text-slate-400 group-focus-within:text-[#081ff0] transition-colors" />
                 <input
                   type="email"
                   name="email"
                   required
                   placeholder="Your Email Address"
-                  className="bg-transparent outline-none text-sm flex-1 text-k-text placeholder:text-k-text-muted/40 font-medium"
+                  className="bg-transparent outline-none text-sm flex-1 text-k-text placeholder:text-slate-400 font-semibold"
                 />
               </div>
 

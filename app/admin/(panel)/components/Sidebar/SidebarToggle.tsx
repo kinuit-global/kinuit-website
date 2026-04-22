@@ -14,11 +14,11 @@ export default function SidebarToggle({
   setIsCollapsed,
 }: SidebarToggleProps) {
   return (
-    <div className="p-3 border-t border-white/5 hidden lg:block shrink-0">
+    <div className="p-3 border-t border-slate-100 hidden lg:block shrink-0">
       <button 
         onClick={() => setIsCollapsed(!isCollapsed)}
         className={cn(
-          "w-full flex items-center transition-all group py-3 rounded-xl text-white/20 hover:text-white hover:bg-white/5",
+          "w-full flex items-center transition-all group py-3 rounded-xl text-slate-400 hover:text-slate-900 hover:bg-slate-50",
           // Conditional centering and padding based on isCollapsed
           isCollapsed ? "justify-center px-0 gap-0" : "justify-start px-3 gap-4"
         )}

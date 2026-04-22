@@ -47,10 +47,10 @@ export default async function DashboardPage() {
     <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
       {/* Welcome Header */}
       <div className="space-y-2">
-        <h1 className="text-4xl font-black text-white uppercase tracking-tighter">
-          HELL0 <span className="text-blue-500 italic">ADMIN</span>
+        <h1 className="text-4xl font-black text-slate-950 uppercase tracking-tighter">
+          HELL0 <span className="text-[#081ff0] italic">ADMIN</span>
         </h1>
-        <p className="text-white/40 text-sm font-medium uppercase tracking-widest max-w-lg">
+        <p className="text-slate-600 text-sm font-medium uppercase tracking-widest max-w-lg">
           Welcome back to the Kinuit Global control panel. Here's an overview of your agency's performance.
         </p>
       </div>
@@ -58,12 +58,12 @@ export default async function DashboardPage() {
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat, i) => (
-          <div key={i} className="bg-white/5 border border-white/10 rounded-3xl p-6 hover:bg-white/8 transition-colors group">
+          <div key={i} className="bg-white border border-slate-200 rounded-3xl p-6 hover:shadow-md transition-all group">
             <div className={`w-12 h-12 ${stat.bg} ${stat.color} rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110`}>
               <stat.icon size={24} />
             </div>
-            <p className="text-[10px] font-black uppercase text-white/40 tracking-wider mb-1">{stat.title}</p>
-            <p className="text-3xl font-black text-white">{stat.value}</p>
+            <p className="text-[10px] font-black uppercase text-slate-400 tracking-wider mb-1">{stat.title}</p>
+            <p className="text-3xl font-black text-slate-950">{stat.value}</p>
           </div>
         ))}
       </div>
@@ -72,34 +72,34 @@ export default async function DashboardPage() {
         {/* Recent Activity */}
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-black uppercase tracking-tighter">Recent Testimonials</h3>
-            <Link href="/admin/testimonials" className="text-blue-500 hover:text-blue-400 text-xs font-black uppercase tracking-widest flex items-center gap-1 group">
+            <h3 className="text-lg font-black uppercase tracking-tighter text-slate-950">Recent Testimonials</h3>
+            <Link href="/admin/testimonials" className="text-[#081ff0] hover:text-[#0618cc] text-xs font-black uppercase tracking-widest flex items-center gap-1 group">
               View All <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
           
           <div className="space-y-4">
             {latestSubmissions.length > 0 ? latestSubmissions.map((t) => (
-              <div key={t.id} className="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center justify-between group hover:bg-white/8 transition-colors">
+              <div key={t.id} className="bg-white border border-slate-200 rounded-2xl p-4 flex items-center justify-between group hover:bg-slate-50 transition-colors shadow-sm">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center text-white/20 group-hover:text-blue-500 transition-colors">
+                  <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-slate-400 group-hover:text-[#081ff0] transition-colors">
                     <Users size={20} />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold uppercase tracking-tight">{t.fullName}</h4>
-                    <p className="text-[10px] font-black text-white/20 uppercase tracking-widest">{t.companyName}</p>
+                    <h4 className="text-sm font-bold uppercase tracking-tight text-slate-950">{t.fullName}</h4>
+                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t.companyName}</p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-[10px] font-black text-white/40 uppercase tracking-widest flex items-center gap-1">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-1">
                     <Clock size={10} />
                     {format(new Date(t.submittedAt), "MMM dd")}
                   </p>
                 </div>
               </div>
             )) : (
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
-                <p className="text-white/20 text-xs font-black uppercase tracking-widest">No recent submissions</p>
+              <div className="bg-white border border-slate-200 rounded-2xl p-8 text-center shadow-sm">
+                <p className="text-slate-400 text-xs font-black uppercase tracking-widest">No recent submissions</p>
               </div>
             )}
           </div>
@@ -107,7 +107,7 @@ export default async function DashboardPage() {
 
         {/* Quick Actions */}
         <div className="space-y-6">
-          <h3 className="text-lg font-black uppercase tracking-tighter">Quick Actions</h3>
+          <h3 className="text-lg font-black uppercase tracking-tighter text-slate-950">Quick Actions</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
              {[
                { title: "Create Blog Post", icon: FileText, href: "/admin/blogs" },
@@ -115,11 +115,11 @@ export default async function DashboardPage() {
                { title: "Export Data", icon: ArrowRight, href: "#" },
                { title: "System Settings", icon: ArrowRight, href: "#" },
              ].map((action, i) => (
-               <Link key={i} href={action.href} className="bg-white/2 border border-white/5 p-5 rounded-2xl flex flex-col gap-4 hover:border-blue-500/30 hover:bg-white/5 transition-all group">
-                  <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center text-white/20 group-hover:text-blue-500 transition-colors">
+               <Link key={i} href={action.href} className="bg-white border border-slate-200 p-5 rounded-2xl flex flex-col gap-4 hover:border-[#081ff0]/30 hover:bg-slate-50 transition-all group shadow-sm">
+                  <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-slate-400 group-hover:text-[#081ff0] transition-colors">
                     <action.icon size={20} />
                   </div>
-                  <span className="text-xs font-black uppercase tracking-widest">{action.title}</span>
+                  <span className="text-xs font-black uppercase tracking-widest text-slate-950">{action.title}</span>
                </Link>
              ))}
           </div>

@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import * as THREE from "three";
-import { useTheme } from "next-themes";
 
 interface GlobeProps {
   size?: number;
@@ -9,12 +8,9 @@ interface GlobeProps {
 
 export default function Globe({ size = 1200 }: GlobeProps) {
   const globeRef = useRef<any>(null);
-  const { theme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [GlobeGL, setGlobeGL] = useState<any>(null);
   const [countries, setCountries] = useState<any>({ features: [] });
-
-  const currentTheme = resolvedTheme || theme;
 
   // Prevent hydration mismatch
   useEffect(() => {
@@ -46,22 +42,13 @@ export default function Globe({ size = 1200 }: GlobeProps) {
     { lat: 11.1271, lng: 78.6569, label: "Tamilnadu", color: "#FB6415", size: 0.1 }
   ], []);
 
-  // Theme-aware globe material
   const nativeGlobeMaterial = useMemo(() => {
-    const isDark = currentTheme === "dark";
-    return new THREE.MeshPhongMaterial({
-      color: isDark ? "#010206" : "#f8fafc",
-      emissive: isDark ? "#000000" : "#f1f5f9",
-      emissiveIntensity: isDark ? 0 : 0.2,
-      shininess: isDark ? 5 : 1,
-      transparent: true,
-      opacity: isDark ? 0.95 : 0.85
+    return new THREE.MeshBasicMaterial({
+      color: "#121820",
     });
-  }, [currentTheme]);
+  }, []);
 
   if (!mounted || !GlobeGL) return <div style={{ width: size, height: size }} className="bg-transparent" />;
-
-  const isDark = currentTheme === "dark";
 
   return (
     <div
@@ -70,27 +57,27 @@ export default function Globe({ size = 1200 }: GlobeProps) {
     >
 
       {/* Absolute bounding box for rendering the full interactive Map engine */}
-      <div className={`absolute inset-0 z-10 flex items-center justify-center opacity-90 ${isDark ? "mix-blend-screen" : "mix-blend-multiply"}`}>
+      <div className={`absolute inset-0 z-10 flex items-center justify-center opacity-100`}>
         <GlobeGL
           ref={globeRef}
           width={size}
           height={size}
-          backgroundColor="rgba(0,0,0,0)" // Makes canvas background transparent wrapping the core
+          backgroundColor="rgba(0,0,0,0)" // Transparent canvas to let card background show
 
           showGlobe={true}
           showAtmosphere={true}
-          atmosphereColor={isDark ? "#ffffff" : "#cbd5e1"}
-          atmosphereAltitude={isDark ? 0.1 : 0.15}
+          atmosphereColor="#081ff0"
+          atmosphereAltitude={0.15}
           globeMaterial={nativeGlobeMaterial}
           onGlobeReady={handleGlobeReady}
 
           showGraticules={true}
-          graticulesColor={isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.05)"}
+          graticulesColor="rgba(255,255,255,0.15)"
 
           polygonsData={countries.features}
           polygonCapColor={() => "rgba(0,0,0,0)"}
           polygonSideColor={() => "rgba(0,0,0,0)"}
-          polygonStrokeColor={() => isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.15)"}
+          polygonStrokeColor={() => "rgba(255,255,255,0.6)"}
 
           pointsData={markerData}
           pointColor={(d: any) => d.color}
@@ -110,7 +97,7 @@ export default function Globe({ size = 1200 }: GlobeProps) {
       {/* Custom CSS edge glow fading matching the horizon perfectly */}
       <div
         style={{ width: size * 0.5, height: size * 0.2 }}
-        className={`absolute top-[35%] left-1/2 -translate-x-1/2 blur-[60px] rounded-[100%] z-0 ${isDark ? "bg-white/5" : "bg-slate-400/5"}`}
+        className={`absolute top-[35%] left-1/2 -translate-x-1/2 blur-[60px] rounded-[100%] z-20 bg-[#081ff0]/10`}
       />
     </div>
   );

@@ -40,27 +40,14 @@ export default function Services() {
     <motion.section
       id="services"
       ref={sectionRef}
-      className="relative py-14 sm:py-15 lg:py-15 overflow-hidden"
+      className="relative py-20 lg:py-24 overflow-hidden bg-[#f1f5f9]"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
       variants={sectionVariants}
     >
       {/* Top blue glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[120px] pointer-events-none" />
-
-      {/* Grid background */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          backgroundImage: `
-          radial-gradient(ellipse 90% 80% at 50% 70%, rgba(37,99,235,0.15) 0%, var(--k-bg) 45%, var(--k-hero-gradient-end) 85%)
-        `,
-          backgroundSize: "100% 100%",
-          backgroundRepeat: "no-repeat",
-          opacity: 0.95,
-        }}
-      />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#081ff0]/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
@@ -82,21 +69,14 @@ export default function Services() {
 
           <Link href="/services" aria-label="View all our services">
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-3 h-8 pr-4 rounded-full border border-k-border bg-k-card-bg w-fit"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="group flex items-center justify-center gap-3 text-k-text text-[13px] sm:text-sm font-semibold pl-6 pr-2.5 py-2 rounded-full border border-[#e2e8f0] bg-white hover:bg-slate-50 transition-all duration-300 shadow-sm"
             >
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-k-primary">
-                <ArrowUpRight
-                  size={14}
-                  strokeWidth={2.5}
-                  className="text-black"
-                />
-              </span>
-
-              <span className="text-sm text-k-text font-medium">
-                Explore all
-              </span>
+              Explore all
+              <div className="w-8 h-8 rounded-full bg-[#081ff0] flex items-center justify-center shadow-sm">
+                <ArrowUpRight className="w-4 h-4 text-white group-hover:translate-x-[1.5px] group-hover:-translate-y-[1.5px] transition-transform duration-300" strokeWidth={2.5} />
+              </div>
             </motion.button>
           </Link>
 
@@ -111,40 +91,37 @@ export default function Services() {
             servicesItem.map((service) => (
               <motion.div
                 key={service.num}
-                whileHover={{ y: -6 }}
-                className="bg-k-card-bg border border-k-border rounded-xl p-6 flex flex-col hover:border-k-primary/40 transition"
+                whileHover={{ y: -6, scale: 1.02 }}
+                className="relative rounded-[24px] group h-full flex flex-col"
               >
-                <span className="text-xs text-k-text-muted mb-4">
-                  {service.num}
-                </span>
+                {/* Highlight Glow Effect */}
+                <div className="absolute -inset-[3px] bg-gradient-to-r from-[#081ff0] via-blue-400 to-[#081ff0] rounded-[26px] opacity-0 blur-md group-hover:opacity-30 transition-opacity duration-500" />
+                <div className="absolute -inset-[1px] bg-gradient-to-r from-[#081ff0] via-blue-500 to-[#081ff0] rounded-[25px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Card Inner Background */}
+                <div className="relative h-full w-full bg-white border border-[#e2e8f0] group-hover:border-transparent rounded-[24px] p-8 flex flex-col transition-colors duration-500 z-10">
+                <div className="flex items-start justify-between mb-6">
+                  <h3 className="text-[22px] md:text-[24px] font-bold text-k-text tracking-tight pr-4 pt-1">
+                    {service.title}
+                  </h3>
+                  <Link href={`/services/${createSlug(service.title)}`} aria-label={`Learn more about ${service.title}`}>
+                    <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-[#081ff0] group-hover:text-white text-slate-400 transition-colors duration-300 shrink-0">
+                      <ArrowUpRight size={20} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                    </div>
+                  </Link>
+                </div>
 
-                <h3 className="text-2xl font-semibold text-k-text mb-6 md:w-[50%] w-full">
-                  {service.title}
-                </h3>
-
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap content-start gap-2 mt-8">
                   {service.tags.map((tag: string) => (
                     <Link
                       href={`/services/${createSlug(tag)}`}
                       key={tag}
-                      className="text-xs px-3 py-2 rounded-full bg-k-card-bg border border-k-border text-k-text-muted hover:bg-k-primary hover:text-white transition-all cursor-pointer shadow-sm"
+                      className="text-[13px] font-medium px-3.5 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-slate-600 hover:bg-[#081ff0] hover:border-[#081ff0] hover:text-white transition-all duration-300"
                     >
                       {tag}
                     </Link>
                   ))}
                 </div>
-
-                <div className="flex justify-end mt-auto">
-                  <Link href={`/services/${createSlug(service.title)}`} aria-label={`Learn more about ${service.title}`}>
-                    <motion.button
-                      whileHover={{ scale: 1.1, rotate: -45 }}
-                      whileTap={{ scale: 0.9 }}
-                      aria-label={`Explore ${service.title} services`}
-                      className="flex items-center justify-center w-8 h-8 rounded-full bg-k-primary/10 border border-k-primary/20 text-k-primary hover:bg-k-primary hover:text-white transition-all"
-                    >
-                      <ArrowUpRight size={18} />
-                    </motion.button>
-                  </Link>
                 </div>
               </motion.div>
             ))

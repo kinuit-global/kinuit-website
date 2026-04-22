@@ -3,18 +3,14 @@
   <defs>
     <style>
       .cls-1 {
-        fill: #1d1b1c;
+        fill: #0e1114;
+      }
+
+      .cls-2 {
+        fill: #f6f6f6;
       }
     </style>
   </defs>
-  <rect class="cls-1" x="78.8" y="25.74" width="15.21" height="35.35" transform="translate(129.82 -42.99) rotate(90)"/>
-  <rect class="cls-1" x="78.8" y="122.75" width="15.21" height="35.35" transform="translate(226.83 54.01) rotate(90)"/>
-  <rect class="cls-1" x="78.8" y="80.46" width="15.21" height="71.41" transform="translate(202.58 29.76) rotate(90)"/>
-  <rect class="cls-1" x="80.01" y="31.96" width="15.21" height="71.41" transform="translate(155.28 -19.95) rotate(90)"/>
-  <rect class="cls-1" x="78.8" y="38.18" width="15.21" height="107.48" transform="translate(178.33 5.51) rotate(90)"/>
-  <rect class="cls-1" x="80.01" y="25.74" width="15.21" height="35.35" transform="translate(131.03 -44.2) rotate(90)"/>
-  <rect class="cls-1" x="80.01" y="122.75" width="15.21" height="35.35" transform="translate(228.04 52.81) rotate(90)"/>
-  <rect class="cls-1" x="80.01" y="80.46" width="15.21" height="71.41" transform="translate(203.78 28.56) rotate(90)"/>
-  <rect class="cls-1" x="81.21" y="31.96" width="15.21" height="71.41" transform="translate(156.49 -21.15) rotate(90)"/>
-  <rect class="cls-1" x="80.01" y="38.18" width="15.21" height="107.48" transform="translate(179.53 4.3) rotate(90)"/>
+  <rect class="cls-1" width="180" height="180"/>
+  <path class="cls-2" d="M81.13,116.48l38.8-38.81v22.31h29.97V26.44h-73.54v29.97h22.46l-38.83,38.82V26.44h-29.97v120.16h29.97v-31.34l7.46,7.46,21.99,23.73h60.56v-29.97h-68.86Z"/>
 </svg>
