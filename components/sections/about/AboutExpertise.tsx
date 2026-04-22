@@ -1,4 +1,4 @@
-"use client";
+import Script from "next/script";
 import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
 import SectionBadge from "@/components/ui/SectionBadge";
@@ -30,9 +30,10 @@ const EXPERTISE_PILLARS = [
 export default function AboutExpertise() {
   return (
     <Section className="bg-k-bg border-t border-k-border">
+      <Script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.10/dist/dotlottie-wc.js" type="module" />
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          
+
           <div className="max-w-xl">
             <SectionBadge icon={<ShieldCheck size={14} className="text-k-primary group-hover:scale-110 transition-transform duration-300" />} label="Our Expertise" />
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-8 text-k-text leading-tight">
@@ -57,17 +58,18 @@ export default function AboutExpertise() {
             </div>
 
             <p className="mt-12 text-k-text font-medium border-l-2 border-k-primary pl-6 italic">
-              Not isolated services. <br/> But a connected system built for growth.
+              Not isolated services. <br /> But a connected system built for growth.
             </p>
           </div>
 
-          <div className="relative w-full aspect-[4/5] lg:aspect-[3/4] rounded-3xl overflow-hidden border border-k-border shadow-2xl group lg:sticky lg:top-32">
-            <img 
-              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" 
-              alt="Our Expertise" 
-              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+          <div className="relative w-full aspect-square lg:aspect-[3/4] rounded-3xl overflow-hidden border border-k-border shadow-2xl group lg:sticky lg:top-32 bg-slate-50 flex items-center justify-center">
+            {/* @ts-ignore */}
+            <dotlottie-wc
+              src="https://lottie.host/60222ba2-1baa-49cb-95db-fbc30c7f1e09/PVmF6xhzOJ.lottie"
+              style={{ width: "100%", height: "100%" }}
+              autoplay
+              loop
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-k-bg/80 via-transparent to-transparent opacity-60" />
           </div>
 
         </div>
