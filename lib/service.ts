@@ -1,4 +1,5 @@
 import { services } from "@/types/service";
+import { Blocks, PenTool, Rocket, Workflow } from "lucide-react";
 
 export function createSlug(text: string): string {
   return text
@@ -13,6 +14,7 @@ export const servicesItem: services[] = [
   {
     num: "01",
     title: "Build",
+    icon: Blocks,
     tags: [
       "Custom websites",
       "Mobile apps",
@@ -25,6 +27,7 @@ export const servicesItem: services[] = [
   {
     num: "02",
     title: "Design",
+    icon: PenTool,
     tags: [
       "Brand identity",
       "UX / UI",
@@ -38,6 +41,7 @@ export const servicesItem: services[] = [
   {
     num: "03",
     title: "Grow",
+    icon: Rocket,
     tags: [
       "SEO",
       "Paid ads",
@@ -51,6 +55,7 @@ export const servicesItem: services[] = [
   {
     num: "04",
     title: "Plan",
+    icon: Workflow,
     tags: [
       "Growth strategy",
       "Pitch decks",

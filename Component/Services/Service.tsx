@@ -100,15 +100,26 @@ export default function Services() {
                 
                 {/* Card Inner Background */}
                 <div className="relative h-full w-full bg-white border border-[#e2e8f0] group-hover:border-transparent rounded-[24px] p-8 flex flex-col transition-colors duration-500 z-10">
-                <div className="flex items-start justify-between mb-6">
-                  <h3 className="text-[22px] md:text-[24px] font-bold text-k-text tracking-tight pr-4 pt-1">
-                    {service.title}
-                  </h3>
-                  <Link href={`/services/${createSlug(service.title)}`} aria-label={`Learn more about ${service.title}`}>
-                    <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-[#081ff0] group-hover:text-white text-slate-400 transition-colors duration-300 shrink-0">
-                      <ArrowUpRight size={20} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-                    </div>
-                  </Link>
+                <div className="flex flex-col items-start w-full">
+                  {service.icon && (() => {
+                    const Icon = service.icon;
+                    return (
+                      <div className="w-14 h-14 rounded-2xl bg-[#081ff0]/5 flex items-center justify-center mb-6 border border-[#081ff0]/10">
+                        <Icon size={26} className="text-[#081ff0]" />
+                      </div>
+                    );
+                  })()}
+                  
+                  <div className="flex items-start justify-between w-full mb-6">
+                    <h3 className="text-[22px] md:text-[24px] font-black text-slate-900 uppercase tracking-tighter">
+                      {service.title}
+                    </h3>
+                    <Link href={`/services/${createSlug(service.title)}`} aria-label={`Learn more about ${service.title}`}>
+                      <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-[#081ff0] group-hover:text-white text-slate-400 transition-colors duration-300 shrink-0">
+                        <ArrowUpRight size={20} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                      </div>
+                    </Link>
+                  </div>
                 </div>
 
                 <div className="flex flex-wrap content-start gap-2 mt-8">
