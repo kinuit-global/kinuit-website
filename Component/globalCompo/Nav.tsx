@@ -47,9 +47,9 @@ export default function Navbar() {
                 <Image
                   src="/logo.png"
                   alt="logo img"
-                  width={220}
-                  height={220}
-                  className="object-contain w-[160px] sm:w-[180px] lg:w-[175px] transition-all duration-300"
+                  width={180}
+                  height={180}
+                  className="object-contain w-[110px] sm:w-[130px] lg:w-[135px] transition-all duration-300"
                 />
               </motion.div>
             </Link>
