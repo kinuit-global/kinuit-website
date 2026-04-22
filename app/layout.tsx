@@ -90,7 +90,7 @@ const jsonLd = {
   "@type": "Organization",
   "name": "Kinuit",
   "url": "https://www.kinuit.com",
-  "logo": "https://www.kinuit.com/logo.svg",
+  "logo": "https://www.kinuit.com/logo.png",
   "contactPoint": {
     "@type": "ContactPoint",
     "email": "hello@kinuit.com",
