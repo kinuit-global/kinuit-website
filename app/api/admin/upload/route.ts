@@ -4,7 +4,10 @@ import { v2 as cloudinary } from "cloudinary";
 // Configure Cloudinary with the official SDK and Signed uploads
 // This eliminates the "Preset not found" issue by using your API Key/Secret.
 cloudinary.config({
-  cloudinary_api_url: process.env.CLOUDINARY_URL,
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
 });
 
 export async function POST(req: Request) {
@@ -24,7 +27,7 @@ export async function POST(req: Request) {
     const result = await new Promise<any>((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
-          folder: "blogs",
+          folder: "case-studies",
           resource_type: "auto", // Handles all file types automatically
         },
         (error, result) => {

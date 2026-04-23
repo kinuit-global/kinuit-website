@@ -1,6 +1,6 @@
 "use client";
 
-import { getBlogPosts } from "@/lib/blog";
+import { getCaseStudies } from "@/lib/case-studies";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,17 +9,17 @@ import { useState } from "react";
 import Container from "@/components/ui/Container";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 
-export default function BlogListingPage() {
+export default function CaseStudiesListingPage() {
   const [activeCategory, setActiveCategory] = useState<string>("ALL");
   const [searchQuery, setSearchQuery] = useState("");
 
   const categories = ["ALL", "BUILD", "DESIGN", "GROW", "PLAN"];
 
-  const blogPosts = getBlogPosts();
-  const filteredPosts = blogPosts.filter((post) => {
-    const matchesCategory = activeCategory === "ALL" || post.category === activeCategory;
-    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                         post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+  const caseStudies = getCaseStudies();
+  const filteredStudies = caseStudies.filter((study) => {
+    const matchesCategory = activeCategory === "ALL" || study.category === activeCategory;
+    const matchesSearch = study.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                         study.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
@@ -34,7 +34,7 @@ export default function BlogListingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <Breadcrumb paths={[{ name: "Blog" }]} />
+              <Breadcrumb paths={[{ name: "Case Studies" }]} />
             </motion.div>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -42,7 +42,7 @@ export default function BlogListingPage() {
               transition={{ delay: 0.1 }}
               className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 leading-tight tracking-tight"
             >
-              The <span className="text-[#081ff0]">Standard</span> Insights.
+              Our <span className="text-[#081ff0]">Case Studies</span>.
             </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -80,7 +80,7 @@ export default function BlogListingPage() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#081ff0] transition-colors" size={18} />
               <input
                 type="text"
-                placeholder="SEARCH ARTICLES..."
+                placeholder="SEARCH CASE STUDIES..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-slate-50 border border-slate-300 hover:border-slate-400 rounded-full py-3 pl-12 pr-6 outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-sm font-semibold tracking-wider placeholder:text-slate-400 uppercase text-k-text shadow-sm"
@@ -90,47 +90,47 @@ export default function BlogListingPage() {
         </Container>
       </section>
 
-      {/* Blog Grid */}
+      {/* Case Study Grid */}
       <section className="py-20">
         <Container>
-          {filteredPosts.length > 0 ? (
+          {filteredStudies.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-              {filteredPosts.map((post, index) => (
+              {filteredStudies.map((study, index) => (
                 <motion.article
-                  key={post.id}
+                  key={study.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: (index % 3) * 0.1 }}
                   viewport={{ once: true }}
                   className="group"
                 >
-                  <Link href={`/blog/${post.slug}`} className="block">
+                  <Link href={`/case-studies/${study.slug}`} className="block">
                     <div className="relative aspect-video rounded-2xl overflow-hidden mb-6 border border-k-border shadow-2xl dark:shadow-none">
                       <Image
-                        src={post.image}
-                        alt={post.title}
+                        src={study.image}
+                        alt={study.title}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       <div className="absolute top-4 left-4">
                         <span className="px-3 py-1 bg-k-primary text-white text-[10px] font-black tracking-widest rounded-full uppercase shadow-lg">
-                          {post.category}
+                          {study.category}
                         </span>
                       </div>
                     </div>
 
                     <div className="space-y-4">
                       <div className="flex items-center gap-4 text-k-text-muted text-[10px] font-black tracking-widest uppercase">
-                        <span className="flex items-center gap-1.5"><Calendar size={14} className="text-k-primary" /> {post.date}</span>
-                        <span className="flex items-center gap-1.5"><Clock size={14} className="text-k-primary" /> {post.readTime}</span>
+                        <span className="flex items-center gap-1.5"><Calendar size={14} className="text-k-primary" /> {study.date}</span>
+                        <span className="flex items-center gap-1.5"><Clock size={14} className="text-k-primary" /> {study.readTime}</span>
                       </div>
                       
                       <h2 className="text-2xl font-black text-k-text group-hover:text-k-primary transition-colors leading-tight tracking-tight">
-                        {post.title}
+                        {study.title}
                       </h2>
                       
                       <p className="text-k-text-muted text-sm line-clamp-3 leading-relaxed font-light">
-                        {post.excerpt}
+                        {study.excerpt}
                       </p>
                       
                       <div className="pt-2 flex items-center text-k-primary text-[10px] font-black uppercase tracking-widest gap-2 group-hover:gap-3 transition-all">
@@ -143,7 +143,7 @@ export default function BlogListingPage() {
             </div>
           ) : (
             <div className="text-center py-40 border border-k-border rounded-3xl bg-k-card-bg">
-              <h3 className="text-2xl font-black text-k-text-muted/20 uppercase tracking-widest italic">No articles found matching your criteria.</h3>
+              <h3 className="text-2xl font-black text-k-text-muted/20 uppercase tracking-widest italic">No case studies found matching your criteria.</h3>
             </div>
           )}
         </Container>

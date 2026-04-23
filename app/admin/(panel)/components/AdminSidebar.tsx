@@ -23,9 +23,9 @@ const menuItems = [
     href: "/admin/dashboard",
   },
   {
-    title: "Blogs",
+    title: "Case Studies",
     icon: FileText,
-    href: "/admin/blogs",
+    href: "/admin/case-studies",
   },
   {
     title: "Services",

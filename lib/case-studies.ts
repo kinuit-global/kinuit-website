@@ -1,6 +1,6 @@
-import blogsData from "../data/blogs.json";
+import caseStudiesData from "../data/case-studies.json";
 
-export interface BlogPost {
+export interface CaseStudy {
   id: string; // Changed to string (UUID)
   slug: string;
   title: string;
@@ -20,8 +20,8 @@ export interface BlogPost {
   keywords?: string;
 }
 
-export const getBlogPosts = (): BlogPost[] => {
-  return [...blogsData].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) as BlogPost[];
+export const getCaseStudies = (): CaseStudy[] => {
+  return [...caseStudiesData].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) as CaseStudy[];
 };
 
-export const blogPosts: BlogPost[] = getBlogPosts();
+export const caseStudies: CaseStudy[] = getCaseStudies();

@@ -5,10 +5,10 @@ import { ChevronLeft, Save, Sparkles, Wand2, ArrowRightLeft, AlignLeft, Search, 
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { BlogPost } from "@/lib/blog";
+import { CaseStudy } from "@/lib/case-studies";
 import toast from "react-hot-toast";
 
-export default function BlogEditorPage({ params }: { params: Promise<{ id: string }> }) {
+export default function CaseStudyEditorPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
   const resolvedParams = use(params);
   const isNew = resolvedParams.id === "new";
@@ -23,7 +23,7 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [blogData, setBlogData] = useState<Partial<BlogPost>>({
+  const [studyData, setStudyData] = useState<Partial<CaseStudy>>({
     title: "", slug: "", excerpt: "", category: "BUILD", 
     date: new Date().toLocaleDateString("en-US", { month: "long", day: "2-digit", year: "numeric" }),
     readTime: "5 min read", image: "", content: "",
@@ -33,11 +33,11 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
 
   useEffect(() => {
     if (!isNew) {
-      fetch("/api/admin/blogs")
+      fetch("/api/admin/case-studies")
         .then(res => res.json())
         .then(data => {
-          const post = data.find((p: any) => p.id === resolvedParams.id);
-          if (post) setBlogData(post);
+          const study = data.find((p: any) => p.id === resolvedParams.id);
+          if (study) setStudyData(study);
           setLoading(false);
         });
     }
@@ -47,27 +47,27 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
     const { name, value } = e.target;
     if (name.startsWith("author.")) {
       const authorField = name.split(".")[1];
-      setBlogData((prev: any) => ({ ...prev, author: { ...prev.author!, [authorField]: value } }));
+      setStudyData((prev: any) => ({ ...prev, author: { ...prev.author!, [authorField]: value } }));
     } else {
-      setBlogData((prev: any) => ({ ...prev, [name]: value }));
+      setStudyData((prev: any) => ({ ...prev, [name]: value }));
     }
   };
 
   const handleSave = async () => {
     setSaving(true);
     try {
-      const url = "/api/admin/blogs";
+      const url = "/api/admin/case-studies";
       const method = isNew ? "POST" : "PUT";
       const res = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(blogData)
+        body: JSON.stringify(studyData)
       });
       if (res.ok) {
-        toast.success(isNew ? "Post created successfully" : "Post updated successfully");
-        router.push("/admin/blogs");
+        toast.success(isNew ? "Case study created successfully" : "Case study updated successfully");
+        router.push("/admin/case-studies");
       } else {
-        toast.error("Failed to save blog post");
+        toast.error("Failed to save case study");
       }
     } catch (error) {
       toast.error("An error occurred while saving");
@@ -94,10 +94,10 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
       
       if (data.success) {
         if (uploadingImage === "cover") {
-          setBlogData((prev: any) => ({ ...prev, image: data.url }));
+          setStudyData((prev: any) => ({ ...prev, image: data.url }));
         } else if (uploadingImage === "content") {
-          const imgTag = `<img src="${data.url}" alt="Blog Image" class="w-full rounded-2xl my-6 shadow-xl border border-white/10" />\n`;
-          setBlogData((prev: any) => ({ ...prev, content: (prev.content || "") + imgTag }));
+          const imgTag = `<img src="${data.url}" alt="Case Study Image" class="w-full rounded-2xl my-6 shadow-xl border border-white/10" />\n`;
+          setStudyData((prev: any) => ({ ...prev, content: (prev.content || "") + imgTag }));
           toast.success("Image uploaded and inserted");
         }
       } else {
@@ -120,10 +120,10 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
   const runAI = async (intent: string, targetText: string = "") => {
     try {
       setAiLoading(intent);
-      const res = await fetch("/api/admin/blogs/ai", {
+      const res = await fetch("/api/admin/case-studies/ai", { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ targetText, intent, fullContent: blogData.content })
+        body: JSON.stringify({ targetText, intent, fullContent: studyData.content })
       });
       const data = await res.json();
       if (!data.success) throw new Error(data.error);
@@ -137,8 +137,8 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
   };
 
   const handleRewriteContent = async () => {
-    if (!blogData.content) return;
-    const res = await runAI("rewrite", blogData.content);
+    if (!studyData.content) return;
+    const res = await runAI("rewrite", studyData.content);
     if (res && res.result) {
       setPendingAIContent(res.result);
       setShowAIReview(true);
@@ -146,8 +146,8 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
   };
 
   const handleCorrectGrammar = async () => {
-    if (!blogData.content) return;
-    const res = await runAI("correct", blogData.content);
+    if (!studyData.content) return;
+    const res = await runAI("correct", studyData.content);
     if (res && res.result) {
       setPendingAIContent(res.result);
       setShowAIReview(true);
@@ -156,7 +156,7 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
 
   const handleAcceptAI = () => {
     if (pendingAIContent) {
-      setBlogData((prev: any) => ({ ...prev, content: pendingAIContent }));
+      setStudyData((prev: any) => ({ ...prev, content: pendingAIContent }));
       setPendingAIContent(null);
       setShowAIReview(false);
       toast.success("AI draft accepted!");
@@ -170,10 +170,10 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
   };
 
   const handleGenerateSEO = async () => {
-    if (!blogData.content) return toast.error("Write some content first!");
+    if (!studyData.content) return toast.error("Write some content first!");
     const res = await runAI("seo");
     if (res && res.seo) {
-      setBlogData((prev: any) => ({ 
+      setStudyData((prev: any) => ({ 
         ...prev, 
         metaTitle: res.seo.metaTitle, 
         metaDescription: res.seo.metaDescription, 
@@ -196,11 +196,11 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-6">
         <div className="flex items-center gap-4">
-          <Link href="/admin/blogs" className="p-3 bg-white border border-slate-200 hover:bg-slate-50 rounded-2xl transition-colors shadow-sm">
+          <Link href="/admin/case-studies" className="p-3 bg-white border border-slate-200 hover:bg-slate-50 rounded-2xl transition-colors shadow-sm">
             <ChevronLeft size={20} className="text-slate-600" />
           </Link>
           <h1 className="text-3xl font-black uppercase tracking-tighter">
-            {isNew ? "CREATE" : "EDIT"} <span className="text-[#081ff0] italic">POST</span>
+            {isNew ? "CREATE" : "EDIT"} <span className="text-[#081ff0] italic">STUDY</span>
           </h1>
         </div>
         
@@ -209,7 +209,7 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
           disabled={saving || !!uploadingImage}
           className="flex items-center justify-center w-full md:w-auto gap-2 px-8 py-3 rounded-2xl bg-[#081ff0] hover:bg-[#0618cc] transition-all font-black uppercase tracking-widest text-xs shadow-lg shadow-[#081ff0]/20 text-white disabled:opacity-50"
         >
-          <Save size={16} /> {saving ? "SAVING..." : "SAVE POST"}
+          <Save size={16} /> {saving ? "SAVING..." : "SAVE STUDY"}
         </button>
       </div>
 
@@ -225,16 +225,16 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2 md:col-span-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Title</label>
-                <input name="title" value={blogData.title} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-sm font-bold text-slate-900" placeholder="High-Impact Title" />
+                <input name="title" value={studyData.title} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-sm font-bold text-slate-900" placeholder="High-Impact Title" />
               </div>
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Slug</label>
-                <input name="slug" value={blogData.slug} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-sm text-slate-900" placeholder="url-friendly-slug" />
+                <input name="slug" value={studyData.slug} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-sm text-slate-900" placeholder="url-friendly-slug" />
               </div>
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Category</label>
                 <div className="relative">
-                  <select name="category" value={blogData.category} onChange={handleChange as any} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-sm appearance-none text-slate-900">
+                  <select name="category" value={studyData.category} onChange={handleChange as any} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-sm appearance-none text-slate-900">
                     <option value="BUILD">BUILD</option>
                     <option value="DESIGN">DESIGN</option>
                     <option value="GROW">GROW</option>
@@ -244,7 +244,7 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
               </div>
               <div className="space-y-2 md:col-span-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Excerpt</label>
-                <textarea name="excerpt" value={blogData.excerpt} onChange={handleChange} className="w-full h-20 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-sm resize-none text-slate-900" placeholder="Short description..." />
+                <textarea name="excerpt" value={studyData.excerpt} onChange={handleChange} className="w-full h-20 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-sm resize-none text-slate-900" placeholder="Short description..." />
               </div>
             </div>
           </div>
@@ -254,7 +254,7 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
              
             <div className="flex items-center justify-between mb-4 flex-wrap gap-4">
               <h2 className="text-xl font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2">
-                <FileText size={18} className="text-purple-500" /> Story Content
+                <FileText size={18} className="text-purple-500" /> Study Content
               </h2>
               
               <div className="flex bg-slate-50 p-1 rounded-xl border border-slate-200">
@@ -295,16 +295,16 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
                 
                 <textarea 
                   name="content" 
-                  value={blogData.content} 
+                  value={studyData.content} 
                   onChange={handleChange} 
                   className="w-full flex-1 bg-slate-50 border border-slate-200 rounded-xl px-6 py-5 outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-sm font-mono leading-relaxed resize-none shadow-inner text-slate-900" 
-                  placeholder="<p>Write your amazing story here...</p>" 
+                  placeholder="<p>Write your amazing study here...</p>" 
                 />
               </>
             ) : (
               <div className="flex-1 bg-white border border-slate-100 rounded-xl p-8 overflow-y-auto w-full prose-content text-slate-800">
-                {blogData.content ? (
-                  <div dangerouslySetInnerHTML={{ __html: blogData.content }} />
+                {studyData.content ? (
+                  <div dangerouslySetInnerHTML={{ __html: studyData.content }} />
                 ) : (
                   <p className="text-slate-300 italic text-center py-12">No content to preview.</p>
                 )}
@@ -329,15 +329,15 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
             <div className="space-y-4">
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Meta Title</label>
-                <input name="metaTitle" value={blogData.metaTitle} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-green-500 transition-all text-sm text-slate-900" placeholder="SEO optimized title" />
+                <input name="metaTitle" value={studyData.metaTitle} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-green-500 transition-all text-sm text-slate-900" placeholder="SEO optimized title" />
               </div>
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Meta Description</label>
-                <textarea name="metaDescription" value={blogData.metaDescription} onChange={handleChange} className="w-full h-24 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-green-500 transition-all text-sm resize-none text-slate-900" placeholder="Compelling meta description" />
+                <textarea name="metaDescription" value={studyData.metaDescription} onChange={handleChange} className="w-full h-24 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-green-500 transition-all text-sm resize-none text-slate-900" placeholder="Compelling meta description" />
               </div>
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Keywords</label>
-                <input name="keywords" value={blogData.keywords} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-green-500 transition-all text-sm text-slate-900" placeholder="comma, separated, tags" />
+                <input name="keywords" value={studyData.keywords} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-green-500 transition-all text-sm text-slate-900" placeholder="comma, separated, tags" />
               </div>
             </div>
           </div>
@@ -359,21 +359,21 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
                     <UploadCloud size={12} /> {uploadingImage === "cover" ? "UP..." : "UPLOAD"}
                   </button>
                 </div>
-                <input name="image" value={blogData.image} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-yellow-500 transition-all text-sm text-slate-900" placeholder="https://" />
+                <input name="image" value={studyData.image} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-yellow-500 transition-all text-sm text-slate-900" placeholder="https://" />
               </div>
-              {blogData.image && (
+              {studyData.image && (
                 <div className="w-full aspect-video rounded-xl overflow-hidden border border-slate-200">
-                  <img src={blogData.image} alt="Cover Preview" className="w-full h-full object-cover" />
+                  <img src={studyData.image} alt="Cover Preview" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Date</label>
-                  <input name="date" value={blogData.date} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-yellow-500 transition-all text-sm text-slate-900" />
+                  <input name="date" value={studyData.date} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-yellow-500 transition-all text-sm text-slate-900" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Read Time</label>
-                  <input name="readTime" value={blogData.readTime} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-yellow-500 transition-all text-sm text-slate-900" />
+                  <input name="readTime" value={studyData.readTime} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-yellow-500 transition-all text-sm text-slate-900" />
                 </div>
               </div>
             </div>
@@ -387,11 +387,11 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
             <div className="space-y-4">
                <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Name</label>
-                <input name="author.name" value={blogData.author?.name} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-indigo-500 transition-all text-sm text-slate-900" />
+                <input name="author.name" value={studyData.author?.name} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-indigo-500 transition-all text-sm text-slate-900" />
               </div>
                <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Role</label>
-                <input name="author.role" value={blogData.author?.role} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-indigo-500 transition-all text-sm text-slate-900" />
+                <input name="author.role" value={studyData.author?.role} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-indigo-500 transition-all text-sm text-slate-900" />
               </div>
             </div>
           </div>
@@ -445,7 +445,7 @@ export default function BlogEditorPage({ params }: { params: Promise<{ id: strin
                     </span>
                   </div>
                   <div className="p-8 overflow-y-auto w-full text-sm font-mono text-slate-400 leading-relaxed opacity-50 select-none pointer-events-none">
-                    {blogData.content}
+                    {studyData.content}
                   </div>
                 </div>
 

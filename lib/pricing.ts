@@ -25,7 +25,7 @@ export const PRICING_DATA: PricingCategory[] = [
         price: "$300",
         description: "Perfect for personal brands and small businesses needing a clean web presence.",
         features: [
-          "Up to 5 Pages (Home, About, Services, Blog, Contact)",
+          "Up to 5 Pages (Home, About, Services, Case Studies, Contact)",
           "Mobile-Responsive Design",
           "Basic SEO Meta Tags Setup",
           "Contact Form Integration",
@@ -41,7 +41,7 @@ export const PRICING_DATA: PricingCategory[] = [
         description: "A content-driven site with full management capabilities.",
         features: [
           "Up to 10 CMS Pages (Sanity, Contentful, or Strapi)",
-          "Integrated Blog/News Module",
+          "Integrated Case Studies Module",
           "Dedicated Admin Panel",
           "Comprehensive SEO Setup",
           "Lead Capture System",
@@ -243,7 +243,7 @@ export const PRICING_DATA: PricingCategory[] = [
           "Technical SEO Audit (Month 1)",
           "Keyword Research (Up to 30/mo)",
           "On-Page Optimization (10 pages/mo)",
-          "4 SEO-optimized Blog Articles",
+          "4 SEO-optimized Case Studies",
           "Backlink Outreach (5 links/mo)",
           "Rank Tracking & Analytics Reports",
           "Search Console Monitoring"

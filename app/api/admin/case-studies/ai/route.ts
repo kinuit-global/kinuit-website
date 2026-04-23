@@ -9,7 +9,7 @@ const PRIMARY_MODEL = "gemini-2.5-flash";
 const FALLBACK_MODEL = "gemini-2.5-flash-lite";
 
 const GENERATION_CONFIG = {
-  maxOutputTokens: 10240, // Sufficient for long-form blog rewrites
+  maxOutputTokens: 10240, // Sufficient for long-form case study rewrites
   temperature: 0.7,
   topP: 0.95,
 };
@@ -86,7 +86,7 @@ export async function POST(req: Request) {
         break;
         
       case "seo":
-        prompt = `Analyze this blog for SEO metadata for Kinuit. 
+        prompt = `Analyze this case study for SEO metadata for Kinuit. 
         Return ONLY valid JSON: {"metaTitle": "...", "metaDescription": "...", "keywords": "..."}
         
         Content: ${fullContent}`;

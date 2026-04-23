@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { blogPosts } from '@/lib/blog';
+import { caseStudies } from '@/lib/case-studies';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.kinuit.com';
@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/services',
     '/work',
     '/contact',
-    '/blog',
+    '/case-studies',
     '/privacy',
     '/terms',
   ].map((route) => ({
@@ -21,13 +21,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === '' ? 1 : 0.8,
   }));
 
-  // Dynamic blog routes
-  const blogRoutes = blogPosts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.date), // Assuming post.date is a valid date string
+  // Dynamic case study routes
+  const caseStudyRoutes = caseStudies.map((study) => ({
+    url: `${baseUrl}/case-studies/${study.slug}`,
+    lastModified: new Date(study.date), // Assuming study.date is a valid date string
     changeFrequency: 'weekly' as const,
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...blogRoutes];
+  return [...staticRoutes, ...caseStudyRoutes];
 }

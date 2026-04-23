@@ -7,7 +7,10 @@ import { revalidatePath } from 'next/cache';
 // Configure Cloudinary with the URL from environment variables
 // This automatically handles the Cloud Name, API Key, and API Secret.
 cloudinary.config({
-  cloudinary_api_url: process.env.CLOUDINARY_URL,
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
 });
 
 /**

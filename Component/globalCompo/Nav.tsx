@@ -5,19 +5,22 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ChevronDown, ArrowRight } from "lucide-react";
+import { servicesItem, createSlug } from "@/lib/service";
 
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "Service", href: "/services" },
+  { label: "Case Studies", href: "/case-studies" },
   { label: "Work", href: "/work" },
-  { label: "Blog", href: "/blog" },
+  { label: "Pricing", href: "/pricing" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -61,32 +64,94 @@ export default function Navbar() {
             <div className="flex items-center gap-1">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
+                const isServices = link.label === "Service";
+
                 return (
-                  <Link
+                  <div 
                     key={link.label}
-                    href={link.href}
-                    aria-current={isActive ? "page" : undefined}
-                    className={`relative px-4 py-2 flex items-center justify-center text-[15px] transition-all duration-300 group rounded-full overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-k-primary ${isActive
-                      ? "text-[#081ff0]"
-                      : "text-k-text-muted hover:text-k-text"
-                      }`}
+                    className="relative"
+                    onMouseEnter={() => isServices && setServicesOpen(true)}
+                    onMouseLeave={() => isServices && setServicesOpen(false)}
                   >
+                    <Link
+                      href={link.href}
+                      aria-current={isActive ? "page" : undefined}
+                      className={`relative px-4 py-2 flex items-center justify-center whitespace-nowrap text-[15px] transition-all duration-300 group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-k-primary ${isActive
+                        ? "text-[#081ff0]"
+                        : "text-k-text-muted hover:text-k-text"
+                        }`}
+                    >
+                      <AnimatePresence>
+                        {isActive && (
+                          <motion.span
+                            layoutId="nav-pill"
+                            className="absolute inset-0 bg-[#081ff0]/5 border border-[#081ff0]/10 rounded-full"
+                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                          />
+                        )}
+                      </AnimatePresence>
 
-                    <AnimatePresence>
-                      {isActive && (
-                        <motion.span
-                          layoutId="nav-pill"
-                          className="absolute inset-0 bg-[#081ff0]/5 border border-[#081ff0]/10 rounded-full"
-                          transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                        />
-                      )}
-                    </AnimatePresence>
+                      <span className="absolute inset-0 bg-k-primary/0 group-hover:bg-k-primary/5 transition-colors duration-300 rounded-full -z-10" />
 
-                    {/* Hover background */}
-                    <span className="absolute inset-0 bg-k-primary/0 group-hover:bg-k-primary/5 transition-colors duration-300 rounded-full -z-10" />
+                      <div className="relative z-10 flex items-center gap-1">
+                        <span className="tracking-wide font-medium">{link.label}</span>
+                        {isServices && (
+                          <ChevronDown 
+                            size={14} 
+                            className={`transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} 
+                          />
+                        )}
+                      </div>
+                    </Link>
 
-                    <span className="relative z-10 tracking-wide font-medium">{link.label}</span>
-                  </Link>
+                    {/* Mega Menu Dropdown */}
+                    {isServices && (
+                      <AnimatePresence>
+                        {servicesOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                            transition={{ duration: 0.2, ease: "easeOut" }}
+                            className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-[100]"
+                          >
+                            <div className="bg-white border border-slate-200 rounded-[2rem] shadow-2xl shadow-slate-200/50 p-6 w-[600px] grid grid-cols-2 gap-4">
+                              {servicesItem.map((service) => (
+                                <Link 
+                                  key={service.title} 
+                                  href={`/services/${createSlug(service.title)}`}
+                                  className="group/item p-4 rounded-2xl hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100"
+                                >
+                                  <div className="flex items-center gap-4">
+                                    <div className="w-10 h-10 shrink-0 rounded-xl bg-[#081ff0]/5 flex items-center justify-center text-[#081ff0] group-hover/item:bg-[#081ff0] group-hover/item:text-white transition-all">
+                                      <service.icon size={20} />
+                                    </div>
+                                    <div>
+                                      <h4 className="text-sm font-bold text-slate-900 group-hover/item:text-[#081ff0] transition-colors uppercase tracking-tight">
+                                        {service.title}
+                                      </h4>
+                                      <p className="text-[10px] text-slate-400 font-medium line-clamp-1 uppercase tracking-widest mt-0.5">
+                                        {service.tags.slice(0, 3).join(" • ")}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </Link>
+                              ))}
+                              
+                              <div className="col-span-2 mt-2 pt-4 border-t border-slate-100 flex items-center justify-between px-2">
+                                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                                  Elite Agency Solutions
+                                </p>
+                                <Link href="/services" className="text-[10px] font-black uppercase tracking-widest text-[#081ff0] hover:underline flex items-center gap-1">
+                                  View all <ArrowRight size={10} />
+                                </Link>
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    )}
+                  </div>
                 );
               })}
             </div>
@@ -148,24 +213,69 @@ export default function Navbar() {
             <nav className="flex flex-col items-center gap-6">
               {navLinks.map((link, i) => {
                 const isActive = pathname === link.href;
+                const isServices = link.label === "Service";
+
                 return (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    aria-current={isActive ? "page" : undefined}
-                    className="w-full text-center"
-                  >
-                    <motion.span
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.07 }}
-                      className={`text-3xl font-light hover:text-k-text transition-colors cursor-pointer block py-2 ${isActive ? "text-[#081ff0] font-black" : "text-k-text-muted"
-                        }`}
+                  <div key={link.label} className="w-full">
+                    <Link
+                      href={link.href}
+                      onClick={() => !isServices && setMenuOpen(false)}
+                      aria-current={isActive ? "page" : undefined}
+                      className="w-full text-center"
                     >
-                      {link.label}
-                    </motion.span>
-                  </Link>
+                      <motion.span
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.07 }}
+                        className={`text-3xl font-light hover:text-k-text transition-colors cursor-pointer block py-2 whitespace-nowrap ${isActive ? "text-[#081ff0] font-black" : "text-k-text-muted"
+                          }`}
+                        onClick={(e) => {
+                          if (isServices) {
+                            e.preventDefault();
+                            setServicesOpen(!servicesOpen);
+                          }
+                        }}
+                      >
+                        <div className="flex items-center justify-center gap-3">
+                          {link.label}
+                          {isServices && (
+                            <ChevronDown 
+                              size={24} 
+                              className={`transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} 
+                            />
+                          )}
+                        </div>
+                      </motion.span>
+                    </Link>
+
+                    {/* Mobile Services Submenu */}
+                    {isServices && (
+                      <AnimatePresence>
+                        {servicesOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="overflow-hidden bg-slate-50 rounded-2xl mt-2"
+                          >
+                            <div className="flex flex-col p-4 gap-4">
+                              {servicesItem.map((service) => (
+                                <Link 
+                                  key={service.title} 
+                                  href={`/services/${createSlug(service.title)}`}
+                                  onClick={() => setMenuOpen(false)}
+                                  className="flex items-center justify-between text-xl font-medium text-slate-600 px-4 py-2 hover:text-[#081ff0]"
+                                >
+                                  {service.title}
+                                  <service.icon size={20} className="shrink-0" />
+                                </Link>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    )}
+                  </div>
                 );
               })}
 

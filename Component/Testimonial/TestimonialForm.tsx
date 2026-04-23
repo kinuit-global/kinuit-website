@@ -2,6 +2,9 @@
 
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import { 
   User, 
   Phone, 
@@ -14,15 +17,34 @@ import {
   CheckCircle2, 
   X,
   Loader2,
-  Plus
+  Plus,
+  AlertCircle
 } from 'lucide-react';
 import { submitTestimonial } from '@/app/actions/testimonial';
 import { toast } from 'react-hot-toast';
+
+const testimonialSchema = z.object({
+  fullName: z.string().min(2, "Full name must be at least 2 characters"),
+  phone: z.string().min(5, "Please enter a valid phone number"),
+  email: z.string().email("Please enter a valid email address"),
+  companyName: z.string().min(2, "Company name is required"),
+  testimonial: z.string().min(10, "Testimonial must be at least 10 characters"),
+});
+
+type TestimonialValues = z.infer<typeof testimonialSchema>;
 
 export default function TestimonialForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TestimonialValues>({
+    resolver: zodResolver(testimonialSchema),
+  });
 
   // File states for previews
   const [previews, setPreviews] = useState<{
@@ -33,6 +55,11 @@ export default function TestimonialForm() {
     images: string[];
   }>({ images: [] });
 
+  // Track actual files for cumulative selection (especially for images)
+  const [selectedFiles, setSelectedFiles] = useState<{
+    images: File[];
+  }>({ images: [] });
+
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, category: string) => {
@@ -40,8 +67,12 @@ export default function TestimonialForm() {
     if (!files || files.length === 0) return;
 
     if (category === 'images') {
-      const newImages = Array.from(files).map(file => URL.createObjectURL(file));
-      setPreviews(prev => ({ ...prev, images: [...prev.images, ...newImages] }));
+      const newFiles = Array.from(files);
+      // Keep track of the actual File objects
+      setSelectedFiles(prev => ({ ...prev, images: [...prev.images, ...newFiles] }));
+      
+      const newPreviews = newFiles.map(file => URL.createObjectURL(file));
+      setPreviews(prev => ({ ...prev, images: [...prev.images, ...newPreviews] }));
     } else {
       const file = files[0];
       const url = URL.createObjectURL(file);
@@ -56,17 +87,50 @@ export default function TestimonialForm() {
           newImages.splice(index, 1);
           return { ...prev, images: newImages };
       });
+      setSelectedFiles(prev => {
+          const newFiles = [...prev.images];
+          newFiles.splice(index, 1);
+          return { ...prev, images: newFiles };
+      });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = async (data: TestimonialValues) => {
+    if (!formRef.current) return;
+    
     setIsSubmitting(true);
     setError(null);
 
     const loadingToast = toast.loading("Sending testimonial and uploading media...");
 
     try {
-        const formData = new FormData(e.currentTarget);
+        // Manually construct FormData to ensure accumulated images and other files are included
+        const formData = new FormData();
+        
+        // Append text fields
+        formData.append("fullName", data.fullName);
+        formData.append("phone", data.phone);
+        formData.append("email", data.email);
+        formData.append("companyName", data.companyName);
+        formData.append("testimonial", data.testimonial);
+
+        // Append single files directly from their inputs
+        const companyLogo = (formRef.current.querySelector('input[name="companyLogo"]') as HTMLInputElement)?.files?.[0];
+        if (companyLogo) formData.append("companyLogo", companyLogo);
+
+        const profilePhoto = (formRef.current.querySelector('input[name="profilePhoto"]') as HTMLInputElement)?.files?.[0];
+        if (profilePhoto) formData.append("profilePhoto", profilePhoto);
+
+        const video = (formRef.current.querySelector('input[name="video"]') as HTMLInputElement)?.files?.[0];
+        if (video) formData.append("video", video);
+
+        const audio = (formRef.current.querySelector('input[name="audio"]') as HTMLInputElement)?.files?.[0];
+        if (audio) formData.append("audio", audio);
+
+        // Append all accumulated images from state
+        selectedFiles.images.forEach((file) => {
+            formData.append("images", file);
+        });
+
         const result = (await submitTestimonial(formData)) as any;
 
         if (result.success) {
@@ -76,13 +140,11 @@ export default function TestimonialForm() {
                 .map(([name, stat]: any) => `${name} (${stat.error || "Upload failed"})`);
 
             if (failures.length > 0) {
-                // Partial success (Text saved, some media failed)
                 toast.error(
                     `Testimonial saved, but failed to upload: ${failures.join(', ')}`, 
                     { id: loadingToast, duration: 8000 }
                 );
             } else {
-                // Full success
                 toast.success("Testimonial submitted successfully!", { id: loadingToast });
             }
             setIsSuccess(true);
@@ -127,70 +189,86 @@ export default function TestimonialForm() {
         </p>
       </div>
 
-      <form ref={formRef} onSubmit={handleSubmit} className="space-y-8">
+      <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         {/* YOUR DETAILS */}
         <div className="bg-k-card-bg border border-k-border p-8 rounded-3xl space-y-6">
           <h2 className="text-[10px] font-black tracking-[0.2em] text-k-primary uppercase mb-4 opacity-70">Your Details</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-xs font-bold text-k-text/60 uppercase ml-1">Full name</label>
+              <label className="text-xs font-bold text-k-text/60 uppercase ml-1">Full name <span className="text-red-500">*</span></label>
               <div className="relative">
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 text-k-text/30 w-4 h-4" />
                 <input 
-                  required
-                  name="fullName"
+                  {...register("fullName")}
                   placeholder="Jane Smith"
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-k-text placeholder-slate-400 font-semibold shadow-sm hover:border-slate-400"
+                  className={`w-full bg-slate-50 border ${errors.fullName ? 'border-red-500' : 'border-slate-300'} rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-k-text placeholder-slate-400 font-semibold shadow-sm hover:border-slate-400`}
                 />
               </div>
+              {errors.fullName && (
+                <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider flex items-center gap-1 mt-1 ml-1">
+                  <AlertCircle size={10} /> {errors.fullName.message}
+                </p>
+              )}
             </div>
             
             <div className="space-y-2">
-              <label className="text-xs font-bold text-k-text/60 uppercase ml-1">Phone number</label>
+              <label className="text-xs font-bold text-k-text/60 uppercase ml-1">Phone number <span className="text-red-500">*</span></label>
               <div className="relative">
                 <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-k-text/30 w-4 h-4" />
                 <input 
-                  required
-                  name="phone"
+                  {...register("phone")}
                   placeholder="+1 (555) 000-0000"
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-k-text placeholder-slate-400 font-semibold shadow-sm hover:border-slate-400"
+                  className={`w-full bg-slate-50 border ${errors.phone ? 'border-red-500' : 'border-slate-300'} rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-k-text placeholder-slate-400 font-semibold shadow-sm hover:border-slate-400`}
                 />
               </div>
+              {errors.phone && (
+                <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider flex items-center gap-1 mt-1 ml-1">
+                  <AlertCircle size={10} /> {errors.phone.message}
+                </p>
+              )}
             </div>
 
             <div className="space-y-2 md:col-span-2">
-              <label className="text-xs font-bold text-k-text/60 uppercase ml-1">Email Address</label>
+              <label className="text-xs font-bold text-k-text/60 uppercase ml-1">Email Address <span className="text-red-500">*</span></label>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-k-text/30 w-4 h-4" />
                 <input 
-                  required
                   type="email"
-                  name="email"
+                  {...register("email")}
                   placeholder="jane@example.com"
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-k-text placeholder-slate-400 font-semibold shadow-sm hover:border-slate-400"
+                  className={`w-full bg-slate-50 border ${errors.email ? 'border-red-500' : 'border-slate-300'} rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-k-text placeholder-slate-400 font-semibold shadow-sm hover:border-slate-400`}
                 />
               </div>
+              {errors.email && (
+                <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider flex items-center gap-1 mt-1 ml-1">
+                  <AlertCircle size={10} /> {errors.email.message}
+                </p>
+              )}
             </div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs font-bold text-k-text/60 uppercase ml-1">Company name</label>
+            <label className="text-xs font-bold text-k-text/60 uppercase ml-1">Company name <span className="text-red-500">*</span></label>
             <div className="relative">
               <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-k-text/30 w-4 h-4" />
               <input 
-                required
-                name="companyName"
+                {...register("companyName")}
                 placeholder="Acme Corp"
-                className="w-full bg-slate-50 border border-slate-300 rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-k-text placeholder-slate-400 font-semibold shadow-sm hover:border-slate-400"
+                className={`w-full bg-slate-50 border ${errors.companyName ? 'border-red-500' : 'border-slate-300'} rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-k-text placeholder-slate-400 font-semibold shadow-sm hover:border-slate-400`}
               />
             </div>
+            {errors.companyName && (
+              <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider flex items-center gap-1 mt-1 ml-1">
+                <AlertCircle size={10} /> {errors.companyName.message}
+              </p>
+            )}
           </div>
         </div>
 
         {/* BRANDING */}
         <div className="bg-k-card-bg border border-k-border p-8 rounded-3xl">
-          <h2 className="text-[10px] font-black tracking-[0.2em] text-k-primary uppercase mb-6 opacity-70">Branding</h2>
+          <h2 className="text-[10px] font-black tracking-[0.2em] text-k-primary uppercase mb-6 opacity-70">Branding (Optional)</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Company Logo */}
@@ -258,20 +336,24 @@ export default function TestimonialForm() {
           </div>
           
           <div className="space-y-2">
-            <label className="text-xs font-bold text-k-text/60 uppercase ml-1">Written testimonial</label>
+            <label className="text-xs font-bold text-k-text/60 uppercase ml-1">Written testimonial <span className="text-red-500">*</span></label>
             <textarea 
-              required
-              name="testimonial"
+              {...register("testimonial")}
               placeholder="Tell us about your experience working with us..."
               rows={5}
-              className="w-full bg-slate-50 border border-slate-300 rounded-2xl p-4 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-k-text placeholder-slate-400 font-semibold shadow-sm hover:border-slate-400 resize-none"
+              className={`w-full bg-slate-50 border ${errors.testimonial ? 'border-red-500' : 'border-slate-300'} rounded-2xl p-4 focus:outline-none focus:border-[#081ff0] focus:ring-1 focus:ring-[#081ff0] transition-all text-k-text placeholder-slate-400 font-semibold shadow-sm hover:border-slate-400 resize-none`}
             />
+            {errors.testimonial && (
+              <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider flex items-center gap-1 mt-1 ml-1">
+                <AlertCircle size={10} /> {errors.testimonial.message}
+              </p>
+            )}
           </div>
         </div>
 
         {/* MEDIA ATTACHMENTS */}
         <div className="bg-k-card-bg border border-k-border p-8 rounded-3xl space-y-8">
-          <h2 className="text-[10px] font-black tracking-[0.2em] text-k-primary uppercase opacity-70">Media Attachments</h2>
+          <h2 className="text-[10px] font-black tracking-[0.2em] text-k-primary uppercase opacity-70">Media Attachments (Optional)</h2>
           
           {/* Video upload */}
           <div className="space-y-3">
@@ -386,6 +468,7 @@ export default function TestimonialForm() {
         )}
 
         <button 
+          type="submit"
           disabled={isSubmitting}
           className="w-full bg-k-text text-k-bg font-black py-5 rounded-2xl uppercase tracking-widest hover:bg-k-primary hover:text-white transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group shadow-xl"
         >

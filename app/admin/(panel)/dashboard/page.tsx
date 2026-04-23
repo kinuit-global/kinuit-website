@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
-import { getBlogPosts } from "@/lib/blog";
+import { getCaseStudies } from "@/lib/case-studies";
 import { servicesItem } from "@/lib/service";
 
 export default async function DashboardPage() {
@@ -32,7 +32,7 @@ export default async function DashboardPage() {
     .sort((a,b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime())
     .slice(0, 3);
 
-  const blogPosts = getBlogPosts();
+  const caseStudies = getCaseStudies();
   // Count all sub-services (tags) for a more accurate "Active Services" count
   const totalSubServices = servicesItem.reduce((acc, service) => acc + service.tags.length, 0);
 
@@ -40,8 +40,9 @@ export default async function DashboardPage() {
     { title: "Total Testimonials", value: totalSubmissions, icon: MessageSquareQuote, color: "text-blue-500", bg: "bg-blue-500/10" },
     { title: "Recent (7d)", value: recentSubmissions, icon: TrendingUp, color: "text-green-500", bg: "bg-green-500/10" },
     { title: "Active Services", value: totalSubServices, icon: Briefcase, color: "text-purple-500", bg: "bg-purple-500/10" },
-    { title: "Blog Posts", value: blogPosts.length, icon: FileText, color: "text-orange-500", bg: "bg-orange-500/10" },
+    { title: "Case Studies", value: caseStudies.length, icon: FileText, color: "text-orange-500", bg: "bg-orange-500/10" },
   ];
+
 
   return (
     <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -110,7 +111,7 @@ export default async function DashboardPage() {
           <h3 className="text-lg font-black uppercase tracking-tighter text-slate-950">Quick Actions</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
              {[
-               { title: "Create Blog Post", icon: FileText, href: "/admin/blogs" },
+               { title: "Create Case Study", icon: FileText, href: "/admin/case-studies" },
                { title: "Review Services", icon: Briefcase, href: "/admin/services" },
                { title: "Export Data", icon: ArrowRight, href: "#" },
                { title: "System Settings", icon: ArrowRight, href: "#" },
