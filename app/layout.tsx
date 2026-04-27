@@ -76,13 +76,16 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/assets/16px.ico", sizes: "16x16" },
-      { url: "/assets/32px.ico", sizes: "32x32" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/assets/16px.ico", sizes: "16x16", type: "image/x-icon" },
+      { url: "/assets/32px.ico", sizes: "32x32", type: "image/x-icon" },
+      { url: "/16px.svg", sizes: "16x16", type: "image/svg+xml" },
+      { url: "/32px.svg", sizes: "32x32", type: "image/svg+xml" },
     ],
-    shortcut: ["/favicon.ico"],
+    shortcut: "/favicon.ico",
     apple: [
-      { url: "/assets/180px.ico", sizes: "180x180" },
+      { url: "/assets/180px.ico", sizes: "180x180", type: "image/x-icon" },
+      { url: "/180px.svg", sizes: "180x180", type: "image/svg+xml" },
     ],
   },
 };
