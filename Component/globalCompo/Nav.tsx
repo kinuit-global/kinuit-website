@@ -75,6 +75,7 @@ export default function Navbar() {
                   >
                     <Link
                       href={link.href}
+                      onClick={() => isServices && setServicesOpen(false)}
                       aria-current={isActive ? "page" : undefined}
                       className={`relative px-4 py-2 flex items-center justify-center whitespace-nowrap text-[15px] transition-all duration-300 group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-k-primary ${isActive
                         ? "text-[#081ff0]"
@@ -115,35 +116,46 @@ export default function Navbar() {
                             transition={{ duration: 0.2, ease: "easeOut" }}
                             className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-[100]"
                           >
-                            <div className="bg-white border border-slate-200 rounded-[2rem] shadow-2xl shadow-slate-200/50 p-6 w-[600px] grid grid-cols-2 gap-4">
+                            <div className="bg-white border border-slate-200 rounded-[2.5rem] shadow-2xl shadow-slate-200/60 p-8 w-[720px] grid grid-cols-2 gap-x-12 gap-y-8">
                               {servicesItem.map((service) => (
-                                <Link 
-                                  key={service.title} 
-                                  href={`/services/${createSlug(service.title)}`}
-                                  className="group/item p-4 rounded-2xl hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100"
-                                >
-                                  <div className="flex items-center gap-4">
+                                <div key={service.title} className="flex flex-col gap-4">
+                                  <Link 
+                                    href={`/services/${createSlug(service.title)}`}
+                                    onClick={() => setServicesOpen(false)}
+                                    className="group/item flex items-center gap-4"
+                                  >
                                     <div className="w-10 h-10 shrink-0 rounded-xl bg-[#081ff0]/5 flex items-center justify-center text-[#081ff0] group-hover/item:bg-[#081ff0] group-hover/item:text-white transition-all">
                                       <service.icon size={20} />
                                     </div>
-                                    <div>
-                                      <h4 className="text-sm font-bold text-slate-900 group-hover/item:text-[#081ff0] transition-colors uppercase tracking-tight">
-                                        {service.title}
-                                      </h4>
-                                      <p className="text-[10px] text-slate-400 font-medium line-clamp-1 uppercase tracking-widest mt-0.5">
-                                        {service.tags.slice(0, 3).join(" • ")}
-                                      </p>
-                                    </div>
+                                    <h4 className="text-sm font-black text-slate-900 group-hover/item:text-[#081ff0] transition-colors uppercase tracking-widest">
+                                      {service.title}
+                                    </h4>
+                                  </Link>
+                                  
+                                  <div className="flex flex-wrap gap-x-3 gap-y-2 ml-14">
+                                    {service.tags.map((tag) => (
+                                      <Link
+                                        key={tag}
+                                        href={`/services/${createSlug(tag)}`}
+                                        onClick={() => setServicesOpen(false)}
+                                        className="text-[11px] text-slate-500 hover:text-[#081ff0] hover:underline underline-offset-4 font-medium transition-colors whitespace-nowrap"
+                                      >
+                                        {tag}
+                                      </Link>
+                                    ))}
                                   </div>
-                                </Link>
+                                </div>
                               ))}
                               
-                              <div className="col-span-2 mt-2 pt-4 border-t border-slate-100 flex items-center justify-between px-2">
-                                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                                  Elite Agency Solutions
-                                </p>
-                                <Link href="/services" className="text-[10px] font-black uppercase tracking-widest text-[#081ff0] hover:underline flex items-center gap-1">
-                                  View all <ArrowRight size={10} />
+                              <div className="col-span-2 mt-4 pt-6 border-t border-slate-100 flex items-center justify-between">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-2 h-2 rounded-full bg-[#081ff0] animate-pulse" />
+                                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                                    Next-Gen Agency Solutions
+                                  </p>
+                                </div>
+                                <Link href="/services" onClick={() => setServicesOpen(false)} className="text-[11px] font-black uppercase tracking-widest text-[#081ff0] hover:translate-x-1 transition-transform flex items-center gap-2">
+                                  Explore All Services <ArrowRight size={12} />
                                 </Link>
                               </div>
                             </div>
@@ -208,7 +220,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-k-bg/95 backdrop-blur-2xl flex flex-col items-center justify-center lg:hidden px-6"
+            className="fixed inset-0 z-40 bg-k-bg/95 backdrop-blur-2xl flex flex-col items-center lg:hidden px-6 pt-24 pb-12 overflow-y-auto"
           >
             <nav className="flex flex-col items-center gap-6">
               {navLinks.map((link, i) => {
@@ -258,18 +270,46 @@ export default function Navbar() {
                             exit={{ height: 0, opacity: 0 }}
                             className="overflow-hidden bg-slate-50 rounded-2xl mt-2"
                           >
-                            <div className="flex flex-col p-4 gap-4">
+                            <div className="flex flex-col gap-3 p-4">
                               {servicesItem.map((service) => (
-                                <Link 
-                                  key={service.title} 
-                                  href={`/services/${createSlug(service.title)}`}
-                                  onClick={() => setMenuOpen(false)}
-                                  className="flex items-center justify-between text-xl font-medium text-slate-600 px-4 py-2 hover:text-[#081ff0]"
-                                >
-                                  {service.title}
-                                  <service.icon size={20} className="shrink-0" />
-                                </Link>
+                                <div key={service.title} className="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm">
+                                  <Link 
+                                    href={`/services/${createSlug(service.title)}`}
+                                    onClick={() => setMenuOpen(false)}
+                                    className="flex items-center gap-3 mb-3"
+                                  >
+                                    <div className="w-10 h-10 rounded-xl bg-[#081ff0]/5 flex items-center justify-center text-[#081ff0]">
+                                      <service.icon size={20} />
+                                    </div>
+                                    <span className="font-black uppercase tracking-widest text-sm text-slate-900">{service.title}</span>
+                                    <ArrowRight size={14} className="ml-auto text-slate-300" />
+                                  </Link>
+                                  
+                                  <div className="flex flex-wrap gap-2">
+                                    {service.tags.map((tag) => (
+                                      <Link
+                                        key={tag}
+                                        href={`/services/${createSlug(tag)}`}
+                                        onClick={() => setMenuOpen(false)}
+                                        className="text-[10px] font-bold uppercase tracking-wider text-slate-500 bg-slate-50 px-3 py-1.5 rounded-full border border-slate-100 active:bg-[#081ff0] active:text-white transition-all"
+                                      >
+                                        {tag}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                </div>
                               ))}
+                              
+                              <Link 
+                                href="/services" 
+                                onClick={() => {
+                                  setMenuOpen(false);
+                                  setServicesOpen(false);
+                                }}
+                                className="mt-2 py-4 bg-[#081ff0]/5 rounded-2xl flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-[#081ff0]"
+                              >
+                                Full Service Catalog <ArrowRight size={14} />
+                              </Link>
                             </div>
                           </motion.div>
                         )}

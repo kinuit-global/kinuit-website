@@ -45,7 +45,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.kinuit.com'),
+  metadataBase: new URL('https://kinuit.com'),
   title: {
     default: "Kinuit | Build, Design, Grow & Plan for Ambitious Brands",
     template: "%s | Kinuit"
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Kinuit | Build, Design, Grow & Plan for Ambitious Brands",
     description: "Kinuit is a full-service agency for ambitious brands — strategy, branding, custom development, and growth, engineered for the new era.",
-    url: "https://www.kinuit.com",
+    url: "https://kinuit.com",
     siteName: "Kinuit",
     images: [
       {
@@ -76,16 +76,16 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/assets/16px.ico", sizes: "16x16", type: "image/x-icon" },
-      { url: "/assets/32px.ico", sizes: "32x32", type: "image/x-icon" },
-      { url: "/16px.svg", sizes: "16x16", type: "image/svg+xml" },
-      { url: "/32px.svg", sizes: "32x32", type: "image/svg+xml" },
+      { url: "https://kinuit.com/favicon.ico", sizes: "any" },
+      { url: "https://kinuit.com/assets/16px.ico", sizes: "16x16", type: "image/x-icon" },
+      { url: "https://kinuit.com/assets/32px.ico", sizes: "32x32", type: "image/x-icon" },
+      { url: "https://kinuit.com/16px.svg", sizes: "16x16", type: "image/svg+xml" },
+      { url: "https://kinuit.com/32px.svg", sizes: "32x32", type: "image/svg+xml" },
     ],
-    shortcut: "/favicon.ico",
+    shortcut: "https://kinuit.com/favicon.ico",
     apple: [
-      { url: "/assets/180px.ico", sizes: "180x180", type: "image/x-icon" },
-      { url: "/180px.svg", sizes: "180x180", type: "image/svg+xml" },
+      { url: "https://kinuit.com/assets/180px.ico", sizes: "180x180", type: "image/x-icon" },
+      { url: "https://kinuit.com/180px.svg", sizes: "180x180", type: "image/svg+xml" },
     ],
   },
 };
