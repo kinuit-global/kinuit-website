@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     siteName: "Kinuit",
     images: [
       {
-        url: "https://www.kinuit.com/assets/og-preview.jpg",
+        url: "/assets/og-preview.jpeg",
         width: 1200,
         height: 630,
         alt: "Kinuit | Build, Design, Grow & Plan for Ambitious Brands",
@@ -72,15 +72,17 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kinuit | Build, Design, Grow & Plan for Ambitious Brands",
     description: "Kinuit is a full-service agency for ambitious brands — strategy, branding, custom development, and growth, engineered for the new era.",
-    images: ["https://www.kinuit.com/assets/og-preview.jpg"],
+    images: ["/assets/og-preview.jpeg"],
   },
   icons: {
     icon: [
-      { url: "/16px.svg", sizes: "16x16" },
-      { url: "/32px.svg", sizes: "32x32" },
+      { url: "/favicon.ico" },
+      { url: "/assets/16px.ico", sizes: "16x16" },
+      { url: "/assets/32px.ico", sizes: "32x32" },
     ],
+    shortcut: ["/favicon.ico"],
     apple: [
-      { url: "/180px.svg", sizes: "180x180" },
+      { url: "/assets/180px.ico", sizes: "180x180" },
     ],
   },
 };
