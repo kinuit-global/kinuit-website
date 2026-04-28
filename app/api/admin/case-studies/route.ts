@@ -42,9 +42,9 @@ export async function POST(req: Request) {
     await persistData(RELATIVE_FILE_PATH, caseStudies);
     
     return NextResponse.json({ success: true, caseStudy: newCaseStudy });
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ success: false, error: "Failed to create case study" }, { status: 500 });
+  } catch (error: any) {
+    console.error("API POST Error:", error);
+    return NextResponse.json({ success: false, error: error.message || "Failed to create case study" }, { status: 500 });
   }
 }
 

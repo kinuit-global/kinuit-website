@@ -67,10 +67,11 @@ export default function CaseStudyEditorPage({ params }: { params: Promise<{ id: 
         toast.success(isNew ? "Case study created successfully" : "Case study updated successfully");
         router.push("/admin/case-studies");
       } else {
-        toast.error("Failed to save case study");
+        const errorData = await res.json().catch(() => null);
+        toast.error(errorData?.error || "Failed to save case study");
       }
-    } catch (error) {
-      toast.error("An error occurred while saving");
+    } catch (error: any) {
+      toast.error(error.message || "An error occurred while saving");
       console.error(error);
     } finally {
       setSaving(false);

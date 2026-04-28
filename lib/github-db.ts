@@ -16,6 +16,7 @@ export async function fetchGitHubData(filePath: string): Promise<any | null> {
       headers: {
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
         Accept: "application/vnd.github.v3+json",
+        "User-Agent": "Kinuit-CMS",
       },
       next: { revalidate: 0 } // Always fetch latest
     });
@@ -48,6 +49,7 @@ export async function saveToGitHub(filePath: string, jsonData: any): Promise<boo
       headers: {
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
         Accept: "application/vnd.github.v3+json",
+        "User-Agent": "Kinuit-CMS",
       },
       cache: 'no-store'
     });
@@ -67,6 +69,7 @@ export async function saveToGitHub(filePath: string, jsonData: any): Promise<boo
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
         Accept: "application/vnd.github.v3+json",
         "Content-Type": "application/json",
+        "User-Agent": "Kinuit-CMS",
       },
       body: JSON.stringify({
         message: `Update ${filePath} via Admin Panel`,
@@ -95,10 +98,13 @@ export async function saveToGitHub(filePath: string, jsonData: any): Promise<boo
 export async function persistData(filePath: string, data: any) {
   const isVercel = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
   
-  if (isVercel && process.env.GITHUB_TOKEN) {
+  if (isVercel) {
+    if (!process.env.GITHUB_TOKEN) {
+      throw new Error("GITHUB_TOKEN environment variable is missing in Vercel.");
+    }
     // We are on Vercel and have a token -> save to GitHub
     const success = await saveToGitHub(filePath, data);
-    if (!success) throw new Error("Failed to save to GitHub");
+    if (!success) throw new Error("GitHub API rejected the request. Check token permissions or branch name.");
   } else {
     // We are local -> save to file system
     const absolutePath = path.join(process.cwd(), filePath);
