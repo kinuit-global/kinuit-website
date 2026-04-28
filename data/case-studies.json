@@ -93,5 +93,47 @@
     "metaDescription": "Stop wasting time on outdated tactics. Learn the proven digital marketing strategies that drive real growth in 2026—SEO, content, ads, and conversion.",
     "keywords": "digital marketing 2026, SEO strategy, content marketing, performance marketing, lead generation, growth marketing, conversion optimization",
     "id": "ffd1d0f8-eacb-4132-9c13-3d26ee861e4c"
+  },
+  {
+    "title": "Test",
+    "slug": "test",
+    "id": "f65abb6c-139b-41c1-b2bb-b5ecae7efb5e"
+  },
+  {
+    "title": "SaaS Content Marketing Strategy That Converts Traffic Into Trials",
+    "slug": "saas-content-marketing-strategy-conversions",
+    "excerpt": "Turn SaaS traffic into real conversions with a structured content marketing strategy focused on intent, funnel stages, and high-performing formats.",
+    "category": "BUILD",
+    "date": "April 28, 2026",
+    "readTime": "5 min read",
+    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    "content": "<p>Middle of Funnel: Build Trust and Consideration</p>",
+    "author": {
+      "name": "Siva R",
+      "role": "Co-Founder"
+    },
+    "metaTitle": "SaaS Content Marketing Strategy to Con",
+    "metaDescription": "Turn SaaS traffic into free trials with a proven content marketing strategy. Learn how to attract, nurture, and convert high-intent users effectively.",
+    "keywords": "saas content marketing, saas seo strateg",
+    "id": "c1b42e8c-3ec3-4ea7-a144-8476556f8f52"
+  },
+  {
+    "title": "SaaS Content Marketing Strategy That Converts Traffic Into Trials",
+    "slug": "saas-content-marketing-strategy-conversions",
+    "excerpt": "Turn SaaS traffic into real conversions with a structured content marketing strategy focused on intent, funnel stages, and high-performing formats.",
+    "category": "BUILD",
+    "date": "April 28, 2026",
+    "readTime": "5 min read",
+    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    "content": "<p>Middle of Funnel: Build Trust and Consideration</p>",
+    "author": {
+      "name": "Siva R",
+      "role": "Co-Founder",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&h=100&fit=crop"
+    },
+    "metaTitle": "SaaS Content Marketing Strategy to Con",
+    "metaDescription": "Turn SaaS traffic into free trials with a proven content marketing strategy. Learn how to attract, nurture, and convert high-intent users effectively.",
+    "keywords": "saas content marketing, saas seo strateg",
+    "id": "6ed27988-4a04-456c-8b4c-380f2901ca92"
   }
 ]

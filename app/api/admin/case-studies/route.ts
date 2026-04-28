@@ -2,10 +2,19 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
+import { persistData, fetchGitHubData } from "@/lib/github-db";
 
-const caseStudiesFilePath = path.join(process.cwd(), "data", "case-studies.json");
+const RELATIVE_FILE_PATH = "data/case-studies.json";
+const caseStudiesFilePath = path.join(process.cwd(), RELATIVE_FILE_PATH);
 
-function getCaseStudiesData() {
+async function getCaseStudiesData() {
+  const isVercel = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
+  
+  if (isVercel && process.env.GITHUB_TOKEN) {
+    const data = await fetchGitHubData(RELATIVE_FILE_PATH);
+    if (data) return data;
+  }
+
   try {
     if (!fs.existsSync(caseStudiesFilePath)) return [];
     return JSON.parse(fs.readFileSync(caseStudiesFilePath, "utf-8"));
@@ -14,19 +23,15 @@ function getCaseStudiesData() {
   }
 }
 
-function saveCaseStudiesData(data: any) {
-  fs.writeFileSync(caseStudiesFilePath, JSON.stringify(data, null, 2));
-}
-
 export async function GET() {
-  const caseStudies = getCaseStudiesData();
+  const caseStudies = await getCaseStudiesData();
   return NextResponse.json(caseStudies);
 }
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const caseStudies = getCaseStudiesData();
+    const caseStudies = await getCaseStudiesData();
     
     const newCaseStudy = {
       ...body,
@@ -34,7 +39,7 @@ export async function POST(req: Request) {
     };
     
     caseStudies.push(newCaseStudy);
-    saveCaseStudiesData(caseStudies);
+    await persistData(RELATIVE_FILE_PATH, caseStudies);
     
     return NextResponse.json({ success: true, caseStudy: newCaseStudy });
   } catch (error) {
@@ -46,7 +51,7 @@ export async function POST(req: Request) {
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
-    const caseStudies = getCaseStudiesData();
+    const caseStudies = await getCaseStudiesData();
     
     const index = caseStudies.findIndex((b: any) => b.id === body.id);
     if (index === -1) {
@@ -54,7 +59,7 @@ export async function PUT(req: Request) {
     }
     
     caseStudies[index] = { ...caseStudies[index], ...body };
-    saveCaseStudiesData(caseStudies);
+    await persistData(RELATIVE_FILE_PATH, caseStudies);
     
     return NextResponse.json({ success: true, caseStudy: caseStudies[index] });
   } catch (error) {
@@ -70,9 +75,9 @@ export async function DELETE(req: Request) {
     
     if (!id) return NextResponse.json({ success: false, error: "ID required" }, { status: 400 });
 
-    const caseStudies = getCaseStudiesData();
+    const caseStudies = await getCaseStudiesData();
     const newCaseStudies = caseStudies.filter((b: any) => b.id !== id);
-    saveCaseStudiesData(newCaseStudies);
+    await persistData(RELATIVE_FILE_PATH, newCaseStudies);
     
     return NextResponse.json({ success: true });
   } catch (error) {
