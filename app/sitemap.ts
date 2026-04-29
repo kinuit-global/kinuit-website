@@ -1,9 +1,9 @@
 import { MetadataRoute } from 'next';
-import { caseStudies } from '@/lib/case-studies';
+import { getCaseStudies } from '@/lib/case-studies';
 import { allServiceDetails, createSlug } from '@/lib/service';
 import { projects } from '@/lib/projects';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.kinuit.com';
 
   // Static routes
@@ -25,7 +25,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Dynamic case study routes
-  const caseStudyRoutes = caseStudies.map((study) => ({
+  const fetchedCaseStudies = await getCaseStudies();
+  const caseStudyRoutes = fetchedCaseStudies.map((study) => ({
     url: `${baseUrl}/case-studies/${study.slug}`,
     lastModified: new Date(study.date),
     changeFrequency: 'weekly' as const,

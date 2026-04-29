@@ -1,34 +1,19 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-import { verifyToken } from './lib/auth-token';
-
-const SESSION_NAME = "kinuit_admin_session";
+import { type NextRequest } from 'next/server'
+import { updateSession } from '@/lib/supabase/middleware'
 
 export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-  const session = request.cookies.get(SESSION_NAME);
-
-  if (pathname.startsWith('/admin')) {
-    // Check if the user is authenticated with a valid signed token
-    const payload = session ? await verifyToken(session.value) : null;
-    const isAuthenticated = !!payload;
-
-    if (pathname === '/admin/login') {
-      if (isAuthenticated) {
-        return NextResponse.redirect(new URL('/admin/dashboard', request.url));
-      }
-      return NextResponse.next();
-    }
-
-    if (!isAuthenticated) {
-      console.log(`[Middleware] Unauthorized access attempt to ${pathname}. Redirecting to login.`);
-      return NextResponse.redirect(new URL('/admin/login', request.url));
-    }
-  }
-
-  return NextResponse.next();
+  return await updateSession(request)
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
-};
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * Feel free to modify this pattern to include more paths.
+     */
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+  ],
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { format } from "date-fns";
 import { FileText, Plus, Edit, Trash2, Calendar, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -24,7 +25,10 @@ export default function CaseStudiesAdminPage() {
   const fetchStudies = async () => {
     try {
       const res = await fetch("/api/admin/case-studies");
-      if (!res.ok) throw new Error("Failed to fetch case studies");
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.details?.message || errData.error || "Failed to fetch case studies");
+      }
       const data = await res.json();
       setStudies(data);
     } catch (err: any) {
@@ -121,7 +125,7 @@ export default function CaseStudiesAdminPage() {
                         </div>
                         <h3 className="font-bold text-sm leading-tight text-slate-900 line-clamp-2">{study.title}</h3>
                         <div className="flex items-center gap-2 text-[10px] text-slate-400 font-medium italic">
-                          <Calendar size={10} /> {study.date}
+                          <Calendar size={10} /> {format(new Date(study.date), "dd-MM-yyyy hh.mm a")}
                         </div>
                       </div>
                     </div>
@@ -175,7 +179,7 @@ export default function CaseStudiesAdminPage() {
                         </td>
                         <td className="p-4">
                           <div className="flex items-center gap-2 text-xs text-slate-500">
-                            <Calendar size={14} /> {study.date}
+                            <Calendar size={14} /> {format(new Date(study.date), "dd-MM-yyyy hh.mm a")}
                           </div>
                         </td>
                         <td className="p-4">

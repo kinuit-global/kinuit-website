@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Inter, Outfit } from "next/font/google";
-import { LogOut, Menu, ShieldCheck } from "lucide-react";
+import { LogOut, Menu, ShieldCheck, User as UserIcon, ChevronDown } from "lucide-react";
 import { logout } from "@/app/actions/auth";
 import AdminSidebar from "./components/AdminSidebar";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Toaster } from "react-hot-toast";
+import { createClient } from "@/lib/supabase/client";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
@@ -19,6 +19,48 @@ export default function AdminLayout({
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Handle click outside to close dropdown
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    if (dropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownOpen]);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        setUserEmail(user.email ?? null);
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('avatar_url')
+          .eq('id', user.id)
+          .single();
+        if (profile?.avatar_url) {
+          setAvatarUrl(profile.avatar_url);
+        }
+      }
+    };
+    fetchUser();
+  }, []);
 
   return (
     <div className={`${inter.variable} ${outfit.variable} font-sans min-h-screen bg-slate-50 text-slate-900 selection:bg-[#081ff0] selection:text-white flex`}>
@@ -28,29 +70,7 @@ export default function AdminLayout({
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#081ff0]/5 blur-[120px] rounded-full" />
       </div>
 
-      <Toaster 
-        position="top-right"
-        toastOptions={{
-          duration: 4000,
-          style: {
-            background: "#fff",
-            color: "#0f172a",
-            border: "1px solid #e2e8f0",
-            borderRadius: "16px",
-            fontSize: "13px",
-            fontWeight: "bold",
-            textTransform: "uppercase",
-            letterSpacing: "0.05em",
-            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
-          },
-          success: {
-            iconTheme: {
-              primary: "#081ff0",
-              secondary: "#fff",
-            },
-          },
-        }}
-      />
+
 
       {/* Sidebar */}
       <AdminSidebar 
@@ -87,16 +107,60 @@ export default function AdminLayout({
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <form action={logout}>
-              <button 
-                type="submit"
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 border border-slate-200 hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-all text-xs font-bold uppercase tracking-wider text-slate-600"
-              >
-                <LogOut size={16} />
-                <span className="hidden sm:inline">Logout</span>
-              </button>
-            </form>
+          <div className="flex items-center gap-4 relative" ref={dropdownRef}>
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="flex items-center gap-3 p-1.5 pr-4 rounded-full bg-slate-100 border border-slate-200 hover:bg-slate-200 transition-all"
+            >
+              <div className="w-8 h-8 rounded-full bg-[#081ff0] flex items-center justify-center text-white font-bold text-xs overflow-hidden">
+                {avatarUrl ? (
+                  <img src={avatarUrl} alt="Avatar" className="w-full h-full object-cover" />
+                ) : userEmail ? (
+                  userEmail.charAt(0).toUpperCase()
+                ) : (
+                  <UserIcon size={14} />
+                )}
+              </div>
+              <div className="hidden sm:flex flex-col items-start">
+                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 leading-none">Admin</span>
+                <span className="text-xs font-bold text-slate-700 truncate max-w-[120px]">{userEmail || "Loading..."}</span>
+              </div>
+              <ChevronDown size={14} className={`text-slate-400 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {dropdownOpen && (
+              <div className="absolute top-full mt-2 right-0 w-64 bg-white border border-slate-200 rounded-2xl shadow-xl overflow-hidden py-2 animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="px-4 py-3 border-b border-slate-100 bg-slate-50">
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-1">Signed in as</p>
+                  <p className="text-sm font-bold text-slate-800 truncate">{userEmail}</p>
+                </div>
+                <div className="p-2">
+                  <Link 
+                    href="/admin/profile" 
+                    onClick={() => setDropdownOpen(false)}
+                    className="flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-[#081ff0] transition-colors"
+                  >
+                    <UserIcon size={16} /> My Profile
+                  </Link>
+                  <Link 
+                    href="/admin/dashboard" 
+                    onClick={() => setDropdownOpen(false)}
+                    className="flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-[#081ff0] transition-colors"
+                  >
+                    <ShieldCheck size={16} /> Dashboard
+                  </Link>
+                  <form action={logout} className="mt-1 border-t border-slate-100 pt-1">
+                    <button 
+                      type="submit"
+                      className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-bold text-red-600 hover:bg-red-50 transition-colors"
+                    >
+                      <LogOut size={16} />
+                      Logout
+                    </button>
+                  </form>
+                </div>
+              </div>
+            )}
           </div>
         </header>
 

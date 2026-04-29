@@ -7,8 +7,10 @@ import {
   FileText, 
   MessageSquareQuote, 
   Briefcase,
+  Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { createClient } from "@/lib/supabase/client";
 
 // Sub-components
 import SidebarBranding from "./Sidebar/SidebarBranding";
@@ -37,6 +39,12 @@ const menuItems = [
     icon: MessageSquareQuote,
     href: "/admin/testimonials",
   },
+  {
+    title: "Users",
+    icon: Users,
+    href: "/admin/users",
+    adminOnly: true,
+  },
 ];
 
 interface SidebarProps {
@@ -54,14 +62,34 @@ export default function AdminSidebar({
 }: SidebarProps) {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    
+    const checkRole = async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('role')
+          .eq('id', user.id)
+          .single();
+        
+        if (profile?.role === 'admin') {
+          setIsAdmin(true);
+        }
+      }
+    };
+    checkRole();
   }, []);
 
   // Safe window width check for tooltips and auto-close
   const isMobileView = mounted ? window.innerWidth < 1024 : false;
   const isTabletView = mounted ? window.innerWidth < 1280 : false;
+
+  const filteredMenuItems = menuItems.filter(item => !item.adminOnly || isAdmin);
 
   return (
     <>
@@ -91,7 +119,7 @@ export default function AdminSidebar({
           "flex-1 px-3 space-y-2 overflow-y-auto overflow-x-hidden transition-all duration-300",
           isCollapsed ? "py-2" : "py-6"
         )}>
-          {menuItems.map((item) => (
+          {filteredMenuItems.map((item) => (
             <SidebarItem
               key={item.href}
               {...item}

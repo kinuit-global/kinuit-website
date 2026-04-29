@@ -14,7 +14,7 @@ interface CaseStudyPageProps {
 }
 
 export async function generateStaticParams() {
-  const caseStudies = getCaseStudies();
+  const caseStudies = await getCaseStudies();
   return caseStudies.map((study) => ({
     slug: study.slug,
   }));
@@ -22,7 +22,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: CaseStudyPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const caseStudies = getCaseStudies();
+  const caseStudies = await getCaseStudies();
   const study = caseStudies.find((p) => p.slug === slug);
   if (!study) return { title: "Case Study Not Found" };
 
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
 
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   const { slug } = await params;
-  const caseStudies = getCaseStudies();
+  const caseStudies = await getCaseStudies();
   const study = caseStudies.find((p) => p.slug === slug);
 
   if (!study) {

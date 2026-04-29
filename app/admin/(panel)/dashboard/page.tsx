@@ -32,7 +32,7 @@ export default async function DashboardPage() {
     .sort((a,b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime())
     .slice(0, 3);
 
-  const caseStudies = getCaseStudies();
+  const caseStudies = await getCaseStudies();
   // Count all sub-services (tags) for a more accurate "Active Services" count
   const totalSubServices = servicesItem.reduce((acc, service) => acc + service.tags.length, 0);
 

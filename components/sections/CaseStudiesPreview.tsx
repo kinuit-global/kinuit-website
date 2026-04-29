@@ -1,15 +1,19 @@
 "use client";
 
-import { getCaseStudies } from "@/lib/case-studies";
+import { getCaseStudies, CaseStudy } from "@/lib/case-studies";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Calendar, Clock, BookOpen, ArrowUpRight } from "lucide-react";
 import SectionBadge from "@/components/ui/SectionBadge";
+import { useState, useEffect } from "react";
 
 export default function CaseStudiesPreview() {
-  // Take top 3 for preview (getCaseStudies already sorts by newest first)
-  const featuredStudies = getCaseStudies().slice(0, 3);
+  const [featuredStudies, setFeaturedStudies] = useState<CaseStudy[]>([]);
+
+  useEffect(() => {
+    getCaseStudies().then((data) => setFeaturedStudies(data.slice(0, 3)));
+  }, []);
 
   return (
     <section className="bg-k-bg py-24 md:py-24 border-t border-k-border relative overflow-hidden">

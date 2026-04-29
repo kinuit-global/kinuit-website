@@ -3,6 +3,7 @@
 import { v2 as cloudinary } from 'cloudinary';
 import { saveSubmission, getAllSubmissions, deleteSubmission, type Submission } from '@/lib/testimonial-store';
 import { revalidatePath } from 'next/cache';
+import { createClient } from '@/lib/supabase/server';
 
 // Configure Cloudinary with the URL from environment variables
 // This automatically handles the Cloud Name, API Key, and API Secret.
@@ -80,6 +81,7 @@ export async function submitTestimonial(formData: FormData) {
   };
 
   try {
+    const supabase = await createClient();
     const logoUrl = await handleUpload("Company Logo", "companyLogo");
     const profileUrl = await handleUpload("Profile Photo", "profilePhoto");
     const videoUrl = await handleUpload("Video Testimonial", "video");
@@ -122,7 +124,7 @@ export async function submitTestimonial(formData: FormData) {
         audio: audioUrl || "",
         images: imageUrls
       }
-    });
+    }, supabase);
 
     revalidatePath('/admin/dashboard');
 
@@ -131,17 +133,19 @@ export async function submitTestimonial(formData: FormData) {
       uploadStats 
     };
   } catch (error: any) {
-    console.error("[Testimonial] Error:", error.message);
-    return { success: false, error: "Failed to save submission." };
+    console.error("[Testimonial] Error:", error.message || error);
+    return { success: false, error: error.message || "Failed to save submission." };
   }
 }
 
 export async function getTestimonials() {
-  return await getAllSubmissions();
+  const supabase = await createClient();
+  return await getAllSubmissions(supabase);
 }
 
 export async function removeTestimonial(id: string) {
-  const success = await deleteSubmission(id);
+  const supabase = await createClient();
+  const success = await deleteSubmission(id, supabase);
   if (success) {
     revalidatePath('/admin/dashboard');
   }

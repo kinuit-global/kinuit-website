@@ -265,6 +265,8 @@ const faqJsonLd = {
   ]
 };
 
+import { ToastProvider } from "./providers";
+
 export default function RootLayout({
   children,
 }: {
@@ -291,6 +293,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <ToastProvider />
         {children}
       </body>
     </html>

@@ -1,7 +1,4 @@
-import fs from 'fs/promises';
-import path from 'path';
-
-const DATA_PATH = path.join(process.cwd(), 'data', 'testimonials.json');
+import { supabasePublic } from '@/lib/supabase/public';
 
 export interface Submission {
   id: string;
@@ -20,39 +17,53 @@ export interface Submission {
   };
 }
 
-export async function getAllSubmissions(): Promise<Submission[]> {
-  try {
-    const data = await fs.readFile(DATA_PATH, 'utf-8');
-    const parsed = JSON.parse(data);
-    return parsed.submissions || [];
-  } catch (error) {
-    console.error('Error reading submissions:', error);
+export async function getAllSubmissions(supabaseClient = supabasePublic): Promise<Submission[]> {
+  const { data, error } = await supabaseClient
+    .from('testimonials')
+    .select('*')
+    .order('submitted_at', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching testimonials from Supabase:', JSON.stringify(error, null, 2));
     return [];
   }
+
+  return data.map((item: any) => ({
+    id: item.id,
+    fullName: item.full_name,
+    phone: item.phone,
+    email: item.email,
+    companyName: item.company_name,
+    testimonial: item.testimonial,
+    submittedAt: item.submitted_at,
+    attachments: item.attachments,
+  })) as Submission[];
 }
 
-export async function saveSubmission(submission: Submission): Promise<void> {
-  const data = await fs.readFile(DATA_PATH, 'utf-8');
-  const parsed = JSON.parse(data);
-  if (!parsed.submissions) parsed.submissions = [];
-  parsed.submissions.push(submission);
-  await fs.writeFile(DATA_PATH, JSON.stringify(parsed, null, 2));
-}
+export async function saveSubmission(submission: Submission, supabaseClient = supabasePublic): Promise<void> {
+  const record = {
+    id: submission.id,
+    full_name: submission.fullName,
+    phone: submission.phone,
+    email: submission.email,
+    company_name: submission.companyName,
+    testimonial: submission.testimonial,
+    submitted_at: submission.submittedAt,
+    attachments: submission.attachments,
+  };
 
-export async function deleteSubmission(id: string): Promise<boolean> {
-  try {
-    const data = await fs.readFile(DATA_PATH, 'utf-8');
-    const parsed = JSON.parse(data);
-    const index = parsed.submissions.findIndex((s: Submission) => s.id === id);
-    if (index !== -1) {
-      parsed.submissions.splice(index, 1);
-      await fs.writeFile(DATA_PATH, JSON.stringify(parsed, null, 2));
-      return true;
-    }
-    return false;
-  } catch (error) {
-    console.error('Error deleting submission:', error);
-    return false;
+  const { error } = await supabaseClient.from('testimonials').insert([record]);
+  if (error) {
+    console.error('Error saving testimonial:', JSON.stringify(error, null, 2));
+    throw new Error(error.message || 'Failed to save testimonial to database');
   }
 }
 
+export async function deleteSubmission(id: string, supabaseClient = supabasePublic): Promise<boolean> {
+  const { error } = await supabaseClient.from('testimonials').delete().eq('id', id);
+  if (error) {
+    console.error('Error deleting testimonial:', JSON.stringify(error, null, 2));
+    return false;
+  }
+  return true;
+}

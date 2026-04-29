@@ -1,47 +1,52 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-import { v4 as uuidv4 } from "uuid";
-import { persistData, fetchGitHubData } from "@/lib/github-db";
-
-const RELATIVE_FILE_PATH = "data/case-studies.json";
-const caseStudiesFilePath = path.join(process.cwd(), RELATIVE_FILE_PATH);
-
-async function getCaseStudiesData() {
-  const isVercel = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
-  
-  if (isVercel && process.env.GITHUB_TOKEN) {
-    const data = await fetchGitHubData(RELATIVE_FILE_PATH);
-    if (data) return data;
-  }
-
-  try {
-    if (!fs.existsSync(caseStudiesFilePath)) return [];
-    return JSON.parse(fs.readFileSync(caseStudiesFilePath, "utf-8"));
-  } catch (error) {
-    return [];
-  }
-}
+import { createClient } from "@/lib/supabase/server";
 
 export async function GET() {
-  const caseStudies = await getCaseStudiesData();
-  return NextResponse.json(caseStudies);
+  const supabase = await createClient();
+  const { data, error } = await supabase.from('case_studies').select('*').order('date', { ascending: false });
+  
+  if (error) {
+    console.error("Supabase GET error:", JSON.stringify(error, null, 2));
+    return NextResponse.json({ error: "Failed to fetch case studies", details: error }, { status: 500 });
+  }
+
+  const formatted = data.map((item: any) => ({
+    ...item,
+    readTime: item.read_time,
+    metaTitle: item.meta_title,
+    metaDescription: item.meta_description
+  }));
+  
+  return NextResponse.json(formatted);
 }
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const caseStudies = await getCaseStudiesData();
+    const supabase = await createClient();
     
-    const newCaseStudy = {
-      ...body,
-      id: body.id || uuidv4(),
+    const record: any = {
+      slug: body.slug,
+      title: body.title,
+      excerpt: body.excerpt,
+      category: body.category,
+      date: body.date,
+      read_time: body.readTime,
+      image: body.image,
+      content: body.content,
+      author: body.author,
+      meta_title: body.metaTitle,
+      meta_description: body.metaDescription,
+      keywords: body.keywords
     };
+
+    if (body.id) record.id = body.id;
     
-    caseStudies.push(newCaseStudy);
-    await persistData(RELATIVE_FILE_PATH, caseStudies);
+    const { data, error } = await supabase.from('case_studies').insert([record]).select().single();
     
-    return NextResponse.json({ success: true, caseStudy: newCaseStudy });
+    if (error) throw error;
+    
+    return NextResponse.json({ success: true, caseStudy: data });
   } catch (error: any) {
     console.error("API POST Error:", error);
     return NextResponse.json({ success: false, error: error.message || "Failed to create case study" }, { status: 500 });
@@ -51,20 +56,32 @@ export async function POST(req: Request) {
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
-    const caseStudies = await getCaseStudiesData();
+    const supabase = await createClient();
     
-    const index = caseStudies.findIndex((b: any) => b.id === body.id);
-    if (index === -1) {
-       return NextResponse.json({ success: false, error: "Case study not found" }, { status: 404 });
-    }
+    const record = {
+      slug: body.slug,
+      title: body.title,
+      excerpt: body.excerpt,
+      category: body.category,
+      date: body.date,
+      read_time: body.readTime,
+      image: body.image,
+      content: body.content,
+      author: body.author,
+      meta_title: body.metaTitle,
+      meta_description: body.metaDescription,
+      keywords: body.keywords,
+      updated_at: new Date().toISOString()
+    };
     
-    caseStudies[index] = { ...caseStudies[index], ...body };
-    await persistData(RELATIVE_FILE_PATH, caseStudies);
+    const { data, error } = await supabase.from('case_studies').update(record).eq('id', body.id).select().single();
     
-    return NextResponse.json({ success: true, caseStudy: caseStudies[index] });
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ success: false, error: "Failed to update case study" }, { status: 500 });
+    if (error) throw error;
+    
+    return NextResponse.json({ success: true, caseStudy: data });
+  } catch (error: any) {
+    console.error("API PUT Error:", error);
+    return NextResponse.json({ success: false, error: error.message || "Failed to update case study" }, { status: 500 });
   }
 }
 
@@ -75,13 +92,14 @@ export async function DELETE(req: Request) {
     
     if (!id) return NextResponse.json({ success: false, error: "ID required" }, { status: 400 });
 
-    const caseStudies = await getCaseStudiesData();
-    const newCaseStudies = caseStudies.filter((b: any) => b.id !== id);
-    await persistData(RELATIVE_FILE_PATH, newCaseStudies);
+    const supabase = await createClient();
+    const { error } = await supabase.from('case_studies').delete().eq('id', id);
+    
+    if (error) throw error;
     
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ success: false, error: "Failed to delete case study" }, { status: 500 });
+  } catch (error: any) {
+    console.error("API DELETE Error:", error);
+    return NextResponse.json({ success: false, error: error.message || "Failed to delete case study" }, { status: 500 });
   }
 }
