@@ -4,6 +4,7 @@ import { getCaseStudies, CaseStudy } from "@/lib/case-studies";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { format } from "date-fns";
 import { ArrowRight, Calendar, Clock, BookOpen, ArrowUpRight } from "lucide-react";
 import SectionBadge from "@/components/ui/SectionBadge";
 import { useState, useEffect } from "react";
@@ -89,7 +90,10 @@ export default function CaseStudiesPreview() {
 
                   <div className="space-y-3">
                     <div className="flex items-center gap-4 text-k-text-muted/60 text-xs font-medium uppercase tracking-wider">
-                      <span className="flex items-center gap-1.5"><Calendar size={14} /> {study.date}</span>
+                      <span className="flex items-center gap-1.5">
+                        <Calendar size={14} /> 
+                        {format(new Date(study.date), "dd-MM-yyyy hh.mm a")}
+                      </span>
                       <span className="flex items-center gap-1.5"><Clock size={14} /> {study.readTime}</span>
                     </div>
 
