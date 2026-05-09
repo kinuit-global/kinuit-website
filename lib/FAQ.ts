@@ -10,10 +10,6 @@ export const FAQItems: FAQItem[] = [
     answ: "Brand identity: 1–2 weeks. Full website: 3–6 weeks."
   },
   {
-    qsn: "What is your pricing model?",
-    answ: "We offer project-based pricing and retainer packages."
-  },
-  {
     qsn: "Do you provide ongoing support after launch?",
     answ: "Yes. We offer website maintenance and marketing support."
   },

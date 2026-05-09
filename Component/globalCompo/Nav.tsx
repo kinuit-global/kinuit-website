@@ -14,7 +14,6 @@ const navLinks = [
   { label: "Service", href: "/services" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Work", href: "/work" },
-  { label: "Pricing", href: "/pricing" },
 ];
 
 export default function Navbar() {

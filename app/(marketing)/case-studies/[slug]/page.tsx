@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Calendar, Clock, ChevronLeft, CalendarDays, User } from "lucide-react";
+import { format } from "date-fns";
 import Container from "@/components/ui/Container";
 import ShareButtons from "@/components/ui/ShareButtons";
 
@@ -71,7 +72,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               </span>
               <div className="h-px w-8 bg-k-border" />
               <div className="flex items-center gap-4 text-k-text-muted text-[10px] font-black tracking-widest uppercase">
-                <span className="flex items-center gap-1.5"><CalendarDays size={14} className="text-k-primary" /> {study.date}</span>
+                <span className="flex items-center gap-1.5"><CalendarDays size={14} className="text-k-primary" /> {format(new Date(study.date), "dd-MM-yyyy hh.mm a")}</span>
                 <span className="flex items-center gap-1.5"><Clock size={14} className="text-k-primary" /> {study.readTime}</span>
               </div>
             </div>
