@@ -1,5 +1,5 @@
 export type Testimonial = {
-  id: number;
+  id: number | string;
   name: string;
   role: string;
   image: string;

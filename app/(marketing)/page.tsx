@@ -10,6 +10,7 @@ import CTA from "@/components/sections/CTA";
 import Reveal from "@/components/ui/Reveal";
 import CaseStudiesPreview from "@/components/sections/CaseStudiesPreview";
 import AboutStory from "@/components/sections/about/AboutStory";
+import FAQ from "@/components/sections/FAQ";
 
 export const metadata: Metadata = {
   title: "Kinuit | Build, Design, Grow & Plan for Ambitious Brands",
@@ -27,6 +28,7 @@ export default function HomePage() {
       <Reveal><FeaturedWork /></Reveal>
       <Reveal><CaseStudiesPreview /></Reveal>
       <Reveal><AboutStory /></Reveal>
+      <Reveal><FAQ /></Reveal>
       <Reveal><CTA /></Reveal>
     </main>
   );

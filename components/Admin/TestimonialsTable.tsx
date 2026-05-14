@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 import Link from "next/link";
-import { removeTestimonial } from "@/app/actions/testimonial";
+import { removeTestimonial, toggleTestimonialVisibility } from "@/app/actions/testimonial";
 import DataTable, { Column } from "./DataTable";
 import ConfirmModal from "@/components/ui/ConfirmModal";
 import toast from "react-hot-toast";
@@ -37,6 +37,7 @@ interface Testimonial {
     audio?: string | null;
     images?: string[];
   };
+  showOnWebsite?: boolean;
 }
 
 export default function TestimonialsTable({ testimonials }: { testimonials: Testimonial[] }) {
@@ -62,6 +63,20 @@ export default function TestimonialsTable({ testimonials }: { testimonials: Test
     } finally {
       setDeletingId(null);
       setConfirmId(null);
+    }
+  };
+
+  const handleToggleVisibility = async (id: string, currentStatus: boolean) => {
+    try {
+        const { success } = await toggleTestimonialVisibility(id, !currentStatus);
+        if (success) {
+            setLocalTestimonials(prev => prev.map(t => t.id === id ? { ...t, showOnWebsite: !currentStatus } : t));
+            toast.success(`Testimonial ${!currentStatus ? 'enabled' : 'disabled'} for website`);
+        } else {
+            toast.error("Failed to update visibility");
+        }
+    } catch (error) {
+        toast.error("An error occurred");
     }
   };
 
@@ -137,6 +152,28 @@ export default function TestimonialsTable({ testimonials }: { testimonials: Test
           {!t.attachments?.logo && !t.attachments?.profile && !t.attachments?.video && !t.attachments?.audio && (!t.attachments?.images || t.attachments.images.length === 0) && (
               <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">No Attachments</span>
           )}
+        </div>
+      ),
+    },
+    {
+      header: "Website",
+      accessor: (t) => (
+        <div className="flex items-center gap-2">
+            <button
+                onClick={() => handleToggleVisibility(t.id, !!t.showOnWebsite)}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${
+                    t.showOnWebsite ? 'bg-[#081ff0]' : 'bg-slate-200'
+                }`}
+            >
+                <span
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                        t.showOnWebsite ? 'translate-x-6' : 'translate-x-1'
+                    }`}
+                />
+            </button>
+            <span className={`text-[10px] font-black uppercase tracking-widest ${t.showOnWebsite ? 'text-[#081ff0]' : 'text-slate-400'}`}>
+                {t.showOnWebsite ? 'Active' : 'Hidden'}
+            </span>
         </div>
       ),
     },

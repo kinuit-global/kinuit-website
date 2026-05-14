@@ -151,3 +151,78 @@ export async function removeTestimonial(id: string) {
   }
   return { success };
 }
+
+export async function toggleTestimonialVisibility(id: string, show: boolean) {
+  const supabase = await createClient();
+  const { updateTestimonialVisibility } = await import('@/lib/testimonial-store');
+  const success = await updateTestimonialVisibility(id, show, supabase);
+  if (success) {
+    revalidatePath('/admin/testimonials');
+    revalidatePath('/admin/dashboard');
+    revalidatePath('/'); // Revalidate homepage as it shows testimonials
+  }
+  return { success };
+}
+
+export async function editTestimonial(id: string, formData: FormData) {
+  const supabase = await createClient();
+  const { updateSubmission } = await import('@/lib/testimonial-store');
+  
+  try {
+    const fullName = formData.get("fullName") as string;
+    const phone = formData.get("phone") as string;
+    const email = formData.get("email") as string;
+    const companyName = formData.get("companyName") as string;
+    const testimonialText = formData.get("testimonial") as string;
+    const showOnWebsite = formData.get("showOnWebsite") === "true";
+
+    const handleUpload = async (fieldName: string) => {
+      const file = formData.get(fieldName);
+      if (!file || (file instanceof Blob && file.size === 0)) return null;
+      const res = await uploadToCloudinary(file, id);
+      return res.success ? res.url : null;
+    };
+
+    const logoUrl = await handleUpload("companyLogo");
+    const profileUrl = await handleUpload("profilePhoto");
+    const videoUrl = await handleUpload("video");
+    const audioUrl = await handleUpload("audio");
+
+    // Multiple images
+    const imageFiles = formData.getAll("images") as File[];
+    const imageUrls = [];
+    for (const file of imageFiles) {
+      if (file.size > 0) {
+        const res = await uploadToCloudinary(file, id);
+        if (res.success && res.url) imageUrls.push(res.url);
+      }
+    }
+
+    const updateData: any = {
+      fullName,
+      phone,
+      email,
+      companyName,
+      testimonial: testimonialText,
+      showOnWebsite,
+      attachments: {}
+    };
+
+    if (logoUrl) updateData.attachments.logo = logoUrl;
+    if (profileUrl) updateData.attachments.profile = profileUrl;
+    if (videoUrl) updateData.attachments.video = videoUrl;
+    if (audioUrl) updateData.attachments.audio = audioUrl;
+    if (imageUrls.length > 0) updateData.attachments.images = imageUrls;
+
+    await updateSubmission(id, updateData, supabase);
+    
+    revalidatePath('/admin/testimonials');
+    revalidatePath(`/admin/testimonials/${id}`);
+    revalidatePath('/');
+    
+    return { success: true };
+  } catch (error: any) {
+    console.error("[Edit Testimonial] Error:", error.message || error);
+    return { success: false, error: error.message || "Failed to update testimonial." };
+  }
+}
