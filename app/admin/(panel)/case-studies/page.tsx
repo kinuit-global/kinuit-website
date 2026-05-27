@@ -122,6 +122,11 @@ export default function CaseStudiesAdminPage() {
                           <span className="px-2 py-0.5 bg-[#081ff0]/10 border border-[#081ff0]/20 rounded text-[9px] font-black uppercase text-[#081ff0] tracking-tighter">
                             {study.category}
                           </span>
+                          {study.isFeatured && (
+                            <span className="px-2 py-0.5 bg-amber-500/10 border border-amber-500/20 rounded text-[9px] font-black uppercase text-amber-600 tracking-tighter flex items-center gap-0.5 shadow-sm">
+                              ★ FEATURED
+                            </span>
+                          )}
                         </div>
                         <h3 className="font-bold text-sm leading-tight text-slate-900 line-clamp-2">{study.title}</h3>
                         <div className="flex items-center gap-2 text-[10px] text-slate-400 font-medium italic">
@@ -169,7 +174,14 @@ export default function CaseStudiesAdminPage() {
                           <div className="flex items-center gap-3">
                             <img src={study.image} alt={study.title} className="w-12 h-12 rounded-lg object-cover border border-slate-100" />
                             <div>
-                              <p className="font-bold text-sm text-slate-900 line-clamp-1">{study.title}</p>
+                              <div className="flex items-center gap-2">
+                                <p className="font-bold text-sm text-slate-900 line-clamp-1">{study.title}</p>
+                                {study.isFeatured && (
+                                  <span className="px-1.5 py-0.5 bg-amber-500/10 border border-amber-500/20 rounded text-[8px] font-black uppercase text-amber-600 tracking-tighter shrink-0 flex items-center gap-0.5">
+                                    ★ PINNED
+                                  </span>
+                                )}
+                              </div>
                               <p className="text-xs text-slate-400 line-clamp-1">{study.slug}</p>
                             </div>
                           </div>

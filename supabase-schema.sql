@@ -72,6 +72,7 @@ CREATE TABLE case_studies (
   meta_title TEXT,
   meta_description TEXT,
   keywords TEXT,
+  is_featured BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc', NOW()),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc', NOW())
 );

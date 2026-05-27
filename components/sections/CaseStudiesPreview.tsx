@@ -13,7 +13,10 @@ export default function CaseStudiesPreview() {
   const [featuredStudies, setFeaturedStudies] = useState<CaseStudy[]>([]);
 
   useEffect(() => {
-    getCaseStudies().then((data) => setFeaturedStudies(data.slice(0, 3)));
+    getCaseStudies().then((data) => {
+      const pinned = data.filter((study) => study.isFeatured);
+      setFeaturedStudies(pinned);
+    });
   }, []);
 
   return (

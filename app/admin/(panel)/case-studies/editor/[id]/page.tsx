@@ -28,7 +28,7 @@ export default function CaseStudyEditorPage({ params }: { params: Promise<{ id: 
     date: new Date().toLocaleDateString("en-US", { month: "long", day: "2-digit", year: "numeric" }),
     readTime: "5 min read", image: "", content: "",
     author: { name: "Marcus Thorne", role: "CTO, Kinuit", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&h=100&fit=crop" },
-    metaTitle: "", metaDescription: "", keywords: ""
+    metaTitle: "", metaDescription: "", keywords: "", isFeatured: false
   });
 
   useEffect(() => {
@@ -44,12 +44,14 @@ export default function CaseStudyEditorPage({ params }: { params: Promise<{ id: 
   }, [isNew, resolvedParams.id]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
+    const val = type === "checkbox" ? (e.target as HTMLInputElement).checked : value;
+    
     if (name.startsWith("author.")) {
       const authorField = name.split(".")[1];
-      setStudyData((prev: any) => ({ ...prev, author: { ...prev.author!, [authorField]: value } }));
+      setStudyData((prev: any) => ({ ...prev, author: { ...prev.author!, [authorField]: val } }));
     } else {
-      setStudyData((prev: any) => ({ ...prev, [name]: value }));
+      setStudyData((prev: any) => ({ ...prev, [name]: val }));
     }
   };
 
@@ -376,6 +378,22 @@ export default function CaseStudyEditorPage({ params }: { params: Promise<{ id: 
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Read Time</label>
                   <input name="readTime" value={studyData.readTime} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-yellow-500 transition-all text-sm text-slate-900" />
                 </div>
+              </div>
+              <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Featured (Pin to Top)</label>
+                  <p className="text-xs text-slate-500 font-medium">Show at the top of case studies lists</p>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="isFeatured"
+                    checked={!!studyData.isFeatured}
+                    onChange={handleChange}
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#081ff0]"></div>
+                </label>
               </div>
             </div>
           </div>

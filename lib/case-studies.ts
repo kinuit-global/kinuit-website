@@ -18,6 +18,7 @@ export interface CaseStudy {
   metaTitle?: string;
   metaDescription?: string;
   keywords?: string;
+  isFeatured?: boolean;
 }
 
 export const getCaseStudies = async (filters?: { category?: string, query?: string }): Promise<CaseStudy[]> => {
@@ -33,7 +34,9 @@ export const getCaseStudies = async (filters?: { category?: string, query?: stri
     query = query.or(`title.ilike.%${filters.query}%,excerpt.ilike.%${filters.query}%,content.ilike.%${filters.query}%`);
   }
 
-  const { data, error } = await query.order("date", { ascending: false });
+  const { data, error } = await query
+    .order("is_featured", { ascending: false })
+    .order("date", { ascending: false });
 
   if (error) {
     console.error("Error fetching case studies from Supabase:", JSON.stringify(error, null, 2));
@@ -45,7 +48,8 @@ export const getCaseStudies = async (filters?: { category?: string, query?: stri
     ...item,
     readTime: item.read_time,
     metaTitle: item.meta_title,
-    metaDescription: item.meta_description
+    metaDescription: item.meta_description,
+    isFeatured: item.is_featured ?? false
   })) as CaseStudy[];
 };
 
