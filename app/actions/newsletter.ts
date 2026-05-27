@@ -54,7 +54,7 @@ export async function subscribeToNewsletter(prevState: any, formData: FormData) 
         to: email,
         replyTo: 'hello@kinuit.com',
         subject: 'Welcome to the Kinuit Inner Circle',
-        text: `Welcome to the Kinuit Inner Circle!\n\nThank you for joining our newsletter. You've just gained a front-row seat to the engine room of high-performance branding and digital strategy.\n\nEvery month, we'll drop deep dives into how we're building the next generation of ambitious brands—minus the fluff.\n\nCheck out our work: https://kinuit.com/work\n\nTo make sure you get our next update, please reply to this email with "Got it!" or add hello@kinuit.com to your contacts.`,
+        text: `Welcome to the Kinuit Inner Circle!\n\nThank you for joining our newsletter. You've just gained a front-row seat to the engine room of high-performance branding and digital strategy.\n\nEvery month, we'll drop deep dives into how we're building the next generation of ambitious brands—minus the fluff.\n\nCheck out our case studies: https://kinuit.com/case-studies\n\nTo make sure you get our next update, please reply to this email with "Got it!" or add hello@kinuit.com to your contacts.`,
         html: `
           <!DOCTYPE html>
           <html>
@@ -67,7 +67,7 @@ export async function subscribeToNewsletter(prevState: any, formData: FormData) 
                 <div style="padding: 40px; text-align: center;">
                   <p style="font-size: 16px; line-height: 1.6; color: #cbd5e1; margin-top: 0; margin-bottom: 24px;">Thank you for joining our newsletter. You've just gained a front-row seat to the engine room of high-performance branding and digital strategy.</p>
                   <p style="font-size: 16px; line-height: 1.6; color: #cbd5e1; margin-bottom: 32px;">Every month, we'll drop deep dives into how we're building the next generation of ambitious brands—minus the fluff.</p>
-                  <a href="${process.env.NEXT_PUBLIC_BASE_URL || 'https://kinuit.com'}/work" style="display: inline-block; background-color: #3b82f6; color: #ffffff; padding: 18px 36px; border-radius: 12px; font-weight: 800; text-decoration: none; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.3s ease;">Explore Our Work</a>
+                  <a href="${process.env.NEXT_PUBLIC_BASE_URL || 'https://kinuit.com'}/case-studies" style="display: inline-block; background-color: #3b82f6; color: #ffffff; padding: 18px 36px; border-radius: 12px; font-weight: 800; text-decoration: none; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.3s ease;">Explore Case Studies</a>
                 </div>
                 <div style="padding: 30px 40px; text-align: center; border-top: 1px solid #1a2542; background-color: #050a14;">
                   <div style="margin-bottom: 16px;">

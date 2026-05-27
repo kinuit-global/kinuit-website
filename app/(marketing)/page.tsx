@@ -5,7 +5,6 @@ import Pillars from "@/components/sections/Pillars";
 import ServicesOverview from "@/components/sections/ServicesOverview";
 import StatsGlobe from "@/components/sections/StatsGlobe";
 import Testimonials from "@/components/sections/Testimonials";
-import FeaturedWork from "@/components/sections/FeaturedWork";
 import CTA from "@/components/sections/CTA";
 import Reveal from "@/components/ui/Reveal";
 import CaseStudiesPreview from "@/components/sections/CaseStudiesPreview";
@@ -27,7 +26,6 @@ export default function HomePage() {
       <Reveal><ServicesOverview /></Reveal>
       <Reveal><Clients /></Reveal>
       <Reveal><Testimonials /></Reveal>
-      <Reveal><FeaturedWork /></Reveal>
       <Reveal><CaseStudiesPreview /></Reveal>
       <Reveal><AboutStory /></Reveal>
       <Reveal><FAQ /></Reveal>

@@ -50,9 +50,9 @@ export default function ThankYouPage() {
                   Return Home
                 </button>
               </Link>
-              <Link href="/work">
+              <Link href="/case-studies">
                 <button className="px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 transition-all flex items-center gap-2 group tracking-widest uppercase">
-                  Explore Our Work
+                  Explore Case Studies
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </Link>
