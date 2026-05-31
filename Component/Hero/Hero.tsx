@@ -114,7 +114,7 @@ export default function Hero() {
         "
           >
             <Link
-              href="/contact"
+              href="/contact?tab=schedule"
               className="
             flex items-center justify-center gap-2
             bg-k-primary hover:opacity-90
@@ -125,7 +125,7 @@ export default function Hero() {
             transition-all duration-300 hover:-translate-y-[2px]
           "
             >
-              Launch Your Brand
+              Book a Strategy Call
               <ChevronRight className="w-4 h-4" />
             </Link>
 
