@@ -4,8 +4,8 @@ export interface StatItem {
 }
 
 export const STATS: StatItem[] = [
-  { value: "150+", label: "Projects Delivered" },
-  { value: "40+", label: "Global Clients" },
+  { value: "10+", label: "Projects Delivered" },
+  { value: "5+", label: "Global Clients" },
   { value: "Global Reach", label: "Zero Latency" },
 ];
 
