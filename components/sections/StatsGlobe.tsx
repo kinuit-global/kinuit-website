@@ -1,7 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
 import { STATS } from "@/lib/stats";
-import Globe from "@/components/ui/Globe";
+import dynamic from "next/dynamic";
+const Globe = dynamic(() => import("@/components/ui/Globe"), {
+  ssr: false,
+});
 import Container from "@/components/ui/Container";
 import { useState, useEffect } from "react";
 import { Globe as GlobeIcon } from "lucide-react";

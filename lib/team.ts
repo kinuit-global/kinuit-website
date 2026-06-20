@@ -20,8 +20,14 @@ export const team: TeamMember[] = [
   },
   {
     name: "Kavin T",
-    role: "Creative Head",
-    image: "/team/creative-head.png",
+    role: "Co-Founder & CCO",
+    image: "/team/cco.png",
     linkedin: "https://www.linkedin.com/in/kavin-ragul-395184184"
+  },
+  {
+    name: "Nidhi Kakani",
+    role: "Co-Founder & CMO",
+    image: "/team/cmo.jpeg",
+    linkedin: "https://www.linkedin.com/in/nidhi-kakani"
   }
 ];

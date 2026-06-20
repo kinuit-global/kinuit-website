@@ -18,7 +18,7 @@ export default function OurTeam() {
           </h2>
         </div>
 
-        <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-10 justify-items-center">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 justify-items-center">
           {team.map((member, idx) => (
             <motion.article
               key={member.name}

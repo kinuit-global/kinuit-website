@@ -1,15 +1,41 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { supabaseFetch } from './fetch'
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request,
   })
 
+  const { pathname } = request.nextUrl
+  const isAdminRoute = pathname.startsWith('/admin')
+  const isAuthPage = pathname === '/admin/login' || pathname === '/admin/register'
+
+  // Check if any Supabase auth cookies exist
+  const hasAuthCookie = request.cookies.getAll().some(cookie => 
+    cookie.name.startsWith('sb-') || 
+    cookie.name.includes('auth-token')
+  )
+
+  // Optimization: If it's a public route and there's no auth cookie, we don't need to do anything.
+  if (!isAdminRoute && !hasAuthCookie) {
+    return supabaseResponse
+  }
+
+  // Optimization: If it's a protected admin route and they don't even have a session cookie,
+  // redirect them to login immediately without hitting Supabase.
+  if (isAdminRoute && !isAuthPage && !hasAuthCookie) {
+    console.log(`[Middleware] No auth cookie found. Quick redirecting to login.`)
+    return NextResponse.redirect(new URL('/admin/login', request.url))
+  }
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
+      global: {
+        fetch: supabaseFetch,
+      },
       cookies: {
         getAll() {
           return request.cookies.getAll()
@@ -35,11 +61,9 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  const { pathname } = request.nextUrl
-
   // Protected routes check
-  if (pathname.startsWith('/admin')) {
-    if (pathname === '/admin/login' || pathname === '/admin/register') {
+  if (isAdminRoute) {
+    if (isAuthPage) {
       if (user) {
         return NextResponse.redirect(new URL('/admin/dashboard', request.url))
       }

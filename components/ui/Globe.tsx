@@ -1,28 +1,24 @@
 "use client";
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import * as THREE from "three";
+import GlobeGL from "react-globe.gl";
 
-interface GlobeProps {
+interface GlobeComponentProps {
   size?: number;
 }
 
-export default function Globe({ size = 1200 }: GlobeProps) {
+export default function Globe({ size = 1200 }: GlobeComponentProps) {
   const globeRef = useRef<any>(null);
   const [mounted, setMounted] = useState(false);
-  const [GlobeGL, setGlobeGL] = useState<any>(null);
   const [countries, setCountries] = useState<any>({ features: [] });
 
-  // Prevent hydration mismatch
+  // Prevent hydration mismatch and load GeoJSON locally
   useEffect(() => {
     setMounted(true);
-  }, []);
-  useEffect(() => {
-    import("react-globe.gl").then((mod) => setGlobeGL(() => mod.default));
-
-    // Fetch raw GeoJSON for continent outlines
-    fetch('https://raw.githubusercontent.com/vasturiano/react-globe.gl/master/example/datasets/ne_110m_admin_0_countries.geojson')
+    fetch('/ne_110m_admin_0_countries.geojson')
       .then(res => res.json())
-      .then(setCountries);
+      .then(setCountries)
+      .catch(err => console.error("Error loading countries geojson:", err));
   }, []);
 
   // Configure automatic rotation safely exactly when Globe finishes rendering
@@ -48,7 +44,7 @@ export default function Globe({ size = 1200 }: GlobeProps) {
     });
   }, []);
 
-  if (!mounted || !GlobeGL) return <div style={{ width: size, height: size }} className="bg-transparent" />;
+  if (!mounted) return <div style={{ width: size, height: size }} className="bg-transparent" />;
 
   return (
     <div
@@ -72,7 +68,6 @@ export default function Globe({ size = 1200 }: GlobeProps) {
           onGlobeReady={handleGlobeReady}
 
           showGraticules={true}
-          graticulesColor="rgba(255,255,255,0.15)"
 
           polygonsData={countries.features}
           polygonCapColor={() => "rgba(0,0,0,0)"}

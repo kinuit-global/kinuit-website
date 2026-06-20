@@ -3,7 +3,6 @@ import Container from "@/components/ui/Container";
 import Link from "next/link";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { motion } from "framer-motion";
-import Globe from "@/components/ui/Globe";
 import { STATS } from "@/lib/stats";
 import SectionBadge from "@/components/ui/SectionBadge";
 import { User } from "lucide-react";
