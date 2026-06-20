@@ -27,7 +27,7 @@ export const team: TeamMember[] = [
   {
     name: "Nidhi Kakani",
     role: "Co-Founder & CMO",
-    image: "/team/cmo.jpeg",
+    image: "/team/cmo.png",
     linkedin: "https://www.linkedin.com/in/nidhi-kakani"
   }
 ];
