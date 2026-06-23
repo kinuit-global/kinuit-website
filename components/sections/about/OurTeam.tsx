@@ -8,6 +8,15 @@ import { motion } from "framer-motion";
 import { team } from "@/lib/team";
 
 export default function OurTeam() {
+  const teamSize = team.length;
+
+  const getGridClasses = () => {
+    if (teamSize === 1) return "grid-cols-1 max-w-xs";
+    if (teamSize === 2) return "grid-cols-1 sm:grid-cols-2 max-w-2xl";
+    if (teamSize === 3) return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl";
+    return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 max-w-6xl";
+  };
+
   return (
     <Section className="bg-k-bg border-t border-k-border py-24" id="team">
       <Container>
@@ -18,7 +27,7 @@ export default function OurTeam() {
           </h2>
         </div>
 
-        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 justify-items-center">
+        <div className={`mx-auto grid gap-8 md:gap-10 justify-items-center ${getGridClasses()}`}>
           {team.map((member, idx) => (
             <motion.article
               key={member.name}
