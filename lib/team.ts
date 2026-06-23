@@ -24,10 +24,10 @@ export const team: TeamMember[] = [
     image: "/team/cco.png",
     linkedin: "https://www.linkedin.com/in/kavin-ragul-395184184"
   },
-  {
-    name: "Nidhi Kakani",
-    role: "Co-Founder & CMO",
-    image: "/team/cmo.png",
-    linkedin: "https://www.linkedin.com/in/nidhi-kakani"
-  }
+  // {
+  //   name: "Nidhi Kakani",
+  //   role: "Co-Founder & CMO",
+  //   image: "/team/cmo.png",
+  //   linkedin: "https://www.linkedin.com/in/nidhi-kakani"
+  // }
 ];
