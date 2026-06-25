@@ -5,6 +5,7 @@ declare namespace NodeJS {
     ADMIN_USERNAME: string;
     ADMIN_PASSWORD: string;
     GEMINI_API_KEY: string;
+    OPEN_AI_API_KEY: string;
     AUTH_SECRET: string;
 
     // Cloudinary Credentials (Secure/Signed SDK)
