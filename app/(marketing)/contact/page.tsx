@@ -6,6 +6,21 @@ import ContactFormSection from "@/components/sections/contact/ContactFormSection
 export const metadata: Metadata = {
   title: "Get in Touch | Start Your Project",
   description: "Start your next project with Kinuit. No long forms. No sales pitch. Just a direct conversation about your brand.",
+  alternates: {
+    canonical: "https://kinuit.com/contact",
+  },
+  openGraph: {
+    title: "Get in Touch | Start Your Project",
+    description: "Start your next project with Kinuit. No long forms. No sales pitch. Just a direct conversation about your brand.",
+    url: "https://kinuit.com/contact",
+    type: "website",
+    siteName: "Kinuit",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Get in Touch | Start Your Project",
+    description: "Start your next project with Kinuit. No long forms. No sales pitch. Just a direct conversation about your brand.",
+  },
 };
 
 

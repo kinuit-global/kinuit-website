@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Barlow, Inter, Sora, Lato, Poppins, Montserrat, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -98,16 +99,157 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const orgSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://kinuit.com/#organization",
+    "name": "Kinuit",
+    "url": "https://kinuit.com",
+    "logo": "https://kinuit.com/favicon.ico",
+    "tagline": "Global Reach. Zero Latency.",
+    "sameAs": [
+      "https://www.linkedin.com/company/kinuit-global",
+      "https://www.instagram.com/kinuit_global/",
+      "https://x.com/kinuit_global"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "hello@kinuit.com",
+      "contactType": "customer service"
+    }
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://kinuit.com/#website",
+    "name": "Kinuit",
+    "url": "https://kinuit.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://kinuit.com/case-studies?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
+  const servicesSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": "https://kinuit.com/#service-build",
+        "name": "Build (Custom Development)",
+        "provider": { "@id": "https://kinuit.com/#organization" },
+        "description": "Engineering high-performance custom websites, mobile apps, AI products, Web3 systems, E-commerce platforms, and ERP systems.",
+        "url": "https://kinuit.com/services/build"
+      },
+      {
+        "@type": "Service",
+        "@id": "https://kinuit.com/#service-design",
+        "name": "Design (Brand & UX/UI)",
+        "provider": { "@id": "https://kinuit.com/#organization" },
+        "description": "Creating premium brand identities, high-converting UX/UI designs, motion graphics, CGI assets, photography, and social creatives.",
+        "url": "https://kinuit.com/services/design"
+      },
+      {
+        "@type": "Service",
+        "@id": "https://kinuit.com/#service-grow",
+        "name": "Grow (Marketing & Analytics)",
+        "provider": { "@id": "https://kinuit.com/#organization" },
+        "description": "Data-driven growth services including SEO optimization, paid ads, social media management, crypto marketing, PR, and community growth.",
+        "url": "https://kinuit.com/services/grow"
+      },
+      {
+        "@type": "Service",
+        "@id": "https://kinuit.com/#service-plan",
+        "name": "Plan (Strategy & GTM)",
+        "provider": { "@id": "https://kinuit.com/#organization" },
+        "description": "Strategic advisory covering growth strategy, investor pitch decks, tokenomics design, go-to-market strategies, and HubSpot integrations.",
+        "url": "https://kinuit.com/services/plan"
+      }
+    ]
+  };
+
+  const breadcrumbsSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": "https://kinuit.com/#breadcrumbs",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://kinuit.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "About",
+        "item": "https://kinuit.com/about"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Services",
+        "item": "https://kinuit.com/services"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Contact",
+        "item": "https://kinuit.com/contact"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "FAQ",
+        "item": "https://kinuit.com/faq"
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "name": "Case Studies",
+        "item": "https://kinuit.com/case-studies"
+      }
+    ]
+  };
+
   return (
     <html
       lang="en"
       className={`${inter.variable} ${barlow.variable} ${sora.variable} ${lato.variable} ${montserrat.variable} ${poppins.variable} ${cormorant.variable}`}
       suppressHydrationWarning
     >
-      <head />
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsSchema) }}
+        />
+      </head>
       <body>
         <ToastProvider />
         {children}
+        <Script id="microsoft-clarity" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "xd1cdjvnbu");
+          `}
+        </Script>
       </body>
     </html>
   );

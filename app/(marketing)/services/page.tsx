@@ -6,6 +6,21 @@ import ServicesCTA from "@/components/sections/services/ServicesCTA";
 export const metadata: Metadata = {
   title: "Our Services | Build, Design, Grow & Plan",
   description: "Explore Kinuit's four service pillars: Build, Design, Grow, and Plan — everything your brand needs to win.",
+  alternates: {
+    canonical: "https://kinuit.com/services",
+  },
+  openGraph: {
+    title: "Our Services | Build, Design, Grow & Plan",
+    description: "Explore Kinuit's four service pillars: Build, Design, Grow, and Plan — everything your brand needs to win.",
+    url: "https://kinuit.com/services",
+    type: "website",
+    siteName: "Kinuit",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Services | Build, Design, Grow & Plan",
+    description: "Explore Kinuit's four service pillars: Build, Design, Grow, and Plan — everything your brand needs to win.",
+  },
 };
 
 

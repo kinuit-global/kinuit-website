@@ -1,5 +1,26 @@
+import { Metadata } from "next";
 import { getCaseStudies } from "@/lib/case-studies";
 import * as motion from "framer-motion/client";
+
+export const metadata: Metadata = {
+  title: "Our Case Studies | Kinuit",
+  description: "Explore Kinuit's collection of client success stories and creative case studies in strategy, design, development, and brand growth.",
+  alternates: {
+    canonical: "https://kinuit.com/case-studies",
+  },
+  openGraph: {
+    title: "Our Case Studies | Kinuit",
+    description: "Explore Kinuit's collection of client success stories and creative case studies in strategy, design, development, and brand growth.",
+    url: "https://kinuit.com/case-studies",
+    type: "website",
+    siteName: "Kinuit",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Case Studies | Kinuit",
+    description: "Explore Kinuit's collection of client success stories and creative case studies in strategy, design, development, and brand growth.",
+  },
+};
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, Clock, ArrowRight } from "lucide-react";

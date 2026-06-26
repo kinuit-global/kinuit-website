@@ -68,6 +68,7 @@ export default function Hero() {
 
           {/* Headline */}
           <motion.h1
+            id="speakable-headline"
             {...fadeUp}
             transition={{ delay: 0.1 }}
             className="
@@ -86,6 +87,7 @@ export default function Hero() {
 
           {/* Description */}
           <motion.p
+            id="speakable-description"
             {...fadeUp}
             transition={{ delay: 0.2 }}
             className="
