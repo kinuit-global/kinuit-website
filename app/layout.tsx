@@ -241,6 +241,19 @@ export default function RootLayout({
       <body>
         <ToastProvider />
         {children}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-KHT67018KQ"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-KHT67018KQ');
+          `}
+        </Script>
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`
             (function(c,l,a,r,i,t,y){
