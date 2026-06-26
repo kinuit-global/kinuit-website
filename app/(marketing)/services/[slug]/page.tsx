@@ -21,6 +21,9 @@ export async function generateMetadata({
   return {
     title: `${service.title} Services`,
     description: service.description,
+    alternates: {
+      canonical: `https://kinuit.com/services/${slug}`,
+    },
     openGraph: {
       title: `${service.title} Services | Kinuit`,
       description: service.description,

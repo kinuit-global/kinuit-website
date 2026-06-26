@@ -2,6 +2,7 @@
 import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
 import Link from "next/link";
+import Image from "next/image";
 import { createSlug } from "@/lib/service";
 import SectionBadge from "@/components/ui/SectionBadge";
 import { Zap, Boxes, TrendingUp, Compass } from "lucide-react";
@@ -65,10 +66,11 @@ export default function ServicesList() {
                   {/* Image Placeholder */}
                   <div className={`lg:col-span-5 w-full aspect-square rounded-3xl overflow-hidden border border-k-border shadow-2xl dark:shadow-none relative group ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
                     <div className="absolute inset-0 bg-[#0059FF]/10 mix-blend-overlay z-10 group-hover:bg-transparent transition-colors duration-500" />
-                    <img
+                    <Image
                       src={svc.image}
                       alt={svc.title}
-                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                      fill
+                      className="object-cover transform group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
 

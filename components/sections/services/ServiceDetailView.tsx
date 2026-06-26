@@ -5,6 +5,7 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import { ServiceDetail, createSlug } from "@/lib/service";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, CheckCircle2, Zap } from "lucide-react";
 import SectionBadge from "@/components/ui/SectionBadge";
 
@@ -51,9 +52,9 @@ export default function ServiceDetailView({
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="w-full aspect-video md:aspect-21/9 rounded-4xl overflow-hidden mb-20 shadow-2xl dark:shadow-none border border-k-border"
+            className="relative w-full aspect-video md:aspect-21/9 rounded-4xl overflow-hidden mb-20 shadow-2xl dark:shadow-none border border-k-border"
           >
-            <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
+            <Image src={service.image} alt={service.title} fill className="object-cover" priority />
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">

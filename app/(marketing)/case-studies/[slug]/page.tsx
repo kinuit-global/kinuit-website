@@ -31,6 +31,9 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
     title: study.metaTitle || study.title,
     description: study.metaDescription || study.excerpt,
     keywords: study.keywords ? study.keywords.split(',').map(k => k.trim()) : undefined,
+    alternates: {
+      canonical: `https://kinuit.com/case-studies/${slug}`,
+    },
     openGraph: {
       title: study.metaTitle || study.title,
       description: study.metaDescription || study.excerpt,
@@ -53,8 +56,39 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
     .filter((p) => p.category === study.category && p.slug !== study.slug)
     .slice(0, 3);
 
+  const caseStudyJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": study.title,
+    "description": study.metaDescription || study.excerpt,
+    "image": study.image,
+    "datePublished": study.date,
+    "dateModified": study.date,
+    "author": {
+      "@type": "Person",
+      "name": study.author.name,
+      "jobTitle": study.author.role,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Kinuit",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://kinuit.com/favicon.ico",
+      },
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://kinuit.com/case-studies/${slug}`,
+    },
+  };
+
   return (
     <article className="min-h-screen bg-k-bg text-k-text pb-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudyJsonLd) }}
+      />
       {/* Article Hero */}
       <section className="relative pt-40 pb-20 overflow-hidden border-b border-k-border">
         <Container>
